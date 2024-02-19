@@ -606,6 +606,12 @@ Route::group(['middleware' => 'auth'], function(){
 
            // Basic demo routes
 
+
+
+           /////////////////////////////Start Recording
+           Route::get('/start-recording', [BookingController::class, 'startRecording']);
+           Route::get('/stop-recording', [BookingController::class, 'stopRecording']);
+
     });
 });
 

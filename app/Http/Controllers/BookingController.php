@@ -817,8 +817,6 @@ class BookingController extends Controller
             $ActivityLogs->save();
 
 
-
-
             $tutor = User::find($request->tutorId);
             $booking = Booking::where('uuid', $request->id)
                 ->where('tutor_id', $request->tutorId)
@@ -1355,41 +1353,6 @@ class BookingController extends Controller
         return redirect('bookings')->with('success', 'Your Booking Reschedule Request Submited #' . '' . $request->booking_id);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function checkSlot(Request $request)
     {
 
@@ -1459,37 +1422,6 @@ class BookingController extends Controller
         return $sernum;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // sheraz
     public function apperove_rescheduled_meeting(Request $request)
     {
         $imagePath = public_path('assets/images/247 NEW Logo 1.png');
@@ -1599,36 +1531,6 @@ class BookingController extends Controller
             return redirect('bookings')->with('failed', 'Reschedule Request Rejected Successfully');
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function endJitsiMeeting(Request $request)
     {
         // dd($request);
@@ -2102,5 +2004,56 @@ class BookingController extends Controller
 
 
 
+    }
+
+    public function startRecording()
+    {
+        if (Auth::check()) {
+
+            // Generate a unique ID for the recording session
+            $sessionId = \Illuminate\Support\Str::uuid()->toString();
+
+            // Dispatch the job to run the recording script in the background
+            \App\Jobs\StartRecordingJob::dispatch($sessionId);
+
+            // Return the response
+            return response()->json(['status' => 'success', 'message' => 'Recording started in the background.', 'sessionId' => $sessionId]);
+
+
+        }else{
+            return response()->json(['status' => 'error', 'message' => 'Recording started in the background.']);
+        }
+
+    }
+
+    public function stopRecording()
+    {
+        // Path to the virtual environment's activate_this.py script
+        //$activateScript = 'venv\Scripts\activate.bat';
+
+        // Execute the activation script and capture both standard output and standard error
+        //$output = exec("\"$activateScript\" 2>&1", $output, $returnVar);
+
+
+        $sessionId = $_GET['uuid'];
+        //        public_path('recordings/'.$sessionId.'/stop_recording.txt');
+
+        // Directory where the file will be created
+        $directory = public_path('recordings/' . $sessionId);
+
+        // Ensure the directory exists, create it if not
+        if (!file_exists($directory)) {
+            mkdir($directory, 0777, true); // Recursive directory creation
+        }
+
+        // Path to the text file
+        $filePath = $directory . '/stop_recording.txt';
+
+        // Content to be written to the file
+        $content = "Stop recording.";
+
+        // Create the text file and write content to it
+        file_put_contents($filePath, $content);
+        return response()->json(['message' => 'Recording stopped.']);
     }
 }

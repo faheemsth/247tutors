@@ -80,7 +80,7 @@ class JitsiMeetJWTController extends Controller
         }
         
         
-        $booking->save();
+        //$booking->save();
 
         return view('zoom',compact('booking'));
     }
