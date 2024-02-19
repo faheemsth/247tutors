@@ -1,0 +1,447 @@
+
+  .arman-d{
+    background-color: #ffffff;
+    border: 1px solid #abff00;
+    border-radius: 3px;
+  }
+
+  .arman-d h3{
+    font-family: inter, sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  .arman-d p{
+    font-family: inter,sans-serif;
+    font-size: 13px;
+  }
+
+  .personally{
+    background-color: #b6e0ff;
+    box-shadow: 2px 2px 2px #cdcdcd;
+  }
+
+  .personally h3{
+    font-family: inter,sans-serif;
+  }
+
+  .personally p{
+    font-family: inter,sans-serif;
+    font-size: 13px;
+    
+  }
+
+  .rating h3{
+    font-family: inter,sans-serif;
+    font-weight: 600;
+  }
+
+  .qualification{
+    background-color: #abff00;
+  } 
+  td{
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .hr h5{
+    color: #4fb5ff;
+  }
+
+  .text-end img{
+    width: 35%;
+    color: #606060;
+  }
+
+  .chat{
+    background-color: #abff00;
+    width: 70%;
+    height: 40vh;
+    border-radius: 10px;
+    margin-left: 45px;
+  }
+
+  .chat img{
+    width: 30%;
+    
+  }
+  .chat h5{
+    font-family: inter,sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .chat p{
+    font-family: inter,sans-serif;
+    font-size: 15px;
+  }
+
+  .chat a{
+    text-decoration: none;
+    background-color: #ffffff;
+    padding: 5px 10px;
+    color: #4fb5ff;
+    border-radius: 3px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  
+
+ .Spreading p{
+  color: #606060;
+ }
+
+ .one{
+  color:#000;
+  background-color: #f7f8fc;
+  padding: 8px 15px;
+  text-decoration: none;
+  
+ }
+ 
+
+ .two{
+  color:#000;
+  background-color: #f7f8fc;
+  padding: 8px 30px;
+  text-decoration: none;
+ }
+
+ .one:hover{
+  color: #000;
+ }
+ .two:hover{
+  color: #000;
+ }
+
+ .book h5{
+  font-size: 15px;
+  background-color: #abff00;
+  padding: 8px 15px;
+  border-radius: 3px;
+ }
+
+  .more a{
+    
+    
+    color: #000;
+  }
+
+  .more li{
+    list-style: none;
+  }
+
+
+
+#review-section-head .review-link {
+    color: #000;
+    font-size: 2.9rem;
+    font-weight: 600;
+}
+
+#review-section-head .review-link a {
+    text-decoration: none;
+    color: #000;
+    border-bottom: 3px solid black;
+}
+
+.review-card .card-img-top {
+    background: linear-gradient(39.28deg, #abff00 11.22%, #abff00 94.78%);
+}
+
+.review-card {
+    border-radius: 50px 50px 0px 0px;
+}
+
+.card-img-div img {
+    width: 120px;
+    padding: 5px;
+    border-radius: 50%;
+    background-color: #abff00;
+}
+
+.avail{
+  width: 100%;
+}
+@media only screen and (max-width: 770px) {
+  .avail{
+    overflow: scroll;
+  }
+}
+
+/* Arman D Start */
+
+
+.image1 img{
+  width: 100%;
+}
+
+.student-home  img{
+  width: 17px;
+}
+
+
+
+.student-home a{
+
+  color:#000;
+  text-decoration: none;
+  background-color: #e9e9e9;
+  padding: 8px 20px;
+  margin-right: 5px;
+}
+
+.hr{
+  color: #4fb5ff;
+}
+
+
+
+
+/* Arman D End */
+
+/* about start */
+.about h4{
+  color: #4fb5ff;
+}
+/* about end */
+
+/* general Detail start */
+.general h2{
+  color: #4fb5ff;
+}
+
+/* grneral Detail end */
+
+/* general div start css */
+
+.general-detail{
+  border: 1px solid #4fb5ff;
+  background-color: #f2f2f2;
+}
+.general-detail input{
+  border: 2px solid #c1c1c1;
+  background-color: #f2f2f2;
+}
+
+/* general div end css */
+
+/* Qualification css start */
+
+.quali h3{
+  color: #4fb5ff;
+}
+ td img{
+  width: 15px;
+  
+}
+
+/* Qualification css End */
+
+/* general availability 2 css start */
+
+.gen h3{
+  color: #4fb5ff;
+}
+.text-end img{
+  width: 20px;
+}
+.tdd img{
+  margin-right: 10px;
+}
+.tdd{
+  text-align: center;
+}
+
+.thh .col{
+  width: 200px;
+}
+/* general availability 2 css end */
+
+/* subject offered 2 css start */
+
+.suboff h3{
+  color: #4fb5ff;
+}
+
+/* subject offered 2 css end */
+
+/* Billing css start */
+.billing h3{
+  color: #4fb5ff;
+}
+
+.input-group{
+  margin-top: 31px;
+
+}
+.billing1{
+  border: 1px solid #000;
+  background-color: #f2f2f2;
+}
+.billing1 input{
+  background-color: #f2f2f2;
+  border:2px solid #c1c1c1;
+  
+}
+/* Billing css end */
+
+@media only screen and (max-width: 425px){
+   .genav{
+    overflow: scroll;
+    width: 85%;
+   }
+
+   .gende{
+    width: 100%;
+    justify-content: center;
+   }
+  
+
+  .billing1{
+    width: 90%;
+    justify-content: center;
+    margin-left: 10px;
+  }
+  .suboff{
+    width: 90%;
+    justify-content: center;
+    margin-left: 10px;
+  }
+
+  .image1 img{
+    width: 35%;
+  }
+  .ard h5{
+    margin-left: 142px;
+    margin-top: -150px;
+    font-size: 17px;
+
+  }
+  .ard p{
+    margin-left: 140px;
+    font-size: 12px;
+    margin-top: 30px;
+  }
+  .hr h5{
+    font-size: 17px;
+  }
+  .student-home a{
+    font-size: 15px;
+    
+  }
+  .student-home a img{
+    width: 15px;
+  }
+  .student-home{
+    margin-top: -100px;
+    
+  }
+  .saved p{
+   font-size: 15px;
+  }
+
+  .saved p img{
+    width: 15px;
+  }
+  .saved{
+    margin-top: -100px;
+    
+  }
+}
+
+@media only screen and (max-width: 375px){
+  .image1 img{
+    width: 35%;
+  }
+  .ard h5{
+    margin-left: 120px;
+    margin-top: -150px;
+    font-size: 17px;
+
+  }
+  .quion{
+   
+    width: 70%;
+  }
+  .ard p{
+    margin-left: 120px;
+    font-size: 12px;
+    margin-top: 30px;
+  }
+  .hr h5{
+    font-size: 17px;
+  }
+  .student-home a{
+    font-size: 12px;
+    
+  }
+  .student-home a img{
+    width: 13px;
+  }
+  .student-home{
+    margin-top: -100px;
+    
+  }
+  .saved p{
+   font-size: 15px;
+  }
+
+  .saved p img{
+    width: 15px;
+  }
+  .saved{
+    margin-top: -100px;
+   
+  }
+}
+@media only screen and (max-width: 320px){
+  .image1 img{
+    width: 35%;
+  }
+  .ard h5{
+    margin-left: 100px;
+    margin-top: -135px;
+    font-size: 17px;
+
+  }
+  
+ 
+  .ard p{
+    margin-left: 100px;
+    font-size: 10px;
+    margin-top: 25px;
+  }
+  .hr h5{
+    font-size: 17px;
+  }
+
+  .student-home a{
+    font-size: 10px;
+    
+  }
+  .student-home a img{
+    width: 13px;
+  }
+  .student-home{
+    margin-top: -100px;
+    
+  }
+  .saved p{
+   font-size: 12px;
+  }
+
+  .saved p img{
+    width: 12px;
+  }
+  .saved{
+    margin-top: -95px;
+    margin-left: 20px;
+  }
+  
+}
+
+
+
+
+

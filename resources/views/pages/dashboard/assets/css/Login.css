@@ -1,0 +1,58 @@
+
+.student-login-title  a{
+    color: black;
+    text-decoration: none;
+}
+.col-border{
+    border-right: 2px solid black;
+    position: relative;
+    z-index: 9;
+}
+#bg-shape-pancil{ 
+    width: 60px;
+    height: auto;
+    position: absolute;
+    top: 28%;
+    left: 22%;
+    z-index: -9;
+}
+#bg-shape-box{
+    width: 40px;
+    height: auto;
+    position: absolute;
+    top: 35%;
+    left: 15%;
+}
+/* /* @media (min-width:320px)and(max-width:465px){
+    .container-fluid .head {
+        font-size: 10px;
+    } 
+} */
+
+ @media(max-width:767px){
+    .container-fluid .student-login-title{
+        font-size: 16px;
+     
+    } 
+    .col-border{
+        border-right:none ;
+    }
+   #col-text{
+    text-align: center;
+    
+   }
+    
+}
+/* responsive pancil and mail logo */
+@media(max-width:400px){
+    #bg-shape-pancil{
+        position: absolute;
+        top: 30%;
+        left: 10%;
+    }
+    #bg-shape-box{
+        position:absolute;
+        top: 40%;
+        left: 2%;
+    }
+}

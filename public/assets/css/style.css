@@ -1,0 +1,962 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+#text-color {
+    color: rgba(0, 150, 255, 1);
+}
+
+#bg-color {
+    background-color: rgba(171, 254, 16, 1);
+}
+
+#btn-bg {
+    background-color: rgba(6, 59, 0, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              Rotate Div style start                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+body {
+    position: relative;
+}
+
+.first-rotate {
+    position: fixed;
+    left: -44px;
+    top: 80%;
+    transform: translateY(-80%);
+    transform: rotate(90deg);
+    z-index: 100000;
+}
+
+.second-rotate {
+    position: fixed;
+    right: -122px;
+    top: 50%;
+    transform: translateY(-50%);
+    transform: rotate(-90deg);
+    z-index: 100000;
+}
+*:focus{
+    outline:none !important;
+    box-shadow: none !important;
+}
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              Rotate Div style end                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              Navbar  Start                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+
+.navbar .header-btn {
+    width: 350px;
+    height: auto;
+}
+
+.navbar ul {
+    font-family: outfit;
+}
+
+.top-header {
+    background-color: rgba(171, 255, 0, 1);
+}
+
+.top-header span {
+    color: #000;
+    font-size: 14px;
+}
+
+.contect-info a {
+    padding: 0 7px;
+}
+
+.top-header .contect-info a {
+    text-decoration: none;
+}
+
+.top-header .contect-info a img {
+    padding-right: 5px;
+}
+
+.top-header .social-icon a {
+    text-decoration: none;
+}
+
+.top-header .social-icon a img {
+    padding: 5px;
+    border-radius: 5px;
+}
+.logo-247 .img-fluid {
+    width: 250px;
+}
+.dropdown-menu-end{
+    right: 33px !important;
+}
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              navbar  end                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              Header  start                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+.hero-text-section h1 {
+    font-size: 2.8em;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.hero-text-section #hero-focus {
+    max-width: max-content;
+    background-color: rgba(6, 59, 0, 1);
+    color: white;
+}
+
+.hero-section .shapes-parent {
+    position: relative;
+}
+
+.hero-section .shapes-parent .shape {
+    width: 480px;
+}
+
+.hero-section .shapes-parent .model-header {
+    width: 430px;
+    position: absolute;
+    top: 2%;
+    left: 5%;
+    transform: translate(2%, 5%);
+}
+
+
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              Header  end                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              Footer Start                                                                                                                *
+************************************************************************************************************************************************************************************************************** */
+
+.footer-wrapper {
+    background-color: #242424;
+    color: rgb(206, 206, 206);
+
+}
+
+.footer-wrapper a {
+    text-decoration: none;
+    color: rgb(206, 206, 206);
+    font-family: 'Outfit', sans-serif;
+}
+
+.footer-wrapper .contact-info span {
+    color: rgba(180, 178, 178, 0.267);
+    font-size: 15px;
+}
+
+.footer-wrapper h5 {
+    font-family: 'Outfit', sans-serif;
+    color: white;
+}
+
+.footer-wrapper ul>li {
+    font-size: 14px;
+    letter-spacing: 0.01rem;
+    line-height: 1.7rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+/*.form-control {*/
+/*    background-color: rgba(59, 59, 59, 0.267);*/
+/*    border: none;*/
+/*}*/
+
+.input-group .input-group-text {
+    background-color: rgba(59, 59, 59, 0.267);
+}
+
+/*.form-control:focus {*/
+/*    color: white;*/
+/*    background-color: rgba(59, 59, 59, 0.267);*/
+/*    border-color: rgba(180, 178, 178, 0.267);*/
+/*    outline: 0;*/
+/*    box-shadow: 0 0 0 0;*/
+/*}*/
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              Footer style end                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+
+
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              Banner style start                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+.banner-sec-home .banner-border-first {
+    border-right: 2px solid rgb(48, 47, 47);
+}
+
+.banner-sec-home .banner-border-second {
+    border-left: 2px solid rgb(48, 47, 47);
+}
+
+.banner-sec-home .banner-border-third {
+    border-left: 2px solid rgb(48, 47, 47);
+}
+
+#banner-icon {
+    background-color: rgb(255, 255, 255);
+    border-radius: 50px;
+    padding: 12px;
+    width: 60px;
+    margin: 0px auto;
+}
+
+
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              Banner style end                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              Subject & Lang style start                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              Subject & Lang style end                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              Choose us style start                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+.choose-title h1 {
+    font-size: 3.3rem;
+    font-weight: 700;
+    letter-spacing: 0.01rem;
+    font-family: outfit;
+}
+
+
+.choose-card-sec .choose-card-blue {
+    width: 100%;
+    height: auto;
+    border-radius: 30px;
+    background-color: rgba(0, 150, 255, 1);
+}
+
+.choose-card-sec .choose-card-blue h1 {
+    color: #fff;
+}
+
+.choose-card-sec h1 {
+    font-size: 1.5rem;
+}
+
+.choose-card-sec .choose-card-green {
+    width: 100%;
+    height: auto;
+    border-radius: 30px;
+    background-color: rgb(162, 244, 10);
+}
+
+.choose-us {
+    position: relative;
+    overflow-x: hidden;
+}
+
+.circle-box {
+    position: absolute;
+}
+
+.circle-box-1 {
+    height: 120px;
+    width: 120px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    background-color: rgba(171, 254, 16, 0.4);
+    top: 21%;
+    left: 5%;
+    z-index: -25;
+
+}
+
+.circle-box-2 {
+    height: 60px;
+    width: 60px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    background-color: rgba(171, 254, 16, 0.4);
+    top: 5%;
+    left: 33.5%;
+    z-index: -30;
+
+}
+
+.circle-box-3 {
+    height: 300px;
+    width: 300px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    background-color: rgba(0, 150, 255, 0.3);
+    top: 0%;
+    right: -6%;
+    z-index: -35;
+
+}
+
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              Choose us style end                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              Review Sec style start                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+#review-section-head .review-link {
+    color: rgba(0, 150, 255, 1);
+    font-size: 2.4rem;
+    font-weight: 600;
+}
+
+#review-section-head .review-link a {
+    text-decoration: none;
+    font-size: 2.4rem;
+    color: #000;
+}
+
+.review-card .card-img-top {
+    background-color: rgba(171, 254, 16, 1);
+}
+
+.review-card {
+    border-radius: 50px 50px 0px 0px;
+}
+
+.card-img-div img {
+    width: 120px;
+    padding: 5px;
+    border-radius: 50%;
+    background-color: rgb(162, 244, 10);
+}
+
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              Review Sec style end                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              Find style start                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+#find-tutor {
+    text-decoration: none;
+    color: white;
+    font-size: 32px;
+    display: inline;
+    padding: 4px 10px;
+    font-weight: 700;
+    letter-spacing: 0.01rem;
+    background-color: rgba(6, 59, 0, 1);
+}
+
+#subject a {
+    color: white;
+}
+
+.ellipse {
+    position: absolute;
+    bottom: -45%;
+    right: -10%;
+    width: 800px;
+    z-index: -1;
+    height: 500px;
+    border-radius: 50%;
+    background-color: rgba(234, 179, 8, 0.2);
+}
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              Find style end                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              FAQs style end                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+.faq-wrapper {
+    width: 87%;
+    min-height: 1000px;
+    margin: 50px auto;
+}
+
+.faq-wrapper .faq-design {
+    background-color: rgba(0, 150, 255, 1);
+    border-radius: 120px 0px 100px 0px;
+    box-shadow: 2px 8px 1px rgba(180, 178, 178, 0.267);
+    min-height: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.faq-design p {
+    color: white;
+    font-size: 20px;
+    letter-spacing: 0.02rem;
+    padding: 10px 5px 0px;
+    font-family: 'Outfit', sans-serif;
+}
+
+.accordion-button:focus {
+    z-index: 0;
+    border-color: transparents;
+    outline: 0;
+    box-shadow: none;
+}
+
+.accordion-button:not(.collapsed) {
+    color: black;
+    background-color: #ffff;
+    box-shadow: none;
+}
+
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              FAQs style end                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                              apply step style start                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+.step-card {
+    position: relative;
+}
+
+.simple-title {
+    font-size: 4rem;
+}
+
+.step-card-header-icon {
+    position: relative;
+    background-color: rgba(171, 254, 16, 1);
+    width: 155px;
+    height: 120px;
+    border-radius: 48px;
+    margin: auto;
+}
+
+.step-card-header-icon img {
+    width: 120px;
+}
+
+#bg-img-line {
+    position: absolute;
+    top: 40%;
+    left: 0%;
+}
+
+#bg-img-line img {
+    width: 100%;
+}
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                               apply step  style end                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                               Blog page  style end                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+
+.button {
+    background-color: rgba(0, 150, 255, 1);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+
+.category {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-flow: row wrap;
+}
+
+.blog-category,
+.last-blog-category {
+    width: 292px;
+}
+
+.blog-category-container {
+    margin-top: 100px;
+}
+
+.card-box {
+    min-height: 400px;
+    width: 100%;
+    background-color: #000;
+    border-radius: 30px;
+    position: relative;
+}
+
+
+.card-box-img {
+    width: 100%;
+    height: auto;
+    background-color: rgba(171, 254, 16, 1);
+    border-radius: 100%;
+    position: absolute;
+    margin-top: -50%;
+}
+
+.card-box-content {
+    position: absolute;
+    top: 150px;
+    text-align: center;
+    margin-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: #fff;
+}
+
+.card-box-btn {
+    position: absolute;
+    bottom: 1rem;
+    width: 100%;
+}
+
+.card-box-btn a {
+    width: 80%;
+    margin-left: 10%;
+}
+
+.card-box h5 {
+    margin-top: 20px;
+    color: rgb(162, 244, 10);
+}
+
+
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                               Blog page  style end                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                               Booking Detail  page  style start                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+.booking-table-details h1 {
+    font-size: 2.9rem;
+    font-weight: 700;
+    color: rgba(13, 153, 255, 1);
+}
+
+.student-table-details {
+    background-color: rgba(171, 255, 0, 1);
+}
+
+.custom-table th,
+.custom-table td {
+    border: 1px solid #808080;
+
+}
+
+.background {
+    background-color: rgba(171, 255, 0, 1);
+}
+
+.label {
+    width: 162px;
+}
+
+.input {
+    border-radius: 8px;
+    width: 155px;
+    height: 37px;
+}
+
+.custom-select {
+    width: 162px;
+    /* Set the desired width here */
+}
+
+.label {
+    width: 162px;
+    margin-left: 1%;
+}
+
+table tr td:last-child {
+    font-weight: 600;
+}
+
+.booking-filter input {
+    background-color: rgba(171, 255, 0, 1);
+    font-size: 17px;
+    letter-spacing: 0.04rem;
+}
+
+.booking-filter input:focus {
+    background-color: rgba(171, 255, 0, 1);
+}
+
+.booking-filter select {
+    background-color: rgba(171, 255, 0, 1);
+    font-size: 18px;
+}
+
+.booking-filter .btn:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.booking-filter .form-select:focus {
+    border-color: rgba(171, 255, 0, 1);
+    outline: 0;
+    box-shadow: none;
+}
+
+.booking-filter label {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.03rem;
+    padding-left: 15px;
+}
+
+/****************************************************************************************************************************************************************************************************************
+*                                                                                               Booking Detail page  style end                                                                                    *
+************************************************************************************************************************************************************************************************************** */
+
+
+
+
+
+
+.subject-title{
+    font-size: 2.8rem;
+    font-weight: 700;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Adjustments for Table responsiveness */
+
+@media (max-width: 768px) {
+    .fromhere img{
+        width: 128px;
+
+    }
+    .dropdown-menu-end {
+        --bs-position: end;
+      }
+      .dropdown-menu-end[data-bs-popper] {
+        right: 0;
+        left: auto;
+      }
+    .rotate-div-blog {
+        bottom: 40%;
+    }
+
+    .rotate-div-faqs {
+        bottom: 25%;
+    }
+
+    #bg-img-line {
+        display: none;
+    }
+
+    .choose-title h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+
+    .choose-card-sec .choose-card-blue {
+        width: 90%;
+        height: auto;
+    }
+
+    .choose-card-sec .choose-card-green {
+        width: 90%;
+        height: auto;
+    }
+
+    .choose-card-sec h1 {
+        font-size: 28px;
+    }
+    .circle-box-1 {
+        background-color: rgba(171, 254, 16, 0.4);
+        top: 26%;
+        left: 1%;
+    }
+
+    .circle-box-2 {
+        top: 0%;
+        left: 70.5%;
+    }
+
+    .circle-box-3 {
+        height: 200px;
+        width: 200px;
+        top: 10%;
+        right: -6%;
+    }
+    .blog-category .card-box-mid{
+        margin: 75% 0px 10%;
+    }
+    .last-blog-category .card-box{
+        margin-top: 0%;
+    }
+}
+
+/* Adjustments for Mobile responsiveness */
+
+@media (max-width: 425px) {
+    .faq-wrapper {
+        width: 99%;
+    }
+
+    .faq-design p {
+        font-size: 18px;
+    }
+
+    .bottom-footer-menu h6 {
+        font-size: 14px;
+        margin-top: 4px;
+        text-align: center;
+    }
+
+    .banner-sec-home .banner-border-first {
+        border-right: 2px solid rgb(77, 75, 75);
+    }
+
+    .banner-sec-home .banner-border-second {
+        border-left: none;
+        border-right: 2px solid rgb(77, 75, 75);
+    }
+
+    .banner-sec-home .banner-border-third {
+        border-left: none;
+    }
+
+    .choose-title h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+
+    .choose-card-sec h1 {
+        font-size: 27px;
+    }
+
+    .choose-card-sec .choose-card-blue {
+        width: 80%;
+        height: auto;
+    }
+
+    .choose-card-sec .choose-card-green {
+        width: 80%;
+        height: auto;
+    }
+
+    #review-section-head .review-link {
+        font-size: 2.2rem;
+        font-weight: 600;
+        color: rgba(0, 150, 255, 1);
+    }
+
+    .custom-table {
+        overflow-x: scroll;
+    }
+
+    .filter-btn {
+        width: 100%;
+
+    }
+    .blog-category .card-box-first{
+        margin-top: 20%;
+    }
+    .blog-category .card-box-mid{
+        margin: 75% 0px 10%;
+    }
+    .last-blog-category .card-box{
+        margin-top: 0%;
+    }
+
+}
+
+/* Adjustments for 1024px responsiveness */
+@media (max-width: 1024px) {
+    .logo-247 .img-fluid {
+        width: 200px;
+    }
+
+    .hero-section .shapes-parent .shape {
+        width: 430px;
+    }
+
+    .hero-section .shapes-parent .model-header {
+        width: 380px;
+    }
+
+    .circle-box-1 {
+        background-color: rgba(171, 254, 16, 0.4);
+        top: 26%;
+        left: 1%;
+    }
+
+    .circle-box-2 {
+        top: 5%;
+        left: 28.5%;
+    }
+
+    .circle-box-3 {
+        height: 200px;
+        width: 200px;
+        top: 14%;
+        right: -6%;
+    }
+    .last-blog-category .card-box{
+        margin-top: 70%;
+    }
+}
+
+
+/* Adjustments for 320px responsiveness */
+@media (max-width: 325px) {
+    .logo-247 .img-fluid {
+        width: 155px;
+    }
+    .logo-img .buger-btn{
+        font-size: 16px;
+    }
+    .subj-card h4 {
+        font-size: 17px;
+    }
+
+    .subj-card {
+        padding: 0px;
+    }
+
+    .subj-card p {
+        font-size: 14px;
+    }
+
+    .choose-title h1 {
+        font-size: 2rem;
+        font-weight: 800;
+    }
+
+    .choose-card-sec .choose-card-blue {
+        width: 100%;
+        height: auto;
+    }
+
+    .choose-card-sec .choose-card-green {
+        width: 100%;
+        height: auto;
+    }
+
+}
+
+@media screen and (min-width: 426px) and (max-width: 1024px) {
+    .faq-wrapper {
+        width: 95%;
+    }
+}
+
+
+  @media screen and (max-width:1025px) {
+    .profile-img img{
+      width: 180px;
+    }
+  }
+@media screen and (max-width:770px) {
+  .profile-img img{
+    width: 120px;
+  }
+}
+@media screen and (max-width:430px) {
+  .profile-img img{
+    width: 150px;
+  }
+  .chat{
+    margin-left: 0px;
+  }
+
+}
+
+
+
+/* user admin side table */
+
+
+
+.user-table-data table {
+    border-color:#000 !important;
+}
+.user-table-data thead {
+    background-color: rgba(171, 254, 16, 1);
+}
+.user-table-data tr th {
+    color: #000;
+    border-color:#000;
+}
+.user-table-data tr td {
+    border-color: #000;
+}
+
+.hoverstu:hover {
+box-shadow: 0 4px 6px 0 black;
+}
+::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }

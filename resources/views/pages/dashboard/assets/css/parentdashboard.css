@@ -1,0 +1,147 @@
+.welcome {
+    background-color: rgb(171, 255, 0);
+    border-radius: 40px;
+}
+
+.cardimg h1 {
+    text-align: center;
+}
+
+.welcome2 {
+    color: rgb(13, 153, 255);
+}
+
+.welcome3 {
+    margin-left: 20%;
+    margin: auto;
+}
+
+#img-border {
+    border-bottom: 2px dashed #1DA1F2;
+}
+
+.kpk {
+    background-color: rgb(171, 255, 0);
+}
+
+.custom-button {
+    background-color: rgb(171, 255, 0);
+    width: 30%;
+    height: 30px;
+    border: none;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 2px;
+    color: black;
+    font-size: 1rem;
+}
+
+.custom-button2 {
+    width: 20%;
+    height: 30px;
+    border: 1px solid rgb(212, 212, 212);
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 2px;
+    color: black;
+    font-size: 1rem;
+    background-color: white;
+}
+
+     /* Media Query Start */
+
+@media (max-width: 480px) {
+
+    .tutor-profile{
+        width: 50%;
+  }
+
+}
+@media (max-width: 768px) {
+    .col-md-3 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .col-md-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-top: 20px;
+    }
+
+    .text-end {
+        text-align: center;
+    }
+
+    .welcome2 {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .welcome,
+    .welcome3 {
+        margin-left: 0;
+    }
+
+    .custom-button,
+    .custom-button2 {
+        width: 100%;
+    }
+
+}
+
+    /* Media Query End */
+
+.correctiocn{
+    width: 20px;
+    height: 20px;
+}
+
+.dollor{
+ color:  #6cbaf2;
+}
+
+.custom-button {
+    width: 197px;
+    height: 40px;
+    
+    background-color:#f7f8fc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+  }
+
+  .button-img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .button1 {
+  width: 134px;
+  height: 40px;
+    background-color: #ffffff;
+    color: #999999;
+    
+    border: solid  #999999;
+    
+  }
+
+  .button2 {
+    width: 197px;
+    height: 40px;
+    background-color: #abff00;
+    color: white;
+    border: none;
+    color:  black;
+  }
+  

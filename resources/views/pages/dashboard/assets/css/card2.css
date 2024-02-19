@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100;
+    width: 100;
+}
+
+.row .login{
+ color: #0096FF;
+}
+
+.card img{
+  
+    max-height: 200px;
+    position: relative;
+    /* object-fit: cover; */
+}
+.card{
+    background-color: #ABFE10;
+    border-radius: 15px;
+    display: block;
+    /* margin: auto; */
+}
+.bottom{
+    margin-top: 90px;
+}
+.card{
+    position: relative;
+}
+.img-one{
+    position: relative;
+    top: -10px;
+}
+.img-two{
+    position: absolute;
+    top: -15px;
+}
+.img-three{
+    position: absolute;
+    top: -10px;
+}
+#bg-shape-1{
+    width: 50px;
+    height: auto;
+    position: absolute;
+    top: 55px;
+    left:9%;
+
+}
+
+#bg-shape-2{
+    width: 50px;
+    height: auto;
+    position: absolute;
+    top: 5px;
+    right:3%;
+
+}
+#shape-pencil{
+    width: 35px;
+    height: auto;
+    position: absolute;
+    top: 52px;
+    left: 47px;
+}
+#shape-mail{
+    width: 45px;
+    height: auto;
+    position: absolute;
+    top: 18%;
+    left:2%;
+}

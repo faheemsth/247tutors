@@ -1,0 +1,584 @@
+/* ****************************************************************************************************************************************************************************************************************
+                                                                                              Tutor in your range or bubgets   start                                                                                   
+*************************************************************************************************************************************************************************************************************  */
+
+.hero-section-title h1 {
+    font-size: 58px;
+    letter-spacing: 0.005em;
+    color: #0096FF;
+}
+
+.hero-section-title p {
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 0.01rem;
+    width: 90%;
+}
+
+.hero-section-title text {
+    font-size: small;
+    color: rgb(124, 124, 124);
+}
+
+.hero-section-title text a {
+    text-decoration: none;
+}
+
+.first-header-model .header-shape {
+    width: 400px;
+    margin-top: -50px;
+}
+
+
+/* ****************************************************************************************************************************************************************************************************************
+                                                                                              Font tutor in your range or budgets end                                                                                    
+*************************************************************************************************************************************************************************************************************  */
+
+
+
+
+/* ****************************************************************************************************************************************************************************************************************
+                                                                                            Head picture start                                                                                  
+*************************************************************************************************************************************************************************************************************  */
+
+
+
+/* 
+.head-pic{
+    position: relative;
+}
+.header-shape{
+    width: 99%;
+position: absolute;
+}
+.header-model{
+    width: 93.2%;
+position: absolute;
+right: 98px;
+}
+@media screen and (max-width:1024px) {
+    .header-model{
+        right: 65px;
+    }
+}
+@media screen and (max-width:768px) {
+    .head-pic{
+        display: none;
+    }
+} */
+
+
+
+/* ****************************************************************************************************************************************************************************************************************
+                                                                                            Head picture end                                                                                  
+*************************************************************************************************************************************************************************************************************  */
+
+
+
+p {
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+
+/* ****************************************************************************************************************************************************************************************************************
+                                                                                            boxes start                                                                                  
+*************************************************************************************************************************************************************************************************************  */
+
+
+#box1 {
+    background-color: #0096FF;
+    color: #FFFFFF;
+}
+
+#box2 {
+    background-color: #ABFE10;
+}
+
+#box3 {
+    background-color: #0096FF;
+    color: #FFFFFF;
+}
+
+@media screen and (max-width : 425px) {
+    .price-boxes {
+        width: 250px;
+    }
+
+    .boxes-center {
+        display: flex;
+        margin-top: 10px;
+        justify-content: center;
+    }
+}
+
+.p-box {
+    /* padding: 10px 10px 10px 10px; */
+    padding: 10px 19px;
+    margin: 14px 19px;
+    border-radius: 35px;
+}
+
+.p-box h2 {
+    font-family: Outfit;
+    font-size: 34px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.p-box p {
+    font-family: Open Sans;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.005em;
+    text-align: center;
+}
+
+@media screen and (max-width:1024px) {
+    .p-box {
+        height: 230px;
+    }
+
+    .p-box h2 {
+        font-size: 28px;
+    }
+
+    .p-box p {
+        font-size: 17px;
+        margin-top: -5px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .p-box {
+        height: 220px;
+    }
+
+    .p-box h2 {
+        font-size: 24;
+    }
+
+    .p-box p {
+        font-size: 16px;
+    }
+}
+
+
+
+
+/* ****************************************************************************************************************************************************************************************************************
+                                                                                            boxes end                                                                                  
+*************************************************************************************************************************************************************************************************************  */
+
+
+/* ****************************************************************************************************************************************************************************************************************
+                                                                                            text after boxes start                                                                                  
+*************************************************************************************************************************************************************************************************************  */
+
+
+
+.boxcontent p {
+    font-size: 18px;
+    text-align: center;
+}
+
+@media screen and (max-width:1024px) {
+    .boxcontent p {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .boxcontent p {
+        font-size: 13px;
+    }
+}
+
+
+
+/* ****************************************************************************************************************************************************************************************************************
+                                                                                            text after boxes end                                                                                  
+*************************************************************************************************************************************************************************************************************  */
+
+
+
+
+/* ****************************************************************************************************************************************************************************************************************
+                                                                                            heading and text after boxes start                                                                                  
+*************************************************************************************************************************************************************************************************************  */
+
+
+
+.find-tutor-budget h1 {
+    text-align: center;
+    font-size: 2.8rem;
+    font-family: Outfit;
+    color: #0096FF;
+}
+
+@media screen and (max-width:1024px) {
+    .find-tutor-budget h1 {
+        font-size: 45px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .find-tutor-budget h1 {
+        font-size: 40px;
+    }
+}
+
+.find-1-text {
+    width: 270px;
+    background-color: #063B00;
+    color: #FFFFFF;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.find-1-text h5 {
+    font-family: Outfit;
+    font-size: 23px;
+    margin-top: 6px;
+}
+
+@media screen and (max-width:1024px) {
+    .find-1-text {
+        width: 220px;
+    }
+
+    .find-1-text h5 {
+        font-size: 21px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .find-1-text {
+        width: 200px;
+    }
+
+    .find-1-text h5 {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width:425px) {
+    .find-1-content {
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .find-1-text {
+        max-width: max-content;
+        padding: 10px;
+        margin: 10px;
+    }
+}
+
+
+
+
+/* ****************************************************************************************************************************************************************************************************************
+                                                                                            Heading and text after boxes end                                                                                  
+*************************************************************************************************************************************************************************************************************  */
+
+
+
+
+/* ****************************************************************************************************************************************************************************************************************
+                                                                                            Text and picture in mid content1 and mid content2 start                                                                                  
+*************************************************************************************************************************************************************************************************************  */
+
+
+
+.mid-content1 h1 {
+    font-family: Outfit;
+    font-size: 3.4rem;
+    font-weight: 600;
+    letter-spacing: 0.005em;
+    color: #0096FF;
+}
+
+.mid-content1 p {
+    /* font-family: Open Sans; */
+    font-size: 18px;
+}
+
+.mid-content1-img {
+    width: 480px;
+}
+.mid-content2 h1 {
+    font-family: Outfit;
+    font-size: 3.4rem;
+    font-weight: 600;
+    letter-spacing: 0.005em;
+    color: #0096FF;
+}
+
+.mid-content2 p {
+    /* font-family: Open Sans; */
+    font-size: 18px;
+}
+
+.mid-content2-img {
+    width: 480px;
+}
+
+
+
+/* ****************************************************************************************************************************************************************************************************************
+                                                                                            Text and picture in mid content1 and mid content2 end                                                                                  
+*************************************************************************************************************************************************************************************************************  */
+
+
+
+
+/* 
+****************************************************************************************************************************************************************************************************************
+                                                                                              Review Sec style start                                                                                    
+*************************************************************************************************************************************************************************************************************  */
+
+
+.review-trustpilot h1 {
+    font-family: Outfit;
+    font-weight: 600;
+    font-size: 40px;
+    color: #0096FF;
+}
+
+.review-trustpilot h1 a {
+    text-decoration: none;
+    color: #0096FF;
+    border-bottom: 4px solid #0096FF;
+}
+
+.review-trustpilot h1 a:hover {
+    color: #0096FF;
+    background-color: #a2cff0;
+}
+
+@media screen and (max-width:1024px) {
+    .review-trustpilot h1 {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .review-trustpilot h1 {
+        font-size: 30px;
+    }
+}
+
+.card-center .text-center {
+    width: 16rem;
+}
+
+.card-center .text-center p {
+    font-size: 15px;
+}
+
+.review-card .card-img-top {
+    background: #ABFE10;
+}
+
+.review-card {
+    border-radius: 50px 50px 0px 0px;
+}
+
+.card-img-div img {
+    width: 120px;
+    padding: 5px;
+    border-radius: 50%;
+    background: #ABFE10;
+
+}
+
+
+/* ****************************************************************************************************************************************************************************************************************
+                                                                                              Review Sec style end                                                                                    
+*************************************************************************************************************************************************************************************************************  */
+
+
+
+
+/* ****************************************************************************************************************************************************************************************************************
+                                                                                            End Heading tittle and button 
+                                                                                            start                                                                                  
+*************************************************************************************************************************************************************************************************************  */
+
+
+
+.speak-tutor h1 {
+    font-family: Outfit;
+    font-weight: 600;
+    font-size: 40px;
+    color: #0096FF;
+}
+
+.findtutor h1 {
+    background-color: #063B00;
+    color: #FFFFFF;
+    width: 100%;
+    padding: 8px;
+    justify-content: center;
+    border-radius: 3px;
+    font-weight: 600;
+    font-size: 30px;
+    font-family: Outfit;
+}
+
+@media screen and (max-width:1024px) {
+    .speak-tutor h1 {
+        font-size: 30px;
+    }
+
+    .findtutor h1 {
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .speak-tutor h1 {
+        font-size: 28px;
+    }
+
+    .findtutor h1 {
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width:425px) {
+    .speak-tutor h1 {
+        text-align: center;
+    }
+}
+
+.findtutor a {
+    text-decoration: none;
+    color: black;
+}
+
+
+/* ****************************************************************************************************************************************************************************************************************
+                                                                                            End Heading tittle and button 
+                                                                                            end                                                                                  
+*************************************************************************************************************************************************************************************************************  */
+
+@media screen and (max-width : 770px) {
+    .hero-section-title h1 {
+        font-size: 2.6rem;
+    }
+
+    .first-header-model .header-shape {
+        width: 300px;
+        margin-top: 16px;
+        margin-bottom: 0px;
+    }
+    
+    /* meet tutor sec  */
+    .mid-content1 h1 {
+        font-size: 2.2rem;
+    }
+
+    .mid-content1 p {
+        font-size: 16px;
+        line-height: 2rem;
+    }
+
+    .mid-content1-img {
+        width: 280px;
+    }
+    .mid-content2 h1 {
+        font-size: 2.4rem;
+    }
+
+    .mid-content2 p {
+        font-size: 18px;
+        line-height: 2rem;
+    }
+
+    .mid-content2-img {
+        width: 400px;
+    }
+    /* meet tutor sec end  */
+}
+
+@media screen and (max-width:1025px) {
+    .first-header-model .header-shape {
+        width: 340px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    /* meet tutor sec  */
+    .mid-content1 h1 {
+        font-size: 2.6rem;
+    }
+
+    .mid-content1 p {
+        font-size: 18px;
+        line-height: 2rem;
+    }
+
+    .mid-content1-img {
+        width: 480px;
+    }
+    .mid-content2 h1 {
+        font-size: 2.4rem;
+    }
+
+    .mid-content2 p {
+        font-size: 18px;
+        line-height: 2rem;
+    }
+
+    .mid-content2-img {
+        width: 400px;
+    }
+    /* meet tutor sec end  */
+}
+
+
+@media screen and (max-width:425px) {
+    .hero-section-title h1 {
+        font-size: 2.7rem;
+    }
+
+    .hero-section-title p {
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.03rem;
+        width: 99%;
+        margin-bottom: 3px;
+    }
+
+    .first-header-model .header-shape {
+        width: 300px;
+        margin-bottom: 0px;
+    }
+
+    .mid-content1 h1 {
+        font-size: 2.3rem;
+    }
+
+    .mid-content1 p {
+        font-size: 16px;
+        line-height: 2rem;
+    }
+
+    .mid-content1-img {
+        width: 300px;
+    }
+    .mid-content2 h1 {
+        font-size: 2.1rem;
+    }
+
+    .mid-content2 p {
+        font-size: 16px;
+        line-height: 2rem;
+    }
+
+    .mid-content2-img {
+        width: 300px;
+    }
+}
