@@ -114,14 +114,23 @@ def combine_audio_video(video_path, audio_path, output_path):
     try:
         video_clip = VideoFileClip(video_path)
         audio_clip = AudioFileClip(audio_path)
-        audio_clip = audio_clip.set_duration(video_clip.duration)
+        
+        # Adjust audio duration to match the duration of the video clip
+        audio_duration = min(video_clip.duration, audio_clip.duration)
+        audio_clip = audio_clip.subclip(0, audio_duration)
+        
+        # Set audio for the video clip
         final_clip = video_clip.set_audio(audio_clip)
+        
+        # Write the final video file with audio
         final_clip.write_videofile(output_path, codec='libx264', audio_codec='aac')
+        
         message = f"Combined audio and video saved to: {output_path}"
     except Exception as e:
         message = f"Error occurred during audio-video combination: {str(e)}"
 
     return message
+
 
 def stop_recording(session_id, session_dir):
     try:
@@ -159,11 +168,17 @@ if __name__ == "__main__":
         output_path = os.path.join(session_dir, "final_output.mp4")
         print(combine_audio_video(video_path, audio_path, output_path))
 
-
+        sleep(60)
         ###############Removing extra files##############
-        #os.remove(system_audio)
-        #os.remove(microphone_path)
-        #os.remove(audio_path)
+       # Update permissions
+        os.chmod(system_audio, 0o777)  # Update permissions to allow deletion
+        os.chmod(microphone_path, 0o777)
+        os.chmod(audio_path, 0o777)
+
+        # Delete files
+        os.remove(system_audio)
+        os.remove(microphone_path)
+        os.remove(audio_path)
 
     elif action == "stop":
         message = stop_recording(session_id, session_dir)
