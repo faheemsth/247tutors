@@ -44,11 +44,57 @@ uitoolkit.joinSession(sessionContainer, config)
 
 var sessionJoined = (() => {
     console.log('session joined')
+    startRecording();
 })
 
 var sessionClosed = (() => {
     console.log('session closed')
+    stopRecording();
 })
+
+function startRecording() {
+    $.ajax({
+        url: "/start-recording",
+        type: "GET",
+        contentType: "application/json",
+        data: JSON.stringify({}),
+        async: true, // Explicitly setting async to true (default behavior)
+        success: function (responseData) {
+            $("#recording-uuid").val(responseData.sessionId);
+            alert(responseData.sessionId);
+            console.log(responseData);
+        },
+        error: function (xhr, status, error) {
+            console.error("Error starting recording:", error);
+        },
+    });
+}
+
+function stopRecording() {
+    var uuid = $("#recording-uuid").val();
+    // Create a new XMLHttpRequest object
+    var xhr = new XMLHttpRequest();
+
+    // Configure the request
+    xhr.open("GET", "/stop-recording?uuid=" + uuid, true);
+
+    // Set up a callback function to handle the response
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                // Handle the response from the server
+                console.log(xhr.responseText);
+            } else {
+                // Handle errors
+                console.error("Request failed:", xhr.status);
+            }
+        }
+    };
+
+    // Send the request
+    xhr.send();
+}
+
 
 uitoolkit.onSessionJoined(sessionJoined)
 
