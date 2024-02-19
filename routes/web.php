@@ -88,6 +88,7 @@ Route::get('TwentyFourInterviewReminder', [InterviewController::class,'TwentyFou
 
 Route::get('SevenDayPaymentSendToTutorReminder', [PayoutController::class,'SevenDayPaymentSendToTutorReminder']);
 
+Route::get('BookingSlotRelease', [InterviewController::class,'BookingSlotRelease']);
 
 
 Route::get('/emailVerificationEmail', function () {
@@ -326,15 +327,15 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/add/terms/condition', [TermsAndConditionController::class,'form']);
         Route::get('/delete/terms/condition/{id}', [TermsAndConditionController::class,'delete']);
         Route::get('/update/terms/condition/{id}', [TermsAndConditionController::class,'updateform']);
-        
-        
-        
+
+
+
         // RefoundList
-         
+
         Route::get('/admin/RefundList', [BookingController::class, 'RefoundList']);
-        
-        
-        
+
+
+
         Route::get('/admin/privacy_policy', [TermsAndConditionController::class,'index_privacy_policy']);
         Route::post('/admin/privacy_policy', [TermsAndConditionController::class,'Submit_privacy_policy']);
         Route::get('/add/terms/privacy_policy', [TermsAndConditionController::class,'form_privacy_policy']);
@@ -355,8 +356,8 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/user/{id}/delete', [UserController::class, 'delete']);
         Route::get('/user/{id}/permissions', [UserController::class, 'permissions']);
         Route::post('/user/{id}/permissions', [UserController::class, 'permission_post']);
-        
-        
+
+
         Route::post('complaint/stages/submit', [UserController::class, 'ComplaintStagesSubmit']);
 
 
@@ -400,26 +401,26 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/newsletter', [FrontendController::class, 'list'])->name('newsletter.list');
         Route::get('/setting/pages', [PageController::class, 'setting'])->name('website');
         Route::get('/setting/blog', [PageController::class, 'bloglisting'])->name('bloglist');
-        
-        
-        Route::get('/setting/blog-comments',function () { 
+
+
+        Route::get('/setting/blog-comments',function () {
             if (Auth::user()->role_id != 1) { return redirect('dashboard'); }
             $BlogReplies = App\Models\BlogReply::all();
-            return view('super-admin.comment.commentlist',compact('BlogReplies')); 
+            return view('super-admin.comment.commentlist',compact('BlogReplies'));
         })->name('commentlist');
-        
-        Route::get('/change/reply/status/{id}/{status}',function ($id,$status) { 
-            
+
+        Route::get('/change/reply/status/{id}/{status}',function ($id,$status) {
+
             $BlogReplies = App\Models\BlogReply::where('id',$id)->first();
             $BlogReplies->status = $status;
             $BlogReplies->save();
             return back()->with('success',$status.' Status Successfully');
-           
-            
+
+
         })->name('change.reply.status');
-        
-        
-        
+
+
+
         Route::get('/setting/document_types', [PageController::class, 'doctypeList'])->name('documentTypes');
         Route::post('/save_document_types', [PageController::class, 'storeDocType'])->name('save_document_types');
         Route::post('/update_document_types', [PageController::class, 'updateDocType'])->name('update_document_types');
@@ -447,21 +448,21 @@ Route::group(['middleware' => 'auth'], function(){
 
         //  admin booking
         Route::post('complaint/Update', [ComplaintController::class, 'complaintUpdate']);
-        
-        
+
+
         Route::get('admin/bookings', [BookingController::class, 'index']);
         Route::get('ActivityLogs', [BookingController::class, 'ActivityLog']);
         Route::get('booking/update/{id}', [BookingController::class, 'booking_update']);
         Route::post('get-booking-details', [BookingController::class, 'booking_details']);
         Route::get('Complaintlogs', [ComplaintController::class, 'complaintlog']);
-        
+
         Route::get('get/interview', [ComplaintController::class,'getinterview']);
-        
-        
+
+
         Route::get('get/refund', [BookingController::class,'getrefund']);
         Route::post('refund/Update', [BookingController::class, 'refundUpdate']);
-        
-        
+
+
         Route::get('mark-as-read/{id}', [ComplaintController::class, 'MarkAsRead']);
         Route::get('/transaction', [TransactionController::class, 'transaction']);
 
@@ -529,24 +530,24 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('/Upload/Image', [StudentController::class, 'upload_profile_img']);
         Route::post('/update_student_post', [StudentController::class, 'update_student_post']);
         Route::get('/student_profile', [StudentController::class, 'student_profile']);
-        
-        
-        
+
+
+
         Route::get('/tutor/book/{id}', [StudentController::class, 'book_tutor']);
-        
+
         Route::get('/tutor/wallet/book/{id}', [StudentController::class, 'book_tutor_wallet']);
-        
-        
-        
-        
-        
+
+
+
+
+
         Route::post('/book_tutor_post', [BookingController::class, 'book_tutor_post'])->name('stripe.post');
-        
+
         Route::post('/book_by_wallet_post', [BookingController::class, 'book_by_wallet_post'])->name('book.by.wallet.post');
-        
-        
-        
-        
+
+
+
+
         Route::post('/stripe_post_wallet', [BookingController::class, 'stripe_post_wallet'])->name('stripe.post.wallet');
         Route::get('/student/payments', [StudentController::class, 'student_payments']);
 
@@ -556,9 +557,9 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/student_profile/{id}', [StudentController::class, 'student_profile_get']);
         Route::get('parent/home',[StudentController::class,'home']);
         Route::get('student/home',[StudentController::class,'home']);
-        
+
         Route::get('AjaxFetchChatUnredList',[StudentController::class,'AjaxFetchChatUnredList']);
-        
+
         Route::get('/chatchat',[StudentController::class,'chat']);
         Route::get('/single_chat',[StudentController::class,'singlechat']);
 

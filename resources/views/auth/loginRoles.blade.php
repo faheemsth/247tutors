@@ -58,8 +58,8 @@
     <div class="row justify-content-between align-items-center bottom mx-xl-5">
         <div class="mt-2  col-md-7 d-flex justify-content-around flex-wrap">
             <div class="col-12 col-xl-4 "><a href="tel:@isset($web_settings['Ph_num']) {{$web_settings['Ph_num'] ?? '' }} @endisset" class="text-dark  text-decoration-none">Need help? Call us on
-                   <br><b>@isset($web_settings['Ph_num']) {{$web_settings['Ph_num'] ?? '' }} @endisset</b></a> or <a 
-                   href="mailto:@isset($web_settings['topbaremail']) {{$web_settings['topbaremail'] ?? '' }} @endisset" class="text-decoration-none text-dark"><b> Email</b></a></div>
+                   <br><b>@isset($web_settings['Ph_num']) {{$web_settings['Ph_num'] ?? '' }} @endisset</b></a> or <a
+                   href="mailto:@isset($web_settings['Maintopbaremail']) {{$web_settings['Maintopbaremail'] ?? '' }} @endisset" class="text-decoration-none text-dark"><b> Email</b></a></div>
             <div class="col-12 col-xl-4"><a href="{{url('/student-apply-steps')}}" class="text-dark  text-decoration-none">Help! I'm an <b> Adult
                     Learn</b></a></div>
             <div class="col-12 col-xl-4"><a href="{{url('/login')}}" class="text-dark  text-decoration-none">Log in as a <b>Tutor

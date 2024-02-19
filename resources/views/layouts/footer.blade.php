@@ -75,10 +75,10 @@
                                 d="M13.3596 2H2.63965C1.59965 2 0.639648 2.88 0.639648 4V12C0.639648 13.12 1.51965 14 2.63965 14H13.2796C14.3996 14 15.2796 13.12 15.2796 12V4C15.3596 2.88 14.3996 2 13.3596 2ZM2.63965 3.36H13.2796C13.5196 3.36 13.7596 3.52 13.8396 3.76L7.99965 7.84L2.07965 3.68C2.15965 3.52 2.39965 3.36 2.63965 3.36ZM13.9996 12C13.9996 12.4 13.6796 12.64 13.3596 12.64H2.63965C2.23965 12.64 1.99965 12.32 1.99965 12V5.28L7.59965 9.2C7.67965 9.28 7.83965 9.28 7.99965 9.28C8.15965 9.28 8.23965 9.28 8.39965 9.2L13.9996 5.28V12Z"
                                 fill="#DDDDDD" />
                         </svg>
-                        <a href="tel:@isset($web_settings['topbaremail']) {{ $web_settings['topbaremail'] ?? '' }} @endisset"
+                        <a href="tel:@isset($web_settings['Maintopbaremail']) {{ $web_settings['Maintopbaremail'] ?? '' }} @endisset"
                             mailto:class="text-primary">
-                            @isset($web_settings['topbaremail'])
-                                {{ $web_settings['topbaremail'] ?? '' }}
+                            @isset($web_settings['Maintopbaremail'])
+                                {{ $web_settings['Maintopbaremail'] ?? '' }}
                             @endisset
                         </a>
                     </p>
@@ -98,7 +98,8 @@
                         </svg>
                         +62 811 09998263
                     </p> --}}
-                    <p><a href="https://api.whatsapp.com/send?phone=7851012039"
+                    <p><a href="https://api.whatsapp.com/send?phone=@isset($web_settings['MainPh_num']){{$web_settings['MainPh_num']??'' }} @endisset"
+
                             class="text-decoration-none d-flex align-items-center gap-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
                                 fill="none">
@@ -106,7 +107,9 @@
                                     d="M12.9031 3.03437C11.5938 1.72187 9.85 1 7.99687 1C4.17187 1 1.05937 4.1125 1.05937 7.9375C1.05937 9.15938 1.37813 10.3531 1.98438 11.4062L1 15L4.67812 14.0344C5.69063 14.5875 6.83125 14.8781 7.99375 14.8781H7.99687C11.8188 14.8781 15 11.7656 15 7.94063C15 6.0875 14.2125 4.34687 12.9031 3.03437ZM7.99687 13.7094C6.95937 13.7094 5.94375 13.4312 5.05937 12.9062L4.85 12.7812L2.66875 13.3531L3.25 11.225L3.1125 11.0063C2.53437 10.0875 2.23125 9.02812 2.23125 7.9375C2.23125 4.75938 4.81875 2.17188 8 2.17188C9.54062 2.17188 10.9875 2.77187 12.075 3.8625C13.1625 4.95312 13.8313 6.4 13.8281 7.94063C13.8281 11.1219 11.175 13.7094 7.99687 13.7094ZM11.1594 9.39062C10.9875 9.30313 10.1344 8.88438 9.975 8.82812C9.81563 8.76875 9.7 8.74062 9.58438 8.91562C9.46875 9.09062 9.1375 9.47813 9.03438 9.59688C8.93438 9.7125 8.83125 9.72812 8.65938 9.64062C7.64062 9.13125 6.97188 8.73125 6.3 7.57812C6.12188 7.27187 6.47812 7.29375 6.80937 6.63125C6.86562 6.51562 6.8375 6.41563 6.79375 6.32812C6.75 6.24062 6.40313 5.3875 6.25938 5.04063C6.11875 4.70312 5.975 4.75 5.86875 4.74375C5.76875 4.7375 5.65312 4.7375 5.5375 4.7375C5.42188 4.7375 5.23438 4.78125 5.075 4.95312C4.91562 5.12813 4.46875 5.54688 4.46875 6.4C4.46875 7.25313 5.09063 8.07813 5.175 8.19375C5.2625 8.30938 6.39687 10.0594 8.1375 10.8125C9.2375 11.2875 9.66875 11.3281 10.2188 11.2469C10.5531 11.1969 11.2437 10.8281 11.3875 10.4219C11.5312 10.0156 11.5312 9.66875 11.4875 9.59688C11.4469 9.51875 11.3313 9.475 11.1594 9.39062Z"
                                     fill="#DDDDDD" />
                             </svg>
-                            +44 7851 012039
+                            @isset($web_settings['MainPh_num'])
+                            {{ $web_settings['MainPh_num'] ?? '' }}
+                        @endisset
                             <span>(Mon to Sun 9am - 11pm GMT)</span>
                         </a>
                     </p>
@@ -339,7 +342,7 @@
 
 @if (Auth::check())
     <script>
-       
+
         setInterval(function() {
         $.ajax({
             url: "{{ url('CounterShow') }}",
@@ -354,7 +357,7 @@
                 if(response.countmessg != 0){
                     // bellAudio.play();
                     // bellSoundPlayed = true;
-      
+
                 $('.messgcount').text(response.countmessg);
                 $('.messgcount').show();
                 }
@@ -368,11 +371,11 @@
         });
     }, 1000);
     </script>
-    
+
     <script>
     var instance = $("[name=sheraz]")
     instance.intlTelInput();
-    
+
     $("[name=sheraz]").on("blur", function() {
       console.log($(this).val())
       console.log(instance.intlTelInput('getSelectedCountryData').dialCode) //get counrty code

@@ -12,9 +12,9 @@
      <div class="container-fluid d-flex">
          <div class="col-md-7 col-lg-6 contect-info">
              <div class="row">
-                 <a href="mailto:@isset($web_settings['topbaremail']) {{$web_settings['topbaremail'] ?? '' }} @endisset" class="px-0 topemail col-auto col-md-6 col-lg-5 col-xl-4 d-flex align-items-center"><img
+                 <a href="mailto:@isset($web_settings['Maintopbaremail']) {{$web_settings['Maintopbaremail'] ?? '' }} @endisset" class="px-0 topemail col-auto col-md-6 col-lg-5 col-xl-4 d-flex align-items-center"><img
                          src="{{ asset('assets/images/email.svg') }}"
-                         alt="Email Icon"><span>@isset($web_settings['topbaremail']) {{$web_settings['topbaremail'] ?? '' }} @endisset</span></a>
+                         alt="Email Icon"><span>@isset($web_settings['Maintopbaremail']) {{$web_settings['Maintopbaremail'] ?? '' }} @endisset</span></a>
                  <a href="tel:@isset($web_settings['Ph_num']) {{$web_settings['Ph_num'] ?? '' }} @endisset" class="topnum col-auto col-md-5 col-lg-5 col-xl-4 px-0"><img src="{{ asset('assets/images/phone.svg') }}"
                          alt="Phone Icon"> <span>@isset($web_settings['Ph_num']) {{$web_settings['Ph_num'] ?? '' }} @endisset</span></a>
              </div>

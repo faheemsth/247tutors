@@ -13,7 +13,7 @@
     @else
         @include('layouts.navbar')
     @endif
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/appointment-slot-picker@1.2.8/css/appointment-picker.css">
 
     <script src="{{ asset('js/jsdelivrcore.js') }}"></script>
@@ -31,10 +31,10 @@
         .labpay{
             font-size:20px;
             font-weight:600;
-            
+
         }
     </style>
-    
+
     <div class="container-fluid">
         <div class="container">
             <div class="row">
@@ -126,16 +126,16 @@
                                             Saved
                                         </a>
                                     </div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
+
+
+
+
+
+
+
+
+
+
                                     <div class="col-xl-4 col-lg-5 col-auto">
 
                                         @if (Auth::check())
@@ -171,22 +171,22 @@
                                             </a>
                                         @endif
                                     </div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                     <!--<div class="col-xl-4 col-lg-4 col-auto ">-->
                                     <!--    @if (Auth::check())-->
                                     <!--        @if (CheckAgeUnder16() && Auth::user()->role_id == 4)-->
@@ -202,10 +202,10 @@
                                     <!--        @endif-->
                                     <!--    @endif-->
                                     <!--</div>-->
-                                    
-                                    
-                                    
-                                    
+
+
+
+
                                     <div class="col-xl-4 col-lg-4 col-auto ">
                                         @if (Auth::check())
                                             @if (CheckAgeUnder16() && Auth::user()->role_id == 4)
@@ -221,15 +221,15 @@
                                             @endif
                                         @endif
                                     </div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
+
+
+
+
+
+
+
+
+
                                 </div>
                             </div>
                         </div>
@@ -242,43 +242,43 @@
                             {{ $tutor->profile_description }}
                             </p>
                         </div>
-                        
+
                         @if($tutor->complaint_stage == 'Personal inform' && $tutor->id == Auth::id())
                         <div class="personally py-4 mb-3 bg-warning">
                             <h3 class="mx-5">Warning by 24/7 Tutor</h3>
                             <h6 class="mx-5">{{$tutor->complaint_stage}}</h6>
                             <p class="mx-5">{{$tutor->complaint_message}}</p>
-                            
+
                             <p class="mx-5">{{Carbon\Carbon::parse($tutor->updated_at)->diffForHumans()}}</p>
 
                         </div>
                         @endif
-                        
-                        
+
+
                         @if($tutor->complaint_stage == 'Disclaimer')
                         <div class="personally py-4 mb-3 bg-warning">
                             <h3 class="mx-5">Warning by 24/7 Tutor</h3>
                             <h6 class="mx-5">{{$tutor->complaint_stage}}</h6>
                             <p class="mx-5">{{$tutor->complaint_message}}</p>
-                            
+
                             <p class="mx-5">{{Carbon\Carbon::parse($tutor->updated_at)->diffForHumans()}}</p>
 
                         </div>
                         @endif
-                        
-                        
+
+
                         @if($tutor->complaint_stage == 'Blocked')
                         <div class="personally py-4 mb-3 bg-warning">
                             <h3 class="mx-5">Warning by 24/7 Tutor</h3>
                             <h6 class="mx-5">{{$tutor->complaint_stage}}</h6>
                             <p class="mx-5">{{$tutor->complaint_message}}</p>
-                            
+
                             <p class="mx-5">{{Carbon\Carbon::parse($tutor->updated_at)->diffForHumans()}}</p>
 
                         </div>
                         @endif
-                        
-                        
+
+
                         <div class="personally py-4 mb-3">
 
 
@@ -297,7 +297,7 @@
                         <div class="container-fluid py-5 px-1">
                             <div class="row py-3 justify-content-center">
                                 <div class="col-xl-12 col-md-10 col-12 text-center">
-                                    <?php 
+                                    <?php
                                     $StuReviews=App\Models\Booking::with('student')->where('tutor_id',$tutor->id)->whereNotNull('student_rating')->get();
                                     $parentReviews=App\Models\Booking::with('parent')->where('tutor_id',$tutor->id)->whereNotNull('parent_rating')->get();
                                     ?>
@@ -343,7 +343,7 @@
                                         @endif
                                        @endforeach
                                       @endif
-                                      
+
                                       @if(!empty($parentReviews))
                                       @foreach($parentReviews as $Review)
                                        @if(!empty(App\Models\User::find($Review->parent_id)))
@@ -384,13 +384,13 @@
                                        @endforeach
                                       @endif
                                     </div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
+
+
+
+
+
+
+
                                 </div>
                             </div>
                         </div>
@@ -441,7 +441,7 @@
 
                                                             </tr>
                                                         @endforeach
-                                                         @else 
+                                                         @else
                                     <tr>
                                         <td colspan="5">No Record Found</td>
                                     </tr>
@@ -496,7 +496,7 @@
                                                         @endfor
                                                     </tr>
                                                 @endforeach
-                                                 @else 
+                                                 @else
                                     <tr>
                                         <td colspan="9">No Record Found</td>
                                     </tr>
@@ -509,13 +509,13 @@
                         </div>
 
                         <div class="row mt-4">
-                            
+
                                 <div class="col-md-6 quali">
                                         <h3 class="headline">Subject Offered</h3>
                                     </div>
                                <div class="row">
                                  <div class="col-md-12 " style="overflow:scroll;">
-                           
+
                                 <table class="table table-bordered border-dark mt-4">
                                     <thead class="qualification">
                                         <tr>
@@ -534,7 +534,7 @@
                                                     <td>£{{ $tutorsubjectoffer->fee }}/hr</td>
                                                 </tr>
                                             @endforeach
-                                             @else 
+                                             @else
                                     <tr>
                                         <td colspan="3">No Record Found</td>
                                     </tr>
@@ -558,7 +558,7 @@
                             <h5>Let’s Chat with 247tutor</h5>
                             <p>Have a Chat with 247tutor and see how (and when!) they can Help</p>
                             <a
-                                href="mailto:@isset($web_settings['topbaremail']) {{ $web_settings['topbaremail'] ?? '' }} @endisset">Let's
+                                href="mailto:@isset($web_settings['Maintopbaremail']) {{ $web_settings['Maintopbaremail'] ?? '' }} @endisset">Let's
                                 Chat</a>
 
                         </div>
@@ -676,10 +676,10 @@
             </div>
         </div>
     </div>
-    
-    
-    
-    
+
+
+
+
         <div class="modal fade zoomIn" id="BooTypemodal" tabindex="-1" aria-labelledby="update_doc_modal"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -699,7 +699,7 @@
                         <div class="row mt-4  justify-content-around">
                             <div class="col-auto">
                                 <label class="text-secondary d-flex gap-1 align-items-center labpay">
-                                Credit  Card : 
+                                Credit  Card :
                                     <div class="d-flex ms-1 gap-2 align-items-center">
               <i class="fa-brands fa-cc-visa" style="color:navy;"></i>
               <i class="fa-brands fa-cc-amex" style="color:blue;"></i>
@@ -715,31 +715,31 @@
                             </div>
                         </div>
                     </div>
-                   
+
                 </div>
             </div>
         </div>
     </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <script src="{{ asset('vendor/jquery/jquery3.7.0.js') }}"></script>
 
 
@@ -907,18 +907,18 @@
             });
             picker.open();
         }
-        
-        
+
+
         function BooTypemodal(BooTypemodal) {
             var stripe = '<a  class=" btn px-5 py-2 text-decoration-none btnpay" href="{{ url('tutor/book') }}/' + BooTypemodal + '">Stripe<i class="ms-3 fa-solid fa-chevron-right"></i></a>';
             var wallet = '<a  class="btn px-5 py-2 text-decoration-none btnpay"  href="{{ url('tutor/wallet/book') }}/' + BooTypemodal + '">Wallet<i class="ms-3 fa-solid fa-chevron-right"></i></a>';
-        
+
             $('#stripe').html(stripe);
             $('#wallet').html(wallet);
             $('#BooTypemodal').modal('show');
         }
 
-        
+
     </script>
 
 

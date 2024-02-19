@@ -13,7 +13,7 @@
     <script type="text/javascript" src="../js/languages/ro.js"></script>
     <script src="{{ URL::asset('assets/sweetalert2/sweetalert2.min.js') }}"></script>
     <link href="{{ URL::asset('assets/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
-    
+
 @endpush
 <style>
     .nav-item:hover{
@@ -113,7 +113,7 @@
                                 <legend>Top-bar:</legend>
                                 <div class="row">
                                     <div class="col-10 col-md-4 my-3">
-                                    <label for="hometitle" class="form-label">Email</label>
+                                    <label for="hometitle" class="form-label">Support Email</label>
                                     <div class="input-group ">
                                         <input type="email" name="topbaremail" id="topbaremail" class="form-control"
                                             placeholder="Enter Email"
@@ -129,24 +129,29 @@
                                     </div>
                                 </div>
                                 </div>
+
+
+
                                 <div class="row">
                                     <div class="col-10 col-md-4 my-1">
-                                    <label for="hometitle" class="form-label">Support Email</label>
+                                    <label for="hometitle" class="form-label">Email</label>
                                     <div class="input-group ">
-                                        <input type="email" name="topbaremail" id="topbaremail" class="form-control"
+                                        <input type="email" name="Maintopbaremail" id="Maintopbaremail" class="form-control"
                                             placeholder="Enter Email"
-                                            value="@isset($web_settings['topbaremail']) {{ $web_settings['topbaremail'] ?? '' }} @endisset">
+                                            value="@isset($web_settings['Maintopbaremail']) {{ $web_settings['Maintopbaremail'] ?? '' }} @endisset">
                                     </div>
                                 </div>
                                 <div class="col-10 col-md-4 my-1">
                                     <label for="hometitle" class="form-label">Whatsapp Number</label>
                                     <div class="input-group">
-                                        <input type="text" name="Ph_num" id="Ph_num" class="form-control"
+                                        <input type="text" name="MainPh_num" id="MainPh_num" class="form-control"
                                             placeholder="Enter Ph.number"
-                                            value="@isset($web_settings['Ph_num']) {{ $web_settings['Ph_num'] ?? '' }} @endisset">
+                                            value="@isset($web_settings['MainPh_num']) {{ $web_settings['MainPh_num'] ?? '' }} @endisset">
                                     </div>
                                 </div>
                                 </div>
+
+
                             </fieldset>
                             <fieldset class="mb-3">
                                 <legend>Social Media Link:</legend>
@@ -674,6 +679,10 @@
 
             var topbaremail = $('#topbaremail').val();
             var Ph_num = $('#Ph_num').val();
+
+            var Maintopbaremail = $('#Maintopbaremail').val();
+            var MainPh_num = $('#MainPh_num').val();
+
             var fblink = $('#fblink').val();
             var instlink = $('#instlink').val();
             var inlink = $('#inlink').val();
@@ -691,6 +700,8 @@
 
                     topbaremail: topbaremail,
                     Ph_num: Ph_num,
+                    Maintopbaremail: Maintopbaremail,
+                    MainPh_num: MainPh_num,
                     fblink: fblink,
                     instlink: instlink,
                     inlink: inlink,

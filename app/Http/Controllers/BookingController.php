@@ -320,7 +320,7 @@ class BookingController extends Controller
             }
         }
     }
-    
+
     // For Wallet
     public function book_by_wallet_post(Request $request)
     {
@@ -359,7 +359,7 @@ class BookingController extends Controller
 
             $Wallet->net_income -= $request->amount;
             $Wallet->save();
-    
+
             if (!empty($request->subject)) {
                 $check_booking->where('subject_id', $request->subject);
             }
@@ -379,10 +379,10 @@ class BookingController extends Controller
                     return redirect('parent/profile')->with('success', 'You Have Booked This Tutor');
                 }
                 if ($request->amount > 0) {
-    
-                    
+
+
                 }
-    
+
                 $firstCheck = ModelsCoupon::where('id', $request->copounid)
                     ->where('usage_limit', '>', 0)
                     ->whereIn('to_user', [Auth::id()])
@@ -396,7 +396,7 @@ class BookingController extends Controller
                         'usage_limit' => $Coupon->usage_limit - 1,
                         'used_count' => $Coupon->used_count + 1,
                     ]);
-    
+
                     $Coupon->to_user = $Coupon->to_user . ',' . Auth::id();
                     $Coupon->save();
                 } else {
@@ -406,7 +406,7 @@ class BookingController extends Controller
                         return redirect('parent/profile')->with('failed', 'You Coupon Limit Is Expire');
                     }
                 }
-    
+
                 $booking = new Booking();
                 $booking->student_id = $request->post('user_id') ? $request->post('user_id') : Auth::id();
                 $booking->tutor_id = $request->tutor_id;
@@ -418,13 +418,13 @@ class BookingController extends Controller
                 $booking->status = 'Pending';
                 $booking->uuid = $this->randomStringFormat();
                 $booking->save();
-    
+
                 $ActivityLogs = new ActivityLog;
                 $ActivityLogs->user_id = Auth::user()->id;
                 $ActivityLogs->title = "New Booking";
                 $ActivityLogs->description = "New Booking  " . Auth::user()->first_name . '   ' . Auth::user()->last_name . 'Book This' . $booking->uuid;
                 $ActivityLogs->save();
-    
+
                 $Transaction = new ModelsTransaction();
                 $Transaction->amount = $request->amount > 0 ? $request->amount : $amoutCredited;
                 $Transaction->charge_id = 'Wallet';
@@ -441,9 +441,9 @@ class BookingController extends Controller
                 $lastInsertedId = $Transaction->id;
                 $tutor = User::find($request->tutor_id);
                 $subject = Subject::find($request->subject);
-    
-    
-    
+
+
+
                 $url = URL::temporarySignedRoute(
                     'booking-status-change',
                     Carbon::now()->addMinutes(Config::get('auth.verification.expire', 1)),
@@ -470,15 +470,15 @@ class BookingController extends Controller
                             $message->from($user->email, $user->first_name . ' ' . $user->last_name);
                         });
                     } elseif ($environment == 'production') {
-    
+
                         $view = \view('pages.mails.NewBooking', $data);
                         $view = $view->render();
-    
+
                         $mail = new PHPMailer();
                         $mail->CharSet = "UTF-8";
-    
+
                         $mail->setfrom('support@247tutors.com', '247 Tutors');
-    
+
                         $mail->isHTML(true);
                         $mail->Subject = 'New Booking';
                         $mail->Body = $view;
@@ -487,13 +487,13 @@ class BookingController extends Controller
                         $mail->addaddress($tutor->email, $data['tutor']);
                         $mail->isHTML(true);
                         $mail->msgHTML($view);
-    
+
                         if (!$mail->send())
                             throw new \Exception('Failed to send mail');
                     }
                 }
-    
-    
+
+
                 if (Auth::user()->role_id == 4) {
                     return redirect('bookings')->with('success', 'Successfully You Have Booked It .');
                 } elseif (Auth::user()->role_id == 5) {
@@ -513,10 +513,10 @@ class BookingController extends Controller
           }else{
               return redirect('parent/payments')->with('failed', 'Sorry, it appears that your wallet currently has insufficient funds.');
           }
-        
+
         }
 
-        
+
     }
 
 
@@ -720,7 +720,7 @@ class BookingController extends Controller
                 }else{
                      $student = User::find($booking->student_id);
                 }
-               
+
             }
 
             $ActivityLogs = new ActivityLog;
@@ -784,7 +784,7 @@ class BookingController extends Controller
                     if (!$mail->send())
                         throw new \Exception('Failed to send mail');
                 }
-            
+
 
             Booking::where('uuid', $request->id)->where('tutor_id', $request->tutorId)
                 ->update([
@@ -829,7 +829,7 @@ class BookingController extends Controller
                 }else{
                      $student = User::find($booking->student_id);
                 }
-               
+
             }
 
 
@@ -844,7 +844,7 @@ class BookingController extends Controller
                 ]);
             $student->booking_cancellation_count += 1;
             $student->save();
-          
+
             $data = [
                 'tutorMessage' => 'Booking Is Cancelled',
                 'student' => $student->first_name . ' ' . $student->last_name,
@@ -869,7 +869,7 @@ class BookingController extends Controller
 
                 if (!$mail->send())
                     throw new \Exception('Failed to send mail');
-            
+
 
             return redirect('bookings')->with('success', 'Successfully Your Bookong' . '  ' . $request->status);
         }
@@ -919,20 +919,20 @@ class BookingController extends Controller
             ->update([
                 'status' => $request->status,
             ]);
-            
-            
+
+
         $Booking=Booking::where('uuid', $request->id)->where('tutor_id', $request->tutorId)->first();
-        
+
         $Transaction=Transaction::where('booking_id',$Booking->id)->first();
         if(empty(PendingPayment::where('booking_id',$Booking->id)->first())){
             $PendingPayment=new PendingPayment;
             $PendingPayment->tutor_id=$request->tutorId;
             $PendingPayment->amount=$Transaction->amount;
             $PendingPayment->booking_id=$Booking->id;
-            $PendingPayment->save(); 
+            $PendingPayment->save();
         }
 
-            
+
         $tutor = User::find($request->tutorId);
         $student = User::find($Booking->student_id);
 
@@ -968,8 +968,8 @@ class BookingController extends Controller
 
         if (!$mail->send())
             throw new \Exception('Failed to send mail');
-            
-           
+
+
         // student
         $view = \view('pages.mails.CompletedBookingStudent', $data);
         $view = $view->render();
@@ -987,8 +987,8 @@ class BookingController extends Controller
 
         if (!$mail->send())
             throw new \Exception('Failed to send mail');
-            
-            
+
+
 
 
         return redirect('bookings')->with('success', 'Successfully Your Bookong' . '  ' . $request->status);
@@ -1083,9 +1083,9 @@ class BookingController extends Controller
                 }else{
                      $student = User::find($booking->student_id);
                 }
-               
+
             }
-            
+
 
         if (empty($student)) {
             return redirect('bookings')->with('success', 'Sorry You Not Have Any Student');
@@ -1160,9 +1160,9 @@ class BookingController extends Controller
             }else{
                    $student = User::find($booking->student_id);
                 }
-               
+
             }
-        
+
         $tutor = User::find($booking->tutor_id);
         $url = URL::temporarySignedRoute(
             'apperove_rescheduled_meeting',
@@ -1799,7 +1799,7 @@ class BookingController extends Controller
                         if (!$mail->send())
                             throw new \Exception('Failed to send mail');
 
-                        // tutor 
+                        // tutor
                         $view = \view('pages.mails.interview', $data);
                         $view = $view->render();
 
@@ -1958,7 +1958,7 @@ class BookingController extends Controller
     {
         if (Auth::user()->role_id != 1) { return redirect('dashboard'); }
         $Refound = Refound::where('bookingId', $request->Tutorid)->first();
-        
+
         $Booking = Booking::where('uuid', $request->Tutorid)->first();
         $PendingPayment=PendingPayment::where('tutor_id',$Booking->tutor_id)->where('booking_id',$Booking->id)->first();
 
@@ -1975,21 +1975,21 @@ class BookingController extends Controller
         if (!$Refound) {
             return back()->with('error', 'Refund not found.');
         }
-        
-        
-        
+
+
+
         if($Booking->parent_id == null){
             $student = User::find($Booking->student_id);
         }else{
             $student = User::find($Booking->parent_id);
         }
         $tutor = User::find($Booking->tutor_id);
-        
-        
+
+
         if (!$student) {
             return back()->with('error', 'Student not found.');
         }
-        
+
         if (!$tutor) {
             return back()->with('error', 'Student not found.');
         }
@@ -2009,9 +2009,9 @@ class BookingController extends Controller
                     $PendingPayment->save();
                     $Booking->request_refound= "2";
                     $Booking->save();
-                    
-                    
-                    
+
+
+
                     // student
                     $view = view('pages.mails.RefundPaidStudent', $data)->render();
                     $mail = new PHPMailer(true);
@@ -2026,9 +2026,9 @@ class BookingController extends Controller
                     $mail->isHTML(true);
                     $mail->msgHTML($view);
                     $mail->send();
-                    
+
                     // tutor
-                    
+
                     $view = view('pages.mails.RefundPaidTutor', $data)->render();
                     $mail = new PHPMailer(true);
                     $mail->CharSet = 'UTF-8';
@@ -2042,18 +2042,18 @@ class BookingController extends Controller
                     $mail->isHTML(true);
                     $mail->msgHTML($view);
                     $mail->send();
-                    
+
                     // update
                     $Refound->status = $request->status;
                     $Refound->save();
                     return back()->with('success', 'Refund updated and email sent successfully.');
-                    
+
                 }
-                
+
             }
             // end paid
         }elseif($request->status == 'Processing'){
-            
+
                     // student
                     $view = view('pages.mails.RefundProcessingStudent', $data)->render();
                     $mail = new PHPMailer(true);
@@ -2068,9 +2068,9 @@ class BookingController extends Controller
                     $mail->isHTML(true);
                     $mail->msgHTML($view);
                     $mail->send();
-                    
+
                     // tutor
-                    
+
                     $view = view('pages.mails.RefundProcessingTutor', $data)->render();
                     $mail = new PHPMailer(true);
                     $mail->CharSet = 'UTF-8';
@@ -2084,23 +2084,23 @@ class BookingController extends Controller
                     $mail->isHTML(true);
                     $mail->msgHTML($view);
                     $mail->send();
-                    
+
                     $Refound->status = $request->status;
                     $Refound->save();
                     return back()->with('success', 'Refund updated and email sent successfully.');
-            
+
         }else{
                     $Refound->status = $request->status;
                     $Refound->save();
-                    return back()->with('success', 'Refund updated and email sent successfully.'); 
+                    return back()->with('success', 'Refund updated and email sent successfully.');
         }
-        
+
      }else
      {
-         return back()->with('error', 'This Booking Already Paid to Tutor.'); 
+         return back()->with('error', 'This Booking Already Paid to Tutor.');
      }
-        
-        
-        
+
+
+
     }
 }

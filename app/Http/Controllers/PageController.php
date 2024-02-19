@@ -20,6 +20,8 @@ class PageController extends Controller
         $keys = array(
             "topbaremail",
             "Ph_num",
+            "Maintopbaremail",
+            "MainPh_num",
             "fblink",
             "instlink",
             "xlink",
@@ -98,7 +100,7 @@ class PageController extends Controller
         $blogs = Blog::query();
         $search = $request->input('search');
         $category = $request->input('category');
-        
+
         if (!empty($search)) {
                             $blogs->where('slug', 'like', '%' . $search . '%')
                              ->orWhere('title', 'like', '%' . $search . '%')
@@ -110,7 +112,7 @@ class PageController extends Controller
            };
 
 
-        $blogs=$blogs->paginate(5);   
+        $blogs=$blogs->paginate(5);
         return view('super-admin.Pages.bloglist', compact('blogs'));
     }
 
