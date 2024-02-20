@@ -249,7 +249,7 @@ class RegisterController extends Controller
                 'cplname' => $data['cplname'],
                 'cpemail' => $data['cpemail'],
                 'zipcode' => $data['zipcode'],
-                'status' => 'Pending',
+                'status' => 'Active',
                 'role_id' => $data['role_id'],
                 'password' => Hash::make('1234'),
             ]);
@@ -278,8 +278,8 @@ class RegisterController extends Controller
                 });
             }elseif($environment == 'production'){
                 $imagePath = public_path('assets/images/247 NEW Logo 1.png');
-                
-                
+
+
                 $view = \view('email.emailVerificationEmail',$data);
                 $view = $view->render();
                 $mail = new PHPMailer();

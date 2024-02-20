@@ -557,6 +557,10 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/student_profile/{id}', [StudentController::class, 'student_profile_get']);
         Route::get('parent/home',[StudentController::class,'home']);
         Route::get('student/home',[StudentController::class,'home']);
+        Route::get('organization/students', [ParentController::class, 'your_students']);
+        Route::get('/organization/payments', [ParentController::class,'parent_payments']);
+
+        Route::get('/organization/messages/',[ChatController::class,'chat']);
 
         Route::get('AjaxFetchChatUnredList',[StudentController::class,'AjaxFetchChatUnredList']);
 
@@ -581,7 +585,8 @@ Route::group(['middleware' => 'auth'], function(){
 
 
         // organization
-        Route::get('/organization/home', [OrgController::class, 'organization_pending'])->name('organization.dashboard');
+        // Route::get('/organization/home', [OrgController::class, 'organization_pending'])->name('organization.dashboard');
+        Route::get('/organization/home', [OrgController::class, 'index'])->name('organization.dashboard');
         Route::get('/organization_pending', [OrgController::class, 'organization_pending'])->name('organization.pending');
 
 

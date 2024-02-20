@@ -9,7 +9,7 @@
     <script src="{{ asset('js/jsdelivr.js') }}"></script>
     <script src="{{ asset('js/jsdelivrcore.js') }}"></script>
     <style>
-   
+
     .bookingdetail{
         font-size:2.5rem;
     }
@@ -66,7 +66,7 @@
             color: #FF912C;
         }
              @media only screen and (max-width : 1025px) {
-       
+
            table tr th{
         min-width:100px !important;
     }
@@ -203,7 +203,7 @@
                                         ->with(['level', 'tutor', 'subject'])
                                         ->get();
                                 @endphp
-                                @if (!empty(optional($booking->student)->role_id == '4'))
+                                @if (!empty(optional($booking->student)->role_id == '4' || optional($booking->student)->role_id == '6'))
                                     <tr>
                                         <th>{{ $booking->uuid }}</th>
                                         <th>{{ optional($booking->student)->username }}</th>
@@ -249,12 +249,12 @@
                                         </td>
                                         <td>{!! $booking->booking_date . '<br>' . $booking->booking_time !!}</td>
                                         <th class="dropdown">
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
+
+
+
+
+
+
                                             @if ($booking->request_refound == '2' || $booking->request_refound == '1' || $booking->status == 'Cancelled' || $booking->status == 'Cancelled By User' || $booking->status == 'Cancelled By Tutor')
                                             <button class="btn student-table-details dropdown-toggle" type="button"
                                                 id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" disabled>
@@ -266,14 +266,14 @@
                                                 Actions
                                             </button>
                                             @endif
-                                            
+
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
-                                                @if (Auth::user()->role_id == 5)
+                                                @if (Auth::user()->role_id == 5 || Auth::user()->role_id == 6)
                                                     <li>
-                                                        <a href="{{ url('chats') . '/' . $booking->tutor->id }}"
+                                                        <a href="{{ url('chat') . '/' . $booking->tutor->id }}"
                                                             class="dropdown-item">Let’s
                                                             chat with Tutor</a>
-                                                        <a href="{{ url('chats') . '/' . $booking->student->id }}"
+                                                        <a href="{{ url('chat') . '/' . $booking->student->id }}"
                                                             class="dropdown-item">Let’s chat with Student</a>
                                                     </li>
                                                 @endif
@@ -307,7 +307,7 @@
                                                                              Zoom</a>
                                                                         @endif
                                                                     @endif
-                                                                    
+
                                                                     @if(Auth::user()->role_id == 3)
                                                                         @if($booking->is_meet_tutor <= 1)
                                                                         <a target="_blank"
@@ -351,7 +351,7 @@
                                                                         Booking</a>
                                                                 @endif
                                                             </li>
-                                                        @elseif (Auth::user()->role_id == 4 || Auth::user()->role_id == 5)
+                                                        @elseif (Auth::user()->role_id == 4 || Auth::user()->role_id == 5 || Auth::user()->role_id == 6)
                                                             <li>
                                                                 @if ($booking->status != 'Scheduled')
                                                                     <a href="{{ url('booking-status-change?id=') . $booking->uuid . '&status=Cancelled&tutorId=' . $booking->tutor_id }}"
@@ -390,24 +390,24 @@
                                                             class="dropdown-item " style="cursor: pointer">
                                                             Request Refund
                                                             </a>
-                                                            
+
                                                         </li>
                                                         @endif
                                                     @endif
                                                 @endif
-                                                     
+
                                             </ul>
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
+
+
+
+
+
+
+
+
+
+
+
                                         </th>
                                     </tr>
                                 @endif
@@ -424,8 +424,8 @@
         </div>
 
     </div>
-    
-    
+
+
         <div class="modal fade zoomIn" id="RefundModal" tabindex="-1" aria-labelledby="update_doc_modal"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -439,27 +439,27 @@
                     @csrf
                     <div class="modal-body">
                         <div class="row mt-4">
-                            
-                            
+
+
                             <div class="row mt-4">
                                 <div class="col-md-6">
                                     <label class="text-secondary">Booking Id</label><br>
                                    <input type="text" id="booking_ids" disabled class="w-100 p-2">
                                 </div>
-                                
+
                                 <div class="col-md-6">
                                     <label class="text-secondary">Tutor</label><br>
                                     <input type="text" class="w-100 p-2" disabled id="tutorname">
                                 </div>
-                                
-                                
+
+
                             </div>
                              <div class="row mt-4">
                                 <div class="col-md-6">
                                     <label class="text-secondary">Subject</label><br>
                                     <input type="text" class="w-100 p-2" disabled id="subjectname">
                                 </div>
-                                
+
                                 <div class="col-md-6">
                                     <label class="text-secondary">Amount</label><br>
                                     <input type="text" class="w-100 p-2" disabled id="price">
@@ -471,14 +471,14 @@
                                     <input type="text" required name="reason" class="w-100 p-2">
                                     <input type="hidden" id="tutorId" value="" name="tutorId">
                                      <input type="hidden" id="booking_id" name="id">
-                                    
+
                                 </div>
-                                
+
                                 <div class="col-md-6">
                                     <label class="text-secondary">Image</label><br>
                                     <input type="file" class="w-100 p-2" name="image">
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -492,16 +492,16 @@
             </div>
         </div>
     </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
     <div class="modal fade zoomIn" id="RescheduledModal" tabindex="-1" aria-labelledby="update_doc_modal"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -552,12 +552,12 @@
             </div>
         </div>
     </div>
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
     <div class="modal" id="ratingModal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -600,9 +600,9 @@
             $('#RescheduledModal').modal('show');
         }
     </script>
-    
-    
-    
+
+
+
     <script>
         function Refund(bookingId, tutorId,tutorName,Subject,price) {
             $('#tutorId').val(tutorId);
@@ -614,7 +614,7 @@
             $('#RefundModal').modal('show');
         }
     </script>
-    
+
 
     <script>
         var picker = '';

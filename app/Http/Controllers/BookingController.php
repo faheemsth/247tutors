@@ -273,7 +273,7 @@ class BookingController extends Controller
             if ($tutor->status !== 'Pending' && $tutor->status !== 'InActive') {
                 $environment = env('APP_ENV', 'local');
                 if ($environment == 'local') {
-                    Mail::send('pages.mails.tutorverifybooking', $data, function ($message) use ($tutor, $user, $subject) {
+                    Mail::send('pages.mails.NewBooking', $data, function ($message) use ($tutor, $user, $subject) {
                         $message->to($tutor->email, $tutor->first_name . ' ' . $tutor->last_name)
                             ->subject($user->first_name . ' ' . $user->last_name . ' Hired You For ' . $subject->name);
                         $message->from($user->email, $user->first_name . ' ' . $user->last_name);
@@ -316,7 +316,7 @@ class BookingController extends Controller
             } elseif (Auth::user()->role_id == 5) {
                 return redirect('parent/profile')->with('failed', 'You Have Already Booked It');
             } elseif (Auth::user()->role_id == 6) {
-                return redirect('parent/profile')->with('failed', 'You Have Already Booked It');
+                return redirect('organization/home')->with('failed', 'You Have Already Booked It');
             }
         }
     }
@@ -464,7 +464,7 @@ class BookingController extends Controller
                 if ($tutor->status !== 'Pending' && $tutor->status !== 'InActive') {
                     $environment = env('APP_ENV', 'local');
                     if ($environment == 'local') {
-                        Mail::send('pages.mails.tutorverifybooking', $data, function ($message) use ($tutor, $user, $subject) {
+                        Mail::send('pages.mails.NewBooking', $data, function ($message) use ($tutor, $user, $subject) {
                             $message->to($tutor->email, $tutor->first_name . ' ' . $tutor->last_name)
                                 ->subject($user->first_name . ' ' . $user->last_name . ' Hired You For ' . $subject->name);
                             $message->from($user->email, $user->first_name . ' ' . $user->last_name);
@@ -507,7 +507,7 @@ class BookingController extends Controller
                 } elseif (Auth::user()->role_id == 5) {
                     return redirect('parent/profile')->with('failed', 'You Have Already Booked It');
                 } elseif (Auth::user()->role_id == 6) {
-                    return redirect('parent/profile')->with('failed', 'You Have Already Booked It');
+                    return redirect('organization/home')->with('failed', 'You Have Already Booked It');
                 }
             }
           }else{
@@ -614,6 +614,59 @@ class BookingController extends Controller
 
         return redirect('bookings')->with('success', 'Successfully You Have Booked Free Lesson ');
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function bookings(Request $request)
     {

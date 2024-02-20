@@ -5,10 +5,12 @@
             @include('layouts.studentnav')
         @elseif (Auth::user()->role_id == '3')
             @include('layouts.tutornav')
-        @elseif (Auth::user()->role_id == '5' || Auth::user()->role_id == '6')
+        @elseif (Auth::user()->role_id == '5')
             @include('layouts.parentnav')
         @elseif (Auth::user()->role_id == '1' || Auth::user()->role_id == '2')
             @include('layouts.navbar')
+        @elseif (Auth::user()->role_id == '6')
+            @include('layouts.orgnav')
         @endif
     @else
         @include('layouts.navbar')
@@ -214,7 +216,7 @@
                                         @endforeach
                                     @endif
                                 </select>
-                                @if (Auth::user()->role_id == '5' && !empty($students))
+                                @if (!empty($students) && Auth::user()->role_id == '5' || Auth::user()->role_id == '6')
                                     <label class="mt-3">Students</label>
                                     <select required name="user_id" id="changesubject" class="w-100 p-2">
                                         @foreach ($students as $student)
@@ -256,7 +258,7 @@
                                 @endif
                                 <div class="text px-3 d-flex flex-column">
                                     <span class="fw-bold">{{ $tutor->username }}</span>
-                                     <span>{{ $tutor->facebook_link }}</span> 
+                                     <span>{{ $tutor->facebook_link }}</span>
                                 </div>
                             </div>
                         </div>
@@ -520,7 +522,7 @@
                                             @endif
                                             <div class="text p-3 d-flex flex-column">
                                                 <span  class="fw-bold">{{ $tutor->username }}</span>
-                                                 <span>{{ $tutor->facebook_link }}</span> 
+                                                 <span>{{ $tutor->facebook_link }}</span>
                                             </div>
                                         </div>
                                         <div class="summary-item mt-3" style="line-height: 0.7;">
@@ -567,9 +569,9 @@
                         <div class="panel-body mt-5 px-5 mx-5">
                             <h2 class="text-left text-primary fs-1"><strong>Confirm Your Booking</strong></h2><br>
                             <div class="d-flex flex-column flex-md-row justify-content-center gap-5">
-                                
+
                                 <div class="col-md-5 col-12 p-3 h-25 mt-4 mt-md-0 me-5">
-                                  
+
                                     <div class="form-1  shadow p-2" style=" background: #ABFF00; border-radius: 12px;">
 
                                         <div class="d-flex">
@@ -613,11 +615,11 @@
                                 </div>
                                 <div class="col-md-3 col-12 p-3 h-25 mt-4 mt-md-0 me-5">
                                       <div class="bg-primary p-2 mb-2 rounded-3">
-                                        
+
                                     <input class=" w-100 p-2" size='4' type='hidden' readonly name="amount" id="amount">
-                                    
-                                        
-                                            
+
+
+
                                         <h5 class="m-0 ps-3 text-dark">Check your email for coupon</h5>
                                         <div class="summary gap-1 mt-3 d-flex justify-content-between">
                                             <input type="text" class="w-100 p-1 mb-1" name="Coupon" id="coupon"
@@ -633,7 +635,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <input type="hidden" class="w-100 p-3" required name="copounid" id="copounid" value="">
 
@@ -645,37 +647,37 @@
                             <input type="submit" class=" next btn btn-primary px-5" value="Pay" id="next3" />
                         </div>
                     </fieldset>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 </form>
             </div>
@@ -1075,8 +1077,8 @@
             $('.total').text('£' + fee);
 
         });
-            
-            
+
+
             $('#changesubject').on('change', function() {
                 var selectedOption = $(this).find('option:selected');
                 var fee = selectedOption.data('fee') - $('#walletBalance').data('balance');
@@ -1125,7 +1127,7 @@
                             id = data.id;
                         }
                         $('#copounid').val(id);
-                        
+
 
                         if(data.discount_type === 'percentage')
                         {
@@ -1136,8 +1138,8 @@
                             $('#dicountId').text('£' + fetchfee + '');
                             discount = Math.max(fetchfee, 0);
                         }
-                        
-                        
+
+
                         var walletCheck=$('#wallet').val();
                         if(walletCheck > 0){
                          var TotalWallet = discount + parseFloat(walletCheck);
@@ -1149,8 +1151,8 @@
                         $('#walletText').text('Wallet Have Amount :' + TotalWallet);
                         $('#feeId').text('£' + fee);
                         $('.total').text('£' + (selectedOption.data('fee') - fetchfee));
-                        
-                        
+
+
                         }else{
                         $('.total').text('£' + Math.max((fee - discount), 0));
                         $('#amount').hide();

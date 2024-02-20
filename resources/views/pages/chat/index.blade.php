@@ -10,6 +10,8 @@
             @include('layouts.parentnav')
         @elseif (Auth::user()->role_id == '1' || Auth::user()->role_id == '2')
             @include('layouts.navbar')
+        @elseif (Auth::user()->role_id == '6')
+            @include('layouts.orgnav')
         @endif
     @else
         @include('layouts.navbar')
@@ -25,10 +27,10 @@
             list-style: none;padding-left: 10px;
         }
         @media only screen and (max-width:330px){
-  
+
      .leftpadd{
         padding-left:0px;
-       
+
     }
 }
     </style>
@@ -59,7 +61,7 @@
 
                                 @if (!empty($tutors))
                                     @foreach ($tutors as $tutor)
-                                
+
                                         <li class="d-flex align-items-end align-items-md-center justify-content-between py-2 mb-2"
                                             style="border-bottom: 1px solid #e3e3e3;">
                                             <div class="d-flex gap-2 align-items-md-center align-items-end">

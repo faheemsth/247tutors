@@ -5,10 +5,12 @@
             @include('layouts.studentnav')
         @elseif (Auth::user()->role_id == '3')
             @include('layouts.tutornav')
-        @elseif (Auth::user()->role_id == '5' || Auth::user()->role_id == '6')
+        @elseif (Auth::user()->role_id == '5')
             @include('layouts.parentnav')
         @elseif (Auth::user()->role_id == '1' || Auth::user()->role_id == '2')
             @include('layouts.navbar')
+        @elseif (Auth::user()->role_id == '6')
+            @include('layouts.orgnav')
         @endif
     @else
         @include('layouts.navbar')
@@ -220,7 +222,7 @@
                                         @endforeach
                                     @endif
                                 </select>
-                                @if (Auth::user()->role_id == '5' && !empty($students))
+                                @if (!empty($students) && Auth::user()->role_id == '5' || Auth::user()->role_id == '6')
                                     <label class="mt-3 mb-1">Students</label>
                                     <select required name="user_id" id="changesubject" class="w-100 p-2">
                                         @foreach ($students as $student)
@@ -262,7 +264,7 @@
                                 @endif
                                 <div class="text px-2 py-3 d-flex flex-column">
                                     <span class="fw-bold">{{ $tutor->username }}</span>
-                                     <span>{{ $tutor->facebook_link }}</span> 
+                                     <span>{{ $tutor->facebook_link }}</span>
                                 </div>
                             </div>
                         </div>
@@ -526,7 +528,7 @@
                                             @endif
                                             <div class="text p-3 d-flex flex-column align-items-center">
                                                 <span  class="fw-bold">{{ $tutor->username }}</span>
-                                                 <span>{{ $tutor->facebook_link }}</span> 
+                                                 <span>{{ $tutor->facebook_link }}</span>
                                             </div>
                                         </div>
                                         <div class="summary-item mt-3" style="line-height: 0.7;">
@@ -571,7 +573,7 @@
                     <fieldset id="personal">
                         <div class="panel-body mt-5 mx-5 px-5">
                             <h2 class="text-left text-primary fs-1"><strong>Confirm Your Booking</strong></h2><br>
-                            
+
 
                             <div class="d-flex flex-column flex-md-row justify-content-center gap-5">
                                 <div class="col-lg-6 col-md-6 col-12">
@@ -592,7 +594,7 @@
                                             </div>
                                         </div>
 
-                                        
+
 
 
                                     </div>
@@ -697,7 +699,7 @@
                                             @endif
                                             <div class="text p-3 d-flex flex-column">
                                                 <span class="fw-bold">{{ $tutor->username }}</span>
-                                                 <span >{{ $tutor->facebook_link }}</span> 
+                                                 <span >{{ $tutor->facebook_link }}</span>
                                             </div>
                                         </div>
                                         <div class="summary-item mt-2" style="line-height: 0.7;">
@@ -1133,11 +1135,11 @@
             $('#amount2').val(fee);
             $('#feeId').text('£' + fee);
             $('.total').text('£' + fee);
-            
+
             $('#feeId').text('£' + fee);
             $('.total').text('£' + selectedOption.data('fee'));
-            
-            
+
+
             $('#changesubject').on('change', function() {
                 var selectedOption = $(this).find('option:selected');
                 var fee = selectedOption.data('fee') - $('#walletBalance').data('balance');
@@ -1186,7 +1188,7 @@
                             id = data.id;
                         }
                         $('#copounid').val(id);
-                        
+
 
                         if(data.discount_type === 'percentage')
                         {
@@ -1197,8 +1199,8 @@
                             $('#dicountId').text('£' + fetchfee + '');
                             discount = Math.max(fetchfee, 0);
                         }
-                        
-                        
+
+
                         var walletCheck=$('#wallet').val();
                         if(walletCheck > 0){
                          var TotalWallet = discount + parseFloat(walletCheck);
@@ -1210,8 +1212,8 @@
                         $('#walletText').text('Wallet Have Amount :' + TotalWallet);
                         $('#feeId').text('£' + fee);
                         $('.total').text('£' + (selectedOption.data('fee') - fetchfee));
-                        
-                        
+
+
                         }else{
                         $('.total').text('£' + Math.max((fee - discount), 0));
                         $('#amount').hide();
