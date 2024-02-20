@@ -94,7 +94,7 @@
                 },
                 yaxis: {
                     title: {
-                        text: '$ (thousands)'
+                        // text: '$ (thousands)'
                     }
                 },
                 fill: {
