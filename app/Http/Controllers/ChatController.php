@@ -223,16 +223,21 @@ class ChatController extends Controller
 
         if (!empty($notifications)) {
             foreach ($notifications as $notification) {
-                if ($notification->user_type == 3) {
-                    $url = url('tutorProfile') . '/' . $notification->user_id.'?NoteId='.$notification->id;
-                } elseif ($notification->user_type == 4 && $notification->title == 'Comptaint') {
-                    $url = 'Complaintlogs';
+
+                $checkUser=User::find($notification->user_id);
+                if(!empty($checkUser)){
+                    if ($notification->user_type == 3) {
+                        $url = url('tutorProfile') . '/' . $notification->user_id.'?NoteId='.$notification->id;
+                    } elseif ($notification->user_type == 4 && $notification->title == 'Comptaint') {
+                        $url = 'Complaintlogs';
+                    }
+                    $html .= '<a href="' . $url . '" class="list-group-item" data-chat-user="' . optional(User::find($notification->user_id))->username . '">
+                        <figure class="user--online">
+                            <img src="' . asset(optional(User::find($notification->user_id))->image) . '" class="rounded-circle" alt="">
+                        </figure><span><span class="name">' .  optional(User::find($notification->user_id))->username . '</span>  <span class="username">'.$notification->title.'</span> </span>
+                    </a>';
                 }
-                $html .= '<a href="' . $url . '" class="list-group-item" data-chat-user="' . optional(User::find($notification->user_id))->username . '">
-                    <figure class="user--online">
-                        <img src="' . asset(optional(User::find($notification->user_id))->image) . '" class="rounded-circle" alt="">
-                    </figure><span><span class="name">' .  optional(User::find($notification->user_id))->username . '</span>  <span class="username">'.$notification->title.'</span> </span>
-                </a>';
+
             }
         }
 

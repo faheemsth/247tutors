@@ -165,6 +165,9 @@ class UserController extends Controller
             Notification::find($_GET['NoteId'])->update(['is_read' => 1]);
         }
         $tutor = User::find($id);
+        if(empty($tutor)){
+            return back()->with('failed', 'Tutor Not Found');
+        }
         $Subjects = Subject::all();
         $tutor_qualifications = TutorQualification::where('tutor_id', $id)->get();
         $tutor_application = TutorApplication::where('tutor_id', $id)->first();
