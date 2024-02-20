@@ -28,7 +28,6 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <?php
-
         $months = [];
         $countstutor = [];
         $countstudent = [];
@@ -201,6 +200,9 @@
 
         .avatar-title i {
             font-size: 20px !important;
+        }
+        .tdcomplaint{
+            padding: 5px 0px !important;
         }
     </style>
     <style type="text/css">
@@ -602,7 +604,7 @@
                                         {{-- <th scope="col">Institute</th>
                                         <th scope="col">Amount</th>
                                         <th scope="col">Position</th> --}}
-                                        <th scope="col">Status</th>
+                                        <th scope="col" style="text-align: center;">Status</th>
                                         {{-- <th scope="col">Rating</th> --}}
                                     </tr>
                                 </thead>
@@ -639,7 +641,7 @@
                                                         {{ $recent->first_name . '  ' . $recent->last_name }}</div>
                                                 </div>
                                             </td>
-                                            <td>{{ $recent->status }}</td>
+                                            <td style="text-align: center;">{{ $recent->status }}</td>
                                             </tr>
                                         @endforeach
                                     @endif
@@ -651,6 +653,195 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-4 col-12">
+                <div class="card" style="height: 94%;">
+                    <div class="card-header my-2">
+                        <h4 class="card-title flex-grow-1">Notice's</h4>
+                        </div>
+
+                    <div class="card-body">
+                       <table>
+                        <tbody>
+                        <tr >
+                            <td class="tdcomplaint">
+                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 m-2">
+
+                                                        @if (!empty($recent->image) && file_exists(public_path(!empty($recent->image) ? $recent->image : '')))
+                                                            <img src="{{ $recent->image }}" alt=""
+                                                                width="45px" height="45px"
+                                                                class="avatar-xs rounded-circle">
+                                                        @else
+                                                            @if ($recent->gender == 'Male')
+                                                                <img src="{{ asset('assets/images/male.jpg') }}"
+                                                                    alt="" width="45px" height="45px"
+                                                                    class="avatar-xs rounded-circle">
+                                                            @elseif($recent->gender == 'Female')
+                                                                <img src="{{ asset('assets/images/female.jpg') }}"
+                                                                    alt="" width="45px" height="45px"
+                                                                    class="avatar-xs rounded-circle">
+                                                            @else
+                                                                <img src="{{ asset('assets/images/default.png') }}"
+                                                                    alt="" width="45px" height="45px"
+                                                                    class="avatar-xs rounded-circle">
+                                                            @endif
+                                                        @endif
+
+                                                        {{-- <img src="{{asset(Auth::user()->image)}}" alt="" width="50" height="50" class="avatar-xs rounded-circle"> --}}
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">{{ $recent->first_name . '  ' . $recent->last_name }}</h6>
+                                                        <a href="" class="text-decoration-none text-secondary"><span class="px-0">Complaint</span></a>
+
+                                                        </div>
+                                                </div>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td class="tdcomplaint">
+                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 m-2">
+
+                                                        @if (!empty($recent->image) && file_exists(public_path(!empty($recent->image) ? $recent->image : '')))
+                                                            <img src="{{ $recent->image }}" alt=""
+                                                                width="45px" height="45px"
+                                                                class="avatar-xs rounded-circle">
+                                                        @else
+                                                            @if ($recent->gender == 'Male')
+                                                                <img src="{{ asset('assets/images/male.jpg') }}"
+                                                                    alt="" width="45px" height="45px"
+                                                                    class="avatar-xs rounded-circle">
+                                                            @elseif($recent->gender == 'Female')
+                                                                <img src="{{ asset('assets/images/female.jpg') }}"
+                                                                    alt="" width="45px" height="45px"
+                                                                    class="avatar-xs rounded-circle">
+                                                            @else
+                                                                <img src="{{ asset('assets/images/default.png') }}"
+                                                                    alt="" width="45px" height="45px"
+                                                                    class="avatar-xs rounded-circle">
+                                                            @endif
+                                                        @endif
+
+                                                        {{-- <img src="{{asset(Auth::user()->image)}}" alt="" width="50" height="50" class="avatar-xs rounded-circle"> --}}
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">{{ $recent->first_name . '  ' . $recent->last_name }}</h6>
+                                                        <a href="" class="text-decoration-none text-secondary"><span class="px-0">Complaint</span></a>
+
+                                                        </div>
+                                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tdcomplaint">
+                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 m-2">
+
+                                                        @if (!empty($recent->image) && file_exists(public_path(!empty($recent->image) ? $recent->image : '')))
+                                                            <img src="{{ $recent->image }}" alt=""
+                                                                width="45px" height="45px"
+                                                                class="avatar-xs rounded-circle">
+                                                        @else
+                                                            @if ($recent->gender == 'Male')
+                                                                <img src="{{ asset('assets/images/male.jpg') }}"
+                                                                    alt="" width="45px" height="45px"
+                                                                    class="avatar-xs rounded-circle">
+                                                            @elseif($recent->gender == 'Female')
+                                                                <img src="{{ asset('assets/images/female.jpg') }}"
+                                                                    alt="" width="45px" height="45px"
+                                                                    class="avatar-xs rounded-circle">
+                                                            @else
+                                                                <img src="{{ asset('assets/images/default.png') }}"
+                                                                    alt="" width="45px" height="45px"
+                                                                    class="avatar-xs rounded-circle">
+                                                            @endif
+                                                        @endif
+
+                                                        {{-- <img src="{{asset(Auth::user()->image)}}" alt="" width="50" height="50" class="avatar-xs rounded-circle"> --}}
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">{{ $recent->first_name . '  ' . $recent->last_name }}</h6>
+                                                        <a href="" class="text-decoration-none text-secondary"><span class="px-0">Complaint</span></a>
+
+                                                        </div>
+                                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tdcomplaint">
+                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 m-2">
+
+                                                        @if (!empty($recent->image) && file_exists(public_path(!empty($recent->image) ? $recent->image : '')))
+                                                            <img src="{{ $recent->image }}" alt=""
+                                                                width="45px" height="45px"
+                                                                class="avatar-xs rounded-circle">
+                                                        @else
+                                                            @if ($recent->gender == 'Male')
+                                                                <img src="{{ asset('assets/images/male.jpg') }}"
+                                                                    alt="" width="45px" height="45px"
+                                                                    class="avatar-xs rounded-circle">
+                                                            @elseif($recent->gender == 'Female')
+                                                                <img src="{{ asset('assets/images/female.jpg') }}"
+                                                                    alt="" width="45px" height="45px"
+                                                                    class="avatar-xs rounded-circle">
+                                                            @else
+                                                                <img src="{{ asset('assets/images/default.png') }}"
+                                                                    alt="" width="45px" height="45px"
+                                                                    class="avatar-xs rounded-circle">
+                                                            @endif
+                                                        @endif
+
+                                                        {{-- <img src="{{asset(Auth::user()->image)}}" alt="" width="50" height="50" class="avatar-xs rounded-circle"> --}}
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">{{ $recent->first_name . '  ' . $recent->last_name }}</h6>
+                                                        <a href="" class="text-decoration-none text-secondary"><span class="px-0">Complaint</span></a>
+
+                                                        </div>
+                                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tdcomplaint">
+                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 m-2">
+
+                                                        @if (!empty($recent->image) && file_exists(public_path(!empty($recent->image) ? $recent->image : '')))
+                                                            <img src="{{ $recent->image }}" alt=""
+                                                                width="45px" height="45px"
+                                                                class="avatar-xs rounded-circle">
+                                                        @else
+                                                            @if ($recent->gender == 'Male')
+                                                                <img src="{{ asset('assets/images/male.jpg') }}"
+                                                                    alt="" width="45px" height="45px"
+                                                                    class="avatar-xs rounded-circle">
+                                                            @elseif($recent->gender == 'Female')
+                                                                <img src="{{ asset('assets/images/female.jpg') }}"
+                                                                    alt="" width="45px" height="45px"
+                                                                    class="avatar-xs rounded-circle">
+                                                            @else
+                                                                <img src="{{ asset('assets/images/default.png') }}"
+                                                                    alt="" width="45px" height="45px"
+                                                                    class="avatar-xs rounded-circle">
+                                                            @endif
+                                                        @endif
+
+                                                        {{-- <img src="{{asset(Auth::user()->image)}}" alt="" width="50" height="50" class="avatar-xs rounded-circle"> --}}
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">{{ $recent->first_name . '  ' . $recent->last_name }}</h6>
+                                                        <a href="" class="text-decoration-none text-secondary"><span class="px-0">Complaint</span></a>
+
+                                                        </div>
+                                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
 
         </div>
     </div>

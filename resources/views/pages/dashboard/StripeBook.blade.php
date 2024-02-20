@@ -580,7 +580,7 @@
                                     <div class="row col-md-12">
                                         <div class="col-md-6">
                                             <div class='col-xs-12 form-group required'>
-                                                <label class='control-label'>Name on Card</label> <input
+                                                <label class='control-label text-secondary'>Name on Card</label> <input
                                                     class=" w-100 p-2" size='4' type='text' required
                                                     name="account_holder_name">
                                             </div>
@@ -588,7 +588,7 @@
 
                                         <div class="col-md-6">
                                             <div class='col-xs-12 form-group required'>
-                                                <label class='control-label'>Payed Amount</label> <input
+                                                <label class='control-label text-secondary'>Amount</label> <input
                                                     class=" w-100 p-2" size='4' type='text' readonly
                                                     name="amount" id="amount2">
                                             </div>
@@ -598,7 +598,7 @@
 
 
                                     </div>
-                                    <div class="mt-5 row col-md-12">
+                                    <div class="mt-3 row col-md-12">
                                         <div class="col-md-12">
                                             <label class="text-secondary">Card Number</label><br>
                                             <input autocomplete='off' required name="card_number"
@@ -606,7 +606,7 @@
                                                 id='cardInput'>
                                         </div>
                                     </div>
-                                    <div class="mt-5 row col-md-12">
+                                    <div class="mt-3 row col-md-12">
 
                                         <div class="col-md-4">
                                             <label class="text-secondary">CVC Number</label><br>
@@ -642,8 +642,8 @@
                                     </div>
 
 
-                                    <div class="mt-5 row col-md-12">
-                                        <div class="col-md-8 d-flex">
+                                    <div class="mt-3 row col-md-12">
+                                        <div class="col-md-8 d-flex ps-1">
                                             <input type="checkbox" required name="card_number"
                                                 class='card-number mb-4 mx-2'>
                                             <label class="text-secondary">I can confirm legellay authorised to use this

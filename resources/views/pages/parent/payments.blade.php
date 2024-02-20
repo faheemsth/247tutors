@@ -90,7 +90,7 @@
 
 
                                 <button class="paypal-button mx-1 py-1" onclick="withdraw()">
-                                    
+
                                     Withdrawn <i class="fa-brands fa-cc-paypal"
                                         style="font-size:34px;margin-left:10px;"></i>
                                 </button>
@@ -112,7 +112,7 @@
                     <h5 class="fw-bold">Balance</h5>
                     <h4>
                         @if(!empty(App\Models\Wallet::where('user_id', Auth::id())->first()))
-                        
+
                             @if ((int) App\Models\Wallet::where('user_id', Auth::id())->first()->net_income == App\Models\Wallet::where('user_id', Auth::id())->first()->net_income)
                                 £{{ App\Models\Wallet::where('user_id', Auth::id())->first()->net_income }}.00
                             @else
@@ -128,7 +128,7 @@
                     <h5 class="fw-bold">Withdrawn</h5>
                     <h4>
                         @if(!empty(App\Models\Wallet::where('user_id', Auth::id())->first()))
-                        
+
                             @if ((int) App\Models\Wallet::where('user_id', Auth::id())->first()->withdrawn == App\Models\Wallet::where('user_id', Auth::id())->first()->withdrawn)
                                 £{{ App\Models\Wallet::where('user_id', Auth::id())->first()->withdrawn }}.00
                             @else
@@ -274,15 +274,15 @@
                                     <div class="row col-md-12">
                                         <div class="col-md-6">
                                             <div class=' form-group required'>
-                                                <label class='control-label'>Name On Card</label> <input class=" w-100 p-2"
+                                                <label class='control-label text-secondary'>Name On Card</label> <input class=" w-100 p-2"
                                                     size='4' type='text' required name="account_holder_name">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class=' form-group required'>
-                                                <label class='control-label'>Payed Amount £</label> <input class=" w-100 p-2"
-                                                    size='4' type='text' name="amount" id="amount2" required>
+                                                <label class='control-label text-secondary'>Amount </label> <input class=" w-100 p-2"
+                                                    size='4' type='text' name="amount" id="amount2" required placeholder="£">
                                             </div>
                                         </div>
 
@@ -355,7 +355,7 @@
                                             @endif
                                             <div class="text p-3 d-flex flex-column">
                                                 <span class="fw-bold" id="text-color">{{ Auth::user()->username }}</span>
-                                                 <span>{{ Auth::user()->facebook_link }}</span> 
+                                                 <span>{{ Auth::user()->facebook_link }}</span>
                                             </div>
                                         </div>
 
