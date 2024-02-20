@@ -262,7 +262,7 @@
                                 @endif
                                 <div class="text px-2 py-3 d-flex flex-column">
                                     <span class="fw-bold">{{ $tutor->username }}</span>
-                                     <span>{{ $tutor->facebook_link }}</span> 
+                                     <span>{{ $tutor->facebook_link }}</span>
                                 </div>
                             </div>
                         </div>
@@ -526,7 +526,7 @@
                                             @endif
                                             <div class="text p-3 d-flex flex-column align-items-center">
                                                 <span  class="fw-bold">{{ $tutor->username }}</span>
-                                                 <span>{{ $tutor->facebook_link }}</span> 
+                                                 <span>{{ $tutor->facebook_link }}</span>
                                             </div>
                                         </div>
                                         <div class="summary-item mt-3" style="line-height: 0.7;">
@@ -571,14 +571,14 @@
                     <fieldset id="personal">
                         <div class="panel-body mt-5 mx-5 px-5">
                             <h2 class="text-left text-primary fs-1"><strong>Confirm Your Booking</strong></h2><br>
-                            
+
 
                             <div class="d-flex flex-column flex-md-row justify-content-center gap-5">
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="row col-md-12">
                                         <div class="col-md-6">
                                             <div class='col-xs-12 form-group required'>
-                                                <label class='control-label'>Name on Card</label> <input
+                                                <label class='control-label text-secondary'>Name on Card</label> <input
                                                     class=" w-100 p-2" size='4' type='text' required
                                                     name="account_holder_name">
                                             </div>
@@ -586,17 +586,17 @@
 
                                         <div class="col-md-6">
                                             <div class='col-xs-12 form-group required'>
-                                                <label class='control-label'>Payed Amount</label> <input
+                                                <label class='control-label text-secondary'>Amount</label> <input
                                                     class=" w-100 p-2" size='4' type='text' readonly
                                                     name="amount" id="amount2">
                                             </div>
                                         </div>
 
-                                        
+
 
 
                                     </div>
-                                    <div class="mt-5 row col-md-12">
+                                    <div class="mt-3 row col-md-12">
                                         <div class="col-md-12">
                                             <label class="text-secondary">Card Number</label><br>
                                             <input autocomplete='off' required name="card_number"
@@ -604,7 +604,7 @@
                                                 id='cardInput'>
                                         </div>
                                     </div>
-                                    <div class="mt-5 row col-md-12">
+                                    <div class="mt-3 row col-md-12">
 
                                         <div class="col-md-4">
                                             <label class="text-secondary">CVC Number</label><br>
@@ -640,8 +640,8 @@
                                     </div>
 
 
-                                    <div class="mt-5 row col-md-12">
-                                        <div class="col-md-8 d-flex">
+                                    <div class="mt-3 row col-md-12">
+                                        <div class="col-md-8 d-flex ps-1">
                                             <input type="checkbox" required name="card_number"
                                                 class='card-number mb-4 mx-2'>
                                             <label class="text-secondary">I can confirm legellay authorised to use this
@@ -697,7 +697,7 @@
                                             @endif
                                             <div class="text p-3 d-flex flex-column">
                                                 <span class="fw-bold">{{ $tutor->username }}</span>
-                                                 <span >{{ $tutor->facebook_link }}</span> 
+                                                 <span >{{ $tutor->facebook_link }}</span>
                                             </div>
                                         </div>
                                         <div class="summary-item mt-2" style="line-height: 0.7;">
@@ -1133,11 +1133,11 @@
             $('#amount2').val(fee);
             $('#feeId').text('£' + fee);
             $('.total').text('£' + fee);
-            
+
             $('#feeId').text('£' + fee);
             $('.total').text('£' + selectedOption.data('fee'));
-            
-            
+
+
             $('#changesubject').on('change', function() {
                 var selectedOption = $(this).find('option:selected');
                 var fee = selectedOption.data('fee') - $('#walletBalance').data('balance');
@@ -1186,7 +1186,7 @@
                             id = data.id;
                         }
                         $('#copounid').val(id);
-                        
+
 
                         if(data.discount_type === 'percentage')
                         {
@@ -1197,8 +1197,8 @@
                             $('#dicountId').text('£' + fetchfee + '');
                             discount = Math.max(fetchfee, 0);
                         }
-                        
-                        
+
+
                         var walletCheck=$('#wallet').val();
                         if(walletCheck > 0){
                          var TotalWallet = discount + parseFloat(walletCheck);
@@ -1210,8 +1210,8 @@
                         $('#walletText').text('Wallet Have Amount :' + TotalWallet);
                         $('#feeId').text('£' + fee);
                         $('.total').text('£' + (selectedOption.data('fee') - fetchfee));
-                        
-                        
+
+
                         }else{
                         $('.total').text('£' + Math.max((fee - discount), 0));
                         $('#amount').hide();

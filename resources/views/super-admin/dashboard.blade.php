@@ -35,7 +35,7 @@
         $roles = [3, 4, 5, 6];
         $years = [2021, 2022, 2023, 2024];
         $data = [];
-        
+
         foreach ($roles as $role) {
             foreach ($years as $year) {
                 $key = "{$role}_{$year}";
@@ -85,7 +85,7 @@
         </script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <!--old bar chart end-->
-        
+
         <!--new bar chart-->
         <script>
             var options = {
@@ -221,10 +221,10 @@ for ($i = 6; $i >= 0; $i--) {
             populateUl();
         </script>
         <!--OLD DOUGHNUT CHART END-->
-        
+
         <!--2new dounut chart-->
          <script>
-      anychart.onDocumentReady(function () {  
+      anychart.onDocumentReady(function () {
         var data = anychart.data.set([
           ["Wimbledon", 8],
           ["Australian Open", 6],
@@ -263,14 +263,14 @@ for ($i = 6; $i >= 0; $i--) {
         .avatar-title i {
             font-size: 20px !important;
         }
-        
 
-    
+
+
     </style>
-       <style type="text/css">      
-       #dochart1 { 
-        width: 100%; height: 100%; margin: 0; padding: 0; 
-      } 
+       <style type="text/css">
+       #dochart1 {
+        width: 100%; height: 100%; margin: 0; padding: 0;
+      }
       .anychart-credits-text{
           display:none;
       }
@@ -278,7 +278,7 @@ for ($i = 6; $i >= 0; $i--) {
           display:none;
       }
     </style>
-    
+
 
     <div class="h-100 px-3">
         <div class="row mb-3 pb-1">
@@ -465,7 +465,7 @@ for ($i = 6; $i >= 0; $i--) {
                 </div><!-- end card -->
             </div>
             <!-- end col -->
-            
+
             <div class="col-xl-3 col-md-4 col-lg-4">
                 <!-- card -->
                 <div class="card card-animate">
@@ -583,11 +583,11 @@ for ($i = 6; $i >= 0; $i--) {
     <!--<div class="container-fluid px-0 mx-auto  ">-->
         <!--<div class="row  mt-1 mb-3 justify-content-center" style="gap:10px">-->
         <!--    <div class="col-md-10 col-lg-7 col-12 bg-white py-2">-->
-                
+
         <!--        <div id="columnchart_material"style="width: 100%; height: 350px; background-color:transparent;"></div>-->
-                
+
         <!--    </div>-->
-        
+
     <!--        <div class="col-md-7 col-12 col-lg-4">-->
     <!--            <div class="bg-white p-3 h-100">-->
     <!--            <h4 class="chart-heading"-->
@@ -604,7 +604,7 @@ for ($i = 6; $i >= 0; $i--) {
     <!--    </div>-->
     <!--</div>-->
     <!---->
-    
+
     <!--new chart section-->
     <div class="container-fluid px-3 mb-3">
     <div class="row">
@@ -613,11 +613,11 @@ for ($i = 6; $i >= 0; $i--) {
                 <div class=" py-2 px-3" style="line-height:1.3;">
                     <h6 class="card-title  fw-bold ">Yearly Users Analytics</h6>
                     <p class="text-muted">Tutor, Parent, Organization and Student : 2023 - 2024</p>
-        
+
                 </div>
 
                 <div id="chart" style="height: 300px; width: 100%;"></div>
-                
+
             </div>
 
         </div>
@@ -631,7 +631,7 @@ for ($i = 6; $i >= 0; $i--) {
             </div>
         </div>
      </div>
-    
+
     </div>
     <!--new chart section end-->
 
@@ -661,7 +661,7 @@ for ($i = 6; $i >= 0; $i--) {
                                         {{-- <th scope="col">Institute</th>
                                         <th scope="col">Amount</th>
                                         <th scope="col">Position</th> --}}
-                                        <th scope="col">Status</th>
+                                        <th scope="col" style="text-align: center;">Status</th>
                                         {{-- <th scope="col">Rating</th> --}}
                                     </tr>
                                 </thead>
@@ -698,7 +698,7 @@ for ($i = 6; $i >= 0; $i--) {
                                                         {{ $recent->first_name . '  ' . $recent->last_name }}</div>
                                                 </div>
                                             </td>
-                                            <td>{{ $recent->status }}</td>
+                                            <td style="text-align: center;">{{ $recent->status }}</td>
                                             </tr>
                                         @endforeach
                                     @endif
@@ -710,6 +710,56 @@ for ($i = 6; $i >= 0; $i--) {
                     </div>
                 </div>
             </div>
+            <div class="col-4 ">
+                <div class="card">
+                    <div class="card-header my-2">
+                        <h4 class="card-title flex-grow-1">Notice's</h4>
+                        </div>
+
+                    <div class="card-body">
+                       <table>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 m-2">
+
+                                                        @if (!empty($recent->image) && file_exists(public_path(!empty($recent->image) ? $recent->image : '')))
+                                                            <img src="{{ $recent->image }}" alt=""
+                                                                width="45px" height="45px"
+                                                                class="avatar-xs rounded-circle">
+                                                        @else
+                                                            @if ($recent->gender == 'Male')
+                                                                <img src="{{ asset('assets/images/male.jpg') }}"
+                                                                    alt="" width="45px" height="45px"
+                                                                    class="avatar-xs rounded-circle">
+                                                            @elseif($recent->gender == 'Female')
+                                                                <img src="{{ asset('assets/images/female.jpg') }}"
+                                                                    alt="" width="45px" height="45px"
+                                                                    class="avatar-xs rounded-circle">
+                                                            @else
+                                                                <img src="{{ asset('assets/images/default.png') }}"
+                                                                    alt="" width="45px" height="45px"
+                                                                    class="avatar-xs rounded-circle">
+                                                            @endif
+                                                        @endif
+
+                                                        {{-- <img src="{{asset(Auth::user()->image)}}" alt="" width="50" height="50" class="avatar-xs rounded-circle"> --}}
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">{{ $recent->first_name . '  ' . $recent->last_name }}</h6>
+                                                        <a href="" class="text-decoration-none text-secondary"><span class="px-0">Complaint</span></a>
+
+                                                        </div>
+                                                </div>
+                            </td>
+
+                        </tr>
+                        </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
 
         </div>
     </div>

@@ -13,7 +13,7 @@
     @else
         @include('layouts.navbar')
     @endif
-    
+
 <style>
 
 .postimg {
@@ -32,7 +32,7 @@
 }
 .entry-title {
   grid-area: header;
-  
+
   text-transform: uppercase;
   margin: 1em 0 0.5em;
   line-height: 1;
@@ -379,7 +379,7 @@
     </script>
 @endif
     <article class="hentry my-5 py-5">
-       
+
 
         <h1 class="entry-title">{{$blog->title}}</h1>
         <div class="featured-image">
@@ -391,22 +391,22 @@
               </span></p>
         </div>
         <div class="entry-content">
-          {!! $blog->content !!}  
+          {!! $blog->content !!}
         </div>
         <footer class="entry-footer"></footer>
         <div id="app">
-       
-      
+
+
             <div class="feedback-info">
               <div class="feedback-emojis" >
-                  {{$blog->is_like}} 
+                  {{$blog->is_like}}
                   Likes
               </div>
               <div class="threads-and-share">
                 <div class="threads"> {{ !empty($reply) ? $reply->count() : 0}} comments</div>
               </div>
             </div>
-          
+
             <div class="feedback-action">
                 @if(App\Models\Blog::where('is_like_by', Auth::id())->exists())
                     @if(App\Models\Blog::where('is_like_by', Auth::id())->first()->is_like == 1)
@@ -430,23 +430,23 @@
                 <i class="fb-icon share"></i>Share
               </div> -->
             </div>
-          
+
             <div class="comments">
               <div class="my-comment-wrapper">
                 <div class="my-avatar">
-                    
-                    @if (!empty(App\Models\User::find(Auth::id())) && file_exists(public_path(!empty(App\Models\User::find(Auth::id())->image) ? App\Models\User::find(Auth::id())->image : '')))
+
+                    @if (!empty(App\Models\User::find(Auth::id())) && !empty(App\Models\User::find(Auth::id())->image) && file_exists(public_path(App\Models\User::find(Auth::id())->image)))
                         <img src="{{ asset(App\Models\User::find(Auth::id())->image) }}" >
                     @else
-                    @if (Auth::check() && App\Models\User::find(Auth::id())->image->gender == 'Male')
+                    @if (Auth::check() && App\Models\User::find(Auth::id())->gender == 'Male')
                         <img src="{{ asset('assets/images/male.jpg') }}" >
-                    @elseif(Auth::check() && App\Models\User::find(Auth::id())->image->gender == 'Female')
+                    @elseif(Auth::check() && App\Models\User::find(Auth::id())->gender == 'Female')
                         <img src="{{ asset('assets/images/female.jpg') }}" >
                     @else
                         <img src="{{ asset('assets/images/default.png') }}">
                     @endif
                     @endif
-                  
+
                 </div>
                 <div class="my-comment">
                   <div class="my-comment-placeholder">
@@ -457,20 +457,20 @@
                   </div>
                 </div>
               </div>
-              
-              
-              
+
+
+
               @if(!empty($reply))
               @foreach($reply as $repl)
               <div class="wrapper">
                 <div class="people-comment-wrapper">
                   <div class="people-avatar">
-                    @if (!empty(App\Models\User::find($repl->user_id)) && file_exists(public_path(!empty(App\Models\User::find($repl->user_id)->image) ? App\Models\User::find($repl->user_id)->image : '')))
+                    @if (!empty(App\Models\User::find($repl->user_id)) && !empty(App\Models\User::find($repl->user_id)->image) && file_exists(public_path(App\Models\User::find($repl->user_id)->image)))
                     <img src="{{ asset(App\Models\User::find($repl->user_id)->image) }}" >
                     @else
-                    @if (App\Models\User::find($repl->user_id)->image->gender == 'Male')
+                    @if (App\Models\User::find($repl->user_id)->gender == 'Male')
                     <img src="{{ asset('assets/images/male.jpg') }}" >
-                    @elseif(App\Models\User::find($repl->user_id)->image->gender == 'Female')
+                    @elseif(App\Models\User::find($repl->user_id)->gender == 'Female')
                     <img src="{{ asset('assets/images/female.jpg') }}" >
                     @else
                     <img src="{{ asset('assets/images/default.png') }}">
@@ -487,35 +487,35 @@
                       </div>
                       <div class="people-saying">{{$repl->reply}}</div>
                     </div>
-                    
+
                   </div>
                 </div>
                 <div class="like-and-response-wrapper">
-                  
+
                   <div class="day-comment">{{Carbon\Carbon::parse($repl->updated_at)->diffForHumans();}}</div>
                 </div>
               </div>
               @endforeach
               @endif
-              
-              
+
+
             </div>
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
       </article>
 
@@ -529,5 +529,5 @@
         }
     });
 </script>
- 
+
  @endsection

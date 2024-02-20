@@ -8238,8 +8238,8 @@ p {
     font-size: 16px;
 }
 .top-menu .nav-link {
-    width: 30px;
-    height: 30px;
+    width: 34px;
+    height: 34px;
     padding: 0;
     text-align: center;
     line-height: 36px;
@@ -9322,8 +9322,9 @@ p {
     width: 290px;
     background: #fff;
     height: 55vh;
-    border:2px solid black;
-    border-left: 1px solid #eef1f2;
+    border:2px solid #0000004d;
+    /* border-left: 1px solid #eef1f2; */
+    border-radius: 3px;
     border-top: 1px solid #eef1f2;
     padding: 1.07143em;
     z-index: 9;
