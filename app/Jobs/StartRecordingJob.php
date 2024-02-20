@@ -10,16 +10,19 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use App\Http\Middleware\QueuePriority;
+use Illuminate\Support\Facades\Log;
 
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
+use App\Models\RecordingSession;
+use Illuminate\Support\Facades\Auth;
 
 class StartRecordingJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $sessionId;
-    public $priority = 5; // Default priority
+    protected $bookingId;
 
     public function __construct($sessionId)
     {
@@ -27,36 +30,48 @@ class StartRecordingJob implements ShouldQueue
     }
 
 
+
+
     public function handle()
     {
-      
-        $activateScript = 'venv\Scripts\activate.bat';
-        $output = exec("\"$activateScript\" 2>&1", $output, $returnVar);
+        // Retrieve the recording session for the current user
+        $recordingSession = RecordingSession::where('user_id', Auth::id())->first();
 
-        $sessionId = $this->sessionId;
-        $command = 'python';
-        $arguments = [
-            public_path('recording.py'),
-            $sessionId,
-            'start',
-        ];
+        // Check if the recording session exists and is in progress
+        // if ($recordingSession) {
+        //     Log::info("Recording is still in progress for session ID: . Retrying job.");
 
-        // Create a new process instance
-        $process = new Process([$command, ...$arguments]);
+        //     // Since the recording is still in progress, we'll throw an exception to trigger a retry
+        //     throw new \Exception("Recording is still in progress. Retrying job...");
+        // } else {
+            // If the recording session doesn't exist or is finished, we can start a new recording
 
-        // Run the process
-        $process->run();
+            // Execute your script here to start the recording
+            $activateScript = 'venv\Scripts\activate.bat';
+            $output = exec("\"$activateScript\" 2>&1", $output, $returnVar);
 
-        // Check if the process was successful
-        if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
-        }
+            $sessionId = $this->sessionId;
+            $command = 'python';
+            $arguments = [
+                public_path('recording.py'),
+                $sessionId,
+                'start',
+            ];
 
-        echo "Python script output:\n" . $process->getOutput() . "\n";
+            // Create a new process instance
+            $process = new Process([$command, ...$arguments]);
+            $process->setTimeout(7200);
+            // Run the process
+            $process->run();
+            echo "Python script output:\n" . $process->getOutput() . "\n";
+       // }
+
+        usleep(100000); // 100 milliseconds
     }
 
-    // public function middleware()
-    // {
-    //     return [new QueuePriority]; // Lower priority for StartRecordingJob
-    // }
+    protected function isRecordingDone()
+    {
+        // Check if a recording session exists for the current user
+        return RecordingSession::where('user_id', Auth::id())->exists();
+    }
 }

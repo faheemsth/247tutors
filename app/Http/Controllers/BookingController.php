@@ -2063,8 +2063,18 @@ class BookingController extends Controller
     {
         if (Auth::check()) {
 
-            // Generate a unique ID for the recording session
-            $sessionId = \Illuminate\Support\Str::uuid()->toString();
+
+
+        // Retrieve the existing session ID or generate a new one
+        $recordingSession = \App\Models\RecordingSession::where('user_id', \Auth::user()->id)->firstOrNew();
+
+        if (!$recordingSession->exists) {
+            $recordingSession->session_id = \Illuminate\Support\Str::uuid()->toString();
+            $recordingSession->user_id = \Auth::user()->id;
+            $recordingSession->save();
+        }
+
+        $sessionId = $recordingSession->session_id;
 
             // Dispatch the job to run the recording script in the background
             \App\Jobs\StartRecordingJob::dispatch($sessionId);
@@ -2081,18 +2091,14 @@ class BookingController extends Controller
 
     public function stopRecording()
     {
-        // Path to the virtual environment's activate_this.py script
-        //$activateScript = 'venv\Scripts\activate.bat';
-
-        // Execute the activation script and capture both standard output and standard error
-        //$output = exec("\"$activateScript\" 2>&1", $output, $returnVar);
-
 
         $sessionId = $_GET['uuid'];
-        //        public_path('recordings/'.$sessionId.'/stop_recording.txt');
-
-        // Directory where the file will be created
         $directory = public_path('recordings/' . $sessionId);
+
+        $session = \App\Models\RecordingSession::where('session_id', $sessionId)->where('user_id', \Auth::user()->id)->first();
+        if($session){
+            $session->delete();
+        }
 
         // Ensure the directory exists, create it if not
         if (!file_exists($directory)) {
