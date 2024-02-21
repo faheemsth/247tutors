@@ -301,7 +301,7 @@ Route::group(['middleware' => 'auth'], function(){
                 $InProcess=Booking::where('status', "In Process")->get();
                 $Scheduled=Booking::where('status', "Scheduled")->get();
                 $Pending=Booking::where('status', "Pending")->get();
-                $notifications = Notification::with('Notifier')->where('is_read', 0)->whereHas('Notifier', function ($query) { $query->whereNotNull('id'); })->paginate(5);
+                $notifications = Notification::with('Notifier')->where('is_read', 0)->where('title','Comptaint')->whereHas('Notifier', function ($query) { $query->whereNotNull('id'); })->paginate(5);
                 return view('super-admin.dashboard',compact('notifications','org','students','tutors','parents','recents','Completed','Cancelled','InProcess','Scheduled','Pending'));
 
             } elseif ($request->user()->role_id == 2) {

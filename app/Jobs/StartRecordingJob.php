@@ -60,9 +60,8 @@ class StartRecordingJob implements ShouldQueue
 
             // Create a new process instance
             $process = new Process([$command, ...$arguments]);
-            $process->setTimeout(7200);
-            // Run the process
-            $process->run();
+            $process->start();
+            $this->delete();
             echo "Python script output:\n" . $process->getOutput() . "\n";
        // }
 

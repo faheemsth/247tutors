@@ -22,11 +22,11 @@ class ChatController extends Controller
 
         $tutors = [];
 
-        $chatsUsers = Chat::where('sender_id',Auth::id())->pluck('reciver_id')->unique();
+        $chatsUsers = Chat::where('sender_id', Auth::id())->pluck('reciver_id')->unique();
 
-        $c_users = User::whereIn('id',$chatsUsers)->where('id','!=',Auth::id())->get();
+        $c_users = User::whereIn('id', $chatsUsers)->where('id', '!=', Auth::id())->get();
         $j = 0;
-        foreach($c_users as $i => $user){
+        foreach ($c_users as $i => $user) {
 
             $tutors[$i]['id'] = $user->id;
             $tutors[$i]['username'] = $user->username;
@@ -36,9 +36,9 @@ class ChatController extends Controller
             $j++;
         }
 
-        $chatsUsers = Chat::where('reciver_id',Auth::id())->pluck('sender_id')->unique();
+        $chatsUsers = Chat::where('reciver_id', Auth::id())->pluck('sender_id')->unique();
 
-        foreach(User::whereIn('id',$chatsUsers)->where('id','!=',Auth::id())->get() as $i => $user){
+        foreach (User::whereIn('id', $chatsUsers)->where('id', '!=', Auth::id())->get() as $i => $user) {
 
             $tutors[$i]['id'] = $user->id;
             $tutors[$i]['username'] = $user->username;
@@ -74,11 +74,11 @@ class ChatController extends Controller
     public function singlechat($id)
     {
 
-        if(Auth::user()->role_id == '3' && User::find($id)->role_id == '3'){
-          return back()->with('error','Sorry You Cannot Chat with Tutor');
+        if (Auth::user()->role_id == '3' && User::find($id)->role_id == '3') {
+            return back()->with('error', 'Sorry You Cannot Chat with Tutor');
         }
         Chat::where('sender_id', $id)->update(['status' => 1,]);
-        $subject = TutorSubjectOffer::where('tutor_id',$id);
+        $subject = TutorSubjectOffer::where('tutor_id', $id);
         $senderId = $id;
         $receiverId = Auth::id();
         $chats = Chat::where(function ($query) use ($senderId, $receiverId) {
@@ -90,7 +90,7 @@ class ChatController extends Controller
                     ->where('reciver_id', $senderId);
             })
             ->get();
-        return view('pages.chat.singlechat', compact('chats', 'id','subject'));
+        return view('pages.chat.singlechat', compact('chats', 'id', 'subject'));
     }
     public function send_message(Request $request)
     {
@@ -104,13 +104,13 @@ class ChatController extends Controller
         //     ->first();
 
         // if (empty($user)) {
-            $chat = new Chat();
-            $chat->reciver_id = $request->reciver_id;
-            $chat->sender_id = Auth::id();
-            $chat->message = $request->message;
-            $chat->save();
+        $chat = new Chat();
+        $chat->reciver_id = $request->reciver_id;
+        $chat->sender_id = Auth::id();
+        $chat->message = $request->message;
+        $chat->save();
 
-            return response()->json(['status' => 'true']);
+        return response()->json(['status' => 'true']);
         // }
         // else {
         //     return response()->json(['status' => 'false']);
@@ -122,7 +122,7 @@ class ChatController extends Controller
 
         $senderId = $request->id;
         $receiverId = Auth::id();
-        $chats = Chat::with(['sender','reciver'])->where(function ($query) use ($senderId, $receiverId) {
+        $chats = Chat::with(['sender', 'reciver'])->where(function ($query) use ($senderId, $receiverId) {
             $query->where('sender_id', $senderId)
                 ->where('reciver_id', $receiverId);
         })
@@ -140,7 +140,6 @@ class ChatController extends Controller
         $chats = GroupChating::All();
         $groups = Group::All();
         return view('pages.dashboard.group_chats2', compact('chats', 'groups'));
-
     }
     public function chat_send_to_student(Request $request)
     {
@@ -153,7 +152,6 @@ class ChatController extends Controller
             $chat->save();
             return $chat;
         }
-
     }
 
     public function create_group(Request $request)
@@ -217,33 +215,31 @@ class ChatController extends Controller
     }
     public function get_notification()
     {
-        $notifications = Notification::where('is_read',0)->get();
-        $notificationCount = Notification::where('is_read',0)->count();
+        $notifications = Notification::where('is_read', 0)->get();
+        $notificationCount = Notification::with('Notifier')->where('is_read', 0)->whereHas('Notifier', function ($query) {
+            $query->whereNotNull('id');
+        })->count();
         $html = '';
 
         if (!empty($notifications)) {
             foreach ($notifications as $notification) {
 
-                $checkUser=User::find($notification->user_id);
-                if(!empty($checkUser)){
+                $checkUser = User::find($notification->user_id);
+                if (!empty($checkUser)) {
                     if ($notification->user_type == 3) {
-                        $url = url('tutorProfile') . '/' . $notification->user_id.'?NoteId='.$notification->id;
+                        $url = url('tutorProfile') . '/' . $notification->user_id . '?NoteId=' . $notification->id;
                     } elseif ($notification->user_type == 4 && $notification->title == 'Comptaint') {
                         $url = 'Complaintlogs';
                     }
                     $html .= '<a href="' . $url . '" class="list-group-item" data-chat-user="' . optional(User::find($notification->user_id))->username . '">
                         <figure class="user--online">
                             <img src="' . asset(optional(User::find($notification->user_id))->image) . '" class="rounded-circle" alt="">
-                        </figure><span><span class="name">' .  optional(User::find($notification->user_id))->username . '</span>  <span class="username">'.$notification->title.'</span> </span>
+                        </figure><span><span class="name">' .  optional(User::find($notification->user_id))->username . '</span>  <span class="username">' . $notification->title . '</span> </span>
                     </a>';
                 }
-
             }
         }
 
-        return response()->json(['html' => $html,'count' => $notificationCount]);
+        return response()->json(['html' => $html, 'count' => $notificationCount]);
     }
-
-
-
 }

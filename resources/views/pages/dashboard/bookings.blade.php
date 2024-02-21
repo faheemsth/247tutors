@@ -288,7 +288,7 @@
                                                 @endif
 
                                                 @if ($booking->status != 'Completed')
-                                                    @if (Auth::user()->role_id == 3 || Auth::user()->role_id == 4)
+                                                    @if (Auth::user()->role_id == 3 || Auth::user()->role_id == 4 || Auth::user()->role_id == 5 || Auth::user()->role_id == 6)
                                                         @if ($booking->status != 'Pending')
                                                             @if (
                                                                 $booking->status != 'Cancelled' &&
@@ -299,7 +299,7 @@
                                                                     <!--    href="{{ url('online-meeting/') . '/' . $booking->uuid }}"-->
                                                                     <!--    class="dropdown-item cursor-pointer">Join-->
                                                                     <!--    Meeting</a>-->
-                                                                    @if(Auth::user()->role_id == 4)
+                                                                    @if(Auth::user()->role_id == 4 || Auth::user()->role_id == 5 || Auth::user()->role_id == 6)
                                                                         @if($booking->is_meet_student <= 1)
                                                                         <a target="_blank"
                                                                             href="{{ url('zoom-online-meeting/') . '/' . $booking->uuid }}"
