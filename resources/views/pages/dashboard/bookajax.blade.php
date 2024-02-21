@@ -185,7 +185,7 @@
                             <a onClick="viewRating(`{{ $booking->uuid }}`)"
                                 class="dropdown-item cursor-pointer" style="cursor: pointer">View Feedback</a>
                         </li>
-                        @if (Auth::user()->role_id != 3)
+                        @if (Auth::user()->role_id != 3 && $booking->booking_fee !== 'Free')
                         <li>
                             <a onclick="Refund('{{$booking->uuid}}','{{$booking->tutor_id}}','{{optional($booking->tutor)->username}}','{{optional($booking->subjects)->name}}','{{$booking->booking_fee}}')"
                             class="dropdown-item " style="cursor: pointer">

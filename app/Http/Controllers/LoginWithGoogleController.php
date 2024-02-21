@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
+use App\Models\ActivityLog;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 use Illuminate\Support\Facades\Hash;
@@ -30,7 +31,7 @@ class LoginWithGoogleController extends Controller
         $dateString = Carbon::now();
         try {
             $user = Socialite::driver('google')->user();
-            
+
             $finduser = User::where('google_id', $user->id)->first();
             // dd($finduser);
             if($finduser){
@@ -73,8 +74,15 @@ class LoginWithGoogleController extends Controller
                            $wallet->user_id = $newUser->id;
                            $wallet->wallet_id = Str::uuid()->toString();
                            $wallet->save();
+
+                            $ActivityLogs = new ActivityLog;
+                            $ActivityLogs->user_id = $user->id;
+                            $ActivityLogs->title = "New Tutor";
+                            $ActivityLogs->description ="New Tutor".$user->first_name .'   '. $user->last_name."  SignUp At ";
+                            $ActivityLogs->save();
+
                             Auth::login($newUser);
-        
+
                             return redirect('profile_verification');
 
                         }elseif($value == 4){
@@ -103,8 +111,15 @@ class LoginWithGoogleController extends Controller
                            $wallet->user_id = $newUser->id;
                            $wallet->wallet_id = Str::uuid()->toString();
                            $wallet->save();
+
+                            $ActivityLogs = new ActivityLog;
+                            $ActivityLogs->user_id = $user->id;
+                            $ActivityLogs->title = "New Student";
+                            $ActivityLogs->description ="New Student".$user->first_name .'   '. $user->last_name."  SignUp At ";
+                            $ActivityLogs->save();
+
                             Auth::login($newUser);
-        
+
                             return redirect('student/home');
 
                         }elseif($value == 5){
@@ -133,8 +148,15 @@ class LoginWithGoogleController extends Controller
                            $wallet->user_id = $newUser->id;
                            $wallet->wallet_id = Str::uuid()->toString();
                            $wallet->save();
+
+                            $ActivityLogs = new ActivityLog;
+                            $ActivityLogs->user_id = $user->id;
+                            $ActivityLogs->title = "New Parent";
+                            $ActivityLogs->description ="New Parent".$user->first_name .'   '. $user->last_name."  SignUp At ";
+                            $ActivityLogs->save();
+
                             Auth::login($newUser);
-        
+
                             return redirect('parent/home');
 
                         }elseif($value == 6){
@@ -158,22 +180,29 @@ class LoginWithGoogleController extends Controller
                                 'google_id' => $user->id,
                                 'password' => Hash::make($user->password),
                             ]);
-                            
+
                            $wallet = new Wallet();
                            $wallet->user_id = $newUser->id;
                            $wallet->wallet_id = Str::uuid()->toString();
                            $wallet->save();
+
+                            $ActivityLogs = new ActivityLog;
+                            $ActivityLogs->user_id = $user->id;
+                            $ActivityLogs->title = "New Organization";
+                            $ActivityLogs->description ="New Organization".$user->first_name .'   '. $user->last_name."  SignUp At ";
+                            $ActivityLogs->save();
+
                             Auth::login($newUser);
-        
+
                             return redirect('organization/home');
                         }
-                        
+
                     }else{
                         return redirect('login')->with('failed', 'Kindly select proper user role you want to sign in with.');
                     }
-                    
+
                 }
-                    
+
             }
 
         } catch (Exception $e) {

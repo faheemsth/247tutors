@@ -45,7 +45,9 @@
                             </a>
                         </div>
                         <button type="button" class="nav-link right-sidebar-toggle"><i
-                            class="ik ik-message-square"></i><span class="badge bg-success" id="CountAppend"></span></button>
+                            class="ik ik-message-square"></i>
+                            <span id="CountAppend"></span>
+                        </button>
                 <div class="dropdown">
                     <a class="btn dropdown-toggle rounded p-0" id="userDropdown" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                         <img class="avatar" src="{{ asset(Auth::user()->image) }}" alt="">
@@ -76,7 +78,12 @@ $.ajax({
           $('#AppendNotification').html('');
           $('#CountAppend').text('');
           $('#AppendNotification').html(response.html);
-          $('#CountAppend').text(response.count);
+        //   $('#CountAppend').text(response.count);
+        if(response.count > 0)
+        {
+            $('#CountAppend').html('<span class="badge bg-success">' + response.count + '</span>');
+        }
+
 
         },
 

@@ -1064,7 +1064,8 @@ class BookingController extends Controller
 
 
         $Transaction = Transaction::where('booking_id', $Booking->id)->first();
-        if (empty(PendingPayment::where('booking_id', $Booking->id)->first())) {
+        if (empty(PendingPayment::where('booking_id', $Booking->id)->first()) && $Transaction) {
+            //  dd($Transaction);
             $PendingPayment = new PendingPayment;
             $PendingPayment->tutor_id = $request->tutorId;
             $PendingPayment->amount = $Transaction->amount;
@@ -2248,7 +2249,7 @@ class BookingController extends Controller
 
         $PendingPayment = PendingPayment::where('tutor_id', $Booking->tutor_id)->where('booking_id', $Booking->id)->first();
 
-        if ($PendingPayment->amount > 0) {
+        if (!empty($PendingPayment) && $PendingPayment->amount > 0) {
 
             if ($Booking) {
                 $student = User::find($Booking->student_id);
@@ -2449,7 +2450,7 @@ class BookingController extends Controller
 
             // Dispatch the job to run the recording script in the background
             \App\Jobs\StartRecordingJob::dispatch($sessionId);
-
+           // dd('come');
             // Return the response
             return response()->json(['status' => 'success', 'message' => 'Recording started in the background.', 'sessionId' => $sessionId]);
         } else {
