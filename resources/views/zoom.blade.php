@@ -369,7 +369,9 @@
 <canvas id="participant-videos-canvas" width="1920" height="1080"></canvas> -->
     <!-- <div id='previewContainer'></div> -->
     <div id='sessionContainer'></div>
-    <input type="hidden" id="recording-uuid" value="">
+    <input type="hidden" id="recording-uuid" value="{{ $booking->uuid }}">
+    <input type="hidden" id="role_id" value="{{ \Auth::user()->role_id }}">
+    <input type="hidden" id="stop_meeting" value="0">
     {{-- <div class="container app-root" id="container">
   <!-- Preview view -->
   <div id="js-preview-view" class="container preview__root">
@@ -529,6 +531,8 @@
         let booking_id = {!! json_encode(!empty($booking->uuid) ? $booking->uuid : request()->segment(2)) !!};
         let user = {!! json_encode(Auth::user()) !!};
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/filereader-stream@0.3.5/dist/filereader-stream.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <script src="https://source.zoom.us/videosdk/zoom-video-1.9.8.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/8.0.20/jsrsasign-all-min.js"></script>
     <script src="{{ asset('videosdk-ui-toolkit-web-main/index.js') }}" type="module"></script>

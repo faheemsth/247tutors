@@ -2484,4 +2484,21 @@ class BookingController extends Controller
         file_put_contents($filePath, $content);
         return response()->json(['message' => 'Recording stopped.']);
     }
+
+    public function saveVideo(Request $request)
+    {
+        try {
+            if ($request->hasFile('video')) {
+                $video = $request->file('video');
+                $booking_id = $request->booking_uid;
+                $video->move(public_path('videos/'.$booking_id), $video->getClientOriginalName().'.mp4');
+                Booking::where('uuid', $booking_id)->update(['video_path' => 'videos/' . $booking_id . '/' . $video->getClientOriginalName() . '.mp4']);
+                return response()->json(['message' => 'Video saved successfully'], 200);
+            } else {
+                return response()->json(['error' => 'No video file uploaded'], 400);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to save video'], 500);
+        }
+    }
 }

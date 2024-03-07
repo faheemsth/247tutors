@@ -623,7 +623,7 @@ Route::group(['middleware' => 'auth'], function(){
     });
 });
 
-
+Route::post('/save-video', [BookingController::class, 'saveVideo'])->name('save.video');
 
 
 
