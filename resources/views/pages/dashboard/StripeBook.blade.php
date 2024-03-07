@@ -223,7 +223,11 @@
                                         @endforeach
                                     @endif
                                 </select>
+<<<<<<< HEAD
                                 @if ((!empty($students) && Auth::user()->role_id == '5') || Auth::user()->role_id == '6')
+=======
+                                @if (!empty($students) && Auth::user()->role_id == '5' || Auth::user()->role_id == '6')
+>>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
                                     <label class="mt-3 mb-1">Students</label>
                                     <select required name="user_id" id="Student" class="w-100 p-2">
                                         @if ($students->count() > 0)

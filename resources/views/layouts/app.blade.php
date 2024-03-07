@@ -112,7 +112,7 @@
 }
 .cookiessection{
     width:35%;
-    bottom: 8px;left:22px; 
+    bottom: 8px;left:22px;
 }
 }
 @media screen and (max-width: 430px){
@@ -131,7 +131,7 @@
 }
  .cookiessection{
         width:85%;
-    
+
  }
 }
 
@@ -338,6 +338,13 @@ body { top: 0px !important; }
             $(document).ready(function() {
                 var popupShown = localStorage.getItem('popupShown');
 
+<<<<<<< HEAD
+=======
+        <script>
+            $(document).ready(function() {
+                var popupShown = localStorage.getItem('popupShown');
+
+>>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
                 // Check if the popup has been shown before
                 if (!popupShown) {
                     setTimeout(function() {

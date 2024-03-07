@@ -257,7 +257,11 @@ class UserController extends Controller
                     $mail->send();
 
             }elseif($request->input('complaint_stage') == 'Blocked'){
+<<<<<<< HEAD
                     $tutor->status = "Pending";
+=======
+
+>>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
                     $view = view('pages.mails.TutorComplaintActionBlocked', $data)->render();
                     $mail = new PHPMailer(true);
                     $mail->CharSet = 'UTF-8';

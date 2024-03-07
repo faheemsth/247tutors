@@ -6,7 +6,7 @@ import wave
 import pyautogui
 import sys
 import time
-import sounddevice as sd 
+import sounddevice as sd
 import soundfile as sf
 import threading
 import subprocess
@@ -17,23 +17,39 @@ def record_system_audio(session_dir):
     try:
         stereo_input_device_index = None
         devices = sd.query_devices()
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
         # Find stereo mix device index
         for index, device in enumerate(devices):
             if 'stereo mix' in device['name'].lower():
                 stereo_input_device_index = index
                 break
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
         if stereo_input_device_index is None:
             raise ValueError("Stereo mix device not found")
 
         frames = int(7200 * devices[stereo_input_device_index]['default_samplerate'])
         sample_rate = int(sd.query_devices(stereo_input_device_index)['default_samplerate'])
+<<<<<<< HEAD
         
         # Start recording with the selected device
         audio_data = sd.rec(frames, samplerate=sample_rate, channels=2, dtype='float32',
                             device=stereo_input_device_index, blocking=False)
         
+=======
+
+        # Start recording with the selected device
+        audio_data = sd.rec(frames, samplerate=sample_rate, channels=2, dtype='float32',
+                            device=stereo_input_device_index, blocking=False)
+
+>>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
         record_start_time = time.time()
         record_end_time = None
 
@@ -41,7 +57,11 @@ def record_system_audio(session_dir):
             if os.path.exists(f"{session_dir}/stop_recording.txt"):
                 record_end_time = time.time()
                 break
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
         sd.stop()
         record_end_time = time.time()
 
@@ -87,7 +107,11 @@ def start_recording(session_id, session_dir):
 
     system_audio_thread = threading.Thread(target=record_system_audio, args=(session_dir,))
     microphone_audio_thread = threading.Thread(target=record_microphone_audio, args=(session_dir,))
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
     system_audio_thread.start()
     microphone_audio_thread.start()
 
@@ -113,7 +137,7 @@ def start_recording(session_id, session_dir):
 
 def merge_audio(system_audio_path, microphone_audio_path, output_audio_path):
     print('Merging audio...')
-    
+
     ffmpeg_command = f"ffmpeg -i \"{system_audio_path}\" -i \"{microphone_audio_path}\" -filter_complex amerge -ac 2 \"{output_audio_path}\""
     subprocess.run(ffmpeg_command, shell=True, check=True)
 
@@ -122,6 +146,7 @@ def merge_audio(system_audio_path, microphone_audio_path, output_audio_path):
 
 def combine_audio_video(video_path, audio_path, output_path):
     try:
+<<<<<<< HEAD
         
         video_clip = VideoFileClip(video_path)
         audio_clip = AudioFileClip(audio_path)
@@ -130,12 +155,26 @@ def combine_audio_video(video_path, audio_path, output_path):
         audio_duration = min(video_clip.duration, audio_clip.duration)
         audio_clip = audio_clip.subclip(0, audio_duration)
        
+=======
+
+        video_clip = VideoFileClip(video_path)
+        audio_clip = AudioFileClip(audio_path)
+
+        # Adjust audio duration to match the duration of the video clip
+        audio_duration = min(video_clip.duration, audio_clip.duration)
+        audio_clip = audio_clip.subclip(0, audio_duration)
+
+>>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
         # Set audio for the video clip
         final_clip = video_clip.set_audio(audio_clip)
-        
+
         # Write the final video file with audio
         final_clip.write_videofile(output_path, codec='libx264', audio_codec='aac', verbose=True)
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
         message = f"Combined audio and video saved to: {output_path}"
     except Exception as e:
         message = f"Error occurred during audio-video combination: {str(e)}"

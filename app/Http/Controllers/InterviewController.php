@@ -197,7 +197,11 @@ class InterviewController extends Controller
 
     public function UnderHoureReminder()
     {
+<<<<<<< HEAD
         $users = User::where('is_Interviewed', 1)->where('send_email', 0)->get();
+=======
+        $users = User::where('is_Interviewed', 1)->where('send_email', 1)->get();
+>>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
         $imagePath = public_path('assets/images/247 NEW Logo 1.png');
 
 
@@ -213,7 +217,11 @@ class InterviewController extends Controller
 
                 $timecheck = $user->meeting_Interview_date . ' ' . $user->meeting_Interview_time;
                 $meeting_time = strtotime($timecheck);
+<<<<<<< HEAD
                 $reminder_time = $meeting_time - (1 * 60);
+=======
+                $reminder_time = $meeting_time - (1 * 3600);
+>>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
 
                 if (time() >= $reminder_time) {
                     $user->send_email = 2;
@@ -230,7 +238,11 @@ class InterviewController extends Controller
                     $mail->setfrom('support@247tutors.com', '247 Tutors');
 
                     $mail->isHTML(true);
+<<<<<<< HEAD
                     $mail->Subject = 'Reminder: Your Interview Will Start in Few Minutes';
+=======
+                    $mail->Subject = 'Reminder: Your Interview Will Start in 1 Hour';
+>>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
                     $mail->Body = $view;
                     $mail->AddEmbeddedImage($imagePath, 'logo');
                     $mail->AltBody = '';
@@ -267,15 +279,52 @@ class InterviewController extends Controller
             }
         }
     }
+<<<<<<< HEAD
     
 
 
 
     public function SixteenMinutesInterviewReminder()
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // sth
+
+    public function TwentyFourInterviewReminder()
+>>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
     {
         $users = User::where('is_Interviewed', 1)->where('send_email', 1)->get();
         $imagePath = public_path('assets/images/247 NEW Logo 1.png');
+<<<<<<< HEAD
 
+=======
+        $users = User::where('is_Interviewed', 1)->where('send_email', 0)->get();
+>>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
 
         foreach ($users as $user) {
             if ($user->meeting_Interview_date && $user->meeting_Interview_time) {
@@ -288,6 +337,7 @@ class InterviewController extends Controller
                 ];
 
                 $timecheck = $user->meeting_Interview_date . ' ' . $user->meeting_Interview_time;
+<<<<<<< HEAD
                 $meeting_time = strtotime($timecheck);
                 $reminder_time = $meeting_time - (1 * 3600);
 
@@ -388,6 +438,8 @@ class InterviewController extends Controller
                 ];
 
                 $timecheck = $user->meeting_Interview_date . ' ' . $user->meeting_Interview_time;
+=======
+>>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
 
                 $meeting_time = strtotime($timecheck);
                 $reminder_time = $meeting_time - (24 * 3600);

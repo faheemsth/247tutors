@@ -587,12 +587,21 @@ Route::group(['middleware' => 'auth'], function(){
 
 
         Route::get('/student_profile/{id}', [StudentController::class, 'student_profile_get']);
+<<<<<<< HEAD
         Route::get('parent/home',[StudentController::class,'Parenthome']);
         Route::get('student/home',[StudentController::class,'Studenthome']);
         Route::get('organization/students', [ParentController::class, 'your_students']);
         Route::get('/organization/payments', [ParentController::class,'parent_payments']);
 
         Route::get('/organization/messages/',[ChatController::class,'Organizationchat']);
+=======
+        Route::get('parent/home',[StudentController::class,'home']);
+        Route::get('student/home',[StudentController::class,'home']);
+        Route::get('organization/students', [ParentController::class, 'your_students']);
+        Route::get('/organization/payments', [ParentController::class,'parent_payments']);
+
+        Route::get('/organization/messages/',[ChatController::class,'chat']);
+>>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
 
         Route::get('AjaxFetchChatUnredList',[StudentController::class,'AjaxFetchChatUnredList']);
 

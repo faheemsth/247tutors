@@ -43,6 +43,7 @@ class ChatController extends Controller
         $chatsUsers = Chat::where('reciver_id', Auth::id())->pluck('sender_id')->unique();
 
         foreach (User::whereIn('id', $chatsUsers)->where('id', '!=', Auth::id())->get() as $i => $user) {
+<<<<<<< HEAD
 
             $tutors[$i]['id'] = $user->id;
             $tutors[$i]['username'] = $user->username;
@@ -126,6 +127,8 @@ class ChatController extends Controller
         $chatsUsers = Chat::where('reciver_id', Auth::id())->pluck('sender_id')->unique();
 
         foreach (User::whereIn('id', $chatsUsers)->where('id', '!=', Auth::id())->get() as $i => $user) {
+=======
+>>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
 
             $tutors[$i]['id'] = $user->id;
             $tutors[$i]['username'] = $user->username;
