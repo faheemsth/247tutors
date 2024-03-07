@@ -1,4 +1,3 @@
-<<<<<<< HEAD
                             @forelse ($bookings as $booking)
                                 @php
                                     $tutorsubjectoffers = App\Models\TutorSubjectOffer::where('tutor_id', $booking->tutor_id)
@@ -122,62 +121,6 @@
                                                             @endif
                                                         @endif
                                                     @endif
-=======
-@forelse ($bookings as $booking)
-@php
-    $tutorsubjectoffers = App\Models\TutorSubjectOffer::where('tutor_id', $booking->tutor_id)
-        ->with(['level', 'tutor', 'subject'])
-        ->get();
-@endphp
-@if (!empty(optional($booking->student)->role_id == '4' || optional($booking->student)->role_id == '6'))
-    <tr>
-        <th>{{ $booking->uuid }}</th>
-        <th>{{ optional($booking->student)->username }}</th>
-        <th class="text-capitalize">
-            <a href="{{url('tutor/profile').'/'.optional($booking->tutor)->id}}" class="text-decoration-none text-dark">
-                {{ optional($booking->tutor)->username }}
-            </a>
-        </th>
-        <th class="text-capitalize">{{ optional($booking->subjects)->name }}</th>
-        <td>
-            @if ($booking->booking_fee !== 'Free')
-                @if ((int) $booking->booking_fee == $booking->booking_fee)
-                    £{{ $booking->booking_fee }}.00/hr
-                @else
-                    £{{ $booking->booking_fee }}/hr
-                @endif
-            @else
-                {{ $booking->booking_fee }}
-            @endif
-        </td>
-        <td>{{ $booking->duration }} minutes</td>
-        <td>
-            @if ($booking->request_refound != 1 && $booking->request_refound != '2')
-                <span
-                    class="badge
-@if ($booking->status == 'Completed') bg-success
-@elseif($booking->status == 'Scheduled') bg-info
-@elseif($booking->status == 'Cancelled By Tutor' || $booking->status == 'Cancelled By User') bg-danger
-@elseif($booking->status == 'Cancelled') bg-danger
-@elseif($booking->status == 'Pending') bg-warning @endif
-">
-                    {{ $booking->status }}
-                </span>
-            @else
-                <span class="badge bg-secondary">
-                    @if($booking->request_refound == '2')
-                     {{ 'Paid Refund To User' }}
-                    @else
-                     {{ 'Request Refund' }}
-                    @endif
-                </span>
-            @endif
-        </td>
-        <td>{!! $booking->booking_date . '<br>' . $booking->booking_time !!}</td>
-        <th class="dropdown">
-
-
->>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
 
 
 <<<<<<< HEAD

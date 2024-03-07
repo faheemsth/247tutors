@@ -93,10 +93,10 @@ class BookingController extends Controller
 
         return view('pages.dashboard.ActivityLog.ActivityLog', compact('ActivityLogs'));
     }
-    
-    
-    
-    
+
+
+
+
     public function download()
     {
         $headers = [
@@ -106,21 +106,21 @@ class BookingController extends Controller
             ,   'Expires'             => '0'
             ,   'Pragma'              => 'public'
         ];
-    
+
         $list = ActivityLog::all()->toArray();
-    
+
         # add headers for each column in the CSV download
         array_unshift($list, array_keys($list[0]));
-    
-       $callback = function() use ($list) 
+
+       $callback = function() use ($list)
         {
             $FH = fopen('php://output', 'w');
-            foreach ($list as $row) { 
+            foreach ($list as $row) {
                 fputcsv($FH, $row);
             }
             fclose($FH);
         };
-    
+
         return response()->stream($callback, 200, $headers);
     }
 
@@ -2476,12 +2476,11 @@ class BookingController extends Controller
 
     public function startRecording()
     {
-<<<<<<< HEAD
-        
+
         //  $activateScript = '/home/u163900009/domains/247tutors.co.uk/public_html/public/venv/Scripts/activate';
-        // $output = exec("source \"$activateScript\" 2>&1", $output, $returnVar); 
-        
-        
+        // $output = exec("source \"$activateScript\" 2>&1", $output, $returnVar);
+
+
         //       $sessionId = 2;
         //     $command = 'python3';
         //     $arguments = [
@@ -2489,28 +2488,25 @@ class BookingController extends Controller
         //         $sessionId,
         //         'start',
         //     ];
-            
+
         //     // Create a new process instance
         //     $process = new Process([$command, ...$arguments]);
         //     $process->run();
-            
+
         //     echo "<pre>";
         //     print_r($process->getOutput());
         //     echo "<pre>";
         //     print_r($process->getErrorOutput());
-            
+
         //     dd();
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
        // if (Auth::check() && Auth::user()->role_id == 3) {
-=======
-        if (Auth::check() && Auth::user()->role_id == 3) {
->>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
 
             // Retrieve the existing session ID or generate a new one
             $recordingSession = \App\Models\RecordingSession::where('user_id', \Auth::user()->id)->firstOrNew();
@@ -2528,15 +2524,9 @@ class BookingController extends Controller
            // dd('come');
             // Return the response
             return response()->json(['status' => 'success', 'message' => 'Recording started in the background.', 'sessionId' => $sessionId]);
-<<<<<<< HEAD
         // } else {
         //     return response()->json(['status' => 'error', 'message' => 'Recording started in the background.']);
         // }
-=======
-        } else {
-            return response()->json(['status' => 'error', 'message' => 'Recording started in the background.']);
-        }
->>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
     }
 
     public function stopRecording()
@@ -2565,9 +2555,9 @@ class BookingController extends Controller
         file_put_contents($filePath, $content);
         return response()->json(['message' => 'Recording stopped.']);
     }
-    
-    
-    
+
+
+
     public function saveVideo(Request $request)
     {
         try {
@@ -2584,7 +2574,7 @@ class BookingController extends Controller
             return response()->json(['error' => 'Failed to save video'], 500);
         }
     }
-    
-    
-    
+
+
+
 }

@@ -121,11 +121,7 @@ and (max-width : 425px){
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1 overflow-hidden">
                                         <p class="text-uppercase fw-bold mb-0">
-<<<<<<< HEAD
                                             <img src="{{ asset('assets/images/graduating-student 1.png') }}" alt=""  width="30px">
-=======
-                                            <img src="{{ asset('assets/images/graduating-student 1.png') }}" alt=""  width="11%">
->>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
                                             Student</p>
                                     </div>
                                     <div class="flex-shrink-0">
@@ -140,11 +136,7 @@ and (max-width : 425px){
                                     </div>
                                     <div style="width: 16%;">
                                         <span class="avatar-title bg-info-subtle rounded fs-3">
-<<<<<<< HEAD
                                             <img src="{{ asset('assets/images/graduating-student 1.png') }}" alt="" width="40px">
-=======
-                                            <img src="{{ asset('assets/images/graduating-student 1.png') }}" alt="" width="100%">
->>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
                                         </span>
                                     </div>
                                 </div>
@@ -159,11 +151,7 @@ and (max-width : 425px){
                                     <div class="flex-grow-1 overflow-hidden">
                                         <p class="text-uppercase fw-bold mb-0">
                                             {{-- <img src="{{ asset('assets/images/user 1.png') }}" alt="" width="11%"> --}}
-<<<<<<< HEAD
                                             <i class="fa-solid fa-user" style="font-size: 27.5px;"></i>
-=======
-                                            <i class="fa-solid fa-user" style="font-size: 22px;"></i>
->>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
                                             Hired Tutor</p>
                                     </div>
                                     <div class="flex-shrink-0">
@@ -193,11 +181,7 @@ and (max-width : 425px){
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1 overflow-hidden">
                                         <p class="text-uppercase fw-bold mb-0">
-<<<<<<< HEAD
                                             <img src="{{ asset('assets/images/booking-icon-png-2 1.png') }}" alt="" width="30px">
-=======
-                                            <img src="{{ asset('assets/images/booking-icon-png-2 1.png') }}" alt="" width="10%">
->>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
                                             Booking</p>
                                     </div>
                                     <div class="flex-shrink-0">
@@ -212,11 +196,7 @@ and (max-width : 425px){
                                     </div>
                                     <div style="width: 16%;">
                                         <span class="avatar-title bg-info-subtle rounded fs-3">
-<<<<<<< HEAD
                                             <img src="{{ asset('assets/images/booking-icon-png-2 1.png') }}" alt="" width="40px">
-=======
-                                            <img src="{{ asset('assets/images/booking-icon-png-2 1.png') }}" alt="" width="90%">
->>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
                                         </span>
                                     </div>
                                 </div>

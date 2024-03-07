@@ -676,11 +676,7 @@
             <div class="col-lg-4 col-12">
                 <div class="card" style="height: 94%;">
                     <div class="card-header my-2">
-<<<<<<< HEAD
                         <h4 class="card-title flex-grow-1">Complaint Notice's</h4>
-=======
-                        <h4 class="card-title flex-grow-1">Notice's</h4>
->>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
                     </div>
 
                     <div class="card-body">

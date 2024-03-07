@@ -32,7 +32,7 @@
 }
 </style>
     <style type="text/css">
-    
+
         #multistep_form fieldset:not(:first-of-type) {
             display: none;
         }
@@ -582,11 +582,7 @@
                             <h2 class="text-left text-primary fs-1"><strong>Confirm Your Booking</strong></h2><br>
                             <div class="d-flex flex-column flex-md-row justify-content-center gap-5">
 
-<<<<<<< HEAD
                                 <div class="col-md-5 col-12 p-3 h-25 mt-4 mt-md-0 ">
-=======
-                                <div class="col-md-5 col-12 p-3 h-25 mt-4 mt-md-0 me-5">
->>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
 
                                     <div class="form-1  shadow p-2" style=" background: #ABFF00; border-radius: 12px;">
 
@@ -622,7 +618,7 @@
                                             <input type="text" class="w-100 p-1 mb-1" name="Coupon" id="coupon"
                                                 placeholder="Enter Coupon Code"
                                                 style="border:1px solid #ABFF00;border-radius: 5px;" value="">
-                                         
+
                                         </div>
                                         <div class="summary px-3 d-flex justify-content-between">
                                             <p id="errormsg" style="color: red"></p>
@@ -647,31 +643,7 @@
                                         </div>
                                     </div>
                                 </div>
-<<<<<<< HEAD
-                              
-=======
-                                <div class="col-md-3 col-12 p-3 h-25 mt-4 mt-md-0 me-5">
-                                      <div class="bg-primary p-2 mb-2 rounded-3">
 
-                                    <input class=" w-100 p-2" size='4' type='hidden' readonly name="amount" id="amount">
-
-
-
-                                        <h5 class="m-0 ps-3 text-dark">Check your email for coupon</h5>
-                                        <div class="summary gap-1 mt-3 d-flex justify-content-between">
-                                            <input type="text" class="w-100 p-1 mb-1" name="Coupon" id="coupon"
-                                                placeholder="Enter Coupon Code"
-                                                style="border:1px solid #ABFF00;border-radius: 10px;" value="">
-                                            <input type="button" class="w-95 p-1 mb-1" value="Confirm" id="confirm"
-                                                style="border:1px solid #ABFF00;border-radius: 10px;">
-
-                                        </div>
-                                        <div class="summary px-3 d-flex justify-content-between">
-                                            <p id="errormsg" style="color: red"></p>
-                                        </div>
-                                    </div>
-                                </div>
->>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
                             </div>
 
                         </div>
@@ -685,44 +657,9 @@
                             <!--<input type="submit" class=" next btn btn-primary px-5" value="Pay" id="next3" />-->
                             <span id="AddAmount"></span>
                             <span id="Order"></span>
-                            
+
                         </div>
                     </fieldset>
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
                 </form>
             </div>
         </div>
@@ -841,7 +778,7 @@
                                             @endif
                                             <div class="text p-3 d-flex flex-column">
                                                 <span class="fw-bold" id="text-color">{{ Auth::user()->username }}</span>
-                                                 <span>{{ Auth::user()->facebook_link }}</span> 
+                                                 <span>{{ Auth::user()->facebook_link }}</span>
                                             </div>
                                         </div>
 
@@ -865,12 +802,12 @@
             </div>
         </div>
     </div>
-    
-    
+
+
     <script src="{{ asset('js/timeslot.min.js') }}"></script>
-    
-    
-    
+
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
@@ -882,7 +819,7 @@
             $('#demo_meeting_modal').modal('show');
         }
     </script>
-    
+
     <script>
         let id = {!! json_encode($tutor->id) !!};
 
@@ -894,14 +831,14 @@
         var selectedOption = $(this).find('option:selected');
         var fee = selectedOption.data('fee');
         var wallet = {!! json_encode(\App\Models\Wallet::where('user_id', auth()->id())->first()->net_income ?? '') !!};
-        
-        
+
+
         if (wallet > 0 && fee <= wallet) {
         $('#Order').html('<input type="submit" class="next btn btn-primary px-5" value="Pay" id="next3" />');
         } else {
             $('#AddAmount').html('<a class="next btn btn-primary px-5" onclick="freeMeetmodal()">Pay</a>');
         }
-    
+
 
 
             var form_count = 1;
@@ -1278,18 +1215,18 @@ $(function() {
                 url: '{{ route('stripe.post.wallet') }}', // Replace with your backend URL for saving data
                 data: formData,
                 success: function(response) {
-                    
+
                    $('#Order').html('');
-      
+
                    $('#AddAmount').html('');
-                   
+
                    $('#add-btn').removeClass('processing').removeAttr('disabled');
                    $('#demo_meeting_modal').modal('hide');
                    $('#Order').html('<input type="submit" class="next btn btn-primary px-5" value="Pay" id="next3" />');
-      
+
                    $('#AddAmount').html('');
-            
-            
+
+
                 },error: function(xhr, status, error) {
                   $('#add-btn').removeClass('processing').removeAttr('disabled');
                 }
@@ -1322,15 +1259,15 @@ $(function() {
             var selectedOption = $(this).find('option:selected');
             var fee = selectedOption.data('fee');
             var wallet = {!! json_encode(\App\Models\Wallet::where('user_id', auth()->id())->first()->net_income ?? '') !!};
-        
-        
+
+
         if (wallet > 0 && fee <= wallet) {
         $('#Order').html('<input type="submit" class="next btn btn-primary px-5" value="Pay" id="next3" />');
         } else {
             $('#AddAmount').html('<a class="next btn btn-primary px-5" onclick="freeMeetmodal()">Pay</a>');
         }
-        
-        
+
+
 
             if (fee < 0) {
                 fee = 0;
@@ -1363,11 +1300,11 @@ $(function() {
                 $('.total').text('£' + fee);
                 // alert(selectedOption.data('fee'));
             });
-            
-            
-            
-            
-            
+
+
+
+
+
             // get coupon
             $('#coupon').on('keyup', function() {
                 var coupon = $('#coupon').val();

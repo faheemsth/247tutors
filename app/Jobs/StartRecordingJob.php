@@ -34,7 +34,7 @@ class StartRecordingJob implements ShouldQueue
 
     public function handle()
     {
-        
+
         // Retrieve the recording session for the current user
         //$recordingSession = RecordingSession::where('user_id', Auth::id())->first();
 
@@ -49,11 +49,11 @@ class StartRecordingJob implements ShouldQueue
 
             // Execute your script here to start the recording
             $activateScript = '/home/u163900009/domains/247tutors.co.uk/public_html/public/venv/Scripts/activate';
-            $output = exec("source \"$activateScript\" 2>&1", $output, $returnVar); 
-            
+            $output = exec("source \"$activateScript\" 2>&1", $output, $returnVar);
+
             dd($output);
-        
-            
+
+
             $sessionId = $this->sessionId;
             $command = 'python3';
             $arguments = [
@@ -61,22 +61,17 @@ class StartRecordingJob implements ShouldQueue
                 $sessionId,
                 'start',
             ];
-            
+
             // Create a new process instance
             $process = new Process([$command, ...$arguments]);
             $process->start();
-<<<<<<< HEAD
-            
+
            // dd($process->getOutput());
-            
+
             $this->delete();
           //  echo "Python script output:\n" . $process->getOutput() . "\n";
-=======
-            $this->delete();
-            echo "Python script output:\n" . $process->getOutput() . "\n";
->>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
        // }
-       
+
 
 
 

@@ -83,11 +83,7 @@ $.ajax({
         {
             $('#CountAppend').html('<span class="badge bg-success">' + response.count + '</span>');
         }
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
 
         },
 

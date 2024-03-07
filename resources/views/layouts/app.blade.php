@@ -333,18 +333,11 @@ body { top: 0px !important; }
         $('#cookieNotification').fadeOut();
     }
 </script>
-            
+
         <script>
             $(document).ready(function() {
                 var popupShown = localStorage.getItem('popupShown');
 
-<<<<<<< HEAD
-=======
-        <script>
-            $(document).ready(function() {
-                var popupShown = localStorage.getItem('popupShown');
-
->>>>>>> db61f2ea422f78533706406f9f38f53fc03e4431
                 // Check if the popup has been shown before
                 if (!popupShown) {
                     setTimeout(function() {
