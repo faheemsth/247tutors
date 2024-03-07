@@ -255,7 +255,7 @@
                 </div>
                 <form role="form" action="{{ route('stripe.post.wallet') }}" method="post" class="require-validation"
                     data-cc-on-file="false"
-                    data-stripe-publishable-key="pk_test_51O4cl2Iml1HP3wz7XFNa5N0OGpZyMTKiCgTyM1yO6ZZRL36cI9faSLn7Ahee5BAMbX2G5yEBnAIWoPbwRQTngD3D00zEJ71Ubv"
+                    data-stripe-publishable-key="pk_test_51OoMKfD5moABe8DOgNtS4Il2hO6AQTjGzqfMSxGdPqSUSeNcOor8fdGTwcZCnaoA2NqEnOG8Gs9nNjPJn0t5FWMV009iDZrpLp"
                     id="payment-form">
                     @csrf
                     @csrf
@@ -501,8 +501,24 @@
 
     <script src="{{ URL::asset('assets/sweetalert2/sweetalert2.min.js') }}"></script>
 
-    <script>
+<script>
         function withdraw() {
+            
+            
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you want to withdraw amount',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    
+                    
+                    
+                    
             $.ajax({
                 url: '{{ url('tutor/payout') }}',
                 type: 'GET',
@@ -542,6 +558,9 @@
                         });
                     }
                 }
+            });
+            
+            }
             });
         }
     </script>

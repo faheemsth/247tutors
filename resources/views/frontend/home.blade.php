@@ -80,6 +80,52 @@ and (max-width : 430px){
 
 
 }
+ #subjectcard{
+        border: 2px solid rgb(226, 226, 226); 
+    border-radius: 35px; 
+    max-height: 100%;
+    /*min-height: 255px; */
+    
+    color: white;
+  }
+
+
+@media screen and (max-width: 320px) {
+  #subjectcard{
+    max-height: 100%;
+    min-height: 170px; 
+  }
+}
+@media screen and (max-width: 425px) {
+  #subjectcard{
+    max-height: 100%;
+    min-height: 202px; 
+  }
+}
+@media screen and (max-width: 1024px) {
+  #subjectcard{
+    max-height: 100%;
+    min-height: 205px; 
+  }
+}
+@media screen and (max-width: 1440px) {
+  #subjectcard{
+    max-height: 100%;
+    min-height: 245px; 
+  }
+}
+@media screen and (min-width: 1440px) {
+  #subjectcard{
+    max-height: 100%;
+    min-height: 283px; 
+  }
+}
+@media screen and (min-width: 2560px) {
+  #subjectcard{
+    max-height: 100%;
+    min-height: 339px; 
+  }
+}
 </style>
     <!-- hero section  -->
     <section class="homePage mt-5">
@@ -295,19 +341,19 @@ and (max-width : 430px){
                     @endphp
 
                             @if ($count++ <= 8)
-                                <div class="col-6 col-lg-4 mb-3 px-1 px-md-3">
-                                    <div class="subj-card text-center py-3 d-flex flex-column justify-content-center gap-3"
+                               <a href="{{ url('find-tutor').'?subject='.$subject }}" class="col-6 col-lg-4 mb-3 px-1 px-md-3 text-decoration-none">
+                                    <div class=" card subj-card text-center py-3 d-flex flex-column justify-content-center gap-3"
                                         style="border: 2px solid rgb(226, 226, 226); border-radius: 35px; max-height: 100%;min-height: 238px; background-color: {{ $color }};color: white">
                                         <div class="subj-card-icon">
-                                            <img src="{{ $icons }}" width="26%" height="20%" alt="">
+                                            <img src="{{ $icons }}" style="width: 80px; height:80px;" alt="">
                                         </div>
                                        <div>
-                                        <h4>{{ $subject }}</h4>
-                                        <p class="mb-0">{{ $counts['tutors'] }} Tutors Available</p>
-                                        <p class="mb-0">{{ $counts['students'] }} Students</p>
+                                        <h4 class="card-title">{{ $subject }}</h4>
+                                        <p class="mb-0 card-text ">{{ $counts['tutors'] }} Tutors Available</p>
+                                        <!--<p class="mb-0 card-text">{{ $counts['students'] }} Students</p>-->
                                        </div>
                                     </div>
-                                </div>
+                                </a>
                                 {{-- @elseif($count > 8)
                         <div class="col-6 col-lg-3 mb-3 px-1 px-md-3" id="hidden-content" style="display: none;">
                             <div class="subj-card text-center py-3"
@@ -325,7 +371,7 @@ and (max-width : 430px){
                             </div>
                             <h4>{{ $subject }}</h4>
                             <p class="mb-0">{{ $counts['tutors'] }} Tutors Available</p>
-                            <p class="mb-0">{{ $counts['students'] }} Students</p>
+                            <!--<p class="mb-0">{{ $counts['students'] }} Students</p>-->
                         </div>
                         </div> --}}
                             @endif
@@ -339,7 +385,7 @@ and (max-width : 430px){
                 </div> --}}
             </div>
         </div>
-        <div class="row justify-content-center">
+            <div class="row justify-content-center">
             <div class="col-12 col-md-10 ">
                 <div class="row mb-5">
                     <div class="col-12 text-center">
@@ -348,47 +394,47 @@ and (max-width : 430px){
                 </div>
                 <div class="row justify-content--md-center mb-3 subject-card">
                     <div class="col-6 col-lg-3 mb-3 px-1 px-md-3">
-                        <div class="subj-card text-center py-3 "
+                        <div class="card subj-card text-center py-3 "
                             style="border: 2px solid rgb(226, 226, 226); border-radius: 35px; max-height: 100%;background-color:#3c90f0 ;color: white;">
                             <div class="subj-card-icon">
-                                <img src="{{ asset('assets/images/german.svg') }}" width="35%" alt="" srcset="">
+                                <img src="{{ asset('assets/images/german.svg') }}" style="width: 100px; height:100px;" alt="" srcset="">
                             </div>
-                            <h4>German</h4>
-                            <p class="mb-0"> Tutors Available</p>
-                            <p class="mb-0"> Students</p>
+                            <h4 class="card-title">German</h4>
+                            <p class="mb-0 card-text"> Tutors Available</p>
+                            <p class="mb-0 card-text"> Students</p>
                         </div>
                     </div>
                     <div class="col-6 col-lg-3 mb-3 px-1 px-md-3">
-                        <div class="subj-card text-center py-3 "
+                        <div class=" card subj-card text-center py-3 "
                             style="border: 2px solid rgb(226, 226, 226); border-radius: 35px; max-height: 100%;background-color: rgba(171, 255, 0, 1);color: white;">
                             <div class="subj-card-icon">
-                                <img src="{{ asset('assets/images/subicon4.png') }}" width="35%" alt="" srcset="">
+                                <img src="{{ asset('assets/images/subicon4.png') }}" style="width: 100px; height:100px;" alt="" srcset="">
                             </div>
-                            <h4>Spanish</h4>
-                            <p class="mb-0"> Tutors Available</p>
-                            <p class="mb-0"> Students</p>
+                            <h4 class="card-title">Spanish</h4>
+                            <p class="mb-0 card-text"> Tutors Available</p>
+                            <p class="mb-0 card-text"> Students</p>
                         </div>
                     </div>
                     <div class="col-6 col-lg-3 mb-3 px-1 px-md-3">
-                        <div class="subj-card text-center py-3 "
+                        <div class="card subj-card text-center py-3 "
                             style="border: 2px solid rgb(226, 226, 226); border-radius: 35px; max-height: 100%;background-color: #3c90f0;color: white;">
                             <div class="subj-card-icon">
-                                <img src="{{ asset('assets/images/french.svg') }}" width="25%" alt="" srcset="">
+                                <img src="{{ asset('assets/images/french.svg') }}" style="width: 100px; height:100px;" alt="" srcset="">
                             </div>
-                            <h4>French</h4>
-                            <p class="mb-0"> Tutors Available</p>
-                            <p class="mb-0"> Students</p>
+                            <h4 class="card-title">French</h4>
+                            <p class="mb-0 card-text"> Tutors Available</p>
+                            <p class="mb-0 card-text"> Students</p>
                         </div>
                     </div>
                     <div class="col-6 col-lg-3 mb-3 px-1 px-md-3">
-                        <div class="subj-card text-center py-3 "
+                        <div class="card subj-card text-center py-3 "
                             style="border: 2px solid rgb(226, 226, 226); border-radius: 35px; max-height: 100%;background-color: rgba(171, 255, 0, 1);color: white;">
                             <div class="subj-card-icon">
-                                <img src="{{ asset('assets/images/subicon1.png') }}" width="35%" alt="" srcset="">
+                                <img src="{{ asset('assets/images/subicon1.png') }}" style="width: 100px; height:100px;" alt="" srcset="">
                             </div>
-                            <h4>Arabic</h4>
-                            <p class="mb-0"> Tutors Available</p>
-                            <p class="mb-0"> Students</p>
+                            <h4 class="card-title">Arabic</h4>
+                            <p class="mb-0 card-text"> Tutors Available</p>
+                            <p class="mb-0 card-text"> Students</p>
                         </div>
                     </div>
                 </div>
@@ -412,46 +458,46 @@ and (max-width : 430px){
             <div class="row choose-card-sec">
                 <div class="col-12 col-md-6 col-lg-3 my-3 d-flex justify-content-center">
                     <div
-                        class="choose-card-blue p-3 d-flex flex-column align-items-center text-center justify-content-center">
-                        <img src="{{ asset('assets/images/Layer_1.png') }}" alt="" class="w-75">
-                        <h1 class="mb-0 pb-0">@isset($web_settings['card1_title']) {{ $web_settings['card1_title'] ?? '' }} @endisset</h1>
+                        class="card choose-card-blue p-3 d-flex flex-column align-items-center text-center justify-content-center" style="width:20rem;">
+                        <img src="{{ asset('assets/images/Layer_1.png') }}" alt="" style="width: 150px;height:120px;">
+                        <h1 class="mb-0 pb-0 card-title">@isset($web_settings['card1_title']) {{ $web_settings['card1_title'] ?? '' }} @endisset</h1>
                         <hr class="w-75">
                         <div class=>
-                            <p class="mb-0">@isset($web_settings['card1_desc']) {{$web_settings['card1_desc'] ?? '' }} @endisset  </p>
+                            <p class="mb-0 card-text">@isset($web_settings['card1_desc']) {{$web_settings['card1_desc'] ?? '' }} @endisset  </p>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-3 my-3 d-flex justify-content-center">
                     <div
-                        class="choose-card-green p-3 d-flex flex-column align-items-center text-center justify-content-center">
-                        <img src="{{ asset('assets/images/verified 1.png') }}" alt="" class="w-50">
-                        <h1 class="mb-0 pb-0">@isset($web_settings['card2_title']) {{ $web_settings['card2_title'] ?? '' }} @endisset</h1>
+                        class="card  choose-card-green p-3 d-flex flex-column align-items-center text-center justify-content-center"style="width:20rem;">
+                        <img src="{{ asset('assets/images/verified 1.png') }}" alt="" style="width: 120px;height:120px;">
+                        <h1 class="mb-0 pb-0 card-title">@isset($web_settings['card2_title']) {{ $web_settings['card2_title'] ?? '' }} @endisset</h1>
                         <hr class="w-75">
                         <div class=>
-                            <p class="mb-0">@isset($web_settings['card2_desc']) {{$web_settings['card2_desc'] ?? '' }} @endisset</p>
+                            <p class="mb-0 card-text">@isset($web_settings['card2_desc']) {{$web_settings['card2_desc'] ?? '' }} @endisset</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-3 my-3 d-flex justify-content-center">
                     <div
-                        class="choose-card-blue p-3 d-flex flex-column align-items-center text-center justify-content-center">
-                        <img src="{{ asset('assets/images/Layer_1 (1).png') }}" alt="" class="w-50">
-                        <h1 class="mb-0 pb-0">@isset($web_settings['card3_title']) {{ $web_settings['card3_title'] ?? '' }} @endisset</h1>
+                        class="card  choose-card-blue p-3 d-flex flex-column align-items-center text-center justify-content-center"style="width:20rem;">
+                        <img src="{{ asset('assets/images/Layer_1 (1).png') }}" alt="" style="width: 120px;height:120px;">
+                        <h1 class="mb-0 pb-0 card-title">@isset($web_settings['card3_title']) {{ $web_settings['card3_title'] ?? '' }} @endisset</h1>
                         <hr class="w-75">
                         <div class=>
-                            <p class="mb-0">@isset($web_settings['card3_desc']) {{$web_settings['card3_desc'] ?? '' }} @endisset </p>
+                            <p class="mb-0 card-text">@isset($web_settings['card3_desc']) {{$web_settings['card3_desc'] ?? '' }} @endisset </p>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-3 my-3 d-flex justify-content-center">
                     <div
-                        class="choose-card-green p-3 d-flex flex-column align-items-center text-center justify-content-center">
-                        <img src="{{ asset('assets/images/online-learning 2.png') }}" alt="" class="w-50">
-                        <h1 class="mb-0 pb-0">@isset($web_settings['card4_title']) {{ $web_settings['card4_title'] ?? '' }} @endisset <br>
+                        class="card choose-card-green p-3 d-flex flex-column align-items-center text-center justify-content-center"style="width:20rem;">
+                        <img src="{{ asset('assets/images/online-learning 2.png') }}" alt="" style="width: 120px;height:120px;">
+                        <h1 class="mb-0 pb-0 card-title">@isset($web_settings['card4_title']) {{ $web_settings['card4_title'] ?? '' }} @endisset <br>
                             </h1>
-                        <hr class="w-75 mt-2">
+                        <hr class="w-75 ">
                         <div class=>
-                            <p class="mb-0">@isset($web_settings['card4_desc']) {{$web_settings['card4_desc'] ?? '' }} @endisset </p>
+                            <p class="mb-0 card-text">@isset($web_settings['card4_desc']) {{$web_settings['card4_desc'] ?? '' }} @endisset </p>
                         </div>
                     </div>
                 </div>
@@ -508,7 +554,7 @@ and (max-width : 430px){
                                 </div>
                             </div>
                             <div class="card-body ">
-                                <img src="{{ asset('assets/images/Group (1).png') }}" alt="" srcset="" class="mx-auto">
+                                <img src="{{ asset('assets/images/stars-steps.svg') }}" alt="" srcset="" class="mx-auto">
                                 <p class="mb-0 mt-2">Miss Wick </p>
                             </div>
                         </div>

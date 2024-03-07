@@ -50,7 +50,7 @@
                 <div class="card  p-md-3 p-2">
                     <div class="card-header justify-content-between">
                         <h3>{{ __('Privacy & Policy') }}</h3>
-                        <a href="{{ url('add/terms/privacy_policy') }}" class="btn btn-primary"><i class="ik ik-plus"></i></a>
+                        <a href="{{ url('add/terms/privacy_policy') }}" class="btn btn-primary px-2 py-1"><i class="fa fa-plus"></i></a>
                     </div>
                     <div class="card-body" style="overflow: scroll;">
                         <table id="reviewStudents" class="table table-bordered">
@@ -67,13 +67,27 @@
                                     @foreach($TermsAndCondition as $key => $TermsAndCon)
                                         <tr>
                                             <th style="border-bottom: .5px solid black;">{{ $key+1 }}</th>
-                                            <td style="border-bottom: .5px solid black;">{{ $TermsAndCon->type }}</td>
+                                            <td style="border-bottom: .5px solid black;">
+
+                                                <?php
+                                                    
+                                                    $string = strip_tags( $TermsAndCon->type);
+                                                    if (strlen($string) > 15) {
+                                                        $stringCut = substr($string, 0, 15);
+                                                        $endPoint = strrpos($stringCut, ' ');
+                                                        $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                                        $string .= '...';
+                                                    }
+                                                    echo $string;
+                                                 ?>
+                                                
+                                                </td>
                                             <td style="border-bottom: .5px solid black;">
                                                 <?php
                                                     
                                                     $string = strip_tags( $TermsAndCon->content);
-                                                    if (strlen($string) > 70) {
-                                                        $stringCut = substr($string, 0, 70);
+                                                    if (strlen($string) > 15) {
+                                                        $stringCut = substr($string, 0, 15);
                                                         $endPoint = strrpos($stringCut, ' ');
                                                         $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
                                                         $string .= '...';
@@ -94,6 +108,10 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                @else
+                                    <tr>
+                                        <td class="text-center" colspan="4">Record not found</td>
+                                    </tr>
                                @endif
                             </tbody>
                         </table>

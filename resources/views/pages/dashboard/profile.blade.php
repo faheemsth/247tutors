@@ -207,7 +207,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="card-body">
-                                                   @for ($i=0;$i < $Review->tutor_rating ;$i++)
+                                                   @for ($i=0;$i < $Review->student_rating ;$i++)
                                                     <i class="fa fa-star" style="color: yellow"></i>
                                                    @endfor
                                                     <p class="mb-0 mt-2">{{ optional(App\Models\User::find($Review->student_id))->first_name . ' '.optional(App\Models\User::find($Review->student_id))->last_name }}</p>

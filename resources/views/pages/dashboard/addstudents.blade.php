@@ -5,11 +5,13 @@
     @include('layouts.studentnav')
 @elseif (Auth::user()->role_id == '3')
     @include('layouts.tutornav')
-@elseif (Auth::user()->role_id == '5' || Auth::user()->role_id == '6')
+@elseif (Auth::user()->role_id == '5')
     @include('layouts.parentnav')
 
 @elseif (Auth::user()->role_id == '1' || Auth::user()->role_id == '2')
   @include('layouts.navbar')
+@elseif (Auth::user()->role_id == '6')
+  @include('layouts.orgnav')
 @endif
 @else
 @include('layouts.navbar')
@@ -43,19 +45,19 @@
             .yours{
                 font-size:3rem;
             }
-            @media only screen 
+            @media only screen
 and (max-width : 1024px) {
 .yours{
                 font-size:3rem;
             }
 }
- @media only screen 
+ @media only screen
 and (max-width : 768px) {
 .yours{
                 font-size:2.8rem;
             }
 }
-@media only screen 
+@media only screen
 and (max-width : 425px) {
 .yours{
                 font-size:1.7rem;
@@ -159,7 +161,7 @@ and (max-width : 425px) {
 
                                 </div>
                             </div>
-                            
+
 
                     </div>
 

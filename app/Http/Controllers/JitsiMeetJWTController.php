@@ -74,33 +74,43 @@ class JitsiMeetJWTController extends Controller
         if(Auth::user()->role_id == 3){
             $booking->is_meet_tutor += 1;
         }
-        
+
         if(Auth::user()->role_id == 4){
             $booking->is_meet_student += 1;
         }
-        
-        
+
+
         //$booking->save();
 
         return view('zoom',compact('booking'));
     }
-    
+
     public function zoom_meet_interview($id){
         $booking = User::where('Interview_meeting_id',$id)->first();
+        if(Auth::user()->role_id == 3 && Auth::user()->is_meet_tutor > 0)
+        {
+            return redirect('dashboard');
+        }
+
+        if(Auth::user()->role_id == 1 && Auth::user()->is_meet_admin  > 0)
+        {
+            return redirect('dashboard');
+        }
+
         if(Auth::user()->role_id == 3){
             $booking->is_meet_tutor += 1;
         }
-        
+
         if(Auth::user()->role_id == 1){
             $booking->is_meet_admin += 1;
         }
-        
-        
+
+
         $booking->save();
 
         return view('zoom',compact('booking'));
     }
-    
+
 
     public function saveRecording(Request $request){
 
@@ -111,10 +121,10 @@ class JitsiMeetJWTController extends Controller
         if (!File::isDirectory($target_dir)) {
             mkdir($target_dir, 0777, true);
         }
-        
+
         $random_no = time();
         $file_name = '247T-'.$random_no.'-'.$file->getClientOriginalName();
-        
+
         $file->move($target_dir, $file_name);
 
         // file_put_contents($target_dir, base64_decode($videoData));

@@ -7,6 +7,11 @@
         <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/webicons/css/all.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+        <style>
+            table tr th{
+                min-width:110px;
+            }
+        </style>
     @endpush
 
 
@@ -53,6 +58,7 @@
                                     <th>{{ __('Sr.No') }}</th>
                                     <th>{{ __('Booking Id') }}</th>
                                     <th>{{ __('Tutor Name') }}</th>
+                                    <th>{{ __('Fee') }}</th>
                                     <th>{{ __('Status') }}</th>
                                     <th>{{ __('Date') }}</th>
                                     
@@ -64,12 +70,13 @@
                                         <td style="border-bottom: .5px solid black;">{{ $loop->index + 1 }}</td>
                                         
                                         <td style="border-bottom: .5px solid black;">
-                                            <a onclick="freeMeetmodal('{{ $user->bookingId }}','{{ $user->status }}')" style="cursor: pointer;font-size:20px">
+                                            <a onclick="freeMeetmodal('{{ $user->bookingId }}','{{ $user->status }}')"  style="cursor: pointer;font-size:20px;color:blue;">
                                               {{ $user->bookingId }}
                                             </a>
                                         </td>
                                         
                                         <td style="border-bottom: .5px solid black;">{{ optional(App\Models\User::find($user->tutorId))->username }}</td>
+                                        <td style="border-bottom: .5px solid black;">{{ optional(App\Models\Transaction::where('booking_id',optional(App\Models\Booking::where('uuid',$user->bookingId)->first())->id)->first())->amount }}£</td>
                                         
                                         <td style="border-bottom: .5px solid black;">{{ $user->status }}</td>
                                         
@@ -78,7 +85,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td>Record not found</td>
+                                        <td colspan="5" class="text-center">Record not found</td>
                                     </tr>
                                 @endforelse
                             </tbody>

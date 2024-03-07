@@ -77,7 +77,7 @@
                                 
                                 <div class="btn btn-primary px-2 py-2" style="height: max-content;">
                                     <a href="/blog/create" class="text-light"><i
-                                            class="fa-solid fa-user-plus m-auto"></i></a>
+                                            class="fa-solid fa-plus m-auto"></i></a>
                                 </div>
 
                             </div>
@@ -135,11 +135,11 @@
                                                 <td style="border-bottom: .5px solid black;">
                                                     <div class="d-flex gap-2">
                                                         <a href="{{ url('blog/update?id=') . $blog->id }}"
-                                                            class="btn btn-primary btn-sm" style="height: max-content;"><i
-                                                                class="fa-regular fa-pen-to-square m-auto"></i></a>
+                                                            class="btn btn-primary p-1" ><i
+                                                                class="fa-regular fa-pen-to-square"></i></a>
                                                         <a href="{{ url('blog/delete?id=') . $blog->id }}"
-                                                            class="btn btn-danger btn-sm" style="height: max-content;"><i
-                                                                class="fa-solid fa-trash-can m-auto"></i></a>
+                                                            class="btn btn-danger p-1"><i
+                                                                class="fa-solid fa-trash-can "></i></a>
                                                     </div>
                                                 </td>
 
@@ -151,7 +151,7 @@
                                         @endforelse
                                     </tbody>
                                 </table>
-                                {{ $blogs->links() }}
+                                <!--{{ $blogs->links() }}-->
                             </div>
                         </div>
                     </div>

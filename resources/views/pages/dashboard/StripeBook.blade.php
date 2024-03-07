@@ -5,10 +5,12 @@
             @include('layouts.studentnav')
         @elseif (Auth::user()->role_id == '3')
             @include('layouts.tutornav')
-        @elseif (Auth::user()->role_id == '5' || Auth::user()->role_id == '6')
+        @elseif (Auth::user()->role_id == '5')
             @include('layouts.parentnav')
         @elseif (Auth::user()->role_id == '1' || Auth::user()->role_id == '2')
             @include('layouts.navbar')
+        @elseif (Auth::user()->role_id == '6')
+            @include('layouts.orgnav')
         @endif
     @else
         @include('layouts.navbar')
@@ -194,13 +196,14 @@
                 {{-- @if (Auth::user()->role_id == '4') --}}
                 <form role="form" action="{{ route('stripe.post') }}" method="post" class="require-validation"
                     data-cc-on-file="false"
-                    data-stripe-publishable-key="pk_test_51O4cl2Iml1HP3wz7XFNa5N0OGpZyMTKiCgTyM1yO6ZZRL36cI9faSLn7Ahee5BAMbX2G5yEBnAIWoPbwRQTngD3D00zEJ71Ubv"
+                    data-stripe-publishable-key="pk_test_51OoMKfD5moABe8DOgNtS4Il2hO6AQTjGzqfMSxGdPqSUSeNcOor8fdGTwcZCnaoA2NqEnOG8Gs9nNjPJn0t5FWMV009iDZrpLp"
                     id="payment-form">
                     @csrf
                     <input type="hidden" required name="tutor_id" value="{{ $tutor->id }}">
                     <fieldset id="account">
                         <div class="panel-body mt-5 mx-5 px-4">
-                            <h2 class="text-left fs-1" id="text-color"><strong>Who Would You Like A Lesson With?</strong></h2><br>
+                            <h2 class="text-left fs-1" id="text-color"><strong>Who Would You Like A Lesson With?</strong>
+                            </h2><br>
                         </div>
                         <div class="d-flex flex-column flex-md-row justify-content-center gap-5">
                             <div class="col-md-6 col-12">
@@ -220,14 +223,18 @@
                                         @endforeach
                                     @endif
                                 </select>
-                                @if (Auth::user()->role_id == '5' && !empty($students))
+                                @if ((!empty($students) && Auth::user()->role_id == '5') || Auth::user()->role_id == '6')
                                     <label class="mt-3 mb-1">Students</label>
-                                    <select required name="user_id" id="changesubject" class="w-100 p-2">
-                                        @foreach ($students as $student)
-                                            <option value="{{ $student->id }}">
-                                                {{ $student->first_name . ' ' . $student->last_name }}
-                                            </option>
-                                        @endforeach
+                                    <select required name="user_id" id="Student" class="w-100 p-2">
+                                        @if ($students->count() > 0)
+                                            @foreach ($students as $student)
+                                                <option value="{{ $student->id }}">
+                                                    {{ $student->first_name . ' ' . $student->last_name }}
+                                                </option>
+                                            @endforeach
+                                        @else
+                                            <option value="">Student Not Found</option>
+                                        @endif
                                     </select>
                                 @endif
                                 <div class="row ">
@@ -240,7 +247,8 @@
                                     <div class="col-md-6 my-3">
                                         <label class="text-secondary">Time</label><br>
                                         {{-- <input type="time" required name="time" class="w-100 p-3"> --}}
-                                        <input id="time-1" required name="time" readonly type="text" class="w-100 p-2">
+                                        <input id="time-1" required name="time" readonly type="text"
+                                            class="w-100 p-2">
                                         <span id="time-1122" style="color: red"></span>
 
                                     </div>
@@ -253,16 +261,19 @@
                                         style="height:50px;width:50px;border-radius:50%;">
                                 @else
                                     @if ($tutor->gender == 'Male')
-                                        <img src="{{ asset('assets/images/male.jpg') }}" style="height:50px;width:50px;border-radius:50%;">
+                                        <img src="{{ asset('assets/images/male.jpg') }}"
+                                            style="height:50px;width:50px;border-radius:50%;">
                                     @elseif($tutor->gender == 'Female')
-                                        <img src="{{ asset('assets/images/female.jpg') }}" style="height:50px;width:50px;border-radius:50%;">
+                                        <img src="{{ asset('assets/images/female.jpg') }}"
+                                            style="height:50px;width:50px;border-radius:50%;">
                                     @else
-                                        <img src="{{ asset('assets/images/default.png') }}" style="height:50px;width:50px;border-radius:50%;">
+                                        <img src="{{ asset('assets/images/default.png') }}"
+                                            style="height:50px;width:50px;border-radius:50%;">
                                     @endif
                                 @endif
                                 <div class="text px-2 py-3 d-flex flex-column">
                                     <span class="fw-bold">{{ $tutor->username }}</span>
-                                     <span>{{ $tutor->facebook_link }}</span>
+                                    <span>{{ $tutor->facebook_link }}</span>
                                 </div>
                             </div>
                         </div>
@@ -429,7 +440,8 @@
                                             <option value="Rwanda">Rwanda</option>
                                             <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
                                             <option value="Saint Lucia">Saint Lucia</option>
-                                            <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+                                            <option value="Saint Vincent and the Grenadines">Saint Vincent and the
+                                                Grenadines</option>
                                             <option value="Samoa">Samoa</option>
                                             <option value="San Marino">San Marino</option>
                                             <option value="Sao Tome and Principe">Sao Tome and Principe</option>
@@ -487,7 +499,7 @@
                                     </div>
                                     <div class="mt-2 mt-md-3">
                                         <label class="text-secondary">Address 2</label><br>
-                                        <input type="text" required name="address2" id="address2" class="w-100 p-2">
+                                        <input type="text" name="address2" id="address2" class="w-100 p-2">
                                     </div>
                                     <div class="mt-2 mt-md-3">
                                         <label class="text-secondary">Town/City</label><br>
@@ -504,18 +516,19 @@
                                 <div class="col-lg-4 col-md-4 col-12 p-3 h-25 mt-4 mt-md-0 me-5">
 
 
-                                    <div class="form-1  shadow pb-3 p-2" style=" background: #ABFF00; border-radius: 12px;">
+                                    <div class="form-1  shadow pb-3 p-2"
+                                        style=" background: #ABFF00; border-radius: 12px;">
 
                                         <div class="d-flex">
                                             @if (!empty($tutor->image) && file_exists(public_path(!empty($tutor->image) ? $tutor->image : '')))
                                                 <!-- <img src="{{ $tutor->image }}" alt="" width="70"
-                                                        height="70"> -->
+                                                            height="70"> -->
                                                 <img src="{{ asset($tutor->image ?? 'assets\images\default.png') }}"
                                                     alt="" style="height:50px;width:50px;border-radius:50%;">
                                             @else
                                                 @if ($tutor->gender == 'Male')
                                                     <img src="{{ asset('assets/images/male.jpg') }}"
-                                                       style="height:50px;width:50px;border-radius:50%;">
+                                                        style="height:50px;width:50px;border-radius:50%;">
                                                 @elseif($tutor->gender == 'Female')
                                                     <img src="{{ asset('assets/images/female.jpg') }}"
                                                         style="height:50px;width:50px;border-radius:50%;">
@@ -525,16 +538,16 @@
                                                 @endif
                                             @endif
                                             <div class="text p-3 d-flex flex-column align-items-center">
-                                                <span  class="fw-bold">{{ $tutor->username }}</span>
-                                                 <span>{{ $tutor->facebook_link }}</span>
+                                                <span class="fw-bold">{{ $tutor->username }}</span>
+                                                <span>{{ $tutor->facebook_link }}</span>
                                             </div>
                                         </div>
                                         <div class="summary-item mt-3" style="line-height: 0.7;">
 
                                             <!-- <div class="summary px-3 d-flex justify-content-between">
-                                                    <p>Saturdays at 13:30-14:25</p>
-                                                    <p id="feeId">£{{ $tutor->fee }}</p>
-                                                </div> -->
+                                                        <p>Saturdays at 13:30-14:25</p>
+                                                        <p id="feeId">£{{ $tutor->fee }}</p>
+                                                    </div> -->
                                             <div class="fw-bold summary px-3 d-flex justify-content-between">
                                                 <p>Discount</p>
                                                 <p id="discountId">0.00</p>
@@ -544,9 +557,9 @@
                                                 <p class="total">£{{ $tutor->fee }}</p>
                                             </div>
                                             <!-- <div class="summary px-3 d-flex justify-content-between">
-                                                    <p>Next lesson: Saturday 28 Aug</p>
-                                                    <p class="total">£{{ $tutor->fee }}</p>
-                                                </div> -->
+                                                        <p>Next lesson: Saturday 28 Aug</p>
+                                                        <p class="total">£{{ $tutor->fee }}</p>
+                                                    </div> -->
                                         </div>
                                         <div class="summary-text mt-3">
                                             <p class="text-center">
@@ -578,7 +591,7 @@
                                     <div class="row col-md-12">
                                         <div class="col-md-6">
                                             <div class='col-xs-12 form-group required'>
-                                                <label class='control-label text-secondary'>Name on Card</label> <input
+                                                <label class='control-label'>Name on Card</label> <input
                                                     class=" w-100 p-2" size='4' type='text' required
                                                     name="account_holder_name">
                                             </div>
@@ -586,7 +599,7 @@
 
                                         <div class="col-md-6">
                                             <div class='col-xs-12 form-group required'>
-                                                <label class='control-label text-secondary'>Amount</label> <input
+                                                <label class='control-label'>Payed Amount</label> <input
                                                     class=" w-100 p-2" size='4' type='text' readonly
                                                     name="amount" id="amount2">
                                             </div>
@@ -596,7 +609,7 @@
 
 
                                     </div>
-                                    <div class="mt-3 row col-md-12">
+                                    <div class="mt-5 row col-md-12">
                                         <div class="col-md-12">
                                             <label class="text-secondary">Card Number</label><br>
                                             <input autocomplete='off' required name="card_number"
@@ -604,7 +617,7 @@
                                                 id='cardInput'>
                                         </div>
                                     </div>
-                                    <div class="mt-3 row col-md-12">
+                                    <div class="mt-5 row col-md-12">
 
                                         <div class="col-md-4">
                                             <label class="text-secondary">CVC Number</label><br>
@@ -640,8 +653,8 @@
                                     </div>
 
 
-                                    <div class="mt-3 row col-md-12">
-                                        <div class="col-md-8 d-flex ps-1">
+                                    <div class="mt-5 row col-md-12">
+                                        <div class="col-md-8 d-flex">
                                             <input type="checkbox" required name="card_number"
                                                 class='card-number mb-4 mx-2'>
                                             <label class="text-secondary">I can confirm legellay authorised to use this
@@ -657,73 +670,64 @@
                                     </div>
 
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-12 p-3 h-25 mt-4 mt-md-0 me-5">
+                                <div class="col-lg-4 col-md-4 col-12 p-1 h-25 mt-4 mt-md-0 ">
 
-                                    <div class="bg-primary p-2 mb-2 rounded-3">
-                                        <h5 class="m-0 ps-3 ">Check your email for coupon</h5>
-                                        <div class="px-3 summary gap-1 mt-3 d-flex justify-content-between">
-                                            <input type="hidden" required name="amount" id="amount"
-                                                value="{{ $tutor->fee }}">
-                                            <input type="text" class="w-100 p-1 mb-1" name="Coupon" id="coupon"
-                                                placeholder="Enter Coupon Code"
-                                                style="border:1px solid #0D6EFD;border-radius: 5px;" value="">
-                                            <input type="button" class="w-95 p-1 mb-1" value="Confirm" id="confirm"
-                                                style="border:1px solid #0D6EFD;border-radius: 5px;">
-
-                                        </div>
-                                        <div class="summary px-3 d-flex justify-content-between">
-                                            <p id="errormsg" style="color: red"></p>
-                                        </div>
-                                    </div>
                                     <div class="form-1  shadow p-2" style=" background: #ABFF00; border-radius: 12px;">
 
                                         <div class="d-flex">
                                             @if (!empty($tutor->image) && file_exists(public_path(!empty($tutor->image) ? $tutor->image : '')))
-                                                <!-- <img src="{{ $tutor->image }}" alt="" width="70"
-                                                        height="70"> -->
                                                 <img src="{{ asset($tutor->image ?? 'assets\images\default.png') }}"
-                                                    alt="" style="height:50px;width:50px;border-radius:50%;">
+                                                    alt="" style="height:70px;width:70px;border-radius:50%;">
                                             @else
                                                 @if ($tutor->gender == 'Male')
                                                     <img src="{{ asset('assets/images/male.jpg') }}"
-                                                        height="70"style="height:50px;width:50px;border-radius:50%;">
+                                                        height="70"style="height:70px;width:70px;border-radius:50%;">
                                                 @elseif($tutor->gender == 'Female')
                                                     <img src="{{ asset('assets/images/female.jpg') }}"
-                                                        style="height:50px;width:50px;border-radius:50%;">
+                                                        style="height:70px;width:70px;border-radius:50%;">
                                                 @else
                                                     <img src="{{ asset('assets/images/default.png') }}"
-                                                        style="height:50px;width:50px;border-radius:50%;">
+                                                        style="height:70px;width:70px;border-radius:50%;">
                                                 @endif
                                             @endif
                                             <div class="text p-3 d-flex flex-column">
-                                                <span class="fw-bold">{{ $tutor->username }}</span>
-                                                 <span >{{ $tutor->facebook_link }}</span>
+                                                <h5>{{ $tutor->username }}</h5>
+                                                <span>{{ $tutor->facebook_link }}</span>
                                             </div>
                                         </div>
-                                        <div class="summary-item mt-2" style="line-height: 0.7;">
+                                        <div class="bg-primary p-2 my-3 rounded-3">
 
-                                            <!-- <div class="summary px-3 d-flex justify-content-between">
-                                                    <p>Saturdays at 13:30-14:25</p>
-                                                    <p id="feeId">£{{ $tutor->fee }}</p>
-                                                </div> -->
-                                            <div class=" fw-bold summary px-3 d-flex justify-content-between">
+                                            <input class=" w-100 p-2" size='4' type='hidden' readonly
+                                                name="amount" id="amount">
+
+
+
+                                            <h5 class="text-white fs-6">Check your email for coupon</h5>
+                                            <div class="summary gap-1 mt-3 d-flex justify-content-between">
+                                                <input type="text" class="w-100 p-1 mb-1" name="Coupon"
+                                                    id="coupon" placeholder="Enter Coupon Code"
+                                                    style="border:1px solid #ABFF00;border-radius: 5px;" value="">
+
+                                            </div>
+                                            <div class="summary px-3 d-flex justify-content-between">
+                                                <p id="errormsg" style="color: red"></p>
+                                            </div>
+                                        </div>
+                                        <div class="summary-item mt-4" style="line-height: 0.7;">
+                                            <div class="fw-bold summary px-3 d-flex justify-content-between">
                                                 <p>Discount</p>
-                                                <p id="dicountId">0.00</p>
+                                                <p id="dicountId">0%</p>
                                             </div>
                                             <div class="fw-bold summary px-3 d-flex justify-content-between">
                                                 <p>Total Payment</p>
                                                 <p class="total">£{{ $tutor->fee }}</p>
                                             </div>
-                                            <!-- <div class="summary px-3 d-flex justify-content-between">
-                                                    <p>Next lesson: Saturday 28 Aug</p>
-                                                    <p class="total">£{{ $tutor->fee }}</p>
-                                                </div> -->
                                         </div>
                                         <div class="summary-text mt-3">
                                             <p class="text-center">
                                                 We'll take payment 24hrs before each lesson
                                                 Make changes before then free of charge.
-                                                See terms and conditions lahore
+                                                See terms and conditions
                                             </p>
                                         </div>
                                     </div>
@@ -733,7 +737,7 @@
                         <input type="hidden" class="w-100 p-3" required name="copounid" id="copounid" value="">
 
                         <div class="d-flex  col-12 justify-content-center m-auto my-5 gap-2"
-                            style="margin-top: 80px !important;">
+                            style="margin-top: 30px !important;">
                             <a href="#" class="link-dark previous btn " id="previous4"><i
                                     class="fa fa-light fa-arrow-left"></i>
                                 Back</a>
@@ -818,13 +822,13 @@
                             if (data.disabled_slots.length === 5) {
 
                                 timeInput.removeAttribute("readonly");
-                            }else{
-                            var timeInput = document.getElementById("time-1");
-                            var time1122 = document.getElementById("time-1122");
-                            time1122.innerText = '';
+                            } else {
+                                var timeInput = document.getElementById("time-1");
+                                var time1122 = document.getElementById("time-1122");
+                                time1122.innerText = '';
                             }
 
-                        }else{
+                        } else {
                             var timeInput = document.getElementById("time-1");
                             var time1122 = document.getElementById("time-1122");
                             time1122.innerText = 'At This Day This Tutor Not available';
@@ -938,7 +942,7 @@
 
                     }
                 } else if (step === 2) {
-                    if ($('#country').val() === '' || $('#address1').val() === '' || $('#address2').val() === '' ||
+                    if ($('#country').val() === '' || $('#address1').val() === '' ||
                         $('#city').val() === '' || $('#postcode').val() === '') {
                         isValid = false;
                     }
@@ -961,7 +965,23 @@
 
             // Handle the "Next" button click
             $(".next").click(function() {
-                showNextStep();
+                var Student = $('#Student').val();
+                if (Student === '') {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Add Your Student.',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        showCloseButton: true
+                    });
+                } else {
+                    showNextStep();
+                }
+
+
+
+
             });
 
             // Handle the "Previous" button click
@@ -1160,7 +1180,7 @@
                 // alert(selectedOption.data('fee'));
             });
             // get coupon
-            $('#confirm').on('click', function() {
+            $('#coupon').on('keyup', function() {
                 var coupon = $('#coupon').val();
                 var fee = $('#amount').val();
                 var fetchfee = 0;
@@ -1188,35 +1208,34 @@
                         $('#copounid').val(id);
 
 
-                        if(data.discount_type === 'percentage')
-                        {
+                        if (data.discount_type === 'percentage') {
                             $('#dicountId').text('£' + fetchfee + '%');
                             calculate = (fee / 100) * fetchfee;
                             discount = Math.max(calculate, 0);
-                        }else{
+                        } else {
                             $('#dicountId').text('£' + fetchfee + '');
                             discount = Math.max(fetchfee, 0);
                         }
 
 
-                        var walletCheck=$('#wallet').val();
-                        if(walletCheck > 0){
-                         var TotalWallet = discount + parseFloat(walletCheck);
-                        $('.total').text('$' + Math.max((fee - TotalWallet), 0));
-                        $('#amount').hide();
-                        $('#amount2').val(Math.max((fee  - fetchfee), 0));
-                        $('#amount').val(Math.max((fee  - fetchfee), 0));
-                        $('#wallet').val(TotalWallet);
-                        $('#walletText').text('Wallet Have Amount :' + TotalWallet);
-                        $('#feeId').text('£' + fee);
-                        $('.total').text('£' + (selectedOption.data('fee') - fetchfee));
+                        var walletCheck = $('#wallet').val();
+                        if (walletCheck > 0) {
+                            var TotalWallet = discount + parseFloat(walletCheck);
+                            $('.total').text('$' + Math.max((fee - TotalWallet), 0));
+                            $('#amount').hide();
+                            $('#amount2').val(Math.max((fee - fetchfee), 0));
+                            $('#amount').val(Math.max((fee - fetchfee), 0));
+                            $('#wallet').val(TotalWallet);
+                            $('#walletText').text('Wallet Have Amount :' + TotalWallet);
+                            $('#feeId').text('£' + fee);
+                            $('.total').text('£' + (selectedOption.data('fee') - fetchfee));
 
 
-                        }else{
-                        $('.total').text('£' + Math.max((fee - discount), 0));
-                        $('#amount').hide();
-                        $('#amount').val(Math.max((fee  - fetchfee), 0));
-                        $('#amount2').val(Math.max((fee - discount), 0));
+                        } else {
+                            $('.total').text('£' + Math.max((fee - discount), 0));
+                            $('#amount').hide();
+                            $('#amount').val(Math.max((fee - fetchfee), 0));
+                            $('#amount2').val(Math.max((fee - discount), 0));
                         }
                         $('#coupon').val('');
                         // $('#discountId').text('$' + fetchfee);
@@ -1225,6 +1244,7 @@
                         if (xhr.status === 422) {
                             var errors = xhr.responseJSON.errors;
                             for (var key in errors) {
+                                $('#errormsg').text('');
                                 $('#errormsg').append('<p>' + errors[key][0] + '</p>');
                             }
                         }

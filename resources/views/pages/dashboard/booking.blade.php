@@ -194,7 +194,7 @@
                 {{-- @if (Auth::user()->role_id == '4') --}}
                 <form role="form" action="{{ route('stripe.post') }}" method="post" class="require-validation"
                     data-cc-on-file="false"
-                    data-stripe-publishable-key="pk_test_51O4cl2Iml1HP3wz7XFNa5N0OGpZyMTKiCgTyM1yO6ZZRL36cI9faSLn7Ahee5BAMbX2G5yEBnAIWoPbwRQTngD3D00zEJ71Ubv"
+                    data-stripe-publishable-key="pk_test_51OoMKfD5moABe8DOgNtS4Il2hO6AQTjGzqfMSxGdPqSUSeNcOor8fdGTwcZCnaoA2NqEnOG8Gs9nNjPJn0t5FWMV009iDZrpLp"
                     id="payment-form">
                     @csrf
                     <input type="hidden" required name="tutor_id" value="{{ $tutor->id }}">

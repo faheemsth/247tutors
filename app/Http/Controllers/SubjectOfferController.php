@@ -14,6 +14,11 @@ class SubjectOfferController extends Controller
 {
     public function store(Request $request)
     {
+        
+       $user = Auth::user();
+       $user->subjects =$user->subjects.','.$request->subject_id;
+       $user->save();
+        
        $subject= new TutorSubjectOffer();
        $subject->tutor_id=Auth::id();
        $subject->level_id= 1;
@@ -49,6 +54,9 @@ class SubjectOfferController extends Controller
     }
     public function update(Request $request,$id)
     {
+       $user = Auth::user();
+       $user->subjects =$user->subjects.','.$request->subject_id;
+       $user->save();
        $subject=TutorSubjectOffer::find($id);
        $subject->tutor_id=Auth::id();
        $subject->level_id= 1;

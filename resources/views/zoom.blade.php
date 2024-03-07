@@ -3,15 +3,34 @@
 
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('videosdk-ui-toolkit-web-main/dist/videosdk-ui-toolkit.css') }}">
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
+    <style>
+    .btnpay:hover{
+    color:white !important;
+    }
+        .btnpay{
+           background: linear-gradient(93.86deg, #87c607 9.41%, #0096ff 98.3%);
+    font-size: 18px;
+    color: white;
+    border: none;
+        }
+        .labpay{
+            font-size:20px;
+            font-weight:600;
 
+        }
+    </style>
 <body id="app">
     <style>
         /* Globally set text font to a sans-serif font */
@@ -369,7 +388,9 @@
 <canvas id="participant-videos-canvas" width="1920" height="1080"></canvas> -->
     <!-- <div id='previewContainer'></div> -->
     <div id='sessionContainer'></div>
-    <input type="hidden" id="recording-uuid" value="">
+    <input type="hidden" id="recording-uuid" value="{{ $booking->uuid }}">
+    <input type="hidden" id="role_id" value="{{ \Auth::user()->role_id }}">
+    <input type="hidden" id="stop_meeting" value="0">
     {{-- <div class="container app-root" id="container">
   <!-- Preview view -->
   <div id="js-preview-view" class="container preview__root">
@@ -529,6 +550,8 @@
         let booking_id = {!! json_encode(!empty($booking->uuid) ? $booking->uuid : request()->segment(2)) !!};
         let user = {!! json_encode(Auth::user()) !!};
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/filereader-stream@0.3.5/dist/filereader-stream.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <script src="https://source.zoom.us/videosdk/zoom-video-1.9.8.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/8.0.20/jsrsasign-all-min.js"></script>
     <script src="{{ asset('videosdk-ui-toolkit-web-main/index.js') }}" type="module"></script>
@@ -749,7 +772,64 @@
             })
         }
     </script>
+    @if(!empty($booking))
+        @if($booking->lessons_schedule == 'Demo Lesson' && Auth::user()->role_id != 3)
+            <script>
+                $(document).ready(function() {
+                    setTimeout(function() {
+                        $('#BooTypemodal').modal('show');
+                    }, 600000); // 10 minutes in milliseconds
+                });
+            </script>
+        @endif
+    @endif
+    
+            <div class="modal fade zoomIn" id="BooTypemodal" tabindex="-1" aria-labelledby="update_doc_modal"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0">
+                <div class="modal-header p-3 bg-info-subtle"  id="text-color">
+                    <h4 class="modal-title fw-bold" id="update_doc_modal_title">Choose Your Payment Gateway</h4>
+                    <a href="{{ url('tutor/profile').'/'.$booking->tutor_id }}" class="btn-close" aria-label="Close" ></a>
+                </div>
+                <div class="tablelist-form">
+                    <div class="modal-body">
+                        <div class="row justify-content-center">
+                            <div class="col-10">
+                                <img src="{{asset('assets/images/payment-methods-illustration-set-characters-260nw-2112350300.jpg')}}" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="row mt-4  justify-content-around">
+                            <div class="col-auto">
+                                <label class="text-secondary d-flex gap-1 align-items-center labpay">
+                                Credit  Card :
+                                    <div class="d-flex ms-1 gap-2 align-items-center">
+                                      <i class="fa-brands fa-cc-visa" style="color:navy;"></i>
+                                      <i class="fa-brands fa-cc-amex" style="color:blue;"></i>
+                                      <i class="fa-brands  fa-cc-mastercard" style="color:red;"></i>
+                                      <i class="fa-brands fa-cc-discover" style="color:orange;"></i>
+                                    </div>
+                                </label>
+                                <div id="stripe" class="mt-1">
+                                    <a  class=" btn px-5 py-2 text-decoration-none btnpay"  href="{{ url('tutor/book').'/'.$booking->tutor_id }}" >Stripe<i class="ms-3 fa-solid fa-chevron-right"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <label class="text-secondary labpay">Our Wallet :</label>
+                                <div id="wallet" class="mt-1">
+                                    <a  class="btn px-5 py-2 text-decoration-none btnpay"  href="{{ url('tutor/wallet/book').'/'.$booking->tutor_id }}">Wallet<i class="ms-3 fa-solid fa-chevron-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
 </body>
 
 </html>

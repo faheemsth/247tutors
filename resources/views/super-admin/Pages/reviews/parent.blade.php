@@ -7,6 +7,11 @@
         <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/webicons/css/all.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+        <style>
+            table tr th{
+                min-width:90px;
+            }
+        </style>
     @endpush
 
 
@@ -15,7 +20,7 @@
             <div class="row align-items-end">
                 <div class="col-lg-8 col-md-6 col-12">
                     <div class="page-header-title">
-                        <i class="ik ik-users bg-blue"></i>
+                        <i class="fa-solid fa-ranking-star bg-blue"></i>
                         <div class="d-inline">
                             <h5>{{ __('Reviews') }}</h5>
                             <span>{{ __('List of Reviews') }}</span>
@@ -82,7 +87,7 @@
                                  @endif
                                 @empty
                                     <tr>
-                                        <td>Record not found</td>
+                                        <td colspan="4" class="text-center">Record not found</td>
                                     </tr>
                                 @endforelse
                             </tbody>

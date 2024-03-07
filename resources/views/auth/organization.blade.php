@@ -601,6 +601,18 @@
     $(document).ready(function() {
         $('#register').click(function() {
             var formData = $('#registration-form').serialize();
+            if ($('#cpfname').val() === '' || $('#cplname').val() === '' || $('#cpemail').val() === '') {
+                    Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Please fill in all the required fields.',
+                    showConfirmButton: false,
+                    timer: 5000,
+                    showCloseButton: true
+                });
+            }else{
+            
+            
             $.ajax({
                 url: '/register',
                 method: 'POST',
@@ -638,6 +650,8 @@
                     }
                 },
             });
+            
+        }
         });
     });
 </script>

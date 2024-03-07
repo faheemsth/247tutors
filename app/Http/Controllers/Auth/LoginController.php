@@ -59,6 +59,10 @@ class LoginController extends Controller
     public function showLoginForm(){
         return view('auth/login');
     }
+    
+    public function adminshowLoginForm(){
+        return view('auth/adminlogin');
+    }
 
     // custom logout function
     // redirect to login page

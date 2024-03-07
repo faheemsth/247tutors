@@ -359,7 +359,7 @@
                                         <div class="row mt-4 justify-content-center">
                                             <div class="col-md-5">
                                                 <label class="text-secondary">Date Of Birth<span  style="color: red;">*</span></label><br>
-                                                <input type="date" id="dob" name="studob" class="w-100 p-2" max="9999-12-31">
+                                                <input type="date" id="dob" name="dob" class="w-100 p-2" max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                                             </div>
                                         </div>
 
@@ -771,6 +771,17 @@
         $(document).ready(function() {
             $('#register').click(function() {
                 var formData = $('#registration-form').serialize();
+                if ($('#confirm-password').val() === '' || $('#parentpassword').val() === '' || $('#parentusername').val() === '') {
+                        Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Please fill in all the required fields.',
+                        showConfirmButton: false,
+                        timer: 5000,
+                        showCloseButton: true
+                    });
+                }else{
+                
                 $.ajax({
                     url: '/register',
                     method: 'POST',
@@ -808,7 +819,22 @@
                         }
                     },
                 });
+                
+            }
             });
         });
     </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script>
+    // Get the message from the URL query parameter
+    var urlParams = new URLSearchParams(window.location.search);
+    var message = urlParams.get('message');
+    if (message) {
+        // Display the message to the user
+        toastr.error('You must be at least 16 years old to continue.');
+    }
+</script>
+
 @endsection

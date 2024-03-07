@@ -77,13 +77,13 @@
 .desktop-closed-message-avatar{
     top: 18px !important;
 }
-<span id="cookieBanner">
-@if(request()->segment(1) == '' || request()->segment(1) == 'faq' || request()->segment(1) == 'find-tutor' || request()->segment(1) == 'blogs' || request()->segment(1) == 'prices'|| request()->segment(1) == 'student-apply-steps'|| request()->segment(1) == 'tutor-apply-steps' || request()->segment(1) == 'organization-apply-steps' || request()->segment(1) == 'login-roles' || request()->segment(1) == 'login' || request()->segment(1) == 'sitemap' || request()->segment(1) == 'privacypolicy' )
-.footer-wrapper{
-    padding-bottom:70px !important;
-}
-@endif
-</span>
+/*<span id="cookieBanner">*/
+/*@if(request()->segment(1) == '' || request()->segment(1) == 'faq' || request()->segment(1) == 'find-tutor' || request()->segment(1) == 'blogs' || request()->segment(1) == 'prices'|| request()->segment(1) == 'student-apply-steps'|| request()->segment(1) == 'tutor-apply-steps' || request()->segment(1) == 'organization-apply-steps' || request()->segment(1) == 'login-roles' || request()->segment(1) == 'login' || request()->segment(1) == 'sitemap' || request()->segment(1) == 'privacypolicy' )*/
+/*.footer-wrapper{*/
+/*    padding-bottom:70px !important;*/
+/*}*/
+/*@endif*/
+/*</span>*/
 
 @keyframes skew-y-shake {
     0% { transform: skewY(-15deg); }
@@ -333,7 +333,29 @@ body { top: 0px !important; }
         $('#cookieNotification').fadeOut();
     }
 </script>
+            
+        <script>
+            $(document).ready(function() {
+                var popupShown = localStorage.getItem('popupShown');
 
+                // Check if the popup has been shown before
+                if (!popupShown) {
+                    setTimeout(function() {
+                        $("#overlaytens").fadeIn(300);
+                        $("#popuptens").fadeIn(300);
+                    }, 100);
+                }
+
+                // Close Popup
+                $("#closetens, #overlaytens").click(function() {
+                    $("#overlaytens").fadeOut(300);
+                    $("#popuptens").fadeOut(300);
+
+                    // Set flag in localStorage indicating the popup has been shown
+                    localStorage.setItem('popupShown', true);
+                });
+            });
+        </script>
 
 
 </body>

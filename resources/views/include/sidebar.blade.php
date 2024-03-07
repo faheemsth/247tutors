@@ -21,72 +21,359 @@
         $segment2 = request()->segment(2);
     @endphp
 
-    <div class="sidebar-content">
-        <div class="nav-container">
-            <nav id="main-menu-navigation" class="navigation-main">
-                <div class="nav-item {{ $segment1 == 'dashboard' ? 'active' : '' }}">
-                    <a href="{{ route('dashboard') }}"><img src="{{ asset('img/sidebar_icons/dashboard.png') }}"
-                            alt="" width="15px" height="15px" style="padding-right: 3px">
-                        <span>{{ __('Dashboard') }}</span></a>
-                </div>
+{{-- <div class="nav-left-sidebar sidebar-dark">
+    <div class="menu-list">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav flex-column">
 
-
-                {{-- <div class="nav-item {{ $segment1 == 'users' ? 'active' : '' }}">
-                    <a href="{{ url('users') }}"><img src="{{ asset('img/sidebar_icons/dashboard.png') }}"
-                            alt="" width="15px" height="15px" style="padding-right: 3px">
-                        <span>{{ __('Users') }}</span></a>
-                </div> --}}
-
-                 <div
-                    class="nav-item {{ $segment1 == 'tutors' || $segment1 == 'organizations' || $segment1 == 'users' || $segment1 == 'parents' || $segment1 == 'students' || $segment1 == 'user' || $segment1 == 'interview' ? 'active open' : '' }} has-sub">
-                    <a href="#" id="user-dropdown-toggle">
-                        <img src="{{ asset('img/sidebar_icons/pngwing_users.png') }}" alt=""
-                            width="15px" height="15px" style="padding-right: 3px">
-                        <span>{{ ('Users') }}</span></a>
-                    <div class="submenu-content">
-                        <!-- only those have manage_user permission will get access -->
-                        @can('manage_user')
-                            <a href="{{ url('students') }}"
-                                class="menu-item {{ $segment1 == 'students' ? 'active' : '' }} d-flex align-items-center">
-                                <i class="fa-solid fa-user-tie ps-1"  style="color: rgba(80, 80, 80, 0.87);font-size: 15px;"></i>
-                                {{('Students') }}</a>
-
-                            <a href="{{ url('tutors') }}"
-                                class="menu-item {{ $segment1 == 'tutors' ? 'active' : '' }} d-flex align-items-center">
-                               <i class="fa-solid fa-user-group" style="color: rgba(80, 80, 80, 0.87);font-size: 15px;"></i>
-                                {{('Tutors') }}</a>
-
-                            <a href="{{ url('interview') }}"
-                                class="menu-item {{ $segment1 == 'interview' ? 'active' : '' }} d-flex align-items-center">
-                               <i class="fa-solid fa-people-arrows" style="color: rgba(80, 80, 80, 0.87);font-size: 15px;"></i>
-                                {{('Interviews') }}</a>
-                        @endcan
-                        <!-- only those have manage_role permission will get access -->
-                        @can('manage_roles')
-                            <a href="{{ url('organizations') }}"
-                                class="menu-item {{ $segment1 == 'organizations' ? 'active' : '' }} d-flex align-items-center">
-                                <i class="fa-solid fa-users-line" style="color: rgba(80, 80, 80, 0.87);font-size: 15px;"></i>
-                                {{('Organizations') }}</a>
-                        @endcan
-                        <!-- only those have manage_permission permission will get access -->
-                        @can('manage_permission')
-                            <a href="{{ url('parents') }}"
-                                class="menu-item {{ $segment1 == 'parents' ? 'active' : '' }} d-flex align-items-center">
-                                <i class="fa-solid fa-users" style="color: rgba(80, 80, 80, 0.87);font-size: 15px;"></i>
-                                {{('Parents') }}</a>
-                        @endcan
-                    </div>
-                </div>
-
-
-                <!-- Include demo pages inside sidebar start-->
-                @include('pages.sidebar-menu')
-                <!-- Include demo pages inside sidebar end-->
-
-            </nav>
-
-        </div>
+                    <li class="nav-item nav-item dropdown">
+                        <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard</a>
+                        <div id="submenu-1" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-2" aria-controls="submenu-1-2">E-Commerce</a>
+                                    <div id="submenu-1-2" class="collapse submenu" style="">
+                                        <ul class="nav flex-column">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="index.html">E Commerce Dashboard</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="ecommerce-product.html">Product List</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="ecommerce-product-single.html">Product Single</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="ecommerce-product-checkout.html">Product Checkout</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="dashboard-finance.html">Finance</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="dashboard-sales.html">Sales</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-1" aria-controls="submenu-1-1">Infulencer</a>
+                                    <div id="submenu-1-1" class="collapse submenu" style="">
+                                        <ul class="nav flex-column">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="dashboard-influencer.html">Influencer</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="influencer-finder.html">Influencer Finder</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="influencer-profile.html">Influencer Profile</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>UI Elements</a>
+                        <div id="submenu-2" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/cards.html">Cards <span class="badge badge-secondary">New</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/general.html">General</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/carousel.html">Carousel</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/listgroup.html">List Group</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/typography.html">Typography</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/accordions.html">Accordions</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/tabs.html">Tabs</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fas fa-fw fa-chart-pie"></i>Chart</a>
+                        <div id="submenu-3" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/chart-c3.html">C3 Charts</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/chart-chartist.html">Chartist Charts</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/chart-charts.html">Chart</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/chart-morris.html">Morris</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/chart-sparkline.html">Sparkline</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/chart-gauge.html">Guage</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Forms</a>
+                        <div id="submenu-4" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/form-elements.html">Form Elements</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/form-validation.html">Parsely Validations</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/multiselect.html">Multiselect</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/datepicker.html">Date Picker</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/bootstrap-select.html">Bootstrap Select</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-fw fa-table"></i>Tables</a>
+                        <div id="submenu-5" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/general-table.html">General Tables</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/data-tables.html">Data Tables</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-divider">
+                        Features
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fas fa-fw fa-file"></i> Pages </a>
+                        <div id="submenu-6" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/blank-page.html">Blank Page</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/blank-page-header.html">Blank Page Header</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/login.html">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/404-page.html">404 page</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/sign-up.html">Sign up Page</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/forgot-password.html">Forgot Password</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/pricing.html">Pricing Tables</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/timeline.html">Timeline</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/calendar.html">Calendar</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/sortable-nestable-lists.html">Sortable/Nestable List</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/widgets.html">Widgets</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/media-object.html">Media Objects</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/cropper-image.html">Cropper</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/color-picker.html">Color Picker</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-7" aria-controls="submenu-7"><i class="fas fa-fw fa-inbox"></i>Apps <span class="badge badge-secondary">New</span></a>
+                        <div id="submenu-7" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/inbox.html">Inbox</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/email-details.html">Email Detail</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/email-compose.html">Email Compose</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/message-chat.html">Message Chat</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-8" aria-controls="submenu-8"><i class="fas fa-fw fa-columns"></i>Icons</a>
+                        <div id="submenu-8" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/icon-fontawesome.html">FontAwesome Icons</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/icon-material.html">Material Icons</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/icon-simple-lineicon.html">Simpleline Icon</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/icon-themify.html">Themify Icon</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/icon-flag.html">Flag Icons</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/icon-weather.html">Weather Icon</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-9" aria-controls="submenu-9"><i class="fas fa-fw fa-map-marker-alt"></i>Maps</a>
+                        <div id="submenu-9" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/map-google.html">Google Maps</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/map-vector.html">Vector Maps</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-10" aria-controls="submenu-10"><i class="fas fa-f fa-folder"></i>Menu Level</a>
+                        <div id="submenu-10" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Level 1</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-11" aria-controls="submenu-11">Level 2</a>
+                                    <div id="submenu-11" class="collapse submenu" style="">
+                                        <ul class="nav flex-column">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#">Level 1</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#">Level 2</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Level 3</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </div>
+</div> --}}
+<div class="sidebar-content">
+    <div class="nav-container">
+        <nav id="main-menu-navigation" class="navigation-main">
+            <div class="nav-item {{ $segment1 == 'dashboard' ? 'active' : '' }}">
+                <a href="{{ route('dashboard') }}" class="d-flex align-items-center"><span class="fa-solid fa-bars-staggered" style="font-size:15px; padding-right:10px;"></span>{{ __('Dashboard') }}</a>
+            </div>
+            {{-- <div class="nav-item {{ $segment1 == 'dashboard' ? 'active' : '' }}">
+                <a href="{{ route('dashboard') }}" ><img src="{{ asset('img/sidebar_icons/dashboard.png') }}"
+                        alt="" width="15px" height="15px" style="padding-right: 3px">
+                    <span>{{ __('Dashboard') }}</span></a>
+            </div> --}}
+
+
+            {{-- <div class="nav-item {{ $segment1 == 'users' ? 'active' : '' }}">
+                <a href="{{ url('users') }}"><img src="{{ asset('img/sidebar_icons/dashboard.png') }}"
+                        alt="" width="15px" height="15px" style="padding-right: 3px">
+                    <span>{{ __('Users') }}</span></a>
+            </div> --}}
+
+             <div
+                class="nav-item {{ $segment1 == 'tutors' || $segment1 == 'organizations' || $segment1 == 'users' || $segment1 == 'parents' || $segment1 == 'students' || $segment1 == 'user' || $segment1 == 'interview' ? 'active open' : '' }} has-sub">
+                <a href="#" id="user-dropdown-toggle">
+                    <span class="fa-solid fa-users" style="font-size: 14px; padding-right:5px;"></span> {{ ('Users') }}</a>
+                <div class="submenu-content">
+                    <!-- only those have manage_user permission will get access -->
+                    @can('manage_user')
+                        <a href="{{ url('students') }}"
+                            class="menu-item {{ $segment1 == 'students' ? 'active' : '' }} d-flex align-items-center">
+                            <span class="fa-solid fa-user-tie "  style="color: rgba(80, 80, 80, 0.87);font-size: 15px;padding-left:2px;padding-right:7px;"></span>
+                            {{('Students') }}</a>
+
+                        <a href="{{ url('tutors') }}"
+                            class="menu-item {{ $segment1 == 'tutors' ? 'active' : '' }} d-flex align-items-center">
+                           <span class="fa-solid fa-user-group " style="color: rgba(80, 80, 80, 0.87);font-size: 13px;padding-right:6px;"></span>
+                            {{('Tutors') }}</a>
+
+                        <a href="{{ url('interview') }}"
+                            class="menu-item {{ $segment1 == 'interview' ? 'active' : '' }} d-flex align-items-center">
+                           <span class="fa-solid fa-people-arrows" style="color: rgba(80, 80, 80, 0.87);font-size: 13px; padding-right:7px;"></span>
+                            {{('Interviews') }}</a>
+                    @endcan
+                    <!-- only those have manage_role permission will get access -->
+                    @can('manage_roles')
+                        <a href="{{ url('organizations') }}"
+                            class="menu-item {{ $segment1 == 'organizations' ? 'active' : '' }} d-flex align-items-center">
+                            <span class="fa-solid fa-users-line" style="color: rgba(80, 80, 80, 0.87);font-size: 13px; padding-right:6px;"></span>
+                            {{('Organizations') }}</a>
+                    @endcan
+                    <!-- only those have manage_permission permission will get access -->
+                    @can('manage_permission')
+                        <a href="{{ url('parents') }}"
+                            class="menu-item {{ $segment1 == 'parents' ? 'active' : '' }} d-flex align-items-center">
+                            <span class="fa-solid fa-users" style="color: rgba(80, 80, 80, 0.87);font-size: 13px;padding-right:6px;"></span>
+                            {{('Parents') }}</a>
+                    @endcan
+                </div>
+            </div>
+
+
+            <!-- Include demo pages inside sidebar start-->
+            @include('pages.sidebar-menu')
+            <!-- Include demo pages inside sidebar end-->
+
+        </nav>
+
+    </div>
+</div>
 </div>
 <script>
 $(document).ready(function() {

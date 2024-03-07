@@ -101,8 +101,8 @@
 
                                     </tr>
                                 @empty
-                                    <tr>
-                                        <td>Record not found</td>
+                                    <tr >
+                                        <td colspan="5" class="text-center">Record not found</td>
                                     </tr>
                                 @endforelse
                             </tbody>

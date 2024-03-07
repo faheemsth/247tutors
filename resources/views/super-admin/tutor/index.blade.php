@@ -81,13 +81,13 @@
                                          @if(empty($tutor->email_verified_at))
                                             <a href="{{url('userVerify').'/'.$tutor->id}}" class="btn btn-primary">Click to Verify</a>
                                          @else
-                                         <button class="btn btn-success px-2 py-1">verified</button>
+                                         <button class="btn btn-success px-2 py-1">Verified</button>
                                          @endif
                                         </td>
                                         <td style="border-bottom: .5px solid black;">
                                             @if ($tutor->request_refound != 1)
                                             <span
-                                                class="badge
+                                                class="py-2 badge
                                         @if ($tutor->status == 'Completed') bg-success
                                         @elseif($tutor->status == 'Scheduled')
                                         bg-info
@@ -114,7 +114,7 @@
 
                                     </tr>
                                 @empty
-                                    <tr>
+                                    <tr colspan="5" class="text-center">
                                         <td>Record not found</td>
                                     </tr>
                                 @endforelse

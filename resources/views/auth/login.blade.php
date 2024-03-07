@@ -19,8 +19,8 @@
     <div class="container-fluid student-login-title text-center  mt-5">
         <div class="row align-items-center">
             <div class="col">
-                <a href="{{ url('/') }}" style="text-decoration: none;"><i class="fa-solid fa-arrow-left "
-                        style="font-size: 23px;"></i> </a>
+                <!--<a href="{{ url('/') }}" style="text-decoration: none;"><i class="fa-solid fa-arrow-left "-->
+                <!--        style="font-size: 23px;"></i> </a>-->
             </div>
             <div class="col-5">
                 <h1 class="student-login-title" style="color: rgba(0, 150, 255, 1); font-weight:bold">
@@ -32,7 +32,7 @@
                 </h1>
             </div>
             <div class="col">
-                <a href="{{ url('/') }}"><i class="fa-solid fa-xmark" style="font-size: 23px;"></i></a>
+                <!--<a href="{{ url('/') }}"><i class="fa-solid fa-xmark" style="font-size: 23px;"></i></a>-->
 
             </div>
 
@@ -107,20 +107,20 @@
         <!-- footer tags -->
 
         <div class="container-fluid" id="col-text">
-            <div class="row justify-content-xl-center align-items-center mt-5 pt-5 mb-5">
+            <div class="row justify-content-md-center align-items-md-end align-items-lg-center mt-5 pt-5 mb-5">
                 <div class="col-md-4 col-lg-3">
                     <a href="tel:+447851012039> Need help call us on <strong>+447851012039</strong> or <strong>Email us</strong></a>
                 </div>
                 <div class="col-md-4 col-lg-2 ">
                     <a href="{{url('/student-apply-steps')}}">Help! I'm an <strong>Adult Learn</strong></a>
                 </div>
-                <div class="col-md-4 col-lg-2">
+                <div class="col-md-4 col-lg-3 col-xl-2">
                     <a href="{{url('/tutor-signup')}}">Log in as <strong>Register as Tutor</strong></a>
                 </div>
-                <div class="col-12 col-lg-5 col-xl-3 mt-4 mt-lg-0">
+                <div class="col-12 col-md-4 col-lg-5 col-xl-3 mt-4 mt-lg-0">
                     <div class="row">
                         <div class="">
-                            <a href="{{ url('login') }}" type="button" class="btn btn-success "
+                            <a href="{{ url('admin/login') }}" type="button" class="btn btn-success "
                                 style="background-color:  #063B00;color: white;">Log
                                 in as Super Admin</a>
                             <a href="{{ url('register') }}" type="button" class="btn btn-success col-sm d-none"

@@ -26,6 +26,7 @@ class BlogController extends Controller
         $blog->image = 'images/' . $imageName;
         $blog->author_id = Auth::id();
         $blog->title = $request->post('title');
+        $blog->status = 'Published';
         $blog->category_id = $request->post('category_id');
         $blog->content = $request->post('content');
         $blog->save();
@@ -57,6 +58,7 @@ class BlogController extends Controller
         $Blog->image = 'images/' . $imageName;
         $Blog->author_id = Auth::id();
         $Blog->title = $request->post('title');
+        $Blog->status = 'Published';
         $Blog->category_id = $request->post('category_id');
         $Blog->content = $request->post('content');
         $Blog->save();

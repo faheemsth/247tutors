@@ -57,80 +57,16 @@
             margin-bottom:4rem !important;
         }
     }
+   @media screen and (min-device-width: 425px) and (max-device-width: 768px){
+    .card-title{
+        font-size: 17px !important;
+    }
+    .card-text{
+         font-size: 15px !important;
+    }
+    }
     </style>
 
-    {{-- <div class="container step-card my-5">
-        <div id="bg-img-line">
-            <img src="./assets/images/Group 115.png" class="" alt="">
-        </div>
-        <div class="row py-5 text-center">
-            <div class="col">
-                <h1 class="fw-bolder simple-title" id="text-color">It is Simple</h1>
-            </div>
-        </div>
-        <!-- second row Student step cards -->
-        <div class="row">
-            <!-- card 1 -->
-            <div class="col-md-6 col-lg-3  bg-transparent my-2">
-
-                <div class="step-card text-center">
-
-                    <div class="step-card-header">
-                        <div class="step-card-header-icon">
-                            <img src="./assets/images/icons8-register-50 1.png" alt="" class="p-4">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title fw-bolder" id="text-color">Get Started</h5>
-                        <p class="card-text">@isset($web_settings['st_one']) {{$web_settings['st_one'] ?? '' }} @endisset
-                    </div>
-                </div>
-            </div>
-            <!-- card 2 -->
-            <div class="col-md-6 col-lg-3 my-2">
-                <div class="car text-center">
-                    <div class="step-card-header">
-                        <div class="step-card-header-icon">
-                            <img src="./assets/images/icons8-online-class-64 1.png" alt="" class="p-4">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-title fw-bold fs-5" id="text-color">Connect with a Tutor</h6>
-                        <p class="card-text">@isset($web_settings['st_two']) {{$web_settings['st_two'] ?? '' }} @endisset</p>
-                    </div>
-                </div>
-            </div>
-            <!-- card 3 -->
-            <div class="col-md-6 col-lg-3 my-2">
-                <div class="car text-center">
-                    <div class="step-card-header">
-                        <div class="step-card-header-icon">
-                            <img src="./assets/images/icons8-online-class-60 1.png" alt="" class="p-4">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title fw-bolder" id="text-color">Take Free Demo</h5>
-                        <p class="card-text">@isset($web_settings['st_three']) {{$web_settings['st_three'] ?? '' }} @endisset
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <!-- card 4 -->
-            <div class="col-md-6 col-lg-3 my-2">
-                <div class="car text-center">
-                    <div class="step-card-header">
-                        <div class="step-card-header-icon">
-                            <img src="./assets/images/icons8-tuition-30 1.png" alt="" class="p-3">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title fw-bolder" id="text-color">Start Tuition</h5>
-                        <p class="card-text">@isset($web_settings['st_four']) {{$web_settings['st_four'] ?? '' }} @endisset</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
     <div class="container">
         <div class="row pt-5 text-center">
             <div class="col">

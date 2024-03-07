@@ -158,13 +158,16 @@ class UserController extends Controller
                             ->join('complaints', 'bookings.uuid', '=', 'complaints.booking_id')
                             ->where('users.id',$id)
                             ->select('users.*')->get();
-        
-                        
+
+
         if(!empty($_GET['NoteId']))
         {
             Notification::find($_GET['NoteId'])->update(['is_read' => 1]);
         }
         $tutor = User::find($id);
+        if(empty($tutor)){
+            return back()->with('failed', 'Tutor Not Found');
+        }
         $Subjects = Subject::all();
         $tutor_qualifications = TutorQualification::where('tutor_id', $id)->get();
         $tutor_application = TutorApplication::where('tutor_id', $id)->first();
@@ -218,9 +221,9 @@ class UserController extends Controller
                 'tutor' => $tutor->first_name . ' ' . $tutor->last_name,
             ];
             $imagePath = public_path('assets/images/247 NEW Logo 1.png');
-            
+
             if($request->input('complaint_stage') == 'Personal inform'){
-                
+
                     $view = view('pages.mails.TutorComplaintActionInform', $data)->render();
                     $mail = new PHPMailer(true);
                     $mail->CharSet = 'UTF-8';
@@ -234,11 +237,11 @@ class UserController extends Controller
                     $mail->isHTML(true);
                     $mail->msgHTML($view);
                     $mail->send();
-                    
-                    
+
+
 
             }elseif($request->input('complaint_stage') == 'Disclaimer'){
-                
+
                     $view = view('pages.mails.TutorComplaintActionDisclaimer', $data)->render();
                     $mail = new PHPMailer(true);
                     $mail->CharSet = 'UTF-8';
@@ -252,9 +255,9 @@ class UserController extends Controller
                     $mail->isHTML(true);
                     $mail->msgHTML($view);
                     $mail->send();
-                
+
             }elseif($request->input('complaint_stage') == 'Blocked'){
-                
+                    $tutor->status = "Pending";
                     $view = view('pages.mails.TutorComplaintActionBlocked', $data)->render();
                     $mail = new PHPMailer(true);
                     $mail->CharSet = 'UTF-8';
@@ -269,13 +272,13 @@ class UserController extends Controller
                     $mail->msgHTML($view);
                     $mail->send();
             }
-                
+
                     $tutor->complaint_message = $request->input('complaint_message');
                     $tutor->complaint_stage = $request->input('complaint_stage');
                     $tutor->save();
-                    
+
             return back()->with('success', 'Tutor updated successfully');
-        
+
     }
 
 
@@ -323,18 +326,18 @@ class UserController extends Controller
         $imagePath = public_path('assets/images/247 NEW Logo 1.png');
         $edituser = User::where('id', $id)->first();
         $admin = User::where('role_id', 1)->first();
-        
+
         $findApplication = TutorApplication::where('tutor_id', $id)->first();
         if(!empty($findApplication)){
           if (($findApplication->user_id_status == 'pending' || $findApplication->user_id_status == 'rejected')
             || ($findApplication->address_proof_status == 'pending' || $findApplication->address_proof_status == 'rejected') || ($findApplication->selfie_status == 'pending' || $findApplication->selfie_status == 'rejected') || ($findApplication->enhaced_dbs_status == 'pending' || $findApplication->enhaced_dbs_status == 'rejected')
           ) {
             return back()->with('failed', 'Please first Approved Document !');
-          } 
+          }
         }else{
             return back()->with('failed', 'Tutor not have Any Document !');
         }
-        
+
 
         $edituser = User::where('id', $id)->first();
 
@@ -346,16 +349,16 @@ class UserController extends Controller
                 'tutor' => $edituser->first_name . ' ' . $edituser->last_name,
                 'id' => $edituser->id,
             ];
-            
+        if($edituser->complaint_stage != 'Blocked'){
             if($request->input('status') == 'Active'){
                 $view = \view('pages.mails.TutorActive', $data);
                 $view = $view->render();
-    
+
                 $mail = new PHPMailer();
                 $mail->CharSet = "UTF-8";
-    
+
                 $mail->setfrom('support@247tutors.com', '247 Tutors');
-    
+
                 $mail->isHTML(true);
                 $mail->Subject ='Verification Successful';
                 $mail->Body = $view;
@@ -364,19 +367,19 @@ class UserController extends Controller
                 $mail->addaddress($edituser->email, $edituser->first_name . ' ' . $edituser->last_name);
                 $mail->isHTML(true);
                 $mail->msgHTML($view);
-    
+
                 if (!$mail->send())
-                throw new \Exception('Failed to send mail');  
+                throw new \Exception('Failed to send mail');
             }else{
-                
+
                 $view = \view('pages.mails.TutorInactive', $data);
                 $view = $view->render();
-    
+
                 $mail = new PHPMailer();
                 $mail->CharSet = "UTF-8";
-    
+
                 $mail->setfrom('support@247tutors.com', '247 Tutors');
-    
+
                 $mail->isHTML(true);
                 $mail->Subject ='Rejection of Your Profile on 247Tutor';
                 $mail->Body = $view;
@@ -385,12 +388,13 @@ class UserController extends Controller
                 $mail->addaddress($edituser->email, $edituser->first_name . ' ' . $edituser->last_name);
                 $mail->isHTML(true);
                 $mail->msgHTML($view);
-    
+
                 if (!$mail->send())
                 throw new \Exception('Failed to send mail');
-                
+
             }
-            
+        }
+
 
         }
 

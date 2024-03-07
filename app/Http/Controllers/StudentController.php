@@ -84,6 +84,9 @@ class StudentController extends Controller
 
     public function student_payments()
     {
+        if(Auth::user()->role_id != 4){
+                return  redirect('/dashboard');
+        }
         $bookings = Booking::where('student_id','=', Auth::user()->id)
             ->with(['student', 'tutor', 'subjects'])
             ->get();
@@ -246,6 +249,7 @@ class StudentController extends Controller
         $user->facebook_link = 'https://www.google.com';
         $user->linkedin_link = 'https://www.google.com';
         $user->twitter_link = 'https://www.google.com';
+        $user->email_verified_at = Carbon::now();
         $user->role_id = 4;
         $user->profile_description = 'demo';
         $user->image = 'pic.jpg';
@@ -298,8 +302,51 @@ class StudentController extends Controller
         User::where('id', $request->id)->delete();
         return back()->with('success', 'Delete Successfully Student');
     }
-    public function home()
+    public function Parenthome()
     {
+        
+        if(Auth::user()->role_id != 5){
+                return  redirect('/dashboard');
+        }
+        
+        $chats = [];
+    
+        $chatsUsers = Chat::where('sender_id',Auth::id())->where('status', 0)->pluck('reciver_id')->unique();
+    
+        $c_users = User::whereIn('id',$chatsUsers)->where('id','!=',Auth::id())->get();
+        $j = 0;
+        foreach($c_users as $i => $user){
+    
+            $chats[$i]['id'] = $user->id;
+            $chats[$i]['username'] = $user->username;
+            $chats[$i]['image'] = $user->image;
+    
+            $j++;
+        }
+    
+        $chatsUsers = Chat::where('reciver_id',Auth::id())->where('status', 0)->pluck('sender_id')->unique();
+    
+        foreach(User::whereIn('id',$chatsUsers)->where('id','!=',Auth::id())->get() as $i => $user){
+    
+            $chats[$i]['id'] = $user->id;
+            $chats[$i]['username'] = $user->username;
+            $chats[$i]['image'] = $user->image;
+    
+            $j++;
+        }
+        
+        $students = User::where('role_id', '4')->where('parent_id', Auth::id())->get();
+        $tutors = Booking::where('parent_id', Auth::id())->with(['tutor', 'tutorSubjectOffer'])->get();
+        return view('auth.StudentHome', compact('students', 'tutors', 'chats'));
+    }
+    
+        public function Studenthome()
+    {
+        
+        if(Auth::user()->role_id != 4){
+                return  redirect('/dashboard');
+        }
+        
         $chats = [];
     
         $chatsUsers = Chat::where('sender_id',Auth::id())->where('status', 0)->pluck('reciver_id')->unique();

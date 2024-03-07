@@ -47,10 +47,10 @@ if (Auth::user()->role_id != 1) { return redirect('dashboard'); }
     public function SubmitComptaint(Request $request)
     {
         $imagePath = public_path('assets/images/247 NEW Logo 1.png');
-        $booking=Booking::where('uuid',$request->booking_id)->first();
-        // if(empty($booking)){
-        //     return back()->with('success', 'Complaint submitted successfully');
-        // }
+        $booking=Complaint::where('booking_id',$request->booking_id)->first();
+        if(!empty($booking)){
+            return back()->with('error', 'This Complaint Already Exist');
+        }
         $data = $request->all();
         $imageName = null;
 

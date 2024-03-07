@@ -46,6 +46,8 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\ReviewsController;
 use App\Models\ActivityLog;
+use App\Models\Notification;
+
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\TermsAndConditionController;
@@ -81,6 +83,7 @@ Route::Post('send/newsletter', [FrontendController::class,'SendNewsletter']);
 Route::get('CounterShow', [FrontendController::class,'CounterShow']);
 
 
+Route::get('UnderHoureReminder', [InterviewController::class,'UnderHoureReminder']);
 Route::get('SixteenMinutesInterviewReminder', [InterviewController::class,'SixteenMinutesInterviewReminder']);
 
 Route::get('TwentyFourInterviewReminder', [InterviewController::class,'TwentyFourInterviewReminder']);
@@ -88,6 +91,7 @@ Route::get('TwentyFourInterviewReminder', [InterviewController::class,'TwentyFou
 
 Route::get('SevenDayPaymentSendToTutorReminder', [PayoutController::class,'SevenDayPaymentSendToTutorReminder']);
 
+Route::get('BookingSlotRelease', [InterviewController::class,'BookingSlotRelease']);
 
 
 Route::get('/emailVerificationEmail', function () {
@@ -167,6 +171,7 @@ Route::get('/login-roles', [LoginController::class, 'loginRoles'])->name('login-
 Route::get('/roleget', [LoginController::class, 'roleget'])->name('roleget');
 
 Route::get('/login', [LoginController::class,'showLoginForm'])->name('login');
+Route::get('admin/login', [LoginController::class,'adminshowLoginForm'])->name('login.admin');
 Route::post('login', [LoginController::class,'login']);
 
 //  Route::get('/login-1', function () { return view('pages.login'); });
@@ -207,19 +212,27 @@ Route::get('account/verify',  function (Request $request) {
             $ActivityLogs = new ActivityLog;
             $ActivityLogs->user_id = $user->id;
 
-            if ($request->role_id == 6) {
-                $ActivityLogs->title = "New Organization";
-                $ActivityLogs->description = "New Organization " . $user->first_name . ' ' . $user->last_name . " verifyAccount At ";
-            } else if ($request->role_id == 5) {
-                $ActivityLogs->title = "New Parent";
-                $ActivityLogs->description = "New Parent " . $user->first_name . ' ' . $user->last_name . " verifyAccount At ";
-            } else if ($request->role_id == 4) {
-                $ActivityLogs->title = "New Student";
-                $ActivityLogs->description = "New Student " . $user->first_name . ' ' . $user->last_name . " verifyAccount At ";
-            } else if ($request->role_id == 3) {
-                $ActivityLogs->title = "New Tutor";
-                $ActivityLogs->description = "New Tutor " . $user->first_name . ' ' . $user->last_name . " verifyAccount At ";
-            }
+    if ($user->role_id == 6) {
+        session(['login_message1' => 'Organization Log In']);
+        session(['login_message' => 'Organization Log In']);
+        $ActivityLogs->title = "New Organization";
+        $ActivityLogs->description = "New Organization " . $user->first_name . ' ' . $user->last_name . " verifyAccount At ";
+    } else if ($user->role_id == 5) {
+        session(['login_message1' => 'Parent Log In']);
+        session(['login_message' => 'Parent Log In']);
+        $ActivityLogs->title = "New Parent";
+        $ActivityLogs->description = "New Parent " . $user->first_name . ' ' . $user->last_name . " verifyAccount At ";
+    } else if ($user->role_id == 4) {
+        session(['login_message1' => 'Student Log In']);
+        session(['login_message' => 'Student Log In']);
+        $ActivityLogs->title = "New Student";
+        $ActivityLogs->description = "New Student " . $user->first_name . ' ' . $user->last_name . " verifyAccount At ";
+    } else if ($user->role_id == 3) {
+        session(['login_message1' => 'Tutor Log In']);
+        session(['login_message' => 'Tutor Log In']);
+        $ActivityLogs->title = "New Tutor";
+        $ActivityLogs->description = "New Tutor " . $user->first_name . ' ' . $user->last_name . " verifyAccount At ";
+    }
             $ActivityLogs->save();
 
             $user->email_verified_at = Carbon::now();
@@ -258,9 +271,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/save_profile_verification', [TutorExperienceController::class, 'SaveprofileVerification'])->name('save.profile.verification');
 
     Route::middleware(['verified'])->group(function () {
-        Route::get('/students/messages/',[ChatController::class,'chat']);
-        Route::get('/parent/messages/',[ChatController::class,'chat']);
-        Route::get('/tutor/messages/',[ChatController::class,'chat']);
+        Route::get('/students/messages/',[ChatController::class,'Studentchat']);
+        Route::get('/parent/messages/',[ChatController::class,'Parentchat']);
+        Route::get('/tutor/messages/',[ChatController::class,'Tutorchat']);
         Route::get('/chat/{id}',[ChatController::class,'singlechat']);
 
         // Tutor Chats
@@ -291,14 +304,16 @@ Route::group(['middleware' => 'auth'], function(){
                 $students=User::where('role_id', 4)->get();
                 $tutors=User::where('role_id', 3)->get();
                 $parents=User::where('role_id', 5)->get();
-                $recents = User::orderBy('id', 'desc')->paginate(5);
+                $recents = User::where('role_id', '!=', 1)->orderBy('id', 'desc')->paginate(5);
+
 
                 $Completed=Booking::where('status', "Completed")->get();
                 $Cancelled=Booking::where('status', "Cancelled")->get();
                 $InProcess=Booking::where('status', "In Process")->get();
                 $Scheduled=Booking::where('status', "Scheduled")->get();
                 $Pending=Booking::where('status', "Pending")->get();
-                return view('super-admin.dashboard',compact('org','students','tutors','parents','recents','Completed','Cancelled','InProcess','Scheduled','Pending'));
+                $notifications = Notification::with('Notifier')->where('is_read', 0)->where('title','Comptaint')->whereHas('Notifier', function ($query) { $query->whereNotNull('id'); })->paginate(5);
+                return view('super-admin.dashboard',compact('notifications','org','students','tutors','parents','recents','Completed','Cancelled','InProcess','Scheduled','Pending'));
 
             } elseif ($request->user()->role_id == 2) {
                 return redirect('admin_dashboard');
@@ -326,15 +341,15 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/add/terms/condition', [TermsAndConditionController::class,'form']);
         Route::get('/delete/terms/condition/{id}', [TermsAndConditionController::class,'delete']);
         Route::get('/update/terms/condition/{id}', [TermsAndConditionController::class,'updateform']);
-        
-        
-        
+
+
+
         // RefoundList
-         
+
         Route::get('/admin/RefundList', [BookingController::class, 'RefoundList']);
-        
-        
-        
+
+
+
         Route::get('/admin/privacy_policy', [TermsAndConditionController::class,'index_privacy_policy']);
         Route::post('/admin/privacy_policy', [TermsAndConditionController::class,'Submit_privacy_policy']);
         Route::get('/add/terms/privacy_policy', [TermsAndConditionController::class,'form_privacy_policy']);
@@ -355,8 +370,8 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/user/{id}/delete', [UserController::class, 'delete']);
         Route::get('/user/{id}/permissions', [UserController::class, 'permissions']);
         Route::post('/user/{id}/permissions', [UserController::class, 'permission_post']);
-        
-        
+
+
         Route::post('complaint/stages/submit', [UserController::class, 'ComplaintStagesSubmit']);
 
 
@@ -400,26 +415,26 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/newsletter', [FrontendController::class, 'list'])->name('newsletter.list');
         Route::get('/setting/pages', [PageController::class, 'setting'])->name('website');
         Route::get('/setting/blog', [PageController::class, 'bloglisting'])->name('bloglist');
-        
-        
-        Route::get('/setting/blog-comments',function () { 
+
+
+        Route::get('/setting/blog-comments',function () {
             if (Auth::user()->role_id != 1) { return redirect('dashboard'); }
             $BlogReplies = App\Models\BlogReply::all();
-            return view('super-admin.comment.commentlist',compact('BlogReplies')); 
+            return view('super-admin.comment.commentlist',compact('BlogReplies'));
         })->name('commentlist');
-        
-        Route::get('/change/reply/status/{id}/{status}',function ($id,$status) { 
-            
+
+        Route::get('/change/reply/status/{id}/{status}',function ($id,$status) {
+
             $BlogReplies = App\Models\BlogReply::where('id',$id)->first();
             $BlogReplies->status = $status;
             $BlogReplies->save();
             return back()->with('success',$status.' Status Successfully');
-           
-            
+
+
         })->name('change.reply.status');
-        
-        
-        
+
+
+
         Route::get('/setting/document_types', [PageController::class, 'doctypeList'])->name('documentTypes');
         Route::post('/save_document_types', [PageController::class, 'storeDocType'])->name('save_document_types');
         Route::post('/update_document_types', [PageController::class, 'updateDocType'])->name('update_document_types');
@@ -447,21 +462,24 @@ Route::group(['middleware' => 'auth'], function(){
 
         //  admin booking
         Route::post('complaint/Update', [ComplaintController::class, 'complaintUpdate']);
-        
-        
+
+
         Route::get('admin/bookings', [BookingController::class, 'index']);
         Route::get('ActivityLogs', [BookingController::class, 'ActivityLog']);
+        
+        Route::get('download', [BookingController::class, 'download']);
+        
         Route::get('booking/update/{id}', [BookingController::class, 'booking_update']);
         Route::post('get-booking-details', [BookingController::class, 'booking_details']);
         Route::get('Complaintlogs', [ComplaintController::class, 'complaintlog']);
-        
+
         Route::get('get/interview', [ComplaintController::class,'getinterview']);
-        
-        
+
+
         Route::get('get/refund', [BookingController::class,'getrefund']);
         Route::post('refund/Update', [BookingController::class, 'refundUpdate']);
-        
-        
+
+
         Route::get('mark-as-read/{id}', [ComplaintController::class, 'MarkAsRead']);
         Route::get('/transaction', [TransactionController::class, 'transaction']);
 
@@ -472,6 +490,11 @@ Route::group(['middleware' => 'auth'], function(){
 
         //  tutor profile
         Route::get('/tutor/home', function () {
+            
+            if(Auth::user()->role_id != 3){
+                return  redirect('/dashboard');
+            }
+            
             $disclaimer=Disclaimer::where('user_id',Auth::id())->first();
             $booking=Booking::where('tutor_id',Auth::id())->count();
             $student=Booking::where('tutor_id',Auth::id())->distinct('student_id')->count();
@@ -487,6 +510,9 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/profile_verification', [TutorExperienceController::class, 'profileVerification'])->name('profile.verification');
         Route::get('/tutor/payments', [TutorExperienceController::class, 'tutor_payments']);
         Route::get('/tutor/payout', [PayoutController::class,'payout']);
+        
+        
+        Route::get('/tutor/check', [PayoutController::class,'check']);
         Route::post('/Upload/Profile', [TutorExperienceController::class, 'upload_profile_img']);
         Route::post('/update_tutor_post', [TutorExperienceController::class, 'update_tutor_post']);
         Route::get('/tutor_payments_post', [TutorExperienceController::class, 'tutor_payments_post']);
@@ -525,28 +551,35 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('/subject/offer/update/{id}', [SubjectOfferController::class, 'update']);
 
         // students
-        Route::get('student/profile', function () { return view('pages.dashboard.profiledetailstudent');});
+        Route::get('student/profile', function () { 
+            
+        if(Auth::user()->role_id != 4){
+                return  redirect('/dashboard');
+        }
+            return view('pages.dashboard.profiledetailstudent');
+            
+        });
         Route::post('/Upload/Image', [StudentController::class, 'upload_profile_img']);
         Route::post('/update_student_post', [StudentController::class, 'update_student_post']);
         Route::get('/student_profile', [StudentController::class, 'student_profile']);
-        
-        
-        
+
+
+
         Route::get('/tutor/book/{id}', [StudentController::class, 'book_tutor']);
-        
+
         Route::get('/tutor/wallet/book/{id}', [StudentController::class, 'book_tutor_wallet']);
-        
-        
-        
-        
-        
+
+
+
+
+
         Route::post('/book_tutor_post', [BookingController::class, 'book_tutor_post'])->name('stripe.post');
-        
+
         Route::post('/book_by_wallet_post', [BookingController::class, 'book_by_wallet_post'])->name('book.by.wallet.post');
-        
-        
-        
-        
+
+
+
+
         Route::post('/stripe_post_wallet', [BookingController::class, 'stripe_post_wallet'])->name('stripe.post.wallet');
         Route::get('/student/payments', [StudentController::class, 'student_payments']);
 
@@ -554,11 +587,15 @@ Route::group(['middleware' => 'auth'], function(){
 
 
         Route::get('/student_profile/{id}', [StudentController::class, 'student_profile_get']);
-        Route::get('parent/home',[StudentController::class,'home']);
-        Route::get('student/home',[StudentController::class,'home']);
-        
+        Route::get('parent/home',[StudentController::class,'Parenthome']);
+        Route::get('student/home',[StudentController::class,'Studenthome']);
+        Route::get('organization/students', [ParentController::class, 'your_students']);
+        Route::get('/organization/payments', [ParentController::class,'parent_payments']);
+
+        Route::get('/organization/messages/',[ChatController::class,'Organizationchat']);
+
         Route::get('AjaxFetchChatUnredList',[StudentController::class,'AjaxFetchChatUnredList']);
-        
+
         Route::get('/chatchat',[StudentController::class,'chat']);
         Route::get('/single_chat',[StudentController::class,'singlechat']);
 
@@ -580,7 +617,8 @@ Route::group(['middleware' => 'auth'], function(){
 
 
         // organization
-        Route::get('/organization/home', [OrgController::class, 'organization_pending'])->name('organization.dashboard');
+        // Route::get('/organization/home', [OrgController::class, 'organization_pending'])->name('organization.dashboard');
+        Route::get('/organization/home', [OrgController::class, 'index'])->name('organization.dashboard');
         Route::get('/organization_pending', [OrgController::class, 'organization_pending'])->name('organization.pending');
 
 
@@ -605,16 +643,16 @@ Route::group(['middleware' => 'auth'], function(){
 
            // Basic demo routes
 
-
-
+    });
+    
            /////////////////////////////Start Recording
            Route::get('/start-recording', [BookingController::class, 'startRecording']);
            Route::get('/stop-recording', [BookingController::class, 'stopRecording']);
-
-    });
 });
 
 
+
+Route::post('/save-video', [BookingController::class, 'saveVideo'])->name('save.video');
 
 
 

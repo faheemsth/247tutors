@@ -87,6 +87,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                               
                                 @forelse($blogs as $key => $blog)
                                     <tr>
                                         <td  style="border-bottom: .5px solid black;">{{ $key + 1 }}</td>
@@ -97,12 +98,13 @@
                                          <td style="border-bottom: .5px solid black;"><a href="{{ url('delete/newsletter').'/'.$blog->id}}" class="btn btn-danger"> <i class="fa fa-trash"></i></a></td>
 
                                     </tr>
+                                
                                 @empty
                                     <tr>
-                                        <td colspan="4">Record not found</td>
+                                        <td  colspan="4" class="text-center">Record not found</td>
                                     </tr>
+                               
                                 @endforelse
-
                                 <script>
                                     $(document).ready(function() {
                                         $(".copy-email").click(function() {

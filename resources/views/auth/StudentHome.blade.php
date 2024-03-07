@@ -163,9 +163,9 @@ and (max-width : 425px){
                                             Tutotr</a>
                                     </div>
                                     <div style="width: 16%;text-align: end;">
-                                        <span class="avatar-title bg-info-subtle rounded fs-3">
+                                        <span class="avatar-title bg-info-subtle rounded ">
                                             {{-- <img src="{{ asset('assets/images/user 1.png') }}" alt="" width="100%"> --}}
-                                            <i class="fa-solid fa-user"></i>
+                                            <i class="fa-solid fa-user" ></i>
                                         </span>
                                     </div>
                                 </div>
@@ -179,7 +179,8 @@ and (max-width : 425px){
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1 overflow-hidden">
                                         <p class="text-uppercase fw-bold mb-0">
-                                            <img src="{{ asset('assets/images/booking-icon-png-2 1.png') }}" alt="" width="10%">
+                                            <!--<img src="{{ asset('assets/images/booking-icon-png-2 1.png') }}" alt="" width="10%">-->
+                                            <i class="fa-regular fa-calendar-days"></i>
                                             Booking</p>
                                     </div>
                                     <div class="flex-shrink-0">
@@ -194,7 +195,8 @@ and (max-width : 425px){
                                     </div>
                                     <div style="width: 16%;">
                                         <span class="avatar-title bg-info-subtle rounded fs-3">
-                                            <img src="{{ asset('assets/images/booking-icon-png-2 1.png') }}" alt="" width="90%">
+                                            <!--<img src="{{ asset('assets/images/booking-icon-png-2 1.png') }}" alt="" width="90%">-->
+                                            <i class="fa-regular fa-calendar-days"></i>
                                         </span>
                                     </div>
                                 </div>

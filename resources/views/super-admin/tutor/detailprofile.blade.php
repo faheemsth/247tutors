@@ -18,6 +18,13 @@
     background-color: white !important
     border: 1px solid rgb(59 59 59 / 61%) !important;
     }
+    .minlitem{
+        min-width:170px;
+    }
+    table tr th{
+        min-width:150px;
+        
+    }
 </style>
 
 <div class="container">
@@ -35,28 +42,36 @@
         @endif
         <div class="col-lg-3 col-md-4 col-8">
             <div class="card mt-n5">
-                <div class="card-body p-4">
+                <div class="card-body p-lg-2 p-xl-4 px-4">
                     <div class="text-center">
                         <div class="profile-user">
 
                             @if (!empty($tutor->image) && file_exists(public_path(!empty($tutor) ? $tutor->image : '')))
                             <img src="{{ asset($tutor->image) }}"
-                                class="w-50 rounded-circle avatar-xl img-thumbnail user-profile-image"
+                                 style="width: 150px;
+    border-radius: 50%;
+    height: 150px;"
                                 alt="user-profile-image">
                             @else
 
                             @if($tutor->gender == 'Male')
                             <img src="{{ asset('assets/images/male.jpg') }}"
-                                class="w-50 rounded-circle avatar-xl img-thumbnail user-profile-image"
-                                alt="user-profile-image">
+                                
+                                alt="user-profile-image"  style="width: 150px;
+    border-radius: 50%;
+    height: 150px;">
                             @elseif($tutor->gender == 'Female')
                             <img src="{{ asset('assets/images/female.jpg') }}"
-                                class="w-50 rounded-circle avatar-xl img-thumbnail user-profile-image"
-                                alt="user-profile-image">
+                                
+                                alt="user-profile-image"  style="width: 150px;
+    border-radius: 50%;
+    height: 150px;">
                             @else
                             <img src="{{ asset('assets/images/default.png') }}"
-                                class="w-50 rounded-circle avatar-xl img-thumbnail user-profile-image"
-                                alt="user-profile-image">
+                                
+                                alt="user-profile-image"  style="width: 150px;
+    border-radius: 50%;
+    height: 150px;">
                             @endif
                             @endif
 
@@ -74,29 +89,30 @@
         <div class="col-lg-9 col-md-8 col-12">
             <div class="card mt-xxl-n5">
                 <div class="card-header">
-                    <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0 " role="tablist">
-                        <li class="nav-item" role="presentation">
+                    <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0 " style=" overflow: scroll;
+    flex-wrap: nowrap;" role="tablist">
+                        <li class="nav-item minlitem" role="presentation" >
                             <a class="nav-link active" data-bs-toggle="tab" href="#personalDetails" role="tab"
                                 aria-selected="true">
                                 <i class="fas fa-home"></i>
                                 Personal Details
                             </a>
                         </li>
-                        <li class="nav-item" role="presentation">
+                        <li class="nav-item minlitem" role="presentation">
                             <a class="nav-link" data-bs-toggle="tab" href="#programs" role="tab" aria-selected="false"
                                 tabindex="-1">
                                 <i class="far fa-user"></i>
                                 Qualification
                             </a>
                         </li>
-                        <li class="nav-item" role="presentation">
+                        <li class="nav-item minlitem" role="presentation">
                             <a class="nav-link" data-bs-toggle="tab" href="#documents" role="tab" aria-selected="false"
                                 tabindex="-1">
                             <i class="fa-regular fa-folder-open"></i>
                                 Documents
                             </a>
                         </li>
-                        <li class="nav-item" role="presentation">
+                        <li class="nav-item minlitem" role="presentation">
                             <a class="nav-link" data-bs-toggle="tab" href="#availability" role="tab"
                                 aria-selected="false" tabindex="-1">
                                 <i class="fa-solid fa-chalkboard-user"></i>
@@ -105,7 +121,7 @@
                         </li>
 
                        @if(!empty($complaintUser) && $complaintUser->count() > 0)
-                            <li class="nav-item" role="presentation">
+                            <li class="nav-item minlitem" role="presentation">
                                 <a class="nav-link" data-bs-toggle="tab" href="#warning" role="tab"
                                     aria-selected="false" tabindex="-1">
                                     <i class="fa-solid fa-triangle-exclamation"></i>
@@ -116,7 +132,7 @@
 
                     </ul>
                 </div>
-                <div class="card-body p-4">
+                <div class="card-body p-md-4 px-2">
                     <div class="tab-content">
                         <div class="tab-pane active" id="personalDetails" role="tabpanel">
                             <form action="{{ url('tutor/update/') . '/' . $tutor->id }}" method="post"
@@ -373,7 +389,7 @@
                                                                 </div>
 
                                                             </td>
-                                                            <td class="m-5">
+                                                            <td >
                                                                 @php $extension =
                                                                 strtolower(pathinfo(storage_path($tutor_application->user_id),
                                                                 PATHINFO_EXTENSION)); @endphp
@@ -382,14 +398,14 @@
                                                                 @if (!empty($tutor_application->user_id) &&
                                                                 file_exists(public_path(!empty($tutor_application->user_id)
                                                                 ? $tutor_application->user_id : '')))
-                                                                <button type="button" class="btn btn-default m-5 pb-4"
+                                                                <button type="button" class="btn btn-default"
                                                                     onclick="getimage('{{ asset($tutor_application->user_id) }}')">
                                                                     <img src="{{ asset($tutor_application->user_id) }}"
                                                                         width="50" height="50" />
                                                                 </button>
                                                                 @endif
                                                                 @elseif (in_array($extension, ['pdf']))
-                                                                <button type="button" class="btn btn-default m-5 pb-4"
+                                                                <button type="button" class="btn btn-default "
                                                                 onclick="getpdf('{{ asset($tutor_application->user_id) }}')">
                                                                     @if ($extension == 'pdf')
                                                                     <img src="{{ asset('assets\document_images\pdf.png') }}"
@@ -397,7 +413,7 @@
                                                                     @endif
                                                                 </button>
                                                                 @elseif (in_array($extension, ['docx']))
-                                                                <button type="button" class="btn btn-default m-5 pb-4"
+                                                                <button type="button" class="btn btn-default "
                                                                 onclick="getdocx('{{ asset($tutor_application->user_id) }}')">
                                                                     <img src="{{ asset('assets\document_images\word.jpg') }}"
                                                                         width="50" height="50" />
@@ -427,7 +443,7 @@
                                                                 <a style="cursor:pointer"
                                                                     onclick="updateDoc({{ $tutor_application->id }},'user_id')"
                                                                     class="link-success fs-20" tooltip="Add File"><i
-                                                                        class="ri-edit-box-line"></i></a>
+                                                                        class="ri-edit-box-line" style="font-size:22px;"></i></a>
                                                             </td>
 
                                                         </tr>
@@ -459,14 +475,14 @@
                                                                 @if (!empty($tutor_application->selfie) &&
                                                                 file_exists(public_path(!empty($tutor_application->selfie)
                                                                 ? $tutor_application->selfie : '')))
-                                                                <button type="button" class="btn btn-default m-5 pb-4"
+                                                                <button type="button" class="btn btn-default"
                                                                 onclick="getimage('{{ asset($tutor_application->selfie) }}')">
                                                                     <img src="{{ asset($tutor_application->selfie) }}"
                                                                         width="50" height="50" />
                                                                 </button>
                                                                 @endif
                                                                 @elseif (in_array($extension, ['pdf']))
-                                                                <button type="button" class="btn btn-default m-5 pb-4"
+                                                                <button type="button" class="btn btn-default"
                                                                 onclick="getpdf('{{ asset($tutor_application->selfie) }}')">
                                                                     @if ($extension == 'pdf')
                                                                     <img src="{{ asset('assets\document_images\pdf.png') }}"
@@ -474,7 +490,7 @@
                                                                     @endif
                                                                 </button>
                                                                 @elseif (in_array($extension, ['docx']))
-                                                                <button type="button" class="btn btn-default m-5 pb-4"
+                                                                <button type="button" class="btn btn-default"
                                                                 onclick="getdocx('{{ asset($tutor_application->selfie) }}')">
                                                                     <img src="{{ asset('assets\document_images\word.jpg') }}"
                                                                         width="50" height="50" />
@@ -502,7 +518,7 @@
                                                                 <a style="cursor:pointer"
                                                                     onclick="updateDoc({{ $tutor_application->id }},'selfie')"
                                                                     class="link-success fs-20" tooltip="Add File"><i
-                                                                        class="ri-edit-box-line"></i></a>
+                                                                        class="ri-edit-box-line" style="font-size:22px;"></i></a>
                                                             </td>
 
                                                         </tr>
@@ -534,14 +550,14 @@
                                                                 @if (!empty($tutor_application->address_proof) &&
                                                                 file_exists(public_path(!empty($tutor_application->address_proof)
                                                                 ? $tutor_application->address_proof : '')))
-                                                                <button type="button" class="btn btn-default m-5 pb-4"
+                                                                <button type="button" class="btn btn-default "
                                                                 onclick="getimage('{{ asset($tutor_application->address_proof) }}')">
                                                                     <img src="{{ asset($tutor_application->address_proof) }}"
                                                                         width="50" height="50" />
                                                                 </button>
                                                                 @endif
                                                                 @elseif (in_array($extension, ['pdf']))
-                                                                <button type="button" class="btn btn-default m-5 pb-4"
+                                                                <button type="button" class="btn btn-default"
                                                                 onclick="getpdf('{{ asset($tutor_application->address_proof) }}')">
                                                                     @if ($extension == 'pdf')
                                                                     <img src="{{ asset('assets\document_images\pdf.png') }}"
@@ -549,7 +565,7 @@
                                                                     @endif
                                                                 </button>
                                                                 @elseif (in_array($extension, ['docx']))
-                                                                <button type="button" class="btn btn-default m-5 pb-4"
+                                                                <button type="button" class="btn btn-default"
                                                                 onclick="getdocx('{{ asset($tutor_application->address_proof) }}')">
                                                                     <img src="{{ asset('assets\document_images\word.jpg') }}"
                                                                         width="50" height="50" />
@@ -579,7 +595,7 @@
                                                                 <a style="cursor:pointer"
                                                                     onclick="updateDoc({{ $tutor_application->id }},'addressproof')"
                                                                     class="link-success fs-20" tooltip="Add File"><i
-                                                                        class="ri-edit-box-line"></i></a>
+                                                                        class="ri-edit-box-line" style="font-size:22px;"></i></a>
                                                             </td>
 
                                                         </tr>
@@ -611,14 +627,14 @@
                                                                 @if (!empty($tutor_application->enhaced_dbs) &&
                                                                 file_exists(public_path(!empty($tutor_application->enhaced_dbs)
                                                                 ? $tutor_application->enhaced_dbs : '')))
-                                                                <button type="button" class="btn btn-default m-5 pb-4"
+                                                                <button type="button" class="btn btn-default"
                                                                 onclick="getimage('{{ asset($tutor_application->enhaced_dbs) }}')">
                                                                     <img src="{{ asset($tutor_application->enhaced_dbs) }}"
                                                                         width="50" height="50" />
                                                                 </button>
                                                                 @endif
                                                                 @elseif (in_array($extension, ['pdf']))
-                                                                <button type="button" class="btn btn-default m-5 pb-4"
+                                                                <button type="button" class="btn btn-default"
                                                                     onclick="getpdf(`{{ asset($tutor_application->enhaced_dbs) }}`)">
                                                                     @if ($extension == 'pdf')
                                                                     <img src="{{ asset('assets\document_images\pdf.png') }}"
@@ -626,7 +642,7 @@
                                                                     @endif
                                                                 </button>
                                                                 @elseif (in_array($extension, ['docx']))
-                                                                <button type="button" class="btn btn-default m-5 pb-4"
+                                                                <button type="button" class="btn btn-default"
                                                                 onclick="getdocx('{{ asset($tutor_application->enhaced_dbs) }}')">
                                                                     <img src="{{ asset('assets\document_images\word.jpg') }}"
                                                                         width="50" height="50" />
@@ -656,7 +672,7 @@
                                                                 <a style="cursor:pointer"
                                                                     onclick="updateDoc({{ $tutor_application->id }},'enhaced_dbs')"
                                                                     class="link-success fs-20" tooltip="Add File"><i
-                                                                        class="ri-edit-box-line"></i></a>
+                                                                        class="ri-edit-box-line" style="font-size:22px;"></i></a>
                                                             </td>
 
                                                         </tr>
@@ -687,14 +703,14 @@
                                                                 @if (!empty($tutor_application->cv) &&
                                                                 file_exists(public_path(!empty($tutor_application->cv) ?
                                                                 $tutor_application->cv : '')))
-                                                                <button type="button" class="btn btn-default m-5 pb-4"
+                                                                <button type="button" class="btn btn-default"
                                                                 onclick="getimage('{{ asset($tutor_application->cv) }}')">
                                                                     <img src="{{ asset($tutor_application->cv) }}"
                                                                         width="50" height="50" />
                                                                 </button>
                                                                 @endif
                                                                 @elseif (in_array($extension, ['pdf']))
-                                                                <button type="button" class="btn btn-default m-5 pb-4"
+                                                                <button type="button" class="btn btn-default"
                                                                 onclick="getpdf('{{ asset($tutor_application->cv) }}')">
                                                                     @if ($extension == 'pdf')
                                                                     <img src="{{ asset('assets\document_images\pdf.png') }}"
@@ -702,7 +718,7 @@
                                                                     @endif
                                                                 </button>
                                                                 @elseif (in_array($extension, ['docx']))
-                                                                <button type="button" class="btn btn-default m-5 pb-4"
+                                                                <button type="button" class="btn btn-default"
                                                                 onclick="getdocx('{{ asset($tutor_application->cv) }}')">
                                                                     <img src="{{ asset('assets\document_images\word.jpg') }}"
                                                                         width="50" height="50" />
@@ -730,7 +746,7 @@
                                                                 <a style="cursor:pointer"
                                                                     onclick="updateDoc({{ $tutor_application->id }},'cv')"
                                                                     class="link-success fs-20" tooltip="Add File"><i
-                                                                        class="ri-edit-box-line"></i></a>
+                                                                        class="ri-edit-box-line" style="font-size:22px;"></i></a>
                                                             </td>
                                                         </tr>
                                                         @endisset
@@ -758,7 +774,7 @@
                                                     <thead>
                                                         <tr class="thh">
 
-                                                            <th class="col" scope="col"></th>
+                                                            <th class="col " style="width:30%;" scope="col" ></th>
                                                             <th scope="col">Mon</th>
                                                             <th scope="col">Tue</th>
                                                             <th scope="col">Wed</th>
@@ -774,23 +790,23 @@
                                                         @php $days = explode(',', $availability->day_of_the_week);
                                                         @endphp
                                                         <tr>
-                                                            <td class="tdd">
+                                                            <td class="tdd d-flex gap-2 align-items-center">
                                                                 @if ($availability->schedule_time == 'Morning')
                                                                 <img src="/assets/images/11111.png"
-                                                                    alt="Morning">Morning
+                                                                    alt="Morning"><h6 class="w-50 mb-0">Morning</h6>
                                                                 @elseif ($availability->schedule_time == 'Afternoon')
                                                                 <img src="/assets/images/sunny 1.png"
-                                                                    alt="Afternoon">Afternoon
+                                                                    alt="Afternoon"><h6 class="w-md-50 mb-0">Afternoon</h6>
                                                                 @elseif ($availability->schedule_time == 'Evening')
                                                                 <img src="/assets/images/sunrise 1.png"
-                                                                    alt="Evening">Evening
+                                                                    alt="Evening"><h6 class="w-50 mb-0">Evening</h6>
                                                                 @endif
                                                             </td>
 
-                                                            @for ($i = 1; $i <= 7; $i++) <td class="text-end">
+                                                            @for ($i = 1; $i <= 7; $i++) <td class="text-center">
                                                                 @if (in_array($i, $days))
                                                                 <img src="{{ asset('assets/images/Vector (3).png') }}"
-                                                                    alt="" data-days="{{ $i }}" width="30" height="30">
+                                                                    alt="" data-days="{{ $i }}" width="25" height="25">
                                                                 @endif
                                                                 </td>
                                                                 @endfor
@@ -829,7 +845,7 @@
                                             @csrf
                                             <input type="hidden" value="{{$tutor->id}}" name="id">
                                             <div class="table-responsive">
-                                                <div class="col-lg-12">
+                                                <div class="col-lg-12 px-0 px-md-2">
                                                 <div class="mb-3">
                                                     <label for="zipcodeInput" class="form-label">Comment's
                                                     </label>
@@ -839,7 +855,7 @@
                                                         rows="3">{{ $tutor->complaint_message }}</textarea>
                                                    </div>
                                                 </div>
-                                                <div class="col-lg-4">
+                                                <div class="col-lg-4 px-0 px-md-2">
                                                     <div class="mb-3">
                                                         <label for="countryInput bachset" class="form-label">Stage's</label>
                                                         <select class="form-select w-75" name="complaint_stage" id="updated_user_status" required>
@@ -856,7 +872,7 @@
 
 
 
-                                         <div class="col-lg-12">
+                                         <div class="col-lg-12 px-0 px-md-2">
                                                <div class="hstack gap-2 justify-content-end">
                                                   <button type="submit" class="py-2 px-3 bg-primary border-0 rounded-3 text-white">Update</button>
                                                </div>
@@ -906,9 +922,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <div class="hstack gap-2 justify-content-end">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="bg-success px-3 py- rounded-2 border-none text-white"
+                    <div class="hstack gap-2 justify-content-end d-flex align-items-center">
+                        <button type="button" class="btn px-3 py-2 btn-light" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="bg-success px-3 py-2 rounded-2 border-0 text-white"
                             onclick="updateStatus()">Update</button>
                     </div>
                 </div>

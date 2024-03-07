@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=D:\Smart Technology House\247tutors\247tutor\venv
+set VIRTUAL_ENV=/home/u163900009/domains/247tutors.co.uk/public_html/public/venv/
 
 if not defined PROMPT set PROMPT=$P$G
 

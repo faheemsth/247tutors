@@ -5,10 +5,12 @@
             @include('layouts.studentnav')
         @elseif (Auth::user()->role_id == '3')
             @include('layouts.tutornav')
-        @elseif (Auth::user()->role_id == '5' || Auth::user()->role_id == '6')
+        @elseif (Auth::user()->role_id == '5')
             @include('layouts.parentnav')
         @elseif (Auth::user()->role_id == '1' || Auth::user()->role_id == '2')
             @include('layouts.navbar')
+        @elseif (Auth::user()->role_id == '6')
+            @include('layouts.orgnav')
         @endif
     @else
         @include('layouts.navbar')
@@ -22,7 +24,15 @@
     <script src="{{ asset('js/jsdelivr.js') }}"></script>
     <script src="{{ asset('vendor/jquery/jquery3.7.0.js') }}"></script>
 
+<style>
+    .btn.processing {
+    pointer-events: none; /* Disable pointer events */
+    opacity: 0.7; /* Reduce opacity to indicate processing */
+    cursor: progress; /* Change cursor to progress */
+}
+</style>
     <style type="text/css">
+    
         #multistep_form fieldset:not(:first-of-type) {
             display: none;
         }
@@ -214,14 +224,18 @@
                                         @endforeach
                                     @endif
                                 </select>
-                                @if (Auth::user()->role_id == '5' && !empty($students))
+                                @if (!empty($students) && Auth::user()->role_id == '5' || Auth::user()->role_id == '6')
                                     <label class="mt-3">Students</label>
-                                    <select required name="user_id" id="changesubject" class="w-100 p-2">
+                                    <select required name="user_id" id="Student" class="w-100 p-2">
+                                        @if ($students->count() > 0)
                                         @foreach ($students as $student)
                                             <option value="{{ $student->id }}">
                                                 {{ $student->first_name . ' ' . $student->last_name }}
                                             </option>
                                         @endforeach
+                                        @else
+                                            <option value="">Student Not Found</option>
+                                        @endif
                                     </select>
                                 @endif
                                 <div class="row ">
@@ -256,7 +270,7 @@
                                 @endif
                                 <div class="text px-3 d-flex flex-column">
                                     <span class="fw-bold">{{ $tutor->username }}</span>
-                                     <span>{{ $tutor->facebook_link }}</span> 
+                                     <span>{{ $tutor->facebook_link }}</span>
                                 </div>
                             </div>
                         </div>
@@ -481,7 +495,7 @@
                                     </div>
                                     <div class="mt-2 mt-md-3">
                                         <label class="text-secondary">Address 2</label><br>
-                                        <input type="text" required name="address2" id="address2" class="w-100 p-2">
+                                        <input type="text" name="address2" id="address2" class="w-100 p-2">
                                     </div>
                                     <div class="mt-2 mt-md-3">
                                         <label class="text-secondary">Town/City</label><br>
@@ -520,7 +534,7 @@
                                             @endif
                                             <div class="text p-3 d-flex flex-column">
                                                 <span  class="fw-bold">{{ $tutor->username }}</span>
-                                                 <span>{{ $tutor->facebook_link }}</span> 
+                                                 <span>{{ $tutor->facebook_link }}</span>
                                             </div>
                                         </div>
                                         <div class="summary-item mt-3" style="line-height: 0.7;">
@@ -567,9 +581,9 @@
                         <div class="panel-body mt-5 px-5 mx-5">
                             <h2 class="text-left text-primary fs-1"><strong>Confirm Your Booking</strong></h2><br>
                             <div class="d-flex flex-column flex-md-row justify-content-center gap-5">
-                                
-                                <div class="col-md-5 col-12 p-3 h-25 mt-4 mt-md-0 me-5">
-                                  
+
+                                <div class="col-md-5 col-12 p-3 h-25 mt-4 mt-md-0 ">
+
                                     <div class="form-1  shadow p-2" style=" background: #ABFF00; border-radius: 12px;">
 
                                         <div class="d-flex">
@@ -589,15 +603,33 @@
                                                 @endif
                                             @endif
                                             <div class="text p-3 d-flex flex-column">
-                                                <span>{{ $tutor->username }}</span>
+                                                <h5>{{ $tutor->username }}</h5>
+                                                <span>{{ $tutor->facebook_link }}</span>
                                             </div>
                                         </div>
-                                        <div class="summary-item mt-2" style="line-height: 0.7;">
-                                            <div class="summary px-3 d-flex justify-content-between">
+                                          <div class="bg-primary p-2 my-3 rounded-3">
+
+                                    <input class=" w-100 p-2" size='4' type='hidden' readonly name="amount" id="amount">
+
+
+
+                                        <h5 class="text-white fs-6">Check your email for coupon</h5>
+                                        <div class="summary gap-1 mt-3 d-flex justify-content-between">
+                                            <input type="text" class="w-100 p-1 mb-1" name="Coupon" id="coupon"
+                                                placeholder="Enter Coupon Code"
+                                                style="border:1px solid #ABFF00;border-radius: 5px;" value="">
+                                         
+                                        </div>
+                                        <div class="summary px-3 d-flex justify-content-between">
+                                            <p id="errormsg" style="color: red"></p>
+                                        </div>
+                                    </div>
+                                        <div class="summary-item mt-4" style="line-height: 0.7;">
+                                            <div class="fw-bold summary px-3 d-flex justify-content-between">
                                                 <p>Discount</p>
                                                 <p id="dicountId">0%</p>
                                             </div>
-                                            <div class="summary px-3 d-flex justify-content-between">
+                                            <div class="fw-bold summary px-3 d-flex justify-content-between">
                                                 <p>Total Payment</p>
                                                 <p class="total">£{{ $tutor->fee }}</p>
                                             </div>
@@ -606,83 +638,188 @@
                                             <p class="text-center">
                                                 We'll take payment 24hrs before each lesson
                                                 Make changes before then free of charge.
-                                                See terms and conditions lahore
+                                                See terms and conditions
                                             </p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-12 p-3 h-25 mt-4 mt-md-0 me-5">
-                                      <div class="bg-primary p-2 mb-2 rounded-3">
-                                        
-                                    <input class=" w-100 p-2" size='4' type='hidden' readonly name="amount" id="amount">
-                                    
-                                        
-                                            
-                                        <h5 class="m-0 ps-3 text-dark">Check your email for coupon</h5>
-                                        <div class="summary gap-1 mt-3 d-flex justify-content-between">
-                                            <input type="text" class="w-100 p-1 mb-1" name="Coupon" id="coupon"
-                                                placeholder="Enter Coupon Code"
-                                                style="border:1px solid #ABFF00;border-radius: 10px;" value="">
-                                            <input type="button" class="w-95 p-1 mb-1" value="Confirm" id="confirm"
-                                                style="border:1px solid #ABFF00;border-radius: 10px;">
-
-                                        </div>
-                                        <div class="summary px-3 d-flex justify-content-between">
-                                            <p id="errormsg" style="color: red"></p>
-                                        </div>
-                                    </div>
-                                </div>
+                              
                             </div>
-                            
+
                         </div>
                         <input type="hidden" class="w-100 p-3" required name="copounid" id="copounid" value="">
 
                         <div class="d-flex  col-12 justify-content-center m-auto my-5 gap-2"
-                            style="margin-top: 80px !important;">
+                            style="margin-top: 20px !important;">
                             <a href="#" class="link-dark previous btn " id="previous4"><i
                                     class="fa fa-light fa-arrow-left"></i>
                                 Back</a>
-                            <input type="submit" class=" next btn btn-primary px-5" value="Pay" id="next3" />
+                            <!--<input type="submit" class=" next btn btn-primary px-5" value="Pay" id="next3" />-->
+                            <span id="AddAmount"></span>
+                            <span id="Order"></span>
+                            
                         </div>
                     </fieldset>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-
                 </form>
             </div>
         </div>
     </div>
 
+
+
+
+
+
+
+    <div class="modal fade zoomIn" id="demo_meeting_modal" tabindex="-1" aria-labelledby="update_doc_modal"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0">
+                <div class="modal-header p-3 bg-info-subtle">
+                    <h5 class="modal-title" id="update_doc_modal_title"> Add Amount In Wallet</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        id="close-modal"></button>
+                </div>
+                <form role="form" action="{{ route('stripe.post.wallet') }}" method="post" class="require-validation"
+                    data-cc-on-file="false"
+                    data-stripe-publishable-key="pk_test_51O4cl2Iml1HP3wz7XFNa5N0OGpZyMTKiCgTyM1yO6ZZRL36cI9faSLn7Ahee5BAMbX2G5yEBnAIWoPbwRQTngD3D00zEJ71Ubv"
+                    id="payment-form">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            <div class="col-lg-12">
+
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="d-flex flex-column flex-md-row justify-content-between">
+                                <div class="col-lg-8 col-xl-7 col-md-6 col-12">
+                                    <div class="row col-md-12">
+                                        <div class="col-md-6">
+                                            <div class=' form-group required'>
+                                                <label class='control-label'>Name On Card</label> <input class=" w-100 p-2"
+                                                    size='4' type='text' required name="account_holder_name">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class=' form-group required'>
+                                                <label class='control-label'>Payed Amount £</label> <input class=" w-100 p-2"
+                                                    size='4' type='text' name="amount"  required>
+                                            </div>
+                                        </div>
+
+                                        <input type="hidden" class="w-100 p-2" required name="wallet" id="wallet"
+                                            value="">
+
+
+                                    </div>
+                                    <div class="mt-3 row col-md-12">
+                                        <div class="col-md-12">
+                                            <label class="text-secondary">Card Number</label><br>
+                                            <input autocomplete='off' required name="card_number"
+                                                class='card-number w-100 p-2' size='20' type='text'
+                                                id='cardInput'>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 row col-md-12">
+
+                                        <div class="col-md-4 pe-1">
+                                            <label class="text-secondary">CVC Number</label><br>
+                                            <input type="text" required name="cvc" placeholder='ex. 311'
+                                                class="w-100 p-2 card-cvc" id="cvcInput">
+                                        </div>
+                                        <div class="col-md-4 px-1">
+                                            <label class="text-secondary">Expiration Month</label><br>
+                                            <input type="text" required name="exp_month" placeholder="MM"
+                                                class="w-100 p-2 card-expiry-month">
+                                        </div>
+
+                                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                        <script>
+                                            $(document).ready(function() {
+                                                $(".card-expiry-month").on("input", function() {
+                                                    var inputValue = $(this).val();
+                                                    inputValue = inputValue.replace(/\D/g, "");
+                                                    if (inputValue === '' || parseInt(inputValue) > 12) {
+                                                        $(this).val('');
+                                                    } else {
+                                                        $(this).val(inputValue);
+                                                    }
+                                                });
+                                            });
+                                        </script>
+
+                                        <div class="col-md-4 ps-1">
+                                            <label class="text-secondary">Expiration Year</label><br>
+                                            <input type="text" required name="exp_year" placeholder="YY"
+                                                class="w-100 p-2 card-expiry-year" id="exp_year_input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-xl-5 col-md-5 col-12 p-2 h-25 mt-4 mt-md-0 me-5">
+                                    <div class="form-1  shadow p-2" style=" background: #ABFF00; border-radius: 12px;">
+
+                                        <div class="d-flex">
+                                            @if (!empty(Auth::user()->image) && file_exists(public_path(!empty(Auth::user()->image) ? Auth::user()->image : '')))
+                                                <img src="{{ asset(Auth::user()->image ?? 'assets\images\default.png') }}"
+                                                    alt="" style="height:70px;width:70px;border-radius:50%;">
+                                            @else
+                                                @if (Auth::user()->gender == 'Male')
+                                                    <img src="{{ asset('assets/images/male.jpg') }}"
+                                                        height="70"style="height:70px;width:70px;border-radius:50%;">
+                                                @elseif(Auth::user()->gender == 'Female')
+                                                    <img src="{{ asset('assets/images/female.jpg') }}"
+                                                        style="height:70px;width:70px;border-radius:50%;">
+                                                @else
+                                                    <img src="{{ asset('assets/images/default.png') }}"
+                                                        style="height:70px;width:70px;border-radius:50%;">
+                                                @endif
+                                            @endif
+                                            <div class="text p-3 d-flex flex-column">
+                                                <span class="fw-bold" id="text-color">{{ Auth::user()->username }}</span>
+                                                 <span>{{ Auth::user()->facebook_link }}</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="summary-text mt-3">
+                                            <p class="text-center">
+                                               Thank you for adding funds to your 247Tutors wallet! Your action ensures smooth transactions and uninterrupted learning experiences with our tutors. 🌟
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="hstack gap-2 justify-content-end">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success" id="add-btn">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    
     <script src="{{ asset('js/timeslot.min.js') }}"></script>
+    
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+
+    <script>
+        function freeMeetmodal() {
+            toastr.error('Dear Tutor', 'Sorry, it appears that your wallet currently has insufficient funds.');
+            $('#demo_meeting_modal').modal('show');
+        }
+    </script>
+    
     <script>
         let id = {!! json_encode($tutor->id) !!};
 
@@ -691,6 +828,17 @@
         let message = '';
 
         $(document).ready(function() {
+        var selectedOption = $(this).find('option:selected');
+        var fee = selectedOption.data('fee');
+        var wallet = {!! json_encode(\App\Models\Wallet::where('user_id', auth()->id())->first()->net_income ?? '') !!};
+        
+        
+        if (wallet > 0 && fee <= wallet) {
+        $('#Order').html('<input type="submit" class="next btn btn-primary px-5" value="Pay" id="next3" />');
+        } else {
+            $('#AddAmount').html('<a class="next btn btn-primary px-5" onclick="freeMeetmodal()">Pay</a>');
+        }
+    
 
 
             var form_count = 1;
@@ -874,8 +1022,7 @@
 
                     }
                 } else if (step === 2) {
-                    if ($('#country').val() === '' || $('#address1').val() === '' || $('#address2').val() === '' ||
-                        $('#city').val() === '' || $('#postcode').val() === '') {
+                    if ($('#country').val() === '' || $('#address1').val() === '' || $('#city').val() === '' || $('#postcode').val() === '') {
                         isValid = false;
                     }
                 }
@@ -897,7 +1044,19 @@
 
             // Handle the "Next" button click
             $(".next").click(function() {
-                showNextStep();
+            var Student = $('#Student').val();
+                if (Student === '') {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Add Your Student.',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        showCloseButton: true
+                    });
+                } else {
+                    showNextStep();
+                }
             });
 
             // Handle the "Previous" button click
@@ -987,65 +1146,95 @@
             $(this).val(formattedDisplay);
         });
 
-        $(function() {
-            var $form = $(".require-validation");
+$(function() {
+    var $form = $(".require-validation");
 
-            $('form.require-validation').bind('submit', function(e) {
-                var $form = $(".require-validation"),
-                    inputSelector = ['input[type=email]', 'input[type=password]',
-                        'input[type=text]', 'input[type=file]',
-                        'textarea'
-                    ].join(', '),
-                    $inputs = $form.find('.required').find(inputSelector),
-                    $errorMessage = $form.find('div.error'),
-                    valid = true;
-                $errorMessage.addClass('hide');
+    $('form.require-validation').bind('submit', function(e) {
+        var $form = $(".require-validation"),
+            inputSelector = ['input[type=email]', 'input[type=password]', 'input[type=text]', 'input[type=file]', 'textarea'].join(', '),
+            $inputs = $form.find('.required').find(inputSelector),
+            $errorMessage = $form.find('div.error'),
+            valid = true;
 
-                $('.has-error').removeClass('has-error');
-                $inputs.each(function(i, el) {
-                    var $input = $(el);
-                    if ($input.val() === '') {
-                        $input.parent().addClass('has-error');
-                        $errorMessage.removeClass('hide');
-                        e.preventDefault();
-                    }
-                });
+        $errorMessage.addClass('hide');
+        $('.has-error').removeClass('has-error');
 
-                if (!$form.data('cc-on-file')) {
-                    e.preventDefault();
-                    Stripe.setPublishableKey($form.data('stripe-publishable-key'));
-                    Stripe.createToken({
-                        number: $('.card-number').val(),
-                        cvc: $('.card-cvc').val(),
-                        exp_month: $('.card-expiry-month').val(),
-                        exp_year: $('.card-expiry-year').val()
-                    }, stripeResponseHandler);
-                }
-
-            });
-
-            /*------------------------------------------
-            --------------------------------------------
-            Stripe Response Handler
-            --------------------------------------------
-            --------------------------------------------*/
-            function stripeResponseHandler(status, response) {
-                if (response.error) {
-                    $('.error')
-                        .removeClass('hide')
-                        .find('.alert')
-                        .text(response.error.message);
-                } else {
-                    /* token contains id, last4, and card type */
-                    var token = response['id'];
-
-                    $form.find('input[type=text]').empty();
-                    $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
-                    $form.get(0).submit();
-                }
+        $inputs.each(function(i, el) {
+            var $input = $(el);
+            if ($input.val() === '') {
+                $input.parent().addClass('has-error');
+                $errorMessage.removeClass('hide');
+                valid = false;
             }
-
         });
+
+        if (!valid) {
+            e.preventDefault(); // Prevent form submission if validation fails
+            return;
+        }
+
+        // Prevent default form submission
+        e.preventDefault();
+
+        if (!$form.data('cc-on-file')) {
+            Stripe.setPublishableKey($form.data('stripe-publishable-key'));
+            Stripe.createToken({
+                number: $('.card-number').val(),
+                cvc: $('.card-cvc').val(),
+                exp_month: $('.card-expiry-month').val(),
+                exp_year: $('.card-expiry-year').val()
+            }, stripeResponseHandler);
+        }
+    });
+
+    /*------------------------------------------
+    --------------------------------------------
+    Stripe Response Handler
+    --------------------------------------------
+    --------------------------------------------*/
+    function stripeResponseHandler(status, response) {
+        $('#add-btn').addClass('processing').prop('disabled', true).text('Processing...');
+        if (response.error) {
+            $('.error')
+                .removeClass('hide')
+                .find('.alert')
+                .text(response.error.message);
+        } else {
+            /* token contains id, last4, and card type */
+            var token = response['id'];
+
+            // Prepare form data for AJAX submission
+            var formData = $form.serialize();
+
+            // Append token to form data
+            formData += '&stripeToken=' + token;
+
+            // Send AJAX request
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('stripe.post.wallet') }}', // Replace with your backend URL for saving data
+                data: formData,
+                success: function(response) {
+                    
+                   $('#Order').html('');
+      
+                   $('#AddAmount').html('');
+                   
+                   $('#add-btn').removeClass('processing').removeAttr('disabled');
+                   $('#demo_meeting_modal').modal('hide');
+                   $('#Order').html('<input type="submit" class="next btn btn-primary px-5" value="Pay" id="next3" />');
+      
+                   $('#AddAmount').html('');
+            
+            
+                },error: function(xhr, status, error) {
+                  $('#add-btn').removeClass('processing').removeAttr('disabled');
+                }
+            });
+        }
+    }
+});
+
     </script>
     <div id="walletBalance" data-balance="0"></div>
     <script>
@@ -1065,8 +1254,21 @@
         // on subject change
 
         $('#changesubject').on('change', function() {
+            $('#Order').html('');
+            $('#AddAmount').html('');
             var selectedOption = $(this).find('option:selected');
             var fee = selectedOption.data('fee');
+            var wallet = {!! json_encode(\App\Models\Wallet::where('user_id', auth()->id())->first()->net_income ?? '') !!};
+        
+        
+        if (wallet > 0 && fee <= wallet) {
+        $('#Order').html('<input type="submit" class="next btn btn-primary px-5" value="Pay" id="next3" />');
+        } else {
+            $('#AddAmount').html('<a class="next btn btn-primary px-5" onclick="freeMeetmodal()">Pay</a>');
+        }
+        
+        
+
             if (fee < 0) {
                 fee = 0;
             }
@@ -1075,8 +1277,8 @@
             $('.total').text('£' + fee);
 
         });
-            
-            
+
+
             $('#changesubject').on('change', function() {
                 var selectedOption = $(this).find('option:selected');
                 var fee = selectedOption.data('fee') - $('#walletBalance').data('balance');
@@ -1098,8 +1300,13 @@
                 $('.total').text('£' + fee);
                 // alert(selectedOption.data('fee'));
             });
+            
+            
+            
+            
+            
             // get coupon
-            $('#confirm').on('click', function() {
+            $('#coupon').on('keyup', function() {
                 var coupon = $('#coupon').val();
                 var fee = $('#amount').val();
                 var fetchfee = 0;
@@ -1125,45 +1332,46 @@
                             id = data.id;
                         }
                         $('#copounid').val(id);
-                        
+
 
                         if(data.discount_type === 'percentage')
                         {
-                            $('#dicountId').text('£' + fetchfee + '%');
+                            $('#dicountId').text('' + fetchfee + '%');
                             calculate = (fee / 100) * fetchfee;
                             discount = Math.max(calculate, 0);
                         }else{
                             $('#dicountId').text('£' + fetchfee + '');
                             discount = Math.max(fetchfee, 0);
                         }
-                        
-                        
+
+
                         var walletCheck=$('#wallet').val();
                         if(walletCheck > 0){
                          var TotalWallet = discount + parseFloat(walletCheck);
                         $('.total').text('$' + Math.max((fee - TotalWallet), 0));
                         $('#amount').hide();
-                        $('#amount2').val(Math.max((fee  - fetchfee), 0));
-                        $('#amount').val(Math.max((fee  - fetchfee), 0));
+                        $('#amount2').val(Math.max((fee - discount), 0));
+                        $('#amount').val(Math.max((fee - discount), 0));
                         $('#wallet').val(TotalWallet);
                         $('#walletText').text('Wallet Have Amount :' + TotalWallet);
                         $('#feeId').text('£' + fee);
                         $('.total').text('£' + (selectedOption.data('fee') - fetchfee));
-                        
-                        
+
+
                         }else{
                         $('.total').text('£' + Math.max((fee - discount), 0));
                         $('#amount').hide();
-                        $('#amount').val(Math.max((fee  - fetchfee), 0));
+                        $('#amount').val(Math.max((fee  - discount), 0));
                         $('#amount2').val(Math.max((fee - discount), 0));
                         }
-                        $('#coupon').val('');
+                        // $('#coupon').val('');
                         // $('#discountId').text('$' + fetchfee);
                     },
                     error: function(xhr) {
                         if (xhr.status === 422) {
                             var errors = xhr.responseJSON.errors;
                             for (var key in errors) {
+                                $('#errormsg').text('');
                                 $('#errormsg').append('<p>' + errors[key][0] + '</p>');
                             }
                         }

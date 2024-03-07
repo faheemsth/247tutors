@@ -14,230 +14,168 @@
         <script src="{{ asset('plugins/owl.carousel/dist/owl.carousel.min.js') }}"></script>
         <script src="{{ asset('plugins/chartist/dist/chartist.min.js') }}"></script>
         <script src="{{ asset('plugins/flot-charts/jquery.flot.js') }}"></script>
-         <!--<script src="{{ asset('plugins/flot-charts/jquery.flot.categories.js') }}"></script> -->
+        <!--<script src="{{ asset('plugins/flot-charts/jquery.flot.categories.js') }}"></script> -->
         <script src="{{ asset('plugins/flot-charts/curvedLines.js') }}"></script>
         <script src="{{ asset('plugins/flot-charts/jquery.flot.tooltip.min.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
         <script src="https://cdn.anychart.com/releases/8.11.1/js/anychart-core.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/8.11.1/js/anychart-pie.min.js"></script>
+        <script src="https://cdn.anychart.com/releases/8.11.1/js/anychart-pie.min.js"></script>
 
         <script src="{{ asset('plugins/amcharts/amcharts.js') }}"></script>
         <script src="{{ asset('plugins/amcharts/serial.js') }}"></script>
         <script src="{{ asset('plugins/amcharts/themes/light.js') }}"></script>
-
-        <!--
-                        <script src="{{ asset('js/widget-statistic.js') }}"></script>
-                        <script src="{{ asset('js/widget-data.js') }}"></script>
-                        <script src="{{ asset('js/dashboard-charts.js') }}"></script>
-                -->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <?php
-        $roles = [3, 4, 5, 6];
-        $years = [2021, 2022, 2023, 2024];
-        $data = [];
+        $months = [];
+        $countstutor = [];
+        $countstudent = [];
+        $countparent = [];
+        $countorganization = [];
 
-        foreach ($roles as $role) {
-            foreach ($years as $year) {
-                $key = "{$role}_{$year}";
-                $data[$key] = App\Models\User::where('role_id', $role)
-                    ->whereYear('created_at', '=', $year)
-                    ->count();
-            }
+        for ($i = 0; $i < 12; $i++) {
+            $month = Carbon\Carbon::now()->subMonths($i);
+            $months[] = $month->format('M');
+
+            $countstutor[] = App\Models\User::where('role_id', 3)->whereMonth('created_at', $month)->count();
+            $countstudent[] = App\Models\User::where('role_id', 4)->whereMonth('created_at', $month)->count();
+            $countparent[] = App\Models\User::where('role_id', 5)->whereMonth('created_at', $month)->count();
+            $countorganization[] = App\Models\User::where('role_id', 6)->whereMonth('created_at', $month)->count();
         }
+
+        $tutor_data = json_encode($countstutor);
+        $student_data = json_encode($countstudent);
+        $parent_data = json_encode($countparent);
+        $organization_data = json_encode($countorganization);
+
         ?>
-        <!--old bar chart-->
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
-            var data = <?php echo json_encode($data); ?>;
 
-            google.charts.load('current', {
-                'packages': ['bar']
-            });
-            google.charts.setOnLoadCallback(drawChart);
-
-            function drawChart() {
-                var chartData = [
-                    ['Year', 'Tutor', 'Parent', 'Student', 'Organizations']
-                ];
-
-                <?php foreach ($years as $year): ?>
-                var row = ['<?php echo $year; ?>'];
-                <?php foreach ($roles as $role): ?>
-                var key = '<?php echo $role . '_' . $year; ?>';
-                row.push(data[key]);
-                <?php endforeach; ?>
-                chartData.push(row);
-                <?php endforeach; ?>
-
-                var dataTable = google.visualization.arrayToDataTable(chartData);
-
-                var options = {
-                    chart: {
-                        title: 'Yearly Users Analytics',
-                        subtitle: 'Tutor, Parent, Organization and Student: 2023-2024',
-                    }
-                };
-
-                var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-                chart.draw(dataTable, google.charts.Bar.convertOptions(options));
-            }
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <!--old bar chart end-->
-
-        <!--new bar chart-->
         <script>
             var options = {
-          series: [{
-          name: 'Tutor',
-          data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
-        }, {
-          name: 'Student',
-          data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
-        },
-         {
-          name: 'Parent',
-          data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
-        },
-        {
-          name: 'Organization',
-          data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
-        }],
-          chart: {
-          type: 'bar',
-          height: 350
-        },
-        plotOptions: {
-          bar: {
-            horizontal: false,
-            columnWidth: '55%',
-            endingShape: 'rounded'
-          },
-        },
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-          show: true,
-          width: 2,
-          colors: ['transparent']
-        },
-        xaxis: {
-          categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-        },
-        yaxis: {
-          title: {
-            // text: '$ (thousands)'
-          }
-        },
-        fill: {
-          opacity: 1
-        },
-        tooltip: {
-          y: {
-            formatter: function (val) {
-              return "$ " + val + " thousands"
-            }
-          }
-        }
-        };
-
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
-        </script>
-        <!--new bar chart end -->
-
-
-
-<?php
-use Carbon\Carbon;
-
-// tutors
-$currentMonth = Carbon::now();
-$labels = [];
-$tutorData = []; // Initialize $tutorData array
-
-for ($i = 6; $i >= 0; $i--) {
-    $startOfMonth = $currentMonth
-        ->copy()
-        ->subMonths($i)
-        ->startOfMonth();
-    $endOfMonth = $currentMonth
-        ->copy()
-        ->subMonths($i)
-        ->endOfMonth();
-
-    $monthName = $startOfMonth->format('F');
-    $labels[] = ucfirst($monthName); // Capitalize the first letter of the month name
-
-    $tutorData['PKR' . $monthName] = App\Models\Booking::where('status', 'Completed')
-        ->whereBetween('bookings.created_at', [$startOfMonth, $endOfMonth])
-        ->join('transactions', 'transactions.booking_id', 'bookings.id')
-        ->sum('transactions.amount');
-}
-?>
-
-
-    <!--OLD DOUGHNUT CHART-->
-        <script type="text/javascript">
-            const chartData = {
-                labels: <?php echo json_encode($labels); ?>,
-                data: <?php echo json_encode(array_values($tutorData)); ?>,
-            };
-
-            const myChart = document.querySelector(".my-charts");
-            const ul = document.querySelector(".programming-stats .details ul");
-
-            new Chart(myChart, {
-                type: "doughnut",
-                data: {
-                    labels: chartData.labels,
-                    datasets: [{
-                        label: "Amount",
-                        data: chartData.data,
-                    }, ],
-                },
-                options: {
-                    borderWidth: 10,
-                    borderRadius: 2,
-                    hoverBorderWidth: 0,
-                    plugins: {
-                        legend: {
-                            display: false,
-                        },
+                series: [{
+                        name: 'Tutor',
+                        data: <?php echo $tutor_data; ?>
                     },
+                    {
+                        name: 'Student',
+                        data: <?php echo $student_data; ?>
+                    },
+                    {
+                        name: 'Parent',
+                        data: <?php echo $parent_data; ?>
+                    },
+                    {
+                        name: 'Organization',
+                        data: <?php echo $organization_data; ?>
+                    }
+                ],
+                chart: {
+                    type: 'bar',
+                    height: 350
                 },
-            });
-
-            const populateUl = () => {
-                chartData.labels.forEach((l, i) => {
-                    let li = document.createElement("li");
-                    li.innerHTML = `${l}: <span class='percentage'>${chartData.data[i]}%</span>`;
-                    ul.appendChild(li);
-                });
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '55%',
+                        endingShape: 'rounded'
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    show: true,
+                    width: 2,
+                    colors: ['transparent']
+                },
+                xaxis: {
+                    categories: <?php echo json_encode($months); ?>
+                },
+                yaxis: {
+                    title: {
+                        // text: '$ (thousands)'
+                    }
+                },
+                fill: {
+                    opacity: 1
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(val) {
+                            return "$ " + val + " thousands"
+                        }
+                    }
+                }
             };
 
-            populateUl();
+            var chart = new ApexCharts(document.querySelector("#chart"), options);
+            chart.render();
         </script>
-        <!--OLD DOUGHNUT CHART END-->
 
-        <!--2new dounut chart-->
-         <script>
-      anychart.onDocumentReady(function () {
-        var data = anychart.data.set([
-          ["Wimbledon", 8],
-          ["Australian Open", 6],
-          ["U.S. Open", 5],
-          ["French Open", 1]
-        ]);
-        var chart = anychart
-          .pie(data)
-          .innerRadius("55%");
-        chart.container("dochart1");
-        chart.draw();
-      });
-    </script>
+
+
+
+        <?php
+        use Carbon\Carbon;
+
+        // tutors
+        $currentMonth = Carbon::now();
+        $labels = [];
+        $tutorData = []; // Initialize $tutorData array
+
+        for ($i = 6; $i >= 0; $i--) {
+            $startOfMonth = $currentMonth->copy()->subMonths($i)->startOfMonth();
+            $endOfMonth = $currentMonth->copy()->subMonths($i)->endOfMonth();
+
+            $monthName = $startOfMonth->format('F');
+            $labels[] = ucfirst($monthName); // Capitalize the first letter of the month name
+
+            $tutorData['' . $monthName] = App\Models\Booking::where('status', 'Completed')
+                ->whereBetween('bookings.created_at', [$startOfMonth, $endOfMonth])
+                ->join('transactions', 'transactions.booking_id', 'bookings.id')
+                ->whereBetween('transactions.created_at', [$startOfMonth, $endOfMonth]) // Specify transactions.created_at
+                ->sum('transactions.amount');
+        }
+        ?>
+
+        <!-- Include anychart library -->
+        <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-bundle.min.js"></script>
+
+        <!-- Render chart -->
+        <!--<div id="dochart1" style="width: 100%; height: 400px;"></div>-->
+
+        <script>
+            anychart.onDocumentReady(function() {
+                // Convert PHP array to JavaScript object
+                var tutorData = <?php echo json_encode($tutorData); ?>;
+
+                // Convert the PHP labels array to JavaScript
+                var labels = <?php echo json_encode($labels); ?>;
+
+                // Prepare data for the chart
+                var data = [];
+                for (var key in tutorData) {
+                    if (tutorData.hasOwnProperty(key)) {
+                        data.push([key, tutorData[key]]);
+                    }
+                }
+
+                // Create pie chart
+                var chart = anychart
+                    .pie(data)
+                    .innerRadius("55%");
+
+                // Set chart title
+                // chart.title("Tutor Data");
+
+                // Set chart container
+                chart.container("dochart1");
+
+                // Draw chart
+                chart.draw();
+            });
+        </script>
     @endpush
     <style>
         .card-animate:hover {
@@ -264,21 +202,25 @@ for ($i = 6; $i >= 0; $i--) {
             font-size: 20px !important;
         }
 
-        .tdcomplaint{
+        .tdcomplaint {
             padding: 5px 0px !important;
         }
-
     </style>
-       <style type="text/css">
-       #dochart1 {
-        width: 100%; height: 100%; margin: 0; padding: 0;
-      }
-      .anychart-credits-text{
-          display:none;
-      }
-      .anychart-credits-logo{
-          display:none;
-      }
+    <style type="text/css">
+        #dochart1 {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .anychart-credits-text {
+            display: none;
+        }
+
+        .anychart-credits-logo {
+            display: none;
+        }
     </style>
 
 
@@ -294,6 +236,20 @@ for ($i = 6; $i >= 0; $i--) {
 
                 </div><!-- end card header -->
             </div>
+
+            <div class="col-12">
+                @if (session('failed'))
+                    <div class="alert alert-danger">
+                        {{ session('failed') }}
+                    </div>
+                @endif
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+            </div>
+
             <!--end col-->
         </div>
         <!--end row-->
@@ -324,7 +280,9 @@ for ($i = 6; $i >= 0; $i--) {
                             </div>
                             <div class="avatar-sm flex-shrink-0">
                                 <span class="avatar-title bg-success-subtle rounded fs-3">
-                                    <i class="bx bx-dollar-circle text-success"></i>
+                                    <!--<i class="bx bx-dollar-circle text-success"></i>-->
+                                    <!--<i class="fa-solid fa-sack-dollar text-success "></i>-->
+                                    <span  style="color:black;border:1px solid black;border-radius:50%;padding:0px 5px;">£</span>
                                 </span>
                             </div>
                         </div>
@@ -355,7 +313,7 @@ for ($i = 6; $i >= 0; $i--) {
                             </div>
                             <div class="avatar-sm flex-shrink-0">
                                 <span class="avatar-title bg-info-subtle rounded fs-3">
-                                    <i class="fa-solid fa-people-group"></i>
+                                   <i class="bx bx-user-circle " style="color:#FF4560;"></i>
                                 </span>
                             </div>
                         </div>
@@ -390,7 +348,7 @@ for ($i = 6; $i >= 0; $i--) {
                             </div>
                             <div class="avatar-sm flex-shrink-0">
                                 <span class="avatar-title bg-warning-subtle rounded fs-3">
-                                    <i class="bx bx-user-circle text-warning"></i>
+                                    <i class="bx bx-user-circle " style="color:#008FFB;"></i>
                                 </span>
                             </div>
                         </div>
@@ -424,7 +382,7 @@ for ($i = 6; $i >= 0; $i--) {
                             </div>
                             <div class="avatar-sm flex-shrink-0">
                                 <span class="avatar-title bg-primary-subtle rounded fs-3">
-                                    <i class="bx bx-user-circle text-warning"></i>
+                                    <i class="bx bx-user-circle " style="color:#00E396;"></i>
                                 </span>
                             </div>
                         </div>
@@ -459,7 +417,7 @@ for ($i = 6; $i >= 0; $i--) {
                             </div>
                             <div class="avatar-sm flex-shrink-0">
                                 <span class="avatar-title bg-primary-subtle rounded fs-3">
-                                    <i class="bx bx-user-circle text-warning"></i>
+                                    <i class="bx bx-user-circle " style="color:#FEB019;"></i>
                                 </span>
                             </div>
                         </div>
@@ -498,7 +456,7 @@ for ($i = 6; $i >= 0; $i--) {
                             </div>
                             <div class="avatar-sm flex-shrink-0">
                                 <span class="avatar-title bg-primary-subtle rounded fs-3">
-                                    <i class="bx bx-user-circle text-warning"></i>
+                                    <i class="bx bx-user-circle " style="color:#000000;"></i>
                                 </span>
                             </div>
                         </div>
@@ -535,7 +493,7 @@ for ($i = 6; $i >= 0; $i--) {
                             </div>
                             <div class="avatar-sm flex-shrink-0">
                                 <span class="avatar-title bg-primary-subtle rounded fs-3">
-                                    <i class="bx bx-user-circle text-warning"></i>
+                                    <i class="bx bx-user-circle" style="color:#E76B4D;"></i>
                                 </span>
                             </div>
                         </div>
@@ -549,7 +507,7 @@ for ($i = 6; $i >= 0; $i--) {
                         <div class="d-flex align-items-center">
                             <div class="flex-grow-1 overflow-hidden">
                                 <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                <i class="fa-solid fa-calendar-check"></i>
+                                    <i class="fa-solid fa-calendar-check"></i>
                                     Completed Booking
                                 </p>
                             </div>
@@ -572,7 +530,7 @@ for ($i = 6; $i >= 0; $i--) {
                             </div>
                             <div class="avatar-sm flex-shrink-0">
                                 <span class="avatar-title bg-primary-subtle rounded fs-3">
-                                    <i class="bx bx-user-circle text-warning"></i>
+                                    <i class="bx bx-user-circle " style="color:#ABFE10;"></i>
                                 </span>
                             </div>
                         </div>
@@ -583,12 +541,12 @@ for ($i = 6; $i >= 0; $i--) {
     </div>
 
     <!--<div class="container-fluid px-0 mx-auto  ">-->
-        <!--<div class="row  mt-1 mb-3 justify-content-center" style="gap:10px">-->
-        <!--    <div class="col-md-10 col-lg-7 col-12 bg-white py-2">-->
+    <!--<div class="row  mt-1 mb-3 justify-content-center" style="gap:10px">-->
+    <!--    <div class="col-md-10 col-lg-7 col-12 bg-white py-2">-->
 
-        <!--        <div id="columnchart_material"style="width: 100%; height: 350px; background-color:transparent;"></div>-->
+    <!--        <div id="columnchart_material"style="width: 100%; height: 350px; background-color:transparent;"></div>-->
 
-        <!--    </div>-->
+    <!--    </div>-->
 
     <!--        <div class="col-md-7 col-12 col-lg-4">-->
     <!--            <div class="bg-white p-3 h-100">-->
@@ -609,30 +567,30 @@ for ($i = 6; $i >= 0; $i--) {
 
     <!--new chart section-->
     <div class="container-fluid px-3 mb-3">
-    <div class="row">
-        <div class="col-12 col-md-12 col-lg-8 my-2">
-            <div class="card h-100 p-2">
-                <div class=" py-2 px-3" style="line-height:1.3;">
-                    <h6 class="card-title  fw-bold ">Yearly Users Analytics</h6>
-                    <p class="text-muted">Tutor, Parent, Organization and Student : 2023 - 2024</p>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-8 my-2">
+                <div class="card h-100 p-2">
+                    <div class=" py-2 px-3" style="line-height:1.3;">
+                        <h6 class="card-title  fw-bold ">Yearly Users Analytics</h6>
+                        <p class="text-muted">Tutor, Parent, Organization and Student : 2023 - 2024</p>
+
+                    </div>
+
+                    <div id="chart" style="height: 300px; width: 100%;"></div>
 
                 </div>
 
-                <div id="chart" style="height: 300px; width: 100%;"></div>
-
             </div>
 
-        </div>
-
-        <div class="col-12 col-md-12 col-lg-4 my-2 ">
-            <div class="card h-100 p-2">
-                <div class="px-3 pt-2 ">
-                    <h6 class="card-title ">Total Complete Booking Revenue: 2023-2024</h6>
+            <div class="col-12 col-md-12 col-lg-4 my-2 ">
+                <div class="card h-100 p-2">
+                    <div class="px-3 pt-2 ">
+                        <h6 class="card-title ">Total Complete Booking Revenue: 2023-2024</h6>
+                    </div>
+                    <div id="dochart1"></div>
                 </div>
-                 <div id="dochart1"></div>
             </div>
         </div>
-     </div>
 
     </div>
     <!--new chart section end-->
@@ -640,7 +598,7 @@ for ($i = 6; $i >= 0; $i--) {
     <div class="container-fluid mx-0 px-3">
         <div class="row ">
             <!--<div class="col-xl-12 col-12 mb-3">-->
-                 <!--<div id="regions_div" style="width: 100%;height:400px; "></div>-->
+            <!--<div id="regions_div" style="width: 100%;height:400px; "></div>-->
             <!-- </div>-->
             <div class="col-xl-8 col-md-12 col-lg-8 col-12">
                 <div class="card px-1 px-md-3">
@@ -703,11 +661,14 @@ for ($i = 6; $i >= 0; $i--) {
                                             <td style="text-align: center;">{{ $recent->status }}</td>
                                             </tr>
                                         @endforeach
+
                                     @endif
 
                                 </tbody><!-- end tbody -->
                             </table><!-- end table -->
-                            {{ $recents->links() }}
+                            @if (!empty($recents))
+                             {{ $recents->links() }}
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -715,27 +676,29 @@ for ($i = 6; $i >= 0; $i--) {
             <div class="col-lg-4 col-12">
                 <div class="card" style="height: 94%;">
                     <div class="card-header my-2">
-                        <h4 class="card-title flex-grow-1">Notice's</h4>
-                        </div>
+                        <h4 class="card-title flex-grow-1">Complaint Notice's</h4>
+                    </div>
 
                     <div class="card-body">
-                       <table>
-                        <tbody>
-                        <tr >
-                            <td class="tdcomplaint">
-                                <div class="d-flex align-items-center">
+                        <table>
+                            <tbody>
+                                @if (!empty($notifications))
+                                    @foreach ($notifications as $notification)
+                                      <tr>
+                                            <td class="tdcomplaint">
+                                                <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0 m-2">
 
-                                                        @if (!empty($recent->image) && file_exists(public_path(!empty($recent->image) ? $recent->image : '')))
-                                                            <img src="{{ $recent->image }}" alt=""
+                                                        @if (!empty($notification->Notifier->image) && file_exists(public_path(!empty($notification->Notifier->image) ? $notification->Notifier->image : '')))
+                                                            <img src="{{ $notification->Notifier->image }}" alt=""
                                                                 width="45px" height="45px"
                                                                 class="avatar-xs rounded-circle">
                                                         @else
-                                                            @if ($recent->gender == 'Male')
+                                                            @if ($notification->Notifier->gender == 'Male')
                                                                 <img src="{{ asset('assets/images/male.jpg') }}"
                                                                     alt="" width="45px" height="45px"
                                                                     class="avatar-xs rounded-circle">
-                                                            @elseif($recent->gender == 'Female')
+                                                            @elseif($notification->Notifier->gender == 'Female')
                                                                 <img src="{{ asset('assets/images/female.jpg') }}"
                                                                     alt="" width="45px" height="45px"
                                                                     class="avatar-xs rounded-circle">
@@ -745,162 +708,47 @@ for ($i = 6; $i >= 0; $i--) {
                                                                     class="avatar-xs rounded-circle">
                                                             @endif
                                                         @endif
-
-                                                        {{-- <img src="{{asset(Auth::user()->image)}}" alt="" width="50" height="50" class="avatar-xs rounded-circle"> --}}
                                                     </div>
                                                     <div class="flex-grow-1">
-                                                        <h6 class="mb-0">{{ $recent->first_name . '  ' . $recent->last_name }}</h6>
-                                                        <a href="" class="text-decoration-none text-secondary"><span class="px-0">Complaint</span></a>
+                                                        <h6 class="mb-0">
+                                                            {{ $notification->Notifier->first_name . '  ' . $notification->Notifier->last_name }}
+                                                        </h6>
+                                                        <a href="{{ url('Complaintlogs') }}"
+                                                            class="text-decoration-none text-secondary"><span
+                                                                class="px-0">Complaint : </span>
+                                                                <span  class="px-0">
+                                                                    <?php
+                                                                        $string = strip_tags($notification->description);
+                                                                        if (strlen($string) > 30) {
 
-                                                        </div>
-                                                </div>
-                            </td>
-                        </tr>
-                        <tr >
-                            <td class="tdcomplaint">
-                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0 m-2">
+                                                                            // truncate string
+                                                                            $stringCut = substr($string, 0, 30);
+                                                                            $endPoint = strrpos($stringCut, ' ');
 
-                                                        @if (!empty($recent->image) && file_exists(public_path(!empty($recent->image) ? $recent->image : '')))
-                                                            <img src="{{ $recent->image }}" alt=""
-                                                                width="45px" height="45px"
-                                                                class="avatar-xs rounded-circle">
-                                                        @else
-                                                            @if ($recent->gender == 'Male')
-                                                                <img src="{{ asset('assets/images/male.jpg') }}"
-                                                                    alt="" width="45px" height="45px"
-                                                                    class="avatar-xs rounded-circle">
-                                                            @elseif($recent->gender == 'Female')
-                                                                <img src="{{ asset('assets/images/female.jpg') }}"
-                                                                    alt="" width="45px" height="45px"
-                                                                    class="avatar-xs rounded-circle">
-                                                            @else
-                                                                <img src="{{ asset('assets/images/default.png') }}"
-                                                                    alt="" width="45px" height="45px"
-                                                                    class="avatar-xs rounded-circle">
-                                                            @endif
-                                                        @endif
+                                                                            //if the string doesn't contain any space then it will cut without word basis.
+                                                                            $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                                                            $string .= '...';
+                                                                        }
+                                                                        echo $string;
+                                                                        ?>
+                                                                </span>
 
-                                                        {{-- <img src="{{asset(Auth::user()->image)}}" alt="" width="50" height="50" class="avatar-xs rounded-circle"> --}}
+                                                                </a>
+
                                                     </div>
-                                                    <div class="flex-grow-1">
-                                                        <h6 class="mb-0">{{ $recent->first_name . '  ' . $recent->last_name }}</h6>
-                                                        <a href="" class="text-decoration-none text-secondary"><span class="px-0">Complaint</span></a>
-
-                                                        </div>
                                                 </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="tdcomplaint">
-                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0 m-2">
-
-                                                        @if (!empty($recent->image) && file_exists(public_path(!empty($recent->image) ? $recent->image : '')))
-                                                            <img src="{{ $recent->image }}" alt=""
-                                                                width="45px" height="45px"
-                                                                class="avatar-xs rounded-circle">
-                                                        @else
-                                                            @if ($recent->gender == 'Male')
-                                                                <img src="{{ asset('assets/images/male.jpg') }}"
-                                                                    alt="" width="45px" height="45px"
-                                                                    class="avatar-xs rounded-circle">
-                                                            @elseif($recent->gender == 'Female')
-                                                                <img src="{{ asset('assets/images/female.jpg') }}"
-                                                                    alt="" width="45px" height="45px"
-                                                                    class="avatar-xs rounded-circle">
-                                                            @else
-                                                                <img src="{{ asset('assets/images/default.png') }}"
-                                                                    alt="" width="45px" height="45px"
-                                                                    class="avatar-xs rounded-circle">
-                                                            @endif
-                                                        @endif
-
-                                                        {{-- <img src="{{asset(Auth::user()->image)}}" alt="" width="50" height="50" class="avatar-xs rounded-circle"> --}}
-                                                    </div>
-                                                    <div class="flex-grow-1">
-                                                        <h6 class="mb-0">{{ $recent->first_name . '  ' . $recent->last_name }}</h6>
-                                                        <a href="" class="text-decoration-none text-secondary"><span class="px-0">Complaint</span></a>
-
-                                                        </div>
-                                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="tdcomplaint">
-                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0 m-2">
-
-                                                        @if (!empty($recent->image) && file_exists(public_path(!empty($recent->image) ? $recent->image : '')))
-                                                            <img src="{{ $recent->image }}" alt=""
-                                                                width="45px" height="45px"
-                                                                class="avatar-xs rounded-circle">
-                                                        @else
-                                                            @if ($recent->gender == 'Male')
-                                                                <img src="{{ asset('assets/images/male.jpg') }}"
-                                                                    alt="" width="45px" height="45px"
-                                                                    class="avatar-xs rounded-circle">
-                                                            @elseif($recent->gender == 'Female')
-                                                                <img src="{{ asset('assets/images/female.jpg') }}"
-                                                                    alt="" width="45px" height="45px"
-                                                                    class="avatar-xs rounded-circle">
-                                                            @else
-                                                                <img src="{{ asset('assets/images/default.png') }}"
-                                                                    alt="" width="45px" height="45px"
-                                                                    class="avatar-xs rounded-circle">
-                                                            @endif
-                                                        @endif
-
-                                                        {{-- <img src="{{asset(Auth::user()->image)}}" alt="" width="50" height="50" class="avatar-xs rounded-circle"> --}}
-                                                    </div>
-                                                    <div class="flex-grow-1">
-                                                        <h6 class="mb-0">{{ $recent->first_name . '  ' . $recent->last_name }}</h6>
-                                                        <a href="" class="text-decoration-none text-secondary"><span class="px-0">Complaint</span></a>
-
-                                                        </div>
-                                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="tdcomplaint">
-                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0 m-2">
-
-                                                        @if (!empty($recent->image) && file_exists(public_path(!empty($recent->image) ? $recent->image : '')))
-                                                            <img src="{{ $recent->image }}" alt=""
-                                                                width="45px" height="45px"
-                                                                class="avatar-xs rounded-circle">
-                                                        @else
-                                                            @if ($recent->gender == 'Male')
-                                                                <img src="{{ asset('assets/images/male.jpg') }}"
-                                                                    alt="" width="45px" height="45px"
-                                                                    class="avatar-xs rounded-circle">
-                                                            @elseif($recent->gender == 'Female')
-                                                                <img src="{{ asset('assets/images/female.jpg') }}"
-                                                                    alt="" width="45px" height="45px"
-                                                                    class="avatar-xs rounded-circle">
-                                                            @else
-                                                                <img src="{{ asset('assets/images/default.png') }}"
-                                                                    alt="" width="45px" height="45px"
-                                                                    class="avatar-xs rounded-circle">
-                                                            @endif
-                                                        @endif
-
-                                                        {{-- <img src="{{asset(Auth::user()->image)}}" alt="" width="50" height="50" class="avatar-xs rounded-circle"> --}}
-                                                    </div>
-                                                    <div class="flex-grow-1">
-                                                        <h6 class="mb-0">{{ $recent->first_name . '  ' . $recent->last_name }}</h6>
-                                                        <a href="" class="text-decoration-none text-secondary"><span class="px-0">Complaint</span></a>
-
-                                                        </div>
-                                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                            </tbody>
                         </table>
-                        </div>
+                        @if (!empty($notifications))
+                        {{ $notifications->links() }}
+                        @endif
                     </div>
                 </div>
+            </div>
 
         </div>
     </div>

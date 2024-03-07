@@ -28,6 +28,9 @@ class TutorExperienceController extends Controller
 {
     public function update_tutor()
     {
+        if(Auth::user()->role_id != 3){
+                return  redirect('/dashboard');
+            }
         $subjects = Subject::with('level')->get();
         $tutorsubjectoffers = TutorSubjectOffer::where('tutor_id', Auth::id())->with(['level', 'tutor', 'subject'])->get();
         $levels = Level::all();
@@ -127,6 +130,11 @@ public function update_tutor_post(Request $request)
     }
     public function tutor_profile()
     {
+        
+        if(Auth::user()->role_id != 3){
+                return  redirect('/dashboard');
+            }
+            
         $subject_ids = Auth::user()->subjects;
         $subject_ids = explode(',', $subject_ids);
 
@@ -432,6 +440,10 @@ public function update_tutor_post(Request $request)
     public function tutor_payments(Request $request)
     {
 
+        if(Auth::user()->role_id != 3){
+                return  redirect('/dashboard');
+        }
+        
         $bookings = Booking::with(['student', 'tutor', 'subjects'])
             ->where('tutor_id', Auth::id())
             ->get();

@@ -32,6 +32,8 @@ class AppServiceProvider extends ServiceProvider
         $keys = array(
             "topbaremail",
             "Ph_num",
+            "Maintopbaremail",
+            "MainPh_num",
             "fblink",
             "instlink",
             "xlink",

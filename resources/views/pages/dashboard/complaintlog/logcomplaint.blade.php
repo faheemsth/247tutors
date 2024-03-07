@@ -81,11 +81,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (!empty($Complaints))
+                                    @if ($Complaints->count() > 0)
                                         @foreach ($Complaints as $Complaint)
                                             <tr>
                                                 <td><a onclick="freeMeetmodal('{{ $Complaint->id }}','{{ $Complaint->status }}')"
-                                                        style="cursor: pointer;font-size:20px">{{ $Complaint->TicketID }}</a>
+                                                        style="cursor: pointer;font-size:20px;color:blue;">{{ $Complaint->TicketID }}</a>
                                                 </td>
                                                 <td>{{ optional(App\Models\User::find($Complaint->user_id))->username }}
                                                 </td>
@@ -109,6 +109,10 @@
                                                 </td>
                                             </tr>
                                         @endforeach
+                                        @else
+                                        <tr>
+                                            <td class="text-center" colspan="6">Record not found</td>
+                                        </tr>
                                     @endif
                                 </tbody>
                             </table>

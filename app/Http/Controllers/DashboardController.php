@@ -31,7 +31,6 @@ class DashboardController extends Controller
         $user->update([
             'first_name' => ucfirst(strtolower($request->input('first_name'))),
             'last_name' => $request->input('last_name'),
-            'email' => $request->input('email'),
             // 'password' => Hash::make($request->input('password')), // Hash the password
             'gender' => $request->input('gender'),
             'dob' => $request->input('dob'),

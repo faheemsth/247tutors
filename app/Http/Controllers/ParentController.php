@@ -51,6 +51,9 @@ class ParentController extends Controller
 
     public function your_students()
     {
+        if(Auth::user()->role_id != 5){
+                return  redirect('/dashboard');
+        }
         $students = User::where('parent_id',Auth::id())->get();
         return view('pages.dashboard.addstudents',compact('students'));
     }
@@ -91,6 +94,11 @@ class ParentController extends Controller
 
     public function parent_payments(Request $request){
 
+
+        if(Auth::user()->role_id != 5){
+                return  redirect('/dashboard');
+        }
+        
         $bookings = Booking::with(['student', 'tutor', 'subjects'])
             ->where('parent_id',Auth::id())
             ->get();

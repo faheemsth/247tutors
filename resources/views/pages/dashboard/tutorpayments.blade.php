@@ -228,6 +228,22 @@
 
     <script>
         function withdraw() {
+            
+            
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you want to withdraw amount',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    
+                    
+                    
+                    
             $.ajax({
                 url: '{{ url('tutor/payout') }}',
                 type: 'GET',
@@ -267,6 +283,9 @@
                         });
                     }
                 }
+            });
+            
+            }
             });
         }
     </script>

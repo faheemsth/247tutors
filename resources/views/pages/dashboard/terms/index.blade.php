@@ -76,13 +76,27 @@ a[href*="www.froala.com"] {
                                     @foreach($TermsAndCondition as $key => $TermsAndCon)
                                         <tr>
                                             <th style="border-bottom: .5px solid black;">{{ $key+1 }}</th>
-                                            <td style="border-bottom: .5px solid black;">{{ $TermsAndCon->type }}</td>
+                                            <td style="border-bottom: .5px solid black;">
+                                                <?php
+                                                    
+                                                    $string = strip_tags( $TermsAndCon->type);
+                                                    if (strlen($string) > 15) {
+                                                        $stringCut = substr($string, 0, 15);
+                                                        $endPoint = strrpos($stringCut, ' ');
+                                                        $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                                        $string .= '...';
+                                                    }
+                                                    echo $string;
+                                                 ?>
+                                              
+                                                
+                                                </td>
                                             <td style="border-bottom: .5px solid black;">
                                                 <?php
                                                     
                                                     $string = strip_tags( $TermsAndCon->content);
-                                                    if (strlen($string) > 100) {
-                                                        $stringCut = substr($string, 0, 100);
+                                                    if (strlen($string) > 15) {
+                                                        $stringCut = substr($string, 0, 15);
                                                         $endPoint = strrpos($stringCut, ' ');
                                                         $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
                                                         $string .= '...';

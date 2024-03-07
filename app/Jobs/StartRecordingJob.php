@@ -34,8 +34,9 @@ class StartRecordingJob implements ShouldQueue
 
     public function handle()
     {
+        
         // Retrieve the recording session for the current user
-        $recordingSession = RecordingSession::where('user_id', Auth::id())->first();
+        //$recordingSession = RecordingSession::where('user_id', Auth::id())->first();
 
         // Check if the recording session exists and is in progress
         // if ($recordingSession) {
@@ -47,24 +48,32 @@ class StartRecordingJob implements ShouldQueue
             // If the recording session doesn't exist or is finished, we can start a new recording
 
             // Execute your script here to start the recording
-            $activateScript = 'venv\Scripts\activate.bat';
-            $output = exec("\"$activateScript\" 2>&1", $output, $returnVar);
-
+            $activateScript = '/home/u163900009/domains/247tutors.co.uk/public_html/public/venv/Scripts/activate';
+            $output = exec("source \"$activateScript\" 2>&1", $output, $returnVar); 
+            
+            dd($output);
+        
+            
             $sessionId = $this->sessionId;
-            $command = 'python';
+            $command = 'python3';
             $arguments = [
-                public_path('recording.py'),
+                '/home/u163900009/domains/247tutors.co.uk/public_html/public/recording.py', // Make sure this resolves to the correct absolute path
                 $sessionId,
                 'start',
             ];
-
+            
             // Create a new process instance
             $process = new Process([$command, ...$arguments]);
-            $process->setTimeout(7200);
-            // Run the process
-            $process->run();
-            echo "Python script output:\n" . $process->getOutput() . "\n";
+            $process->start();
+            
+           // dd($process->getOutput());
+            
+            $this->delete();
+          //  echo "Python script output:\n" . $process->getOutput() . "\n";
        // }
+       
+
+
 
         usleep(100000); // 100 milliseconds
     }

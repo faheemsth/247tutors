@@ -136,27 +136,27 @@
                     </tr>
                 </table>
             </td>
-           
+
             </tr>
             <tr>
-            
+
             <td align="center" bgcolor="#e9ecef">
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                     <tr>
                         <td align="left" bgcolor="#ffffff"
                             style="padding: 36px 24px 0; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;border-top: 3px solid #d4dadf">
-                           
+
                             <h3>
                             I hope this email finds you well. This mail to inform you that your verification process on 247Tutors has been successfully completed. You are now officially verified and can proceed to log in to your account to update your profile information.
-                        
+
                             </h3>
-                            
+
                         </td>
                     </tr>
                 </table>
             </td>
             </tr>
-            
+
              <tr>
             <td align="center" bgcolor="#e9ecef">
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
@@ -169,8 +169,8 @@
                 </table>
             </td>
         </tr>
-            
-            
+
+
             <tr>
             <td align="center" bgcolor="#e9ecef">
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
@@ -186,7 +186,20 @@
                 </table>
             </td>
         </tr>
-           
+           <tr>
+            <td align="center" bgcolor="#e9ecef">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+                    <tr>
+                        <td align="left" bgcolor="#ffffff"
+                            style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-bottom: 3px solid #d4dadf">
+                            <ul>
+                                <li>Schecdule Time : {{$time}}</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
         <tr>
             <td align="center" bgcolor="#e9ecef">
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">

@@ -70,8 +70,8 @@ class FrontendController extends Controller
     {
         return view('frontend.organization-apply-steps');
     }
-    
-    
+
+
    public function CommentsStore(Request $request,$id)
     {
         if(Auth::check()){
@@ -86,14 +86,14 @@ class FrontendController extends Controller
         }
 
     }
-    
+
     public function likepost($id)
     {
         if(!Auth::check())
         {
            return redirect('login');
         }
-        
+
         $blog = Blog::find($id);
         if ($blog && $blog->is_like_by != Auth::id()) {
             $blog->is_like += 1;
@@ -104,7 +104,7 @@ class FrontendController extends Controller
             return back()->with('error','You Have Already Like');
         }
     }
-    
+
     public function unlikepost($id)
     {
         if(!Auth::check())
@@ -122,7 +122,7 @@ class FrontendController extends Controller
         }
     }
 
-    
+
     public function singlepost($id)
     {
         $blog = Blog::find($id);
@@ -184,7 +184,7 @@ class FrontendController extends Controller
             return view('pages.dashboard.profiletutor', compact('TutorQualifications','availabilitys', 'tutor', 'subjects', 'tutorsubjectoffers','students'));
         }
         $AllSubjects = Subject::distinct('name')->pluck('name');
-       
+
         return view('pages.dashboard.profiletutor', compact('TutorQualifications','availabilitys', 'tutor', 'subjects', 'tutorsubjectoffers','students','AllSubjects'));
     }
     public function likeDislike(Request $request)
@@ -241,7 +241,7 @@ class FrontendController extends Controller
 
             $mail->setfrom('support@247tutors.com', '247 Tutors');
             $mail->AddEmbeddedImage($imagePath, 'logo');
-            
+
             $mail->isHTML(true);
             $mail->Subject = 'Thank You for Subscribing to Our Newsletter!';
             $mail->Body = $view;
@@ -271,28 +271,28 @@ class FrontendController extends Controller
         if (!empty($search)) {
             $blogs->where('email', 'like', '%' . $search . '%');
         }
-        
+
         if (!empty($request->input('date'))) {
-            
+
             if($request->input('date') == 'Today'){
                 $blogs->whereDate('created_at', today());
             }
-            
+
             if($request->input('date') == '15 Days'){
                 $blogs->whereDate('created_at', '>=', now()->subDays(15));
             }
-            
+
             if($request->input('date') == '30 Days'){
                 $blogs->whereDate('created_at', '>=', now()->subDays(30));
             }
-            
+
         }
-        
+
         $blogs=$blogs->paginate(5);
         return view('super-admin.Pages.Newsletter.list', compact('blogs'));
 
     }
-    
+
         public function deleteNewsletter($id)
         {
             if (Auth::user()->role_id != 1) { return redirect('dashboard'); }
@@ -305,8 +305,8 @@ class FrontendController extends Controller
             }
         }
 
-    
-    
+
+
 
     public function CounterShow(){
      $countmessg = Chat::where('reciver_id', Auth::id())
@@ -322,7 +322,7 @@ class FrontendController extends Controller
     $countBooking = Booking::where('tutor_id', Auth::id())->where('status', 'Pending')->count();
 
     }
-    if(Auth::user()->role_id == 5){
+    if(Auth::user()->role_id == 5 || Auth::user()->role_id == 6){
         $countBooking = Booking::where('parent_id', Auth::id())->where('status', 'Pending')->count();
 
     }

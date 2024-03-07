@@ -55,7 +55,7 @@
                                     <th>{{ __('Description') }}</th>
                                     <th>{{ __('Status') }}</th>
                                     <th>{{ __('Action') }}</th>
-                                    
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -66,10 +66,12 @@
                                         <td>{{ optional(App\Models\Blog::find($BlogReply->post_id))->slug }}</td>
                                         <td>{{ optional(App\Models\User::find($BlogReply->user_id))->first_name.' '.optional(App\Models\User::find($BlogReply->user_id))->last_name }}</td>
                                         <td>{{ $BlogReply->reply }}</td>
-                                        <td>{{ $BlogReply->status }}</td>
+                                        <td>
+                                            <span class="badge {{ $BlogReply->status == 'Active' ? 'badge-success':'badge-danger' }}">{{ $BlogReply->status }}</span>
+                                        </td>
                                         <td>
                                             <div class="dropdown">
-                                              <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                                 Change Status
                                               </button>
                                               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -80,12 +82,15 @@
                                         </td>
                                     </tr>
                                     @endforeach
+                                    <tr>
+                                        <td class="text-center" colspan="6">Record not found</td>
+                                    </tr>
                                 @endif
                             </tbody>
                         </table>
                         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css"/>
                         <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
-                       
+
                     </div>
                 </div>
             </div>

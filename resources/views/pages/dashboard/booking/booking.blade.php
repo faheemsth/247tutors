@@ -155,7 +155,7 @@
                                     <th>Duration</th>
                                     <th>Amount</th>
                                     <th>Status</th>
-                                    <!--<th>Actions</th>-->
+                                    <th>Download</th>
 
                                 </tr>
                             </thead>
@@ -166,7 +166,16 @@
                                         <td>{{ optional($booking->tutor)->first_name . ' ' . optional($booking->tutor)->last_name }}</td>
                                         <th>{{ optional($booking->subjects)->name }}</th>
                                         <td>{{ $booking->duration }} minute</td>
-                                        <td>{{ $booking->amount }} /Hr</td>
+                                        <td>
+                                            
+                                            @if ((int) $booking->amount == $booking->amount)
+                                                    £{{ $booking->amount }}.00/hr
+                                            @else
+                                                    £{{ $booking->amount }}/hr
+                                            @endif
+
+                                            
+                                        </td>
 
                                         <td>
                                             @if ($booking->request_refound != 1)
@@ -190,19 +199,14 @@
                                                 </span>
                                             @endif
                                         </td>
-                                        <!--<td>-->
-                                            
-                                        <!--    @if($booking->std_recording != NULL)-->
-                                        <!--        <button class="btn btn-success px-2 py-1">Student Recording</button>-->
-                                        <!--    @elseif($booking->tutor_recording != NULL)-->
-                                        <!--        <button class="btn btn-success px-2 py-1">Tutor Recording</button>-->
-                                        <!--    @endif-->
-                                        <!--</td>-->
+                                        <td>
+                                           <a class="btn btn-success" href="{{ asset('videos/'.$booking->uuid.'/blob.mp4') }}" download>Lecture Download</a>
+                                        </td>
                                     </tr>
 
                                 @empty
                                     <tr >
-                                        <td>Record not found</td>
+                                        <td class="text-center" colspan="7">Record not found</td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -218,39 +222,39 @@
     @push('script')
         <script src="{{ asset('plugins/select2/dist/js/select2.min.js') }}"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('#status').on('change', function() {
-                    var status = $('#status').val();
-                    $.ajax({
-                        url: '{{ url('admin/bookings') }}',
-                        type: 'GET',
-                        data: { status: status },
-                        success: function(data) {
-                            $('#ajaxbody').html(data);
-                        }
-                    });
-                });
+        // <script>
+        //     $(document).ready(function() {
+        //         $('#status').on('change', function() {
+        //             var status = $('#status').val();
+        //             $.ajax({
+        //                 url: '{{ url('admin/bookings') }}',
+        //                 type: 'GET',
+        //                 data: { status: status },
+        //                 success: function(data) {
+        //                     $('#ajaxbody').html(data);
+        //                 }
+        //             });
+        //         });
 
-                $(document).on('click', '.pagination a', function(e) {
-                    e.preventDefault();
-                    var page = $(this).attr('href').split('page=')[1];
-                    var status = $('#status').val();
-                    getPaginatedData(status,page);
-                });
+        //         $(document).on('click', '.pagination a', function(e) {
+        //             e.preventDefault();
+        //             var page = $(this).attr('href').split('page=')[1];
+        //             var status = $('#status').val();
+        //             getPaginatedData(status,page);
+        //         });
 
-                function getPaginatedData(status,page) {
-                    $.ajax({
-                        url: '{{ url('admin/bookings') }}?page=' + page,
-                        type: 'GET',
-                        data: { status: status },
-                        success: function(data) {
-                            $('#ajaxbody').html(data);
-                        }
-                    });
-                }
+        //         function getPaginatedData(status,page) {
+        //             $.ajax({
+        //                 url: '{{ url('admin/bookings') }}?page=' + page,
+        //                 type: 'GET',
+        //                 data: { status: status },
+        //                 success: function(data) {
+        //                     $('#ajaxbody').html(data);
+        //                 }
+        //             });
+        //         }
 
-            });
-        </script>
+        //     });
+        // </script>
     @endpush
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
+use App\Models\ActivityLog;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 use Illuminate\Support\Facades\Hash;
@@ -25,7 +26,6 @@ class LoginWithGoogleController extends Controller
 
     public function handleGoogleCallback()
     {
-        // $timestamp = mktime(9, 39, 22, 10, 9, 2023);
 
         $dateString = Carbon::now();
         try {
@@ -73,6 +73,13 @@ class LoginWithGoogleController extends Controller
                            $wallet->user_id = $newUser->id;
                            $wallet->wallet_id = Str::uuid()->toString();
                            $wallet->save();
+                           createNotification($newUser->role_id,$newUser->id,'Tutor Signup','Comptaint By ' .$newUser->username);
+                            $ActivityLogs = new ActivityLog;
+                            $ActivityLogs->user_id = $newUser->id;
+                            $ActivityLogs->title = "New Tutor";
+                            $ActivityLogs->description ="New Tutor".$newUser->first_name .'   '. $newUser->last_name."  SignUp At ";
+                            $ActivityLogs->save();
+            
                             Auth::login($newUser);
         
                             return redirect('profile_verification');
@@ -103,6 +110,13 @@ class LoginWithGoogleController extends Controller
                            $wallet->user_id = $newUser->id;
                            $wallet->wallet_id = Str::uuid()->toString();
                            $wallet->save();
+                           
+                            $ActivityLogs = new ActivityLog;
+                            $ActivityLogs->user_id = $newUser->id;
+                            $ActivityLogs->title = "New Student";
+                            $ActivityLogs->description ="New Student".$user->first_name .'   '. $user->last_name."  SignUp At ";
+                            $ActivityLogs->save();
+                            
                             Auth::login($newUser);
         
                             return redirect('student/home');
@@ -133,6 +147,13 @@ class LoginWithGoogleController extends Controller
                            $wallet->user_id = $newUser->id;
                            $wallet->wallet_id = Str::uuid()->toString();
                            $wallet->save();
+                           
+                            $ActivityLogs = new ActivityLog;
+                            $ActivityLogs->user_id = $newUser->id;
+                            $ActivityLogs->title = "New Parent";
+                            $ActivityLogs->description ="New Parent".$user->first_name .'   '. $user->last_name."  SignUp At ";
+                            $ActivityLogs->save();
+                            
                             Auth::login($newUser);
         
                             return redirect('parent/home');
@@ -163,6 +184,13 @@ class LoginWithGoogleController extends Controller
                            $wallet->user_id = $newUser->id;
                            $wallet->wallet_id = Str::uuid()->toString();
                            $wallet->save();
+                           
+                            $ActivityLogs = new ActivityLog;
+                            $ActivityLogs->user_id = $newUser->id;
+                            $ActivityLogs->title = "New Organization";
+                            $ActivityLogs->description ="New Organization".$user->first_name .'   '. $user->last_name."  SignUp At ";
+                            $ActivityLogs->save();
+                            
                             Auth::login($newUser);
         
                             return redirect('organization/home');

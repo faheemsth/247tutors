@@ -1,10 +1,10 @@
-@forelse ($bookings as $booking)
+                            @forelse ($bookings as $booking)
                                 @php
                                     $tutorsubjectoffers = App\Models\TutorSubjectOffer::where('tutor_id', $booking->tutor_id)
                                         ->with(['level', 'tutor', 'subject'])
                                         ->get();
                                 @endphp
-                                @if (!empty(optional($booking->student)->role_id == '4'))
+                                @if (!empty(optional($booking->student)->role_id == '4' || optional($booking->student)->role_id == '6'))
                                     <tr>
                                         <th>{{ $booking->uuid }}</th>
                                         <th>{{ optional($booking->student)->username }}</th>
@@ -16,7 +16,7 @@
                                         <th class="text-capitalize">{{ optional($booking->subjects)->name }}</th>
                                         <td>
                                             @if ($booking->booking_fee !== 'Free')
-                                               @if ((int) $booking->booking_fee == $booking->booking_fee)
+                                                @if ((int) $booking->booking_fee == $booking->booking_fee)
                                                     £{{ $booking->booking_fee }}.00/hr
                                                 @else
                                                     £{{ $booking->booking_fee }}/hr
@@ -50,12 +50,12 @@
                                         </td>
                                         <td>{!! $booking->booking_date . '<br>' . $booking->booking_time !!}</td>
                                         <th class="dropdown">
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
+
+
+
+
+
+
                                             @if ($booking->request_refound == '2' || $booking->request_refound == '1' || $booking->status == 'Cancelled' || $booking->status == 'Cancelled By User' || $booking->status == 'Cancelled By Tutor')
                                             <button class="btn student-table-details dropdown-toggle" type="button"
                                                 id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" disabled>
@@ -67,29 +67,29 @@
                                                 Actions
                                             </button>
                                             @endif
-                                            
+
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
-                                                @if (Auth::user()->role_id == 5)
+                                                @if (Auth::user()->role_id == 5 || Auth::user()->role_id == 6)
                                                     <li>
-                                                        <a href="{{ url('chats') . '/' . $booking->tutor->id }}"
+                                                        <a href="{{ url('chat') . '/' . $booking->tutor->id }}"
                                                             class="dropdown-item">Let’s
                                                             chat with Tutor</a>
-                                                        <a href="{{ url('chats') . '/' . $booking->student->id }}"
+                                                        <a href="{{ url('chat') . '/' . $booking->student->id }}"
                                                             class="dropdown-item">Let’s chat with Student</a>
                                                     </li>
                                                 @endif
 
                                                 @if (Auth::user()->role_id == 5)
-                                                    <li>
-                                                        <a class="dropdown-item cursor-pointer"
-                                                            onclick="UpdateSubject('{{ $booking->id }}','{{ $booking->date }}','{{ $booking->time }}','{{ $booking->subjects->name }}','{{ $booking->tutor->username }}','£{{ $booking->amount }}/hr')">
-                                                            Edit Booking
-                                                        </a>
-                                                    </li>
+                                                    <!--<li>-->
+                                                    <!--    <a class="dropdown-item cursor-pointer"-->
+                                                    <!--        onclick="UpdateSubject('{{ $booking->id }}','{{ $booking->date }}','{{ $booking->time }}','{{ $booking->subjects->name }}','{{ $booking->tutor->username }}','£{{ $booking->amount }}/hr')">-->
+                                                    <!--        Edit Booking-->
+                                                    <!--    </a>-->
+                                                    <!--</li>-->
                                                 @endif
 
                                                 @if ($booking->status != 'Completed')
-                                                    @if (Auth::user()->role_id == 3 || Auth::user()->role_id == 4)
+                                                    @if (Auth::user()->role_id == 3 || Auth::user()->role_id == 4 || Auth::user()->role_id == 5 || Auth::user()->role_id == 6)
                                                         @if ($booking->status != 'Pending')
                                                             @if (
                                                                 $booking->status != 'Cancelled' &&
@@ -100,7 +100,7 @@
                                                                     <!--    href="{{ url('online-meeting/') . '/' . $booking->uuid }}"-->
                                                                     <!--    class="dropdown-item cursor-pointer">Join-->
                                                                     <!--    Meeting</a>-->
-                                                                    @if(Auth::user()->role_id == 4)
+                                                                    @if(Auth::user()->role_id == 4 || Auth::user()->role_id == 5 || Auth::user()->role_id == 6)
                                                                         @if($booking->is_meet_student <= 1)
                                                                         <a target="_blank"
                                                                             href="{{ url('zoom-online-meeting/') . '/' . $booking->uuid }}"
@@ -108,7 +108,7 @@
                                                                              Zoom</a>
                                                                         @endif
                                                                     @endif
-                                                                    
+
                                                                     @if(Auth::user()->role_id == 3)
                                                                         @if($booking->is_meet_tutor <= 1)
                                                                         <a target="_blank"
@@ -152,7 +152,7 @@
                                                                         Booking</a>
                                                                 @endif
                                                             </li>
-                                                        @elseif (Auth::user()->role_id == 4 || Auth::user()->role_id == 5)
+                                                        @elseif (Auth::user()->role_id == 4 || Auth::user()->role_id == 5 || Auth::user()->role_id == 6)
                                                             <li>
                                                                 @if ($booking->status != 'Scheduled')
                                                                     <a href="{{ url('booking-status-change?id=') . $booking->uuid . '&status=Cancelled&tutorId=' . $booking->tutor_id }}"
@@ -185,30 +185,30 @@
                                                             <a onClick="viewRating(`{{ $booking->uuid }}`)"
                                                                 class="dropdown-item cursor-pointer" style="cursor: pointer">View Feedback</a>
                                                         </li>
-                                                        @if (Auth::user()->role_id != 3)
+                                                        @if (Auth::user()->role_id != 3 && $booking->booking_fee !== 'Free')
                                                         <li>
                                                             <a onclick="Refund('{{$booking->uuid}}','{{$booking->tutor_id}}','{{optional($booking->tutor)->username}}','{{optional($booking->subjects)->name}}','{{$booking->booking_fee}}')"
                                                             class="dropdown-item " style="cursor: pointer">
                                                             Request Refund
                                                             </a>
-                                                            
+
                                                         </li>
                                                         @endif
                                                     @endif
                                                 @endif
-                                                     
+
                                             </ul>
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
+
+
+
+
+
+
+
+
+
+
+
                                         </th>
                                     </tr>
                                 @endif

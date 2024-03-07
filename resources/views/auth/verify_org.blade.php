@@ -401,7 +401,7 @@
                                     </div>
                                     <div class="mt-1 mb-5">
                                         <p class="cen">Need help? Call us <a href="tel:@isset($web_settings['Ph_num']) {{$web_settings['Ph_num'] ?? '' }} @endisset" class="text-decoration-none"><span style="color: rgb(162, 244, 10)">@isset($web_settings['Ph_num']) {{$web_settings['Ph_num'] ?? '' }} @endisset</span></a> or
-                                          <a href="mailto:@isset($web_settings['topbaremail']) {{$web_settings['topbaremail'] ?? '' }} @endisset"  class="text-decoration-none"><span style="color: rgb(162, 244, 10)">email us</span></a>. </p>
+                                          <a href="mailto:@isset($web_settings['Maintopbaremail']) {{$web_settings['Maintopbaremail'] ?? '' }} @endisset"  class="text-decoration-none"><span style="color: rgb(162, 244, 10)">email us</span></a>. </p>
                                     </div>
                                 </div>
                             </div>

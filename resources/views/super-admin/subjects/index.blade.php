@@ -97,6 +97,10 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                @else 
+                                    <tr>
+                                        <td colspan="4" class="text-center">Record not found</td>
+                                    </tr>
                                 @endif
                             </tbody>
                         </table>

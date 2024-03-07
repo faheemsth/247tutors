@@ -120,7 +120,7 @@
                                         </td> --}}
                                     </tr>
                                 @empty
-                                    <tr>
+                                    <tr colspan="5" class="text-center">
                                         <td>Record not found</td>
                                     </tr>
                                 @endforelse

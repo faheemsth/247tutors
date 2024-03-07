@@ -7,56 +7,66 @@
 <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/webicons/css/all.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-@endpush
+
 <style>
-           .profileeditdiv{
-            opacity: 1;
+    .nav-item .active{
+                background-color: rgba(171, 255, 0, 1) !important;
+        }
+        .pro-nav:hover{
+             background-color: #FFFFFF !important;
+             /*color :white !important;*/
+        }
+         
+         
+       
+            .profileeditdiv{
+            opacity: 0;
             position: absolute;
             top:0px;
             left:50px;
         }
+         .profileeditdiv:hover{
+            opacity: 0.9;
+            /*z-index:999999999;*/
+        }
+    
         @media only screen and (max-width: 1026px){
             .profileeditdiv{
-                 position: absolute;
-            top:0px;
+              
             left:7px;
         }
         @media only screen and (max-width: 770px){
             .profileeditdiv{
-                 position: absolute;
-            top:0px;
+                
             left:33px;
         }
         @media only screen and (max-width: 426px){
             .profileeditdiv{
-                 position: absolute;
-            top:0px;
+               
             left:55px;
         }
         @media only screen and (max-width: 375px){
             .profileeditdiv{
-                 position: absolute;
-            top:0px;
+                
             left:38px;
         }
         @media only screen and (max-width: 325px){
             .profileeditdiv{
-                 position: absolute;
-            top:0px;
+                
             left:19px;
         }
-        @media only screen and (min-width: 1440px){
+        
+         @media only screen and (min-width: 1440px){
             .profileeditdiv{
-                 position: absolute;
-            top:0px;
+       
             left:79px;
         }
         }
-        .profileeditdiv:hover{
-            opacity: 0.8;
-        }
+       
+    
 
 </style>
+@endpush
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-4 col-8">
@@ -112,7 +122,7 @@
 
 
                             <h5 class="fs-17 mb-1">{{ $users->first_name }} {{ $users->last_name }}</h5>
-                            <p class="text-muted mb-0">Admin</p>
+                            <p class="text-muted mb-0">{{ $users->profile_description }}</p>
                         </div>
                     </div>
                 </div>
@@ -121,19 +131,19 @@
                 <div class="card mt-xxl-n5">
                     <div class="card-header">
                         <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
-                            <li class="nav-item" role="presentation">
+                            <li class="nav-item pro-nav" role="presentation">
                                 <a class="nav-link active" data-bs-toggle="tab" href="#personalDetails" role="tab" aria-selected="true">
                                     <i class="fas fa-home"></i>
                                     Personal Details
                                 </a>
                             </li>
-                            <li class="nav-item " role="presentation">
+                            <li class="nav-item pro-nav" role="presentation">
                                 <a class="nav-link" data-bs-toggle="tab" href="#programs" role="tab" aria-selected="false" tabindex="-1">
                                     <i class="far fa-user"></i>
                                     Password
                                 </a>
                             </li>
-                            <li class="nav-item d-none" role="presentation">
+                            <li class="nav-item d-none pro-nav" role="presentation">
                                 <a class="nav-link" data-bs-toggle="tab" href="#documents" role="tab" aria-selected="false" tabindex="-1">
                                     <i class="far fa-envelope"></i>
                                     Documents
@@ -170,7 +180,7 @@
                                             <div class="mb-3">
                                                 <label for="contact" class="form-label">Email
                                                     </label>
-                                                <input type="email" class="form-control" name="email" id="email"  value="{{ $users->email }}">
+                                                <input type="email" class="form-control" name="email" id="email"  value="{{ $users->email }}" disabled>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">

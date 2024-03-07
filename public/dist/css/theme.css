@@ -12,6 +12,9 @@ body {
     margin: 0;
     overflow-x: hidden;
 }
+::-webkit-scrollbar {
+  display: none;
+}
 
 article,
 aside,
@@ -8106,7 +8109,7 @@ p {
     background-color: #ffffff;
     z-index: 1030;
     position: relative;
-    padding: 15px 0;
+    padding: 12px 0;
     position: fixed;
     top: 0;
     width: 100%;
@@ -8239,7 +8242,7 @@ p {
 }
 .top-menu .nav-link {
     width: 34px;
-    height: 34px;
+    height: 33px;
     padding: 0;
     text-align: center;
     line-height: 36px;
@@ -8577,6 +8580,9 @@ p {
     margin-right: 10px;
     display: inline-block;
     vertical-align: -4px;
+}
+.wrapper .page-wrap .app-sidebar .sidebar-content .nav-container .navigation-main .nav-item a {
+    font-size: 13px !important;
 }
 .wrapper
     .page-wrap
@@ -9317,14 +9323,13 @@ p {
 }
 .wrapper .page-wrap .right-sidebar {
     position: fixed;
-    top: 66px;
+    top: 61px;
     right: 0;
     width: 290px;
     background: #fff;
     height: 55vh;
-    border:2px solid #0000004d;
-    /* border-left: 1px solid #eef1f2; */
-    border-radius: 3px;
+    border:2px solid #eef1f2;
+    /*border-left: 1px solid #eef1f2;*/
     border-top: 1px solid #eef1f2;
     padding: 1.07143em;
     z-index: 9;

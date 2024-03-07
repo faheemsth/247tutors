@@ -429,7 +429,7 @@
                                     <div class="row mt-4 justify-content-center">
                                         <div class="col-md-5">
                                             <label class="text-secondary">Password</label><br>
-                                            <input type="password" id="password" name="password"
+                                            <input type="password" id="passwordUser" name="password"
                                                 placeholder="Enter Password" class="w-100 p-2">
                                         </div>
                                     </div>
@@ -596,7 +596,7 @@
                         isValid = false;
                     }
                 } else if (step === 3) {
-                    if ($('#confirm-password').val() === '' || $('#password').val() === '' || $('#username')
+                    if ($('#confirm-password').val() === '' || $('#passwordUser').val() === '' || $('#username')
                         .val() === '') {
                         isValid = false;
                     }
@@ -637,6 +637,16 @@
         $(document).ready(function() {
             $('#register').click(function() {
                 var formData = $('#registration-form').serialize();
+                if ($('#confirm-password').val() === '' || $('#passwordUser').val() === '' || $('#username').val() === '') {
+                        Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Please fill in all the required fields.',
+                        showConfirmButton: false,
+                        timer: 5000,
+                        showCloseButton: true
+                    });
+                }else{
                 $.ajax({
                     url: '/register',
                     method: 'POST',
@@ -674,6 +684,8 @@
                         }
                     },
                 });
+                
+            }
             });
         });
     </script>

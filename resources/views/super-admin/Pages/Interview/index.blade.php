@@ -72,6 +72,7 @@
                                      
                                     <th>{{ __('Status') }}</th>
                                     <th>{{ __('Interview') }}</th>
+                                    <th>{{ __('Download') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -122,14 +123,17 @@
                                             @if($Parent->is_meet_admin > 0)
                                               <a class="btn btn-success p-2 text-white" target="_blank">Interview Completed</a>
                                             @else
-                                              <a href="{{ url('zoom-online-interiew-meeting').'/'.$Parent->Interview_meeting_id }}" class="btn btn-primary p-2 text-white" target="_blank">Join Interview Meeting</a>
+                                              <a href="{{ url('zoom-online-interiew-meeting').'/'.$Parent->Interview_meeting_id }}" class="btn btn-primary px-2 py-1 text-white" target="_blank">Join Interview Meeting</a>
                                             @endif
                                         @endif
+                                        </td>
+                                        <td>
+                                           <a class="btn btn-success" href="#!" download>Interview Download</a>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td>Record not found</td>
+                                        <td colspan="6" class="text-center">Record not found</td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -156,13 +160,13 @@
                     <div class="row mt-4">
                         <div class="col-md-6">
                             <label class="text-secondary">Date</label><br>
-                            <input type="date" name="date" id="date" class="w-100 p-3" required max="9999-12-31">
+                            <input type="date" name="date" id="date" class="w-100 p-2" required max="9999-12-31">
                             <input type="hidden" name="id" id="Tutorid" class="w-100 p-3" required>
                         </div>
 
                         <div class="col-md-6">
                             <label class="text-secondary">Time</label><br>
-                            <input type="time" id="time-1" name="time" class="w-100 p-3" required>
+                            <input type="time" id="time-1" name="time" class="w-100 p-2" required>
                         </div>
                     </div>
                 </div>

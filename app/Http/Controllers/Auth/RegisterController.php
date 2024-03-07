@@ -185,7 +185,7 @@ class RegisterController extends Controller
                 'role_id' => $data['role_id'],
                 'username' => ucfirst(strtolower($data['username'])),
                 'dob' => $data['dob'],
-                'subjects' => implode(',', $data['subject']),
+                'subjects' => !empty($data['subject']) ? implode(',', $data['subject']) : null,
                 'password' => Hash::make($data['confirm-password']),
             ]);
 
@@ -205,26 +205,29 @@ class RegisterController extends Controller
                 'status' => 'Pending',
                 'role_id' => $data['role_id'],
                 'username' => ucfirst(strtolower($data['username'])),
-                'subjects' => implode(',', $data['subject']),
+                'subjects' => !empty($data['subject']) ? implode(',', $data['subject']) : null,
                 'password' => Hash::make($data['password']),
-                'parent_authority' => $data['parent_authority'],
+                'parent_authority' => !empty($data['parent_authority']) ? $data['parent_authority'] : 0,
             ]);
         $parentId=User::where('email', $data['email'])->first()->id;
-            $studentData = [
-                'first_name' => ucfirst(strtolower($request->input('stufname'))),
-                'last_name' => $request->input('stulname'),
-                'phone' => $request->input('stucode') . $request->input('stuphone'),
-                'email' => $request->input('stuemail'),
-                'username' => $request->input('stulname').rand ( 100 , 999 ),
+            if(!empty($request->input('stuemail'))){
+                          $studentData = [
+                    'first_name' => ucfirst(strtolower($request->input('stufname'))),
+                    'last_name' => $request->input('stulname'),
+                    'phone' => $request->input('stucode') . $request->input('stuphone'),
+                    'email' => $request->input('stuemail'),
+                    'username' => $request->input('stulname').rand ( 100 , 999 ),
+    
+                    'status' => 'Active',
+                    'email_verified_at' => Carbon::now(),
+                    'role_id' => '4',
+                    'password' => Hash::make($data['password']),
+                    'parent_id' => $parentId
+                ];
+    
+                User::create($studentData);  
+            }
 
-                'status' => 'Active',
-                'email_verified_at' => Carbon::now(),
-                'role_id' => '4',
-                'password' => Hash::make($data['password']),
-                'parent_id' => $parentId
-            ];
-
-            User::create($studentData);
             $ActivityLogs = new ActivityLog;
             $ActivityLogs->user_id = $user->id;
             $ActivityLogs->title = "New Parent";
@@ -249,7 +252,7 @@ class RegisterController extends Controller
                 'cplname' => $data['cplname'],
                 'cpemail' => $data['cpemail'],
                 'zipcode' => $data['zipcode'],
-                'status' => 'Pending',
+                'status' => 'Active',
                 'role_id' => $data['role_id'],
                 'password' => Hash::make('1234'),
             ]);
@@ -278,8 +281,8 @@ class RegisterController extends Controller
                 });
             }elseif($environment == 'production'){
                 $imagePath = public_path('assets/images/247 NEW Logo 1.png');
-                
-                
+
+
                 $view = \view('email.emailVerificationEmail',$data);
                 $view = $view->render();
                 $mail = new PHPMailer();

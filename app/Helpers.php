@@ -3,6 +3,11 @@
 use App\Models\ActivityLog;
 use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
+use Stripe\Stripe;
+use Stripe\Payout;
+use Stripe\Transfer;
+use Stripe\Balance;
+use App\Models\Wallet;
 
 if (!function_exists('viewlike')) {
 function viewlike($to){
@@ -55,4 +60,85 @@ function createActivityLog($UserID,$Title,$Description)
     }
 
 }
+
+
+function PayoutAmount($Price,$AccountNo)
+{
+    if(Auth::check()){
+        
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+        // $balance = Balance::retrieve();
+        // $amount = $balance->available[0]->amount;
+        // dd($amount);
+        try {
+            
+            $wallet = Wallet::where('user_id', \Auth::user()->id)->first();
+            if (!empty($wallet) && $wallet->net_income > 0) {
+                
+            // $payout = Payout::create([
+            //     'amount' => 10,
+            //     'currency' => 'usd',
+            //     'destination' => 'acct_1OoKzjSDq7qRUMRw',
+            //     'source_type' => 'bank_account',
+            // ]);
+            
+            $transfer = Transfer::create([
+                'amount' => 10,
+                'currency' => 'usd',
+                'destination' => 'acct_1OokqSRAiypBZtje',
+                //'source_type' => 'bank_account',
+            ]);
+            $wallet->withdrawn += $Price;
+            $wallet->net_income = $wallet->net_income - $Price;
+            $wallet->save();
+            
+            $response['message'] = " Withdraw successfull! ";
+            $response['success'] = true;
+            $response['status_code'] = 200;
+            return response()->json($response);
+                    
+            }else{
+            $response['message'] = " We cannot process this request! ";
+            $response['success'] = true;
+            $response['status_code'] = 501;
+            return response()->json($response);
+            }
+                    
+        } catch (\Stripe\Exception\CardException $e) {
+            $response['message'] = $e->getMessage();
+            $response['success'] = true;
+            $response['data'] = $e;
+            $response['status_code'] = 501;
+            return response()->json($response);
+        } catch (\Stripe\Exception\InvalidRequestException $e) {
+            $response['message'] = $e->getMessage();
+            $response['success'] = true;
+            $response['data'] = $e;
+            $response['status_code'] = 501;
+            return response()->json($response);
+        } catch (\Stripe\Exception\AuthenticationException $e) {
+            $response['message'] = $e->getMessage();
+            $response['success'] = true;
+            $response['data'] = $e;
+            $response['status_code'] = 501;
+            return response()->json($response);
+        } catch (\Stripe\Exception\ApiConnectionException $e) {
+            $response['message'] = $e->getMessage();
+            $response['success'] = true;
+            $response['data'] = $e;
+            $response['status_code'] = 501;
+            return response()->json($response);
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+            $response['message'] = $e->getMessage();
+            $response['success'] = true;
+            $response['data'] = $e;
+            $response['status_code'] = 501;
+            return response()->json($response);
+        }
+        
+       
+    }
+
+}
+
 ?>

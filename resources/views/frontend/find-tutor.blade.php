@@ -5,10 +5,12 @@
             @include('layouts.studentnav')
         @elseif (Auth::user()->role_id == '3')
             @include('layouts.tutornav')
-        @elseif (Auth::user()->role_id == '5' || Auth::user()->role_id == '6')
+        @elseif (Auth::user()->role_id == '5')
             @include('layouts.parentnav')
         @elseif (Auth::user()->role_id == '1' || Auth::user()->role_id == '2')
             @include('layouts.navbar')
+        @elseif (Auth::user()->role_id == '6')
+            @include('layouts.orgnav')
         @endif
     @else
         @include('layouts.navbar')
@@ -20,7 +22,7 @@
         @include('include.message')
 
             <div class="col-md-6 col-12">
-                <h4 id="appendcount">{{ $TutorSubjectOffers->total() }} {{ __('Search results in') }}<strong></strong> Tutors</h4>
+                <h4 id="appendcount">{{ $TutorSubjectOffers->total() }} {{ __('Search Results in') }}<strong></strong> Tutors</h4>
             </div>
             <div class="col-md-6 col-12">
                 <div class="d-flex gap-2 gap-md-2 justify-content-md-end align-items-baseline">
@@ -32,9 +34,9 @@
                                 <strong>Price </strong>
                             </a>
                             <ul class="dropdown-menu " aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" id="dropdown-item" href="javascript:void(0)">low to high</a>
+                                <li><a class="dropdown-item" id="dropdown-item" href="javascript:void(0)">Low to High</a>
                                 </li>
-                                <li><a class="dropdown-item" id="dropdown-item" href="javascript:void(0)">high to low</a>
+                                <li><a class="dropdown-item" id="dropdown-item" href="javascript:void(0)">High to Low</a>
                                 </li>
                             </ul>
                         </li>
@@ -537,7 +539,7 @@
                                         @endif
                                     </div>
 
-                                   
+
                                 </div>
                                 <div class="range my-2">
                                     <label for="">
@@ -643,9 +645,9 @@
                                                                     class="correctiocn mx-1" alt="">
                                                             </div>
                                                             <div class="d-sm-block d-md-none">
-                                                              <a 
+                                                              <a
                                                         href="{{ url('likeDislike?tutor=') . (!empty($tutor) ? $tutor->id : '') }}"
-                                                        style="text-decoration: none;color: inherit;">   
+                                                        style="text-decoration: none;color: inherit;">
                                                                   @php
                                                             $tutorId = !empty($tutor) ? $tutor->id : '';
                                                             $action = App\Models\LikeDislike::where('to_user_id', $tutorId)
@@ -666,7 +668,7 @@
                                                     </div>
                                                     <div class="col-md-5">
                                                         <div class="row" style="text-align:inline-end;">
-                                                           
+
                                                             <div class="col-12 dollor text-end pe-3 d-none d-md-inline-block">
 
                                                                 @if (
@@ -838,9 +840,9 @@
             $('#search, .zipcode, .Education_level, .checkbox1, input[name="only"], #max_price, #min_price, #dropdown-item, .applyButton')
                 .on('keyup change click', function() {
                     var sort = $(this).text().trim();
-                    
+
                     var firstTen = sort.substring(0, 10);
-                    
+
                     if (firstTen === 'All Levels' || firstTen === 'Apply filt') {
                             sort = '';
                         }

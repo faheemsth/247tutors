@@ -6,7 +6,7 @@
         </span>
         <span class=" float-sm-right mt-1 mt-sm-0 text-center">
             {{ __('Developed by')}}
-            <a class="text-dark" target="_blank" href="https://smarttechnologyhouse.net/">Smart Technology House </a>
+            <a class="text-dark" target="_blank" href="">Smart Technology House </a>
             </a>
 
         </span>

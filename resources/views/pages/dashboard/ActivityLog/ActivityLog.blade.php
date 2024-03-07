@@ -133,6 +133,7 @@
                     <!--</div>-->
                     <div class="card-header justify-content-between">
                         <h3>{{ __('Activity Logs') }}</h3>
+                        <a class="btn btn-success px-3 py-1" href="void::javascript(0)" onclick="tableToCSV()"><i class="fa fa-download me-2" style="font-size:16px;"></i>Export</a>
                     </div>
 
                     <div class="card-body" style="overflow: scroll;">
@@ -144,6 +145,7 @@
                                     <th>User</th>
                                     <th>Title</th>
                                     <th>Description</th>
+                                    <th>Time & Date</th>
                                 </tr>
                             </thead>
                             <tbody id="ajaxbody">
@@ -151,10 +153,11 @@
                                  @if(!empty($booking->user) && !empty($booking->title) && !empty($booking->description))
                                     <tr>
                                         {{-- @dd($booking) --}}
-                                        <td style="border-bottom: .5px solid black;">{{ $booking->id }}</td>
+                                        <td style="border-bottom: .5px solid black;">{{ $key+1 }}</td>
                                         <td style="border-bottom: .5px solid black;">{{ optional($booking->user)->first_name.' '.optional($booking->user)->last_name }}</td>
                                         <td class="fw-bold" style="border-bottom: .5px solid black;">{{ $booking->title }}</td>
                                         <td style="border-bottom: .5px solid black;">{{ $booking->description }}</td>
+                                        <td style="border-bottom: .5px solid black;">{{ $booking->created_at }}</td>
                                     </tr>
                                 @endif
                                 @endforeach
@@ -172,8 +175,44 @@
                         <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
                         <script>
                             $(document).ready(function(){
-                                $('#reviewStudents').DataTable();
+                                $('#reviewStudents').DataTable({
+                                    "order": [[ 0, "desc" ]] // Sort by the first column in ascending order
+                                });
                             });
                         </script>
+
+                    	<script type="text/javascript">
+                    		function tableToCSV() {
+                    			let csv_data = [];
+                    			let rows = document.getElementsByTagName('tr');
+                    			for (let i = 0; i < rows.length; i++) {
+                    				let cols = rows[i].querySelectorAll('td,th');
+                    				let csvrow = [];
+                    				for (let j = 0; j < cols.length; j++) {
+                    					csvrow.push(cols[j].innerHTML);
+                    				}
+                    				csv_data.push(csvrow.join(","));
+                    			}
+                    			csv_data = csv_data.join('\n');
+                    			downloadCSVFile(csv_data);
+                    
+                    		}
+                    
+                    		function downloadCSVFile(csv_data) {
+                    			CSVFile = new Blob([csv_data], {
+                    				type: "text/csv"
+                    			});
+                    			let temp_link = document.createElement('a');
+                    			temp_link.download = "ActivityLogs.csv";
+                    			let url = window.URL.createObjectURL(CSVFile);
+                    			temp_link.href = url;
+                    			temp_link.style.display = "none";
+                    			document.body.appendChild(temp_link);
+                    			temp_link.click();
+                    			document.body.removeChild(temp_link);
+                    		}
+                    	</script>
+
+
     @endpush
 @endsection

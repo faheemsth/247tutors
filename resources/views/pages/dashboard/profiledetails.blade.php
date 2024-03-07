@@ -728,9 +728,9 @@
                     <!-- Modal body -->
                     <div class="modal-body">
                         <div class="form-floating mb-3">
-                            <select class="form-select" id="floatingSelectGrid" name="subject_id"
+                            <select class="form-select" id="floatingSelectGrid" required name="subject_id"
                                 aria-label="Floating label select example">
-                                <option selected>Select Subject</option>
+                                <option value="" selected>Select Subject</option>
                                 @if ($subjects)
                                     @foreach ($subjects as $subject)
                                         <option value="{{ $subject->id }}">{{ $subject->name }}</option>
@@ -740,9 +740,9 @@
                             <label for="floatingSelectGrid">Subjects</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <select class="form-select" id="floatingSelectGrid" name="level_id"
+                            <select class="form-select" id="floatingSelectGrid" name="level_id" required
                                 aria-label="Floating label select example">
-                                <option selected>Select Level</option>
+                                <option value="">Select Level</option>
                                 <option value="KS1 (Primary)" data-level="KS1 (Primary)">KS1 (Primary)</option>
                                 <option value="KS2 (Primary)" data-level="KS2 (Primary)">KS2 (Primary)</option>
                                 <option value="KS3 (GCSE)" data-level="KS3 (GCSE)">KS3 (GCSE)</option>
@@ -752,7 +752,7 @@
                             <label for="floatingSelectGrid">Levels</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="fee"
+                            <input type="text" class="form-control" name="fee" required
                                 oninput="this.value = this.value.replace(/[^0-9]/g, '');" id="floatingInput"
                                 placeholder="Name">
                             <label for="floatingInput">Fee</label>
@@ -762,7 +762,7 @@
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Create</button>
+                        <button type="submit" class="btn btn-success" >Create</button>
                     </div>
                 </form>
 

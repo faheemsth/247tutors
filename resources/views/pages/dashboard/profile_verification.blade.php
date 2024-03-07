@@ -86,28 +86,29 @@
 
 
 
-         @media only screen and (min-width: 1440px){
+        @media only screen and (min-width: 1440px) {
 
-        .flag-2 {
-            left: 247px;
+            .flag-2 {
+                left: 247px;
+            }
+
+            .flag-3 {
+                left: 507px;
+            }
+
+            .flag-4 {
+                left: 764px;
+            }
+
+            .flag-5 {
+                left: 1024px;
+            }
+
+            .flag-6 {
+                left: 1280px;
+            }
         }
 
-        .flag-3 {
-            left: 507px;
-        }
-
-        .flag-4 {
-            left: 764px;
-        }
-
-        .flag-5 {
-            left: 1024px;
-        }
-
-        .flag-6 {
-            left: 1280px;
-        }
-        }
         @media only screen and (max-width: 1025px) {
             .flag-2 {
                 left: 175px;
@@ -120,7 +121,8 @@
             .flag-4 {
                 left: 550px;
             }
-              .flag-5 {
+
+            .flag-5 {
                 left: 739px;
             }
 
@@ -143,9 +145,11 @@
             .flag-4 {
                 left: 408px;
             }
+
             .flag-5 {
                 left: 550px;
             }
+
             .flag-6 {
                 left: 684px;
             }
@@ -447,12 +451,12 @@
         }
 
         #chekboxId {}
-        @media only screen
-and (max-width : 425px) {
-.card-content{
-    width:100%;
-}
-}
+
+        @media only screen and (max-width : 425px) {
+            .card-content {
+                width: 100%;
+            }
+        }
     </style>
     <div id="topscroll" class="container">
         <div class="row">
@@ -536,8 +540,9 @@ and (max-width : 425px) {
                             <a href="#" class="link-dark previous btn " id="previous1"><i
                                     class="fa fa-light fa-arrow-left"></i>
                                 Back</a>
-                            <a href="#topscroll" class="text-decoration-none"> <input type="button" required data-id="1"; name="password"
-                                class=" next btn btn-primary px-5" value="Next" id="next1" /></a>
+                            <a href="#topscroll" class="text-decoration-none"> <input type="button" required
+                                    data-id="1"; name="password" class=" next btn btn-primary px-5" value="Next"
+                                    id="next1" /></a>
                         </div>
                     </fieldset>
 
@@ -593,7 +598,7 @@ and (max-width : 425px) {
                                                                 <label class="text-secondary">Biography<span
                                                                         id="Title-validation-message"
                                                                         style="color: red;">*</span></label><br>
-                                                                <textarea name="biography" id="biography" class="w-100 p-2" ></textarea>
+                                                                <textarea name="biography" id="biography" class="w-100 p-2"></textarea>
                                                             </div>
 
 
@@ -642,8 +647,9 @@ and (max-width : 425px) {
                             <a href="#" class="link-dark previous btn " id="previous2"><i
                                     class="fa fa-light fa-arrow-left"></i>
                                 Back</a>
-                                <a href="#topscroll" class="text-decoration-none"> <input type="button" data-id="2" required name="password"
-                                class=" next btn btn-primary px-5" value="Next" id="next2" /></a>
+                            <a href="#topscroll" class="text-decoration-none"> <input type="button" data-id="2"
+                                    required name="password" class=" next btn btn-primary px-5" value="Next"
+                                    id="next2" /></a>
                         </div>
                     </fieldset>
 
@@ -720,7 +726,8 @@ and (max-width : 425px) {
                                                                                 id="Title-validation-message"
                                                                                 style="color: red;">*</span></label><br>
 
-                                                                        <select class=" w-100 p-2" name="allowed_drive" onchange="checkDrivePermission(this)"
+                                                                        <select class=" w-100 p-2" name="allowed_drive"
+                                                                            onchange="checkDrivePermission(this)"
                                                                             id="allowed_drive"
                                                                             aria-label="Default select example">
                                                                             <option value="" selected>Select Option
@@ -735,11 +742,15 @@ and (max-width : 425px) {
 
                                                                     <span id="DrivePermission" style="display: none">
                                                                         <div class="col-md-12 mb-3">
-                                                                            <label class="text-secondary">Licence number<span id="Title-validation-message"
+                                                                            <label class="text-secondary">Licence
+                                                                                number<span id="Title-validation-message"
                                                                                     style="color: red;">*</span></label><br>
-                                                                            <input type="text" class="w-100 p-2 licence_number" id="licence_number" name="licence_number"
-                                                                                placeholder="Enter Licence number" >
-                                                                            <span id="Title-validation-message" style="color: red;"></span>
+                                                                            <input type="text"
+                                                                                class="w-100 p-2 licence_number"
+                                                                                id="licence_number" name="licence_number"
+                                                                                placeholder="Enter Licence number">
+                                                                            <span id="Title-validation-message"
+                                                                                style="color: red;"></span>
                                                                         </div>
                                                                     </span>
 
@@ -770,167 +781,84 @@ and (max-width : 425px) {
                                                             </div>
 
                                                             <h4 class="text-bold">What days are you available ?
-                                                            <span id="Title-validation-message" style="color: red;">*</span>
+                                                                <span id="Title-validation-message"
+                                                                    style="color: red;">*</span>
                                                             </h4>
 
                                                             <div class="custom-table">
-                                                                <table class="table table-bordered border-dark mt-4 custom-table">
-                                                                <thead class="qualification">
-                                                                    <tr class="thh">
+                                                                <table
+                                                                    class="table table-bordered border-dark mt-4 custom-table">
+                                                                    <thead class="qualification">
+                                                                        <tr class="thh">
 
-                                                                        <th class="col" scope="col"></th>
-                                                                        <th scope="col">Mon</th>
-                                                                        <th scope="col">Tue</th>
-                                                                        <th scope="col">Wed</th>
-                                                                        <th scope="col">Thu</th>
-                                                                        <th scope="col">Fri</th>
-                                                                        <th scope="col">Sat</th>
-                                                                        <th scope="col">Sun</th>
-                                                                        <!-- <th scope="col">Action</th> -->
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody id="userRecordsTableBody">
-                                                                    <tr>
-                                                                        <td class="tdd">
-                                                                            <img src="/assets/images/11111.png"
-                                                                                alt="Morning">Morning
-                                                                        </td>
-                                                                        @for ($i = 1; $i <= 7; $i++)
-                                                                            <td class="text-end">
-                                                                                <input class="form-check-input"
-                                                                                    type="checkbox"
-                                                                                    name="day_of_the_week[]"
-                                                                                    value="{{ $i }}"
-                                                                                    id="flexCheckChecked{{ $i }}">
+                                                                            <th class="col" scope="col"></th>
+                                                                            <th scope="col">Mon</th>
+                                                                            <th scope="col">Tue</th>
+                                                                            <th scope="col">Wed</th>
+                                                                            <th scope="col">Thu</th>
+                                                                            <th scope="col">Fri</th>
+                                                                            <th scope="col">Sat</th>
+                                                                            <th scope="col">Sun</th>
+                                                                            <!-- <th scope="col">Action</th> -->
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="userRecordsTableBody">
+                                                                        <tr>
+                                                                            <td class="tdd">
+                                                                                <img src="/assets/images/11111.png"
+                                                                                    alt="Morning">Morning
                                                                             </td>
-                                                                        @endfor
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="tdd">
-                                                                            <img src="/assets/images/sunny 1.png"
-                                                                                alt="Afternoon">Afternoon
-                                                                        </td>
+                                                                            @for ($i = 1; $i <= 7; $i++)
+                                                                                <td class="text-end">
+                                                                                    <input class="form-check-input"
+                                                                                        type="checkbox"
+                                                                                        name="day_of_the_week[]"
+                                                                                        value="{{ $i }}"
+                                                                                        id="flexCheckChecked{{ $i }}">
+                                                                                </td>
+                                                                            @endfor
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="tdd">
+                                                                                <img src="/assets/images/sunny 1.png"
+                                                                                    alt="Afternoon">Afternoon
+                                                                            </td>
 
-                                                                        @for ($i = 1; $i <= 7; $i++)
-                                                                            <td class="text-end">
-                                                                                <input class="form-check-input"
-                                                                                    type="checkbox"
-                                                                                    name="day_of_the_week[]"
-                                                                                    value="{{ $i }}"
-                                                                                    id="flexCheckChecked{{ $i }}">
+                                                                            @for ($i = 1; $i <= 7; $i++)
+                                                                                <td class="text-end">
+                                                                                    <input class="form-check-input"
+                                                                                        type="checkbox"
+                                                                                        name="day_of_the_week[]"
+                                                                                        value="{{ $i }}"
+                                                                                        id="flexCheckChecked{{ $i }}">
+                                                                                </td>
+                                                                            @endfor
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="tdd">
+                                                                                <img src="/assets/images/sunrise 1.png"
+                                                                                    alt="Evening">Evening
                                                                             </td>
-                                                                        @endfor
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="tdd">
-                                                                            <img src="/assets/images/sunrise 1.png"
-                                                                                alt="Evening">Evening
-                                                                        </td>
 
-                                                                        @for ($i = 1; $i <= 7; $i++)
-                                                                            <td class="text-end">
-                                                                                <input class="form-check-input"
-                                                                                    type="checkbox"
-                                                                                    name="day_of_the_week[]"
-                                                                                    value="{{ $i }}"
-                                                                                    id="flexCheckChecked{{ $i }}">
-                                                                            </td>
-                                                                        @endfor
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
+                                                                            @for ($i = 1; $i <= 7; $i++)
+                                                                                <td class="text-end">
+                                                                                    <input class="form-check-input"
+                                                                                        type="checkbox"
+                                                                                        name="day_of_the_week[]"
+                                                                                        value="{{ $i }}"
+                                                                                        id="flexCheckChecked{{ $i }}">
+                                                                                </td>
+                                                                            @endfor
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
                                                             </div>
 
-                                                            <!-- <div class="col-md-12 mb-3 d-flex">
-                                                                                                                    <input type="checkbox" value="Monday"
-                                                                                                                        name="available_days" class="w-50 available_days"
-                                                                                                                        id="monday"
-                                                                                                                        style="margin-left: -92px;margin-right: -95px;">
-                                                                                                                    <label class="text-secondary">Monday<span
-                                                                                                                            id="Title-validation-message"
-                                                                                                                            style="color: red;">*</span></label>
 
-                                                                                                                </div>
-                                                                                                                <div class="col-md-12 mb-3 d-flex">
-                                                                                                                    <input type="checkbox" value="Tuesday"
-                                                                                                                        name="available_days" class="w-50 available_days"
-                                                                                                                        id="tuesday"
-                                                                                                                        style="margin-left: -92px;margin-right: -95px;">
-                                                                                                                    <label class="text-secondary">Tuesday<span
-                                                                                                                            id="Title-validation-message"
-                                                                                                                            style="color: red;">*</span></label>
-
-                                                                                                                </div>
-                                                                                                                <div class="col-md-12 mb-3 d-flex">
-                                                                                                                    <input type="checkbox" value="Wednesday"
-                                                                                                                        name="available_days" class="w-50 available_days"
-                                                                                                                        id="wednesday"
-                                                                                                                        style="margin-left: -92px;margin-right: -95px;">
-                                                                                                                    <label class="text-secondary">Wednesday<span
-                                                                                                                            id="Title-validation-message"
-                                                                                                                            style="color: red;">*</span></label>
-
-                                                                                                                </div>
-                                                                                                                <div class="col-md-12 mb-3 d-flex">
-                                                                                                                    <input type="checkbox" value="Thursday"
-                                                                                                                        name="available_days" class="w-50" id="thursday"
-                                                                                                                        style="margin-left: -92px;margin-right: -95px;">
-                                                                                                                    <label class="text-secondary">Thursday<span
-                                                                                                                            id="Title-validation-message"
-                                                                                                                            style="color: red;">*</span></label>
-
-                                                                                                                </div>
-                                                                                                                <div class="col-md-12 mb-3 d-flex">
-                                                                                                                    <input type="checkbox" value="Friday"
-                                                                                                                        name="available_days" class="w-50 available_days"
-                                                                                                                        id="friday"
-                                                                                                                        style="margin-left: -92px;margin-right: -95px;">
-                                                                                                                    <label class="text-secondary">Friday<span
-                                                                                                                            id="Title-validation-message"
-                                                                                                                            style="color: red;">*</span></label>
-
-                                                                                                                </div>
-                                                                                                                <div class="col-md-12 mb-3 d-flex">
-                                                                                                                    <input type="checkbox" value="Saturday"
-                                                                                                                        name="available_days" class="w-50 available_days"
-                                                                                                                        id="saturday"
-                                                                                                                        style="margin-left: -92px;margin-right: -95px;">
-                                                                                                                    <label class="text-secondary">Saturday<span
-                                                                                                                            id="Title-validation-message"
-                                                                                                                            style="color: red;">*</span></label>
-
-                                                                                                                </div>
-                                                                                                                <div class="col-md-12 mb-3 d-flex">
-                                                                                                                    <input type="checkbox" value="Sunday"
-                                                                                                                        name="available_days" class="w-50 available_days"
-                                                                                                                        id="sunday"
-                                                                                                                        style="margin-left: -92px;margin-right: -95px;">
-                                                                                                                    <label class="text-secondary">Sunday<span
-                                                                                                                            id="Title-validation-message"
-                                                                                                                            style="color: red;">*</span></label>
-
-                                                                                                                </div> -->
-
-
-                                                            <!-- <h4 class="text-bold">Preferred Slots for Tutoring?</h4>
-                                                                                                            <div class="col-md-12 mb-3">
-                                                                                                                <label class="text-secondary">Choose <span
-                                                                                                                        id="Title-validation-message"
-                                                                                                                        style="color: red;">*</span></label><br>
-
-                                                                                                                <select class=" w-100 p-3" name="tutoring_slot"
-                                                                                                                    id="tutoring_slot"
-                                                                                                                    aria-label="Default select example">
-                                                                                                                    <option value="" selected>Select Option</option>
-                                                                                                                    <option value="Morning">Morning</option>
-                                                                                                                    <option value="Afternoon">Afternoon</option>
-                                                                                                                    <option value="Evening">Evening</option>
-                                                                                                                    <option value="Any">Any</option>
-                                                                                                                </select>
-                                                                                                            </div> -->
 
                                                             <h4 class="text-bold">Tutoring Experience?
-                                                            <span id="Title-validation-message" style="color: red;">*</span>
+                                                                <span id="Title-validation-message"
+                                                                    style="color: red;">*</span>
                                                             </h4>
                                                             <div class="col-md-12 mb-3">
                                                                 <label class="text-secondary">Choose <span
@@ -965,7 +893,8 @@ and (max-width : 425px) {
 
 
                                                             <h4 class="text-bold">Which Subjects you can teach what Level?
-                                                            <span id="Title-validation-message" style="color: red;">*</span>
+                                                                <span id="Title-validation-message"
+                                                                    style="color: red;">*</span>
                                                             </h4>
                                                             <div class="col-md-12 mb-3">
                                                                 <div class="row">
@@ -1054,326 +983,12 @@ and (max-width : 425px) {
                                                             </div>
 
 
-                                                            {{-- <h4>What is your teaching level ?</h4>
-                                                            <div class="col-md-12 mb-3">
-                                                                <label class="text-secondary">Choose <span
-                                                                        id="Title-validation-message"
-                                                                        style="color: red;">*</span></label><br>
 
-                                                                <select class=" w-100 p-2" name="teaching_level"
-                                                                    id="teaching_level"
-                                                                    aria-label="Default select example">
-                                                                    <option value="" selected>Select Option</option>
-                                                                    <option value="KS1 (Primary)" data-level="KS1 (Primary)">KS1 (Primary)</option>
-                                                                    <option value="KS2 (Primary)" data-level="KS2 (Primary)">KS2 (Primary)</option>
-                                                                    <option value="KS3 (GCSE)" data-level="KS3 (GCSE)">KS3 (GCSE)</option>
-                                                                    <option value="KS4 (A Level)" data-level="KS4 (A Level)">KS4 (A Level)</option>
-                                                                    <option value="University" data-level="University">University</option>
-                                                                </select>
-                                                            </div> --}}
 
-                                                            {{-- <h4>Are you part of any other tutoring organisation?</h4>
-                                                            <div class="col-md-12 mb-3">
-                                                                <label class="text-secondary">Choose <span
-                                                                        id="Title-validation-message"
-                                                                        style="color: red;">*</span></label><br>
 
-                                                                <select class=" w-100 p-2" name="tutoring_organisation"
-                                                                    id="tutoring_organisation"
-                                                                    aria-label="Default select example">
-                                                                    <option value="" selected>Select Option</option>
-                                                                    <option value="1">School</option>
-                                                                    <option value="2">tution center</option>
-                                                                    <option value="3">online tuturing</option>
-                                                                    <option value="4">private Tution</option>
-                                                                    <option value="5">no</option>
-                                                                </select>
-                                                            </div> --}}
 
                                                         </span>
-                                                        <!--  -->
-                                                        {{-- <span id="hometutor">
 
-
-
-
-                                        <h4>Are you willing to travel  ?</h4>
-                                        <div class="col-md-12 mb-3">
-                                            <label class="text-secondary">Choose <span id="Title-validation-message"
-                                                style="color: red;">*</span></label><br>
-
-                                            <select class=" w-100 p-2" name="is_willing_travel"  id="is_willing_travel"
-                                                aria-label="Default select example">
-                                                <option value="" selected>Select Option</option>
-                                                <option value="1">Yes</option>
-                                                <option value="2">No</option>
-                                            </select>
-                                        </div>
-
-
-
-
-
-                                        <h4>How far are you willing to travel to pupils home ?</h4>
-                                        <div class="col-md-12 mb-3">
-                                            <label class="text-secondary">Choose <span id="Title-validation-message"
-                                                style="color: red;">*</span></label><br>
-
-                                            <select class=" w-100 p-2" name="traveling_distance"  id="traveling_distance"
-                                                aria-label="Default select example">
-                                                <option value="" selected>Select Option</option>
-                                                <option value="5">Upto 5 Miles</option>
-                                                <option value="10">Upto 10 Miles</option>
-                                                <option value="15">Upto 15 Miles</option>
-                                                <option value="20">Upto 20 Miles</option>
-                                            </select>
-                                        </div>
-
-
-
-                                        <h4>Are you allowed to drive in UK ?</h4>
-                                        <div class="col-md-12 mb-3">
-                                            <label class="text-secondary">Choose <span id="Title-validation-message"
-                                                style="color: red;">*</span></label><br>
-
-                                            <select class=" w-100 p-2" name="allowed_drive"  id="allowed_drive"
-                                                aria-label="Default select example">
-                                                <option value="" selected>Select Option</option>
-                                                <option value="1">Yes</option>
-                                                <option value="2">No</option>
-                                            </select>
-                                        </div>
-                                    </span> --}}
-                                                        <!--  -->
-                                                        {{-- <span id="bothtype">
-                                                <h4>Are you willing to travel  ?</h4>
-                                                <div class="col-md-12 mb-3">
-                                                    <label class="text-secondary">Choose <span id="Title-validation-message"
-                                                        style="color: red;">*</span></label><br>
-
-                                                    <select class=" w-100 p-3" name="tutortype"  id="tutortype"
-                                                        aria-label="Default select example">
-                                                        <option value="" selected>Select Option</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-
-
-
-
-
-                                                <h4>How far are you willing to travel to pupils home ?</h4>
-                                                <div class="col-md-12 mb-3">
-                                                    <label class="text-secondary">Choose <span id="Title-validation-message"
-                                                        style="color: red;">*</span></label><br>
-
-                                                    <select class=" w-100 p-3" name="tutortype"  id="tutortype"
-                                                        aria-label="Default select example">
-                                                        <option value="" selected>Select Option</option>
-                                                        <option value="5">Upto 5 Miles</option>
-                                                        <option value="10">Upto 10 Miles</option>
-                                                        <option value="15">Upto 15 Miles</option>
-                                                        <option value="20">Upto 20 Miles</option>
-                                                    </select>
-                                                </div>
-
-
-
-                                                <h4>Are you allowed to drive in UK ?</h4>
-                                                <div class="col-md-12 mb-3">
-                                                    <label class="text-secondary">Choose <span id="Title-validation-message"
-                                                        style="color: red;">*</span></label><br>
-
-                                                    <select class=" w-100 p-3" name="tutortype"  id="tutortype"
-                                                        aria-label="Default select example">
-                                                        <option value="" selected>Select Option</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                                <h4>How many hours are you available per week ?</h4>
-
-                                                <div class="col-md-12 mb-3">
-                                                    <label class="text-secondary">Choose <span id="Title-validation-message"
-                                                        style="color: red;">*</span></label><br>
-
-                                                    <select class=" w-100 p-3" name="tutortype"  id="tutortype"
-                                                        aria-label="Default select example">
-                                                        <option value="" selected>Select Option</option>
-                                                        <option value="5">5</option>
-                                                        <option value="10">10</option>
-                                                        <option value="15">15</option>
-                                                        <option value="20">20</option>
-                                                        <option value="25">25</option>
-                                                        <option value="30">30</option>
-                                                        <option value="35">35</option>
-                                                        <option value="40">40</option>
-                                                        <option value="45">45</option>
-                                                        <option value="50">50</option>
-                                                        <option value="55">55</option>
-                                                        <option value="60">60</option>
-                                                    </select>
-                                                </div>
-
-                                                <h4 class="text-bold">What days are you available ?</h4>
-                                                <div class="col-md-12 mb-3 d-flex">
-                                                    <input type="checkbox" id="title" value="Monday" name="email" class="w-50" id="chekboxId" style="margin-left: -92px;margin-right: -95px;">
-                                                    <label class="text-secondary">Monday<span id="Title-validation-message"
-                                                        style="color: red;">*</span></label>
-
-                                                </div>
-
-
-
-                                                <div class="col-md-12 mb-3 d-flex">
-                                                    <input type="checkbox" id="title" value="Tuesday" name="email" class="w-50" id="chekboxId" style="margin-left: -92px;margin-right: -95px;">
-                                                    <label class="text-secondary">Tuesday<span id="Title-validation-message"
-                                                        style="color: red;">*</span></label>
-
-                                                </div>
-
-
-
-                                                <div class="col-md-12 mb-3 d-flex">
-                                                    <input type="checkbox" id="title" value="Wednesday" name="email" class="w-50" id="chekboxId" style="margin-left: -92px;margin-right: -95px;">
-                                                    <label class="text-secondary">Wednesday<span id="Title-validation-message"
-                                                        style="color: red;">*</span></label>
-
-                                                </div>
-
-
-
-                                                <div class="col-md-12 mb-3 d-flex">
-                                                    <input type="checkbox" id="title" value="Thursday" name="email" class="w-50" id="chekboxId" style="margin-left: -92px;margin-right: -95px;">
-                                                    <label class="text-secondary">Thursday<span id="Title-validation-message"
-                                                        style="color: red;">*</span></label>
-
-                                                </div>
-
-
-
-                                                <div class="col-md-12 mb-3 d-flex">
-                                                    <input type="checkbox" id="title" value="Friday" name="email" class="w-50" id="chekboxId" style="margin-left: -92px;margin-right: -95px;">
-                                                    <label class="text-secondary">Friday<span id="Title-validation-message"
-                                                        style="color: red;">*</span></label>
-
-                                                </div>
-
-
-
-                                                <div class="col-md-12 mb-3 d-flex">
-                                                    <input type="checkbox" id="title" value="Saturday" name="email" class="w-50" id="chekboxId" style="margin-left: -92px;margin-right: -95px;">
-                                                    <label class="text-secondary">Saturday<span id="Title-validation-message"
-                                                        style="color: red;">*</span></label>
-
-                                                </div>
-
-
-
-
-                                                <div class="col-md-12 mb-3 d-flex">
-                                                    <input type="checkbox" id="title" value="Sunday" name="email" class="w-50" id="chekboxId" style="margin-left: -92px;margin-right: -95px;">
-                                                    <label class="text-secondary">Sunday<span id="Title-validation-message"
-                                                        style="color: red;">*</span></label>
-
-                                                </div>
-
-
-                                                <h4 class="text-bold">Preferred Slots for Tutoring?</h4>
-                                                <div class="col-md-12 mb-3">
-                                                    <label class="text-secondary">Choose <span id="Title-validation-message"
-                                                        style="color: red;">*</span></label><br>
-
-                                                    <select class=" w-100 p-3" name="tutortype"  id="tutortype"
-                                                        aria-label="Default select example">
-                                                        <option value="" selected>Select Option</option>
-                                                        <option value="Morning">Morning</option>
-                                                        <option value="Afternoon">Afternoon</option>
-                                                        <option value="Evening">Evening</option>
-                                                        <option value="Any">Any</option>
-                                                    </select>
-                                                </div>
-
-                                                <h4 class="text-bold">Tutoring Experience?</h4>
-                                                <div class="col-md-12 mb-3">
-                                                    <label class="text-secondary">Choose <span id="Title-validation-message"
-                                                        style="color: red;">*</span></label><br>
-
-                                                    <select class=" w-100 p-3" name="tutortype"  id="tutortype"
-                                                        aria-label="Default select example">
-                                                        <option value="" selected>Select Option</option>
-                                                        <option value="1">1 Year</option>
-                                                        <option value="2">2 Year</option>
-                                                        <option value="3">3 Year</option>
-                                                        <option value="4">4 Year</option>
-                                                        <option value="5">5 Year</option>
-                                                        <option value="6">6 Year</option>
-                                                        <option value="7">7 Year</option>
-                                                        <option value="8">8 Year</option>
-                                                        <option value="9">9 Year</option>
-                                                        <option value="10">10 Year</option>
-                                                        <option value="11">11 Year</option>
-                                                        <option value="12">12 Year</option>
-                                                        <option value="13">13 Year</option>
-                                                        <option value="14">14 Year</option>
-                                                        <option value="15">15 Year</option>
-                                                        <option value="16">16 Year</option>
-                                                        <option value="17">17 Year</option>
-                                                        <option value="18">18 Year</option>
-                                                        <option value="19">19 Year</option>
-                                                        <option value="20">20 Year</option>
-                                                    </select>
-                                                </div>
-
-
-                                                <h4 class="text-bold">Which Subjects you can teach what Level ?</h4>
-                                                <div class="col-md-12 mb-3">
-                                                    <label class="text-secondary">Choose <span id="Title-validation-message"
-                                                        style="color: red;">*</span></label><br>
-                                                        @if (!empty($subjects))
-                                                    <select class="w-10 p-3 select2" name="subject[]"  id="tutortype"
-                                                        aria-label="Default select example">
-                                                        @foreach ($subjects as $subject)
-                                                            <option value="{{ $subject->id }}">{{ $subject->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @endif
-                                                </div>
-
-                                                <h4>What is your teaching level ?</h4>
-                                                <div class="col-md-12 mb-3">
-                                                    <label class="text-secondary">Choose <span id="Title-validation-message"
-                                                        style="color: red;">*</span></label><br>
-
-                                                    <select class=" w-100 p-3" name="tutortype"  id="tutortype"
-                                                        aria-label="Default select example">
-                                                        <option value="" selected>Select Option</option>
-                                                        <option value="KS1 (Primary)" data-level="KS1 (Primary)">KS1 (Primary)</option>
-                                                        <option value="KS2 (Primary)" data-level="KS2 (Primary)">KS2 (Primary)</option>
-                                                        <option value="KS3 (GCSE)" data-level="KS3 (GCSE)">KS3 (GCSE)</option>
-                                                        <option value="KS4 (A Level)" data-level="KS4 (A Level)">KS4 (A Level)</option>
-                                                        <option value="University" data-level="University">University</option>
-                                                    </select>
-                                                </div>
-
-                                                <h4>Are you part of any other tutoring organisation ?</h4>
-                                                <div class="col-md-12 mb-3">
-                                                    <label class="text-secondary">Choose <span id="Title-validation-message"
-                                                        style="color: red;">*</span></label><br>
-
-                                                    <select class=" w-100 p-3" name="tutortype"  id="tutortype"
-                                                        aria-label="Default select example">
-                                                        <option value="" selected>Select Option</option>
-                                                        <option value="1">School</option>
-                                                        <option value="2">tution center</option>
-                                                        <option value="3">online tuturing</option>
-                                                        <option value="4">private Tution</option>
-                                                        <option value="5">no</option>
-                                                    </select>
-                                                </div>
-                                    </span> --}}
 
 
                                                     </div>
@@ -1391,8 +1006,9 @@ and (max-width : 425px) {
                             <a href="#" class="link-dark previous btn " id="previous2"><i
                                     class="fa fa-light fa-arrow-left"></i>
                                 Back</a>
-                                <a href="#topscroll" class="text-decoration-none">  <input type="button" data-id="3" required name="password"
-                                class=" next btn btn-primary px-5" value="Next" id="next2" /></a>
+                            <a href="#topscroll" class="text-decoration-none"> <input type="button" data-id="3"
+                                    required name="password" class=" next btn btn-primary px-5" value="Next"
+                                    id="next2" /></a>
                         </div>
                     </fieldset>
 
@@ -1418,7 +1034,8 @@ and (max-width : 425px) {
                                                         <div class="row mt-4 justify-content-center">
                                                             <div class="col-md-12 mb-3">
                                                                 <label class="text-secondary">Qualifications
-                                                                    type<span id="Title-validation-message" style="color: red;">*</span></label><br>
+                                                                    type<span id="Title-validation-message"
+                                                                        style="color: red;">*</span></label><br>
                                                                 <select class=" w-100 p-2 qualification_type"
                                                                     onchange="changeQualification()"
                                                                     aria-label="Default select example"
@@ -1432,7 +1049,9 @@ and (max-width : 425px) {
 
 
                                                             <div class="col-md-12 mb-3">
-                                                                <label class="text-secondary">Title<span id="Title-validation-message" style="color: red;">*</span></label><br>
+                                                                <label class="text-secondary">Title<span
+                                                                        id="Title-validation-message"
+                                                                        style="color: red;">*</span></label><br>
                                                                 <input type="text"
                                                                     class="w-100 p-2 qualification_title"
                                                                     id="qualification_title" name="qualification_title"
@@ -1442,7 +1061,8 @@ and (max-width : 425px) {
                                                             </div>
                                                             <div class="col-md-12 mb-3">
                                                                 <label class="text-secondary">Name of
-                                                                    institution <span id="Title-validation-message" style="color: red;">*</span></label><br>
+                                                                    institution <span id="Title-validation-message"
+                                                                        style="color: red;">*</span></label><br>
                                                                 <input type="text"
                                                                     class="w-100 p-2 qualification_institution"
                                                                     id="qualification_institution">
@@ -1450,7 +1070,9 @@ and (max-width : 425px) {
                                                                     style="color: red;"></span>
                                                             </div>
                                                             <div class="col-md-12 mb-3">
-                                                                <label class="text-secondary">Grade <span id="Title-validation-message" style="color: red;">*</span></label><br>
+                                                                <label class="text-secondary">Grade <span
+                                                                        id="Title-validation-message"
+                                                                        style="color: red;">*</span></label><br>
                                                                 <select class=" w-100 p-2 qualification_grade"
                                                                     aria-label="Default select example"
                                                                     name="qualification_grade" id="qualification_grade">
@@ -1458,9 +1080,12 @@ and (max-width : 425px) {
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-12 mb-3">
-                                                                <label class="text-secondary">Year Completed <span id="Title-validation-message" style="color: red;">*</span></label><br>
+                                                                <label class="text-secondary">Year Completed <span
+                                                                        id="Title-validation-message"
+                                                                        style="color: red;">*</span></label><br>
                                                                 <input type="date" class="w-100 p-2 year_completed"
-                                                                    name="year_completed" id="year_completed" max="9999-12-31">
+                                                                    name="year_completed" id="year_completed"
+                                                                    max="9999-12-31">
 
                                                             </div>
                                                             <span id="appendmore">
@@ -1487,8 +1112,9 @@ and (max-width : 425px) {
                             <a href="#" class="link-dark previous btn " id="previous3"><i
                                     class="fa fa-light fa-arrow-left"></i>
                                 Back</a>
-                                <a href="#topscroll" class="text-decoration-none"> <input type="button" required name="password" class=" next btn btn-primary px-5"
-                                value="Next" id="next2" data-id="4" /></a>
+                            <a href="#topscroll" class="text-decoration-none"> <input type="button" required
+                                    name="password" class=" next btn btn-primary px-5" value="Next" id="next2"
+                                    data-id="4" /></a>
                         </div>
                     </fieldset>
                     <fieldset id="step-5">
@@ -1499,51 +1125,51 @@ and (max-width : 425px) {
 
                                 <div class="col-md-6 col-12 ">
                                     <h2 class="fs-1" id="text-color"><strong>
-                                    Please Upload a Copy Of Your Documents<span id="Title-validation-message" style="color: red;"></span>
-                                </strong></h2><br>
+                                            Please Upload a Copy Of Your Documents<span id="Title-validation-message"
+                                                style="color: red;"></span>
+                                        </strong></h2><br>
                                     <p>
                                         We need your graduation certificate for verifiction purposes
                                     </p>
                                     <div class="formbold-mb-5">
                                         <label for="text" class="formbold-form-label">
-                                            Upload your ID:<span id="Title-validation-message" style="color: red;">*</span>
+                                            Upload your ID:<span id="Title-validation-message"
+                                                style="color: red;">*</span>
                                         </label>
                                         <input type="file" name="user_id" id="user_id"
                                             class="formbold-form-input" />
                                     </div>
                                     <div class="formbold-mb-5">
                                         <label for="text" class="formbold-form-label">
-                                            your ID Expiry:<span id="Title-validation-message" style="color: red;">*</span>
+                                            your ID Expiry:<span id="Title-validation-message"
+                                                style="color: red;">*</span>
                                         </label>
                                         <input type="date" name="user_id_expiry" id="user_id_expiry"
-                                            class="formbold-form-input"  max="9999-12-31"/>
+                                            class="formbold-form-input" max="9999-12-31" />
                                     </div>
 
                                     <div class="formbold-mb-5">
                                         <label for="file" class="formbold-form-label">
-                                            Proof of address:<span id="Title-validation-message" style="color: red;">*</span>
+                                            Proof of address:<span id="Title-validation-message"
+                                                style="color: red;">*</span>
                                         </label>
                                         <input type="file" name="address_proof" class="formbold-form-input"
                                             id="address_proof" />
                                     </div>
-                                    {{-- <div class="formbold-mb-5">
-                                        <label for="file" class="formbold-form-label">
-                                            Proof of address Expiry:<span id="Title-validation-message" style="color: red;">*</span>
-                                        </label>
-                                        <input type="date" name="address_proof_expiry" class="formbold-form-input"
-                                            id="address_proof_expiry" />
-                                    </div> --}}
+
 
                                     <div class="formbold-mb-5">
                                         <label for="text" class="formbold-form-label">
-                                            Upload Enhaced DBS:<span id="Title-validation-message" style="color: red;">*</span>
+                                            Upload Enhaced DBS:<span id="Title-validation-message"
+                                                style="color: red;">*</span>
                                         </label>
                                         <input type="file" name="enhaced_dbs" id="enhaced_dbs"
                                             class="formbold-form-input" />
                                     </div>
                                     <div class="formbold-mb-5">
                                         <label for="text" class="formbold-form-label">
-                                            Enhaced DBS Expiry:<span id="Title-validation-message" style="color: red;">*</span>
+                                            Enhaced DBS Expiry:<span id="Title-validation-message"
+                                                style="color: red;">*</span>
                                         </label>
                                         <input type="date" name="enhaced_dbs_expiry" id="enhaced_dbs_expiry"
                                             class="formbold-form-input" max="9999-12-31" />
@@ -1557,7 +1183,8 @@ and (max-width : 425px) {
                                     </div>
                                     <div class="formbold-mb-5">
                                         <label for="text" class="formbold-form-label">
-                                            Upload a Profile Photo:<span id="Title-validation-message" style="color: red;">*</span>
+                                            Upload a Profile Photo:<span id="Title-validation-message"
+                                                style="color: red;">*</span>
                                         </label>
                                         <input type="file" id="selfie" name="selfie" name="selfie"
                                             class="formbold-form-input" />
@@ -1570,8 +1197,9 @@ and (max-width : 425px) {
                             <a href="#" class="link-dark previous btn " id="previous3"><i
                                     class="fa fa-light fa-arrow-left"></i>
                                 Back</a>
-                                <a href="#topscroll" class="text-decoration-none">    <input type="button" required name="password" class=" next btn btn-primary px-5"
-                                value="Next" id="next2" data-id="5" /></a>
+                            <a href="#topscroll" class="text-decoration-none"> <input type="button" required
+                                    name="password" class=" next btn btn-primary px-5" value="Next" id="next2"
+                                    data-id="5" /></a>
                         </div>
                     </fieldset>
 
@@ -1596,10 +1224,13 @@ and (max-width : 425px) {
 
 
                                                             <div class="col-md-12 mb-3">
-                                                                <label class="text-secondary">Do you have any reference? </label><br>
+                                                                <label class="text-secondary">Do you have any reference?
+                                                                </label><br>
                                                                 <select class=" w-100 p-2" name="reference"
                                                                     id="refr" aria-label="Default select example">
-                                                                    <option selected value="">Select Reference<span id="Title-validation-message" style="color: red;">*</span>
+                                                                    <option selected value="">Select Reference<span
+                                                                            id="Title-validation-message"
+                                                                            style="color: red;">*</span>
                                                                     </option>
                                                                     <option value="1">Yes</option>
                                                                     <option value="0">No</option>
@@ -1609,7 +1240,8 @@ and (max-width : 425px) {
                                                             <span id="refrmore">
 
                                                                 <div class="col-md-12 mb-3">
-                                                                    <label class="text-secondary">Select Relationship</label><br>
+                                                                    <label class="text-secondary">Select
+                                                                        Relationship</label><br>
                                                                     <select class=" w-100 p-2" id="refrance_relationship"
                                                                         name="refrance_relationship"
                                                                         aria-label="Default select example">
@@ -1645,8 +1277,11 @@ and (max-width : 425px) {
                                                             <div class="col-md-12 mb-3 d-flex">
 
                                                                 <input type="checkbox" id="disclaimer" value="1"
-                                                                    name="disclaimer" id="chekboxId" class="lastcheck mx-1"
-  <label class="text-secondary">Accept<span id="Title-validation-message" style="color: red;">*</span></label><br>
+                                                                    name="disclaimer" id="chekboxId"
+                                                                    class="lastcheck mx-1" <label
+                                                                    class="text-secondary">Accept<span
+                                                                    id="Title-validation-message"
+                                                                    style="color: red;">*</span></label><br>
                                                             </div>
 
                                                         </div>
@@ -2222,25 +1857,22 @@ and (max-width : 425px) {
                         }
                     } else {
                         if (experience == '' || experience == null || week_hours == '' || week_hours == null || subjects ==
-                            '' || subjects == null || is_willing_travel == '' || is_willing_travel == null || allowed_drive == '' || allowed_drive == null) {
+                            '' || subjects == null || is_willing_travel == '' || is_willing_travel == null ||
+                            allowed_drive == '' || allowed_drive == null) {
                             if (is_willing_travel === 1) {
                                 if (traveling_distance == '' || traveling_distance == null ||
                                     allowed_drive == '' || allowed_drive == null) {
                                     message();
                                     return false;
                                 }
-                            } else {
-                                alert(1);
+                            }
+
+                        } else {
+                            if (licence_number == '' || licence_number == null ||
+                                allowed_drive == '' || allowed_drive == null) {
                                 message();
                                 return false;
                             }
-
-                        }else{
-                            if (licence_number == '' || licence_number == null ||
-                                    allowed_drive == '' || allowed_drive == null) {
-                                    message();
-                                    return false;
-                                }
 
 
                         }
@@ -2310,21 +1942,21 @@ and (max-width : 425px) {
     </script>
     <script>
         $(document).ready(function() {
-          // Add an input event listener to the numeric input
-          $('.numericInput').on('input', function() {
-            // Replace non-numeric characters with an empty string
-            $(this).val($(this).val().replace(/[^0-9]/g, ''));
-          });
+            // Add an input event listener to the numeric input
+            $('.numericInput').on('input', function() {
+                // Replace non-numeric characters with an empty string
+                $(this).val($(this).val().replace(/[^0-9]/g, ''));
+            });
         });
-        </script>
-        <script>
-            function checkDrivePermission(selectElement) {
-                var selectedValue = selectElement.value;
-                if (selectedValue === "1") {
-                    $('#DrivePermission').show();
-                } else if (selectedValue === "2") {
-                    $('#DrivePermission').hide();
-                }
+    </script>
+    <script>
+        function checkDrivePermission(selectElement) {
+            var selectedValue = selectElement.value;
+            if (selectedValue === "1") {
+                $('#DrivePermission').show();
+            } else if (selectedValue === "2") {
+                $('#DrivePermission').hide();
             }
-        </script>
+        }
+    </script>
 @endsection

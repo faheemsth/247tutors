@@ -274,7 +274,7 @@
                                 <div class="row mt-4 justify-content-center">
                                     <div class="col-md-5">
                                         <label class="text-secondary">Date Of Birth</label><br>
-                                        <input type="date" id="dob" name="dob" class="w-100 p-2" max="9999-12-31">
+                                        <input type="date" id="dob" name="dob" class="w-100 p-2" max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                                     </div>
                                 </div>
 
@@ -479,7 +479,7 @@
                                     <div class="row mt-4 justify-content-center">
                                         <div class="col-md-5">
                                             <label class="text-secondary">Password</label><br>
-                                            <input type="password" id="password" name="password"
+                                            <input type="password" required id="passwordUser" name="password"
                                                 placeholder="Enter Password" class="w-100 p-2">
                                         </div>
                                     </div>
@@ -487,7 +487,7 @@
                                     <div class="row mt-4 justify-content-center">
                                         <div class="col-md-5">
                                             <label class="text-secondary">Confirm Password</label><br>
-                                            <input type="password" id="confirm-password" name="confirm-password"
+                                            <input type="password" required id="confirm-password" name="confirm-password"
                                                 placeholder="Enter Confirm Password" class="w-100 p-2">
                                         </div>
                                     </div>
@@ -516,25 +516,28 @@
 
     <script src="{{ asset('js/timeslot.min.js') }}"></script>
 
-    <script>
-        $(function() {
-            $('#dob').on('change', function() {
-                var dobValue = $('#dob').val();
-                var dobDate = new Date(dobValue);
+<!-- Include Toastify library -->
 
-                if (!isNaN(dobDate)) {
-                    var today = new Date();
-                    var age = today.getFullYear() - dobDate.getFullYear();
-                    if (today.getMonth() < dobDate.getMonth() || (today.getMonth() === dobDate.getMonth() && today.getDate() < dobDate.getDate())) {
-                        age--;
-                    }
-                    if (age < 16) {
-                        window.location.href = '{{ url('/parent-signup') }}';
-                    }
+<script>
+    $(function() {
+        $('#dob').on('change', function() {
+            var dobValue = $('#dob').val();
+            var dobDate = new Date(dobValue);
+
+            if (!isNaN(dobDate)) {
+                var today = new Date();
+                var age = today.getFullYear() - dobDate.getFullYear();
+                if (today.getMonth() < dobDate.getMonth() || (today.getMonth() === dobDate.getMonth() && today.getDate() < dobDate.getDate())) {
+                    age--;
                 }
-            });
+                if (age < 16) {
+                    window.location.href = '{{ url('/parent-signup') }}?role=5&message=true'; 
+                }
+            }
         });
-    </script>
+    });
+</script>
+
 
 
 
@@ -717,13 +720,27 @@
                 'subject'   : $('#subject').val(),
                 'username'   : $('#username').val(),
                 'username'   : $('#username').val(),
-                'password'   : $('#password').val(),
+                'password'   : $('#passwordUser').val(),
                 'confirm-password'   : $('#confirm-password').val(),
                 'role_id'   : $('#role_id').val(),
 
 
             }
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            
+            
+            if ($('#confirm-password').val() === '' || $('#passwordUser').val() === '')
+            { 
+                Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Please fill in all the required fields.',
+                showConfirmButton: false,
+                timer: 5000,
+                showCloseButton: true
+            });
+            }else{
+                      
             $.ajax({
                 url: '/register',
                 method: 'POST',
@@ -764,6 +781,7 @@
                     }
                 },
             });
+        }
         });
     });
 </script>

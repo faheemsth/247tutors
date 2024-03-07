@@ -7,7 +7,7 @@
         <div class=" login col-6  ">
             <h3 class="fs-1 fw-bold co" >Log in</h3>
         </div>
-        <div class="col-6 fs-4 mt-2  text-end"><a href="{{ url('/') }}" class="text-dark"><i class="fa-solid fa-xmark" style="font-size: 28px;margin-right: 20px"></i></a></div>
+        <!--<div class="col-6 fs-4 mt-2  text-end"><a href="{{ url('/') }}" class="text-dark"><i class="fa-solid fa-xmark" style="font-size: 28px;margin-right: 20px"></i></a></div>-->
     </div>
     <!-- card1 -->
     <div class="row col-md-12 mt-5 gap-4 justify-content-center  text-center">
@@ -58,15 +58,15 @@
     <div class="row justify-content-between align-items-center bottom mx-xl-5">
         <div class="mt-2  col-md-7 d-flex justify-content-around flex-wrap">
             <div class="col-12 col-xl-4 "><a href="tel:@isset($web_settings['Ph_num']) {{$web_settings['Ph_num'] ?? '' }} @endisset" class="text-dark  text-decoration-none">Need help? Call us on
-                   <br><b>@isset($web_settings['Ph_num']) {{$web_settings['Ph_num'] ?? '' }} @endisset</b></a> or <a 
-                   href="mailto:@isset($web_settings['topbaremail']) {{$web_settings['topbaremail'] ?? '' }} @endisset" class="text-decoration-none text-dark"><b> Email</b></a></div>
+                   <br><b>@isset($web_settings['Ph_num']) {{$web_settings['Ph_num'] ?? '' }} @endisset</b></a> or <a
+                   href="mailto:@isset($web_settings['Maintopbaremail']) {{$web_settings['Maintopbaremail'] ?? '' }} @endisset" class="text-decoration-none text-dark"><b> Email</b></a></div>
             <div class="col-12 col-xl-4"><a href="{{url('/student-apply-steps')}}" class="text-dark  text-decoration-none">Help! I'm an <b> Adult
                     Learn</b></a></div>
             <div class="col-12 col-xl-4"><a href="{{url('/login')}}" class="text-dark  text-decoration-none">Log in as a <b>Tutor
                     </b></a></div>
         </div>
         <div class="mt-3 mt-md-0 col-lg-4 d-flex justify-content-center justify-content-md-end gap-3">
-            <div><a href="{{ url('login') }}" class="btn" style="background-color:  #063B00;color: white;">Login as Super Admin</a>
+            <div><a href="{{ url('admin/login') }}" class="btn" style="background-color:  #063B00;color: white;">Login as Super Admin</a>
             </div>
             <div class="d-none"><a href="{{ url('register') }}" class="btn" style="background-color:  #063B00;color: white;">Sign up</a></div>
         </div>

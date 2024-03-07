@@ -11,6 +11,10 @@ class ProfileController extends Controller
 {
     public function profile_setting()
     {
+        if(Auth::user()->role_id != 5){
+                return  redirect('/dashboard');
+        }
+        
         return view('pages.dashboard.profiledetailparent');
     }
     public function upload_profile_img(Request $request){

@@ -11,25 +11,30 @@
 {{-- coupons --}}
 
 <div class="nav-item {{ $segment1 == 'bookings' ? 'active' : '' }}">
-    <a href="{{ url('admin/bookings') }}"><img src="{{ asset('img/sidebar_icons/subject.png') }}" alt="" width="20px"
-            height="20px" style="padding-right:5px;">
-        <span>{{ __('Bookings') }}</span></a>
+    <a href="{{ url('admin/bookings') }}">
+        <span class="fa-solid fa-calendar-days" style="font-size: 15px; padding-left:2px; padding-right:7px;"></span>
+        {{ __('Bookings') }}</a>
 </div>
 
 {{-- coupons --}}
 <div class="nav-item {{ $segment1 == 'coupons' ? 'active' : '' }}">
-    <a class="d-flex align-items-baseline" href="{{ url('coupons') }}"><i class="fa-solid fa-percent" style="color: rgb(50 50 50 / 94%);font-size: 15px;" style="padding-right:5px;"></i>
-        <span>{{ __('Coupons') }}</span></a>
+    <a class="d-flex align-items-baseline" href="{{ url('coupons') }}"><span class="fa-solid fa-percent" style="color: rgb(50 50 50 / 94%);font-size: 16px ;padding-right:10px; padding-left:2px;"></span>{{ __('Coupons') }}</a>
 </div>
 <div class="nav-item {{ $segment1 == 'complaint' ? 'active' : '' }}">
     <a class="d-flex align-items-baseline" href="{{ url('Complaintlogs') }}">
-        <i class="fa-solid fa-box-tissue" style="color: rgb(50 50 50 / 94%);font-size: 15px;"></i>
-        <span>{{ __('Complaint') }}</span></a>
+        <span class="fa-solid fa-box-tissue" style="color: rgb(50 50 50 / 94%);font-size: 15px ;padding-right:8.5px;"></span>{{ __('Complaint') }}</a>
 </div>
 <div class="nav-item  {{ $segment1 == 'transaction' ? 'active' : '' }}">
-    <a class=" d-flex align-items-center" href="{{ url('/transaction') }}"><i class="fa-regular fa-credit-card" style="color: rgb(50 50 50 / 94%);font-size: 15px;"></i>
-        <span>{{ __('Transaction') }}</span></a>
+    <a class=" d-flex align-items-baseline" href="{{ url('/transaction') }}"><span class="fa-regular fa-credit-card" style="color: rgb(50 50 50 / 94%);font-size: 14px ;padding-right:8.5px;"></span>{{ __('Transaction') }}</a>
 </div>
+<div class="nav-item {{ $segment2 == 'RefundList' ? 'active' : '' }}">
+    <a href="{{ url('admin/RefundList') }}" class="d-flex align-items-center "> 
+            <span class="fa-solid fa-file-shield" style="color: rgb(50 50 50 / 94%);font-size: 14px ;padding-right:8px;"></span>
+        <span>{{ __('Refund') }}</span></a>
+</div>
+{{-- ruff code --}}
+
+{{-- ruff code --}}
 
 
 <!--Subject-->
@@ -78,33 +83,33 @@
 
 <div class="nav-item {{ $segment1 == 'setting' || $segment1 == 'newsletter' || $segment2 == 'terms_condition' || $segment2 == 'privacy_policy'  ? 'active open' : '' }} has-sub">
     <a href="#" id="setting-dropdown-toggle"style="display: flex; align-items: center ;">
-        <!--<img src="{{ asset('img/sidebar_icons/settings.png') }}" alt="" width="15px" height="15px" style="padding-right: 3px">-->
+        
         <i class="fa-solid fa-gear"style="color: rgb(50 50 50 / 94%);font-size: 15px;"></i>
         <span>Setting</span>
     </a>
     <div class="submenu-content" id="setting-dropdown-content">
         <!-- Only those with manage_user permission will get access -->
         <a href="{{ route('website') }}" class="d-flex align-items-center menu-item {{ $segment2 == 'pages' ? 'active' : '' }}">
-            <i class="fa-solid fa-pager"  style="color: rgb(50 50 50 / 94%);font-size: 15px;"></i>
+            <span class="fa-solid fa-pager"  style="color: rgb(50 50 50 / 94%);font-size: 15px; padding-left:1px; padding-right:8px;"></span>
             Website</a>
         <a href="{{ route('bloglist') }}" class=" d-flex align-items-center menu-item {{ $segment2 == 'blog' ? 'active' : '' }}">
-            <i class="fa-solid fa-newspaper" style="color: rgb(50 50 50 / 94%);font-size: 15px;"></i>
+            <span class="fa-solid fa-newspaper" style="color: rgb(50 50 50 / 94%);font-size: 15px ; padding-left:1px;padding-right:8px;"></span>
             Blogs</a>
             <a href="{{ route('newsletter.list') }}" class="menu-item {{ $segment1 == 'newsletter' ? 'active' : '' }}">
              
-                <i class="fa-solid fa-envelopes-bulk" style="color: rgb(50 50 50 / 94%);font-size: 15px;"></i>Newsletter</a>
+                <span class="fa-solid fa-envelopes-bulk" style="color: rgb(50 50 50 / 94%);font-size: 14px;padding-right:6px;"></span>Newsletter</a>
                 <a href="{{ route('commentlist') }}" class=" d-flex align-items-center menu-item {{ $segment2 == 'blog-comments' ? 'active' : '' }}">
-            <i class="fa-solid fa-comments"  style="color: rgb(50 50 50 / 94%);font-size: 15px;"></i>
+            <span class="fa-solid fa-comments"  style="color: rgb(50 50 50 / 94%);font-size: 14px ;padding-right:6px;"></span>
             Comments</a>
             
             
             <a href="{{ url('admin/terms_condition') }}" class=" d-flex align-items-center menu-item {{ $segment2 == 'terms_condition' ? 'active' : '' }}">
-            <i class="fa-solid fa-file-shield"  style="color: rgb(50 50 50 / 94%);font-size: 15px;"></i>
+            <span class="fa-solid fa-file-shield"  style="color: rgb(50 50 50 / 94%);font-size: 15px ;padding-left:2px;padding-right:6px;"></span>
             Terms Conditions</a>
             
             
             <a href="{{ url('admin/privacy_policy') }}" class=" d-flex align-items-center menu-item {{ $segment2 == 'privacy_policy' ? 'active' : '' }}">
-            <i class="fa-solid fa-file-invoice"  style="color: rgb(50 50 50 / 94%);font-size: 16px;"></i>
+            <span class="fa-solid fa-file-invoice"  style="color: rgb(50 50 50 / 94%);font-size: 16px ;padding-left:2px;padding-right:12px;"></span>
             Privacy policy</a>
             
         {{-- <a href="{{ route('documentTypes') }}" class="menu-item {{ $segment2 == 'document_types' ? 'active' : '' }}">Document Types</a> --}}
@@ -117,7 +122,7 @@
 <div class="nav-item {{ $segment1 == 'reviews' || $segment1 == 'student' || $segment1 == 'tutor' || $segment1 == 'parent'  ? 'active open' : '' }} has-sub">
     <a href="#" id="setting-dropdown-toggle" style="display: flex; align-items: start ;">
         <!--<img src="{{ asset('img/sidebar_icons/settings.png') }}" alt="" width="15px" height="15px" style="padding-right: 3px">-->
-        <i class="fa-solid fa-ranking-star" style="color: rgb(50 50 50 / 94%);font-size: 15px;"></i>
+        <span class="fa-solid fa-ranking-star" style="color: rgb(50 50 50 / 94%);font-size: 14px ;padding-right:8px;"></span>
         <span>Reviews</span>
     </a>
     <div class="submenu-content" id="setting-dropdown-content">
@@ -141,7 +146,7 @@
 
 
 <div class="nav-item {{ $segment1 == 'subjects' ? 'active' : '' }}">
-    <a class="d-flex align-items-baseline" href="{{ url('subjects') }}"><i class="fa-solid fa-book" style="color: rgb(50 50 50 / 94%);font-size: 15px;"></i>
+    <a class="d-flex align-items-baseline" href="{{ url('subjects') }}"><i class="fa-solid fa-book" style="color: rgb(50 50 50 / 94%);font-size: 15px ;padding-right:2px;"></i>
 
         <span>{{ __('Subject') }}</span></a>
 </div>
@@ -149,15 +154,11 @@
 <!--Reviews-->
 <div class="nav-item {{ $segment1 == 'ActivityLogs' ? 'active' : '' }}">
     <a href="{{ url('ActivityLogs') }}" class="d-flex align-items-center "> 
-            <i class="fa-solid fa-file-shield" style="color: rgb(50 50 50 / 94%);font-size: 15px;"></i>
+            <span class="fa-solid fa-file-shield" style="color: rgb(50 50 50 / 94%);font-size: 14px ;padding-right:8px;"></span>
         <span>{{ __('ActivityLogs') }}</span></a>
 </div>
 
-<div class="nav-item {{ $segment2 == 'RefundList' ? 'active' : '' }}">
-    <a href="{{ url('admin/RefundList') }}" class="d-flex align-items-center "> 
-            <i class="fa-solid fa-file-shield" style="color: rgb(50 50 50 / 94%);font-size: 15px;"></i>
-        <span>{{ __('Refund') }}</span></a>
-</div>
+
 
 <!--Payments-->
 <!--<div class=" nav-item {{ $segment1 == 'payments' ? 'active' : '' }}">-->
